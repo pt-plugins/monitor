@@ -5,12 +5,10 @@
 
 import { existsSync, mkdirSync, readFileSync, readdirSync, rmdirSync, statSync, unlinkSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 
-const __dirname = dirname(new URL(import.meta.url).pathname);
-const ROOT = resolve(
-  __dirname.startsWith("/") ? __dirname.slice(1) : __dirname,
-  ".."
-);
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const ROOT = resolve(__dirname, "..");
 const DATA_DIR = join(ROOT, "data");
 const UPTIME_DIR = join(DATA_DIR, "uptime");
 const INDEX_FILE = join(DATA_DIR, "uptime.json");
