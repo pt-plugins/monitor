@@ -21,7 +21,7 @@ function getLocalIconSet(): Map<string, string> {
     for (const f of readdirSync(ICONS_DIR)) {
       const match = f.match(/^(.+)\.(png|ico|svg)$/i);
       if (match) {
-        map.set(match[1], `/siteIcons/${f}`);
+        map.set(match[1], `/monitor/siteIcons/${f}`);
       }
     }
   } catch {}
@@ -41,7 +41,7 @@ function resolveFaviconUrl(site: SiteDefinition, iconSet: Map<string, string>): 
     const base = favicon.replace(/^\.\//, "").replace(/\.[^.]+$/, "");
     for (const ext of ["png", "ico", "svg"]) {
       const key = `${base}.${ext}`;
-      const url = `/siteIcons/${key}`;
+      const url = `/monitor/siteIcons/${key}`;
       if (existsSync(join(ICONS_DIR, key))) return url;
     }
   }

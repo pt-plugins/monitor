@@ -35,7 +35,7 @@ function extractSiteMetadata(filePath) {
     // Find the siteMetadata variable declaration
     // Matches: export const siteMetadata = { ... } or export const siteMetadata: SiteMetadata = { ... }
     const metaRegex =
-      /export\s+const\s+siteMetadata\s*(?::\s*\w+)?\s*=\s*\{([\s\S]*?)\n\};/;
+      /export\s+const\s+siteMetadata\s*(?::\s*\w+)?\s*=\s*\{([\s\S]*?)\};/;
     const match = content.match(metaRegex);
     if (!match) {
       console.warn(`[WARN] No siteMetadata found in ${filePath}`);

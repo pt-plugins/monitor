@@ -33,7 +33,7 @@ function uptimeClass(pct: number): string {
 }
 ---
 
-<a href={`/site/${site.id}`} class="site-card" data-status={site.currentStatus} data-filter={`${site.id} ${site.name} ${site.urls.map(decodeUrl).join(" ")} ${site.description || ""}`.toLowerCase()}>
+<a href={`/monitor/site/${site.id}`} class="site-card" data-status={site.currentStatus} data-filter={`${site.id} ${site.name} ${site.urls.map(decodeUrl).join(" ")} ${site.description || ""}`.toLowerCase()}>
   <div class="card-header">
     <StatusBadge status={site.currentStatus} />
     <span class="card-type">{site.type}</span>
