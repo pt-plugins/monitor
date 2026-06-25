@@ -1,0 +1,199 @@
+---
+// site/src/components/SiteCard.astro
+import type { SiteSummary } from "../lib/types";
+import StatusBadge from "./StatusBadge.astro";
+
+export interface Props {
+  site: SiteSummary;
+}
+
+const { site } = Astro.props;
+
+function rot13(str: string): string {
+  return str.replace(/[a-zA-Z]/g, (c) => {
+    const base = c <= "Z" ? 65 : 97;
+    return String.fromCharCode(((c.charCodeAt(0) - base + 13) % 26) + base);
+  });
+}
+
+function decodeUrl(url: string): string {
+  return /^uggcf?:\/\//i.test(url) ? rot13(url) : url;
+}
+
+function fmtLatency(ms: number | null): string {
+  if (ms === null) return "—";
+  if (ms < 1000) return `${ms}ms`;
+  return `${(ms / 1000).toFixed(1)}s`;
+}
+
+function uptimeClass(pct: number): string {
+  if (pct >= 99) return "uptime--great";
+  if (pct >= 95) return "uptime--ok";
+  return "uptime--poor";
+}
+---
+
+<a href={`/site/${site.id}`} class="site-card" data-status={site.currentStatus} data-filter={`${site.id} ${site.name} ${site.urls.map(decodeUrl).join(" ")} ${site.description || ""}`.toLowerCase()}>
+  <div class="card-header">
+    <StatusBadge status={site.currentStatus} />
+    <span class="card-type">{site.type}</span>
+  </div>
+  <h3 class="card-name">
+    {site.faviconUrl && (
+      <img
+        class="card-favicon"
+        src={site.faviconUrl}
+        alt=""
+        width="16"
+        height="16"
+        loading="lazy"
+        onerror="this.style.display='none'"
+      />
+    )}
+    {site.name}
+  </h3>
+  <p class="card-desc">{site.description || "—"}</p>
+  {site.currentStatus !== "dead" && (
+    <>
+      <div class="card-stats">
+        <div class="stat">
+          <span class="stat-label">Latency</span>
+          <span class="stat-value">{fmtLatency(site.currentLatency)}</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">24h Uptime</span>
+          <span class={`stat-value ${uptimeClass(site.uptime24h)}`}>
+            {site.uptime24h}%
+          </span>
+        </div>
+      </div>
+      <div class="uptime-bar">
+        <div
+          class="uptime-bar-fill"
+          style={`width: ${site.uptime24h}%`}
+          data-uptime={site.uptime24h}
+        ></div>
+      </div>
+    </>
+  )}
+</a>
+
+<style>
+  .site-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--color-surface);
+    border-radius: var(--radius);
+    padding: 1rem;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--color-border);
+    border-left: 4px solid var(--color-border);
+    text-decoration: none;
+    color: var(--color-text);
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+
+  .site-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  }
+
+  .site-card[data-status="up"] {
+    border-left-color: var(--color-up);
+  }
+  .site-card[data-status="down"] {
+    border-left-color: var(--color-down);
+  }
+  .site-card[data-status="dead"] {
+    border-left-color: var(--color-dead);
+    opacity: 0.7;
+  }
+
+  .site-card.hidden {
+    display: none !important;
+  }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .card-type {
+    font-size: 0.7rem;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .card-name {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4em;
+  }
+
+  .card-favicon {
+    flex-shrink: 0;
+    border-radius: 2px;
+  }
+
+  .card-desc {
+    font-size: 0.8rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 0.75rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .card-stats {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 0.5rem;
+    margin-top: auto;
+  }
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .stat-label {
+    font-size: 0.65rem;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .stat-value {
+    font-size: 0.95rem;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .uptime--great { color: var(--color-up); }
+  .uptime--ok { color: var(--color-warn); }
+  .uptime--poor { color: var(--color-down); }
+
+  .uptime-bar {
+    height: 3px;
+    background: var(--color-border);
+    border-radius: 999px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+  }
+
+  .uptime-bar-fill {
+    height: 100%;
+    border-radius: 999px;
+    transition: width 0.3s;
+  }
+
+  .uptime-bar-fill[data-uptime="100"] { background: var(--color-up); }
+  .uptime-bar-fill:not([data-uptime="100"]) { background: var(--color-warn); }
+  .site-card[data-status="down"] .uptime-bar-fill { background: var(--color-down); }
+</style>

@@ -1,0 +1,40 @@
+name: Daily Update
+
+on:
+  schedule:
+    - cron: "5 0 * * *"
+  workflow_dispatch: {}
+
+concurrency:
+  group: "uptime-pipeline"
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: "10"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Update site source definitions
+        run: pnpm update-source
+
+      - name: Run data cleanup
+        run: pnpm cleanup
+
+      - name: Commit updates
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "data: [auto] daily site source update and data cleanup"
+          file_pattern: "data/"

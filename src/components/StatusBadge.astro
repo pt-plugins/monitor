@@ -1,0 +1,73 @@
+---
+// site/src/components/StatusBadge.astro
+export interface Props {
+  status: "up" | "down" | "dead";
+  size?: "sm" | "md";
+}
+
+const { status, size = "md" } = Astro.props;
+
+const labels: Record<string, string> = {
+  up: "UP",
+  down: "DOWN",
+  dead: "DEAD",
+};
+---
+
+<span class={`badge badge--${status} badge--${size}`}>
+  <span class="badge-dot" aria-hidden="true"></span>
+  {labels[status] ?? status.toUpperCase()}
+</span>
+
+<style>
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35em;
+    font-weight: 600;
+    border-radius: 999px;
+    padding: 0.15em 0.65em;
+    white-space: nowrap;
+  }
+
+  .badge--sm {
+    font-size: 0.7rem;
+    padding: 0.1em 0.5em;
+  }
+
+  .badge--md {
+    font-size: 0.8rem;
+  }
+
+  .badge-dot {
+    width: 0.5em;
+    height: 0.5em;
+    border-radius: 50%;
+    display: inline-block;
+    flex-shrink: 0;
+  }
+
+  .badge--up {
+    background: color-mix(in srgb, var(--color-up) 15%, transparent);
+    color: var(--color-up);
+  }
+  .badge--up .badge-dot {
+    background: var(--color-up);
+  }
+
+  .badge--down {
+    background: color-mix(in srgb, var(--color-down) 15%, transparent);
+    color: var(--color-down);
+  }
+  .badge--down .badge-dot {
+    background: var(--color-down);
+  }
+
+  .badge--dead {
+    background: color-mix(in srgb, var(--color-dead) 15%, transparent);
+    color: var(--color-dead);
+  }
+  .badge--dead .badge-dot {
+    background: var(--color-dead);
+  }
+</style>

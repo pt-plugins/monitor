@@ -1,0 +1,322 @@
+---
+export interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title} — PT Site Status</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="description" content="PT site uptime monitor status page" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a href="/" class="logo">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+          </svg>
+          <span class="logo-text">PT Status</span>
+        </a>
+        <button class="search-toggle" id="search-toggle" aria-label="Toggle search" type="button">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+          </svg>
+        </button>
+        <div class="header-search" id="header-search">
+          <input
+            type="search"
+            id="filter"
+            class="filter-input"
+            placeholder="Filter sites..."
+            autocomplete="off"
+          />
+          <span id="filter-count" class="filter-count"></span>
+        </div>
+      </div>
+    </header>
+
+    <main class="container">
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p>
+          Powered by <a href="https://github.com/pt-plugins/PT-depiler" target="_blank" rel="noopener">PT-depiler</a> &middot;
+          Auto-updated every 30 minutes
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      (function() {
+        const filterInput = document.getElementById("filter");
+        const filterCount = document.getElementById("filter-count");
+        const toggle = document.getElementById("search-toggle");
+        const searchBox = document.getElementById("header-search");
+
+        // Search toggle for mobile
+        if (toggle && searchBox) {
+          toggle.addEventListener("click", () => {
+            searchBox.classList.toggle("open");
+            if (searchBox.classList.contains("open")) {
+              filterInput?.focus();
+            }
+          });
+          // Close on outside click
+          document.addEventListener("click", (e) => {
+            if (!searchBox.contains(e.target) && !toggle.contains(e.target)) {
+              searchBox.classList.remove("open");
+            }
+          });
+        }
+
+        // Filter logic
+        if (filterInput) {
+          function updateFilter() {
+            const cards = document.querySelectorAll(".site-card");
+            const term = filterInput.value.toLowerCase().trim();
+            let visible = 0;
+            for (const card of cards) {
+              const data = card.getAttribute("data-filter") || "";
+              if (!term || data.includes(term)) {
+                card.classList.remove("hidden");
+                visible++;
+              } else {
+                card.classList.add("hidden");
+              }
+            }
+            if (filterCount) {
+              if (term && cards.length > 0) {
+                filterCount.textContent = `${visible} / ${cards.length}`;
+              } else {
+                filterCount.textContent = "";
+              }
+            }
+          }
+          filterInput.addEventListener("input", updateFilter);
+        }
+      })();
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    --color-bg: #f8f9fa;
+    --color-surface: #ffffff;
+    --color-text: #212529;
+    --color-text-secondary: #6c757d;
+    --color-border: #dee2e6;
+    --color-up: #28a745;
+    --color-down: #dc3545;
+    --color-dead: #6c757d;
+    --color-warn: #ffc107;
+    --color-link: #0d6efd;
+    --radius: 8px;
+    --shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --color-bg: #1a1d23;
+      --color-surface: #252830;
+      --color-text: #e9ecef;
+      --color-text-secondary: #adb5bd;
+      --color-border: #3a3d44;
+      --color-up: #28a745;
+      --color-down: #dc3545;
+      --color-dead: #6c757d;
+      --color-link: #5c9eff;
+      --shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    }
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  .site-header {
+    background: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+    padding: 0.75rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    box-shadow: var(--shadow);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 700;
+    font-size: 1.15rem;
+    color: var(--color-text);
+    text-decoration: none;
+    flex-shrink: 0;
+    margin-right: auto;
+  }
+
+  .logo svg {
+    color: var(--color-up);
+  }
+
+  .search-toggle {
+    display: none;
+    background: none;
+    border: none;
+    padding: 0.35rem;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    border-radius: var(--radius);
+    flex-shrink: 0;
+  }
+
+  .search-toggle:hover {
+    color: var(--color-text);
+    background: var(--color-bg);
+  }
+
+  .header-search {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-shrink: 0;
+  }
+
+  .filter-input {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 260px;
+    padding: 0.4rem 0.75rem;
+    font-size: 0.85rem;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    color: var(--color-text);
+    outline: none;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+
+  .filter-input:focus {
+    border-color: var(--color-link);
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-link) 20%, transparent);
+  }
+
+  .filter-input::placeholder {
+    color: var(--color-text-secondary);
+    opacity: 0.6;
+  }
+
+  .filter-input::-webkit-search-cancel-button {
+    display: none;
+  }
+
+  .filter-count {
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  main.container {
+    flex: 1;
+    padding-top: 1.5rem;
+    padding-bottom: 3rem;
+  }
+
+  .site-footer {
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+    padding: 1rem 0;
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--color-text-secondary);
+  }
+
+  .site-footer a {
+    color: var(--color-link);
+    text-decoration: none;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+    margin-bottom: 0.25rem;
+  }
+
+  h2 {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+  }
+
+  a {
+    color: var(--color-link);
+  }
+
+  .site-card.hidden {
+    display: none !important;
+  }
+
+  /* Mobile: icon toggle, search overlay */
+  @media (max-width: 640px) {
+    .search-toggle {
+      display: flex;
+    }
+
+    .header-search {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      padding: 0.75rem 1rem;
+      background: var(--color-surface);
+      border-bottom: 1px solid var(--color-border);
+      box-shadow: var(--shadow);
+      z-index: 9;
+    }
+
+    .header-search.open {
+      display: flex;
+    }
+
+    .filter-input {
+      width: 100%;
+    }
+  }
+</style>

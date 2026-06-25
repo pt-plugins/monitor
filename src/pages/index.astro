@@ -1,0 +1,180 @@
+---
+import Layout from "../components/Layout.astro";
+import SiteCard from "../components/SiteCard.astro";
+import { computeSiteSummaries, getLatestTimestamp } from "../lib/data-loader";
+
+const summaries = computeSiteSummaries();
+const latestTimestamp = getLatestTimestamp();
+
+const total = summaries.length;
+const upCount = summaries.filter((s) => s.currentStatus === "up").length;
+const downCount = summaries.filter((s) => s.currentStatus === "down").length;
+const deadCount = summaries.filter((s) => s.currentStatus === "dead").length;
+const overallUptime = total > 0 ? Math.round((upCount / (total - deadCount)) * 100) || 100 : 100;
+const activeSites = summaries.filter((s) => s.currentStatus !== "dead");
+const deadSites = summaries.filter((s) => s.currentStatus === "dead");
+
+function formatTime(iso: string | null): string {
+  if (!iso) return "N/A";
+  const d = new Date(iso);
+  return d.toLocaleString("zh-CN", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    timeZoneName: "short",
+  });
+}
+---
+
+<Layout title="Dashboard">
+  <div class="dashboard-header">
+    <h1>PT Site Status</h1>
+    <p class="updated">
+      Last updated: <time datetime={latestTimestamp ?? ""}>{formatTime(latestTimestamp)}</time>
+    </p>
+  </div>
+
+  <div class="stats-bar">
+    <div class="stat-item stat-item--total">
+      <span class="stat-number">{total}</span>
+      <span class="stat-label">Sites</span>
+    </div>
+    <div class="stat-item stat-item--up">
+      <span class="stat-number">{upCount}</span>
+      <span class="stat-label">Up</span>
+    </div>
+    <div class="stat-item stat-item--down">
+      <span class="stat-number">{downCount}</span>
+      <span class="stat-label">Down</span>
+    </div>
+    <div class="stat-item stat-item--dead">
+      <span class="stat-number">{deadCount}</span>
+      <span class="stat-label">Dead</span>
+    </div>
+    <div class="stat-item stat-item--uptime">
+      <span class="stat-number">{overallUptime}%</span>
+      <span class="stat-label">Uptime</span>
+    </div>
+  </div>
+
+  {
+    summaries.length === 0 ? (
+      <div class="empty-state">
+        <p>No site data available yet. Run monitoring to populate data.</p>
+      </div>
+    ) : (
+      <>
+        <section class="section">
+          <h2 class="section-title">Active Sites</h2>
+          {activeSites.length > 0 ? (
+            <div class="site-grid">
+              {activeSites.map((site) => <SiteCard site={site} />)}
+            </div>
+          ) : (
+            <p class="empty">No active sites.</p>
+          )}
+        </section>
+        {deadSites.length > 0 && (
+          <section class="section">
+            <h2 class="section-title section-title--dead">Dead Sites</h2>
+            <div class="site-grid">
+              {deadSites.map((site) => <SiteCard site={site} />)}
+            </div>
+          </section>
+        )}
+      </>
+    )
+  }
+</Layout>
+
+<style>
+  .dashboard-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .updated {
+    font-size: 0.8rem;
+    color: var(--color-text-secondary);
+  }
+
+  .stats-bar {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+  }
+
+  .stat-item {
+    background: var(--color-surface);
+    border-radius: var(--radius);
+    padding: 0.75rem 1.25rem;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--color-border);
+    text-align: center;
+    min-width: 80px;
+  }
+
+  .stat-number {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    line-height: 1.2;
+  }
+
+  .stat-label {
+    font-size: 0.7rem;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .stat-item--total .stat-number { color: var(--color-link); }
+  .stat-item--up .stat-number { color: var(--color-up); }
+  .stat-item--down .stat-number { color: var(--color-down); }
+  .stat-item--dead .stat-number { color: var(--color-dead); }
+  .stat-item--uptime .stat-number { color: var(--color-up); }
+
+  .site-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: var(--color-text-secondary);
+  }
+
+  .section {
+    margin-bottom: 2rem;
+  }
+
+  .section-title {
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-text-secondary);
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.35rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .section-title--dead {
+    color: var(--color-dead);
+  }
+
+  .empty {
+    color: var(--color-text-secondary);
+    font-size: 0.85rem;
+  }
+</style>

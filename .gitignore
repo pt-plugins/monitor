@@ -1,0 +1,7 @@
+node_modules/
+.cache/
+dist/
+.astro/
+.DS_Store
+*.log
+.kunsdd

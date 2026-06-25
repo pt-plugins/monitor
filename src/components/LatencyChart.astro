@@ -1,0 +1,96 @@
+---
+// site/src/components/LatencyChart.astro
+export interface Props {
+  data: Array<{ timestamp: string; latency: number | null }>;
+  height?: number;
+}
+
+const { data, height = 120 } = Astro.props;
+
+// Filter to valid latency points, take last N
+const valid = data
+  .filter((d) => d.latency !== null)
+  .slice(-96);
+
+const maxLatency = Math.max(...valid.map((d) => d.latency!), 100);
+const chartWidth = valid.length > 1 ? valid.length * 8 : 100;
+const padding = 4;
+const w = chartWidth + padding * 2;
+const h = height + padding * 2 + 20;
+
+function x(i: number) {
+  return padding + (valid.length > 1 ? (i / (valid.length - 1)) * chartWidth : chartWidth / 2);
+}
+
+function y(latency: number) {
+  return padding + height - (latency / maxLatency) * height;
+}
+
+// Build polyline points
+const points = valid
+  .map((d, i) => `${x(i).toFixed(1)},${y(d.latency!).toFixed(1)}`)
+  .join(" ");
+
+// Bar representation: each point is a thin rect
+const bars = valid
+  .map((d, i) => {
+    const barH = Math.max((d.latency! / maxLatency) * height, 2);
+    const barX = x(i) - 2;
+    const barY = padding + height - barH;
+    return `<rect x="${barX.toFixed(1)}" y="${barY.toFixed(1)}" width="4" height="${barH.toFixed(1)}" rx="1" fill="var(--color-up)" opacity="0.7" />`;
+  })
+  .join("");
+---
+
+<div class="chart-wrapper">
+  {valid.length > 0 ? (
+    <svg
+      viewBox={`0 0 ${w} ${h}`}
+      width="100%"
+      height={h}
+      role="img"
+      aria-label="Latency chart"
+    >
+      <!-- Grid lines -->
+      <line x1={padding} y1={padding} x2={w - padding} y2={padding} stroke="var(--color-border)" stroke-width="0.5" />
+      <line x1={padding} y1={padding + height / 2} x2={w - padding} y2={padding + height / 2} stroke="var(--color-border)" stroke-width="0.5" stroke-dasharray="2,2" />
+      <line x1={padding} y1={padding + height} x2={w - padding} y2={padding + height} stroke="var(--color-border)" stroke-width="0.5" />
+
+      <!-- Bars -->
+      {bars}
+
+      <!-- Max latency label -->
+      <text x={padding} y={padding - 2} fill="var(--color-text-secondary)" font-size="9">
+        {maxLatency}ms
+      </text>
+      <text x={padding} y={padding + height + 12} fill="var(--color-text-secondary)" font-size="9">
+        0ms
+      </text>
+    </svg>
+  ) : (
+    <p class="chart-empty">No latency data available</p>
+  )}
+</div>
+
+<style>
+  .chart-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    background: var(--color-surface);
+    border-radius: var(--radius);
+    border: 1px solid var(--color-border);
+    padding: 0.5rem;
+  }
+
+  .chart-wrapper svg {
+    display: block;
+    min-width: 200px;
+  }
+
+  .chart-empty {
+    text-align: center;
+    color: var(--color-text-secondary);
+    font-size: 0.85rem;
+    padding: 1rem;
+  }
+</style>

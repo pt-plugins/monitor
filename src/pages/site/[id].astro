@@ -1,0 +1,274 @@
+---
+// site/src/pages/site/[id].astro
+import Layout from "../../components/Layout.astro";
+import StatusBadge from "../../components/StatusBadge.astro";
+import LatencyChart from "../../components/LatencyChart.astro";
+import { computeSiteSummaries } from "../../lib/data-loader";
+
+export function getStaticPaths() {
+  const summaries = computeSiteSummaries();
+  return summaries.map((s) => ({ params: { id: s.id } }));
+}
+
+const { id } = Astro.params;
+const summaries = computeSiteSummaries();
+const site = summaries.find((s) => s.id === id);
+
+if (!site) {
+  return Astro.redirect("/");
+}
+
+function fmtLatency(ms: number | null): string {
+  if (ms === null) return "—";
+  if (ms < 1000) return `${ms}ms`;
+  return `${(ms / 1000).toFixed(1)}s`;
+}
+
+function fmtTime(iso: string): string {
+  const d = new Date(iso);
+  return d.toLocaleString("zh-CN", {
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+}
+
+function uptimeColor(pct: number): string {
+  if (pct >= 99) return "var(--color-up)";
+  if (pct >= 95) return "var(--color-warn)";
+  return "var(--color-down)";
+}
+
+// Recent history (last 50 entries, reversed for table)
+const recentHistory = [...site.history].reverse().slice(0, 50);
+
+// Find URLs from the site definition
+const siteDefs = summaries;
+---
+
+<Layout title={site.name}>
+
+  <div class="detail-header">
+    <div class="detail-title">
+      <h1>
+        {site.faviconUrl && (
+          <img
+            class="card-favicon"
+            src={site.faviconUrl}
+            alt=""
+            width="16"
+            height="16"
+            loading="lazy"
+            onerror="this.style.display='none'"
+          />
+        )}
+        {site.name}
+      </h1>
+      <StatusBadge status={site.currentStatus} />
+    </div>
+  </div>
+
+  <!-- Uptime Summary -->
+  <section class="section">
+    <h2>Uptime</h2>
+    <div class="uptime-grid">
+      <div class="uptime-card">
+        <div class="uptime-value" style={`color: ${uptimeColor(site.uptime24h)}`}>
+          {site.uptime24h}%
+        </div>
+        <div class="uptime-label">24 hours</div>
+      </div>
+      <div class="uptime-card">
+        <div class="uptime-value" style={`color: ${uptimeColor(site.uptime7d)}`}>
+          {site.uptime7d}%
+        </div>
+        <div class="uptime-label">7 days</div>
+      </div>
+      <div class="uptime-card">
+        <div class="uptime-value" style={`color: ${uptimeColor(site.uptime30d)}`}>
+          {site.uptime30d}%
+        </div>
+        <div class="uptime-label">30 days</div>
+      </div>
+      <div class="uptime-card">
+        <div class="uptime-value">
+          {fmtLatency(site.currentLatency)}
+        </div>
+        <div class="uptime-label">Current Latency</div>
+      </div>
+      <div class="uptime-card">
+        <div class="uptime-value">
+          {fmtLatency(site.avgLatency24h)}
+        </div>
+        <div class="uptime-label">Avg Latency (24h)</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Latency Chart -->
+  <section class="section">
+    <h2>Response Time (24h)</h2>
+    <LatencyChart data={site.history} height={150} />
+  </section>
+
+  <!-- Recent Checks -->
+  <section class="section">
+    <h2>Recent Checks</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Time</th>
+            <th>Status</th>
+            <th>Latency</th>
+          </tr>
+        </thead>
+        <tbody>
+          {recentHistory.map((entry) => (
+            <tr>
+              <td class="td-time">{fmtTime(entry.timestamp)}</td>
+              <td>
+                <StatusBadge status={entry.status} size="sm" />
+              </td>
+              <td class="td-latency">{fmtLatency(entry.latency)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      {recentHistory.length === 0 && (
+        <p class="empty">No monitoring data yet.</p>
+      )}
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .back-link {
+    display: inline-block;
+    margin-bottom: 1rem;
+    font-size: 0.85rem;
+  }
+
+  .detail-header {
+    margin-bottom: 1.5rem;
+  }
+
+  .detail-title {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .detail-title h1 {
+    margin-bottom: 0;
+  }
+
+  .detail-meta {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+  }
+
+  .meta-type {
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.75rem;
+  }
+
+  .section {
+    margin-bottom: 2rem;
+  }
+
+  .section h2 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.75rem;
+  }
+
+  .uptime-grid {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .uptime-card {
+    background: var(--color-surface);
+    border-radius: var(--radius);
+    padding: 1rem 1.25rem;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--color-border);
+    text-align: center;
+    min-width: 100px;
+  }
+
+  .uptime-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    line-height: 1.2;
+  }
+
+  .uptime-label {
+    font-size: 0.7rem;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-top: 0.2rem;
+  }
+
+  .table-wrap {
+    background: var(--color-surface);
+    border-radius: var(--radius);
+    border: 1px solid var(--color-border);
+    overflow: hidden;
+    max-height: 400px;
+    overflow-y: auto;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+  }
+
+  th {
+    text-align: left;
+    padding: 0.5rem 0.75rem;
+    background: var(--color-bg);
+    font-size: 0.7rem;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    position: sticky;
+    top: 0;
+  }
+
+  td {
+    padding: 0.4rem 0.75rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .td-time {
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+    color: var(--color-text-secondary);
+    font-size: 0.8rem;
+  }
+
+  .td-latency {
+    font-variant-numeric: tabular-nums;
+  }
+
+  .empty {
+    text-align: center;
+    padding: 1rem;
+    color: var(--color-text-secondary);
+    font-size: 0.85rem;
+  }
+</style>
