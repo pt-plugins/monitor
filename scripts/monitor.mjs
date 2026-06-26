@@ -34,6 +34,14 @@ function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
+// Check if response is from Cloudflare WAF (site is protected but reachable)
+function isCloudflareWAF(response) {
+  const server = (response.headers.get("server") || "").toLowerCase();
+  const cfRay = response.headers.get("cf-ray");
+  // Cloudflare typically returns 403 or 503 with cf-ray header
+  return (response.status === 403 || response.status === 503) && (server.includes("cloudflare") || cfRay);
+}
+
 // Test a single URL with retry logic — silent, returns result + attempt logs
 async function probeUrl(url, retries = MAX_RETRIES) {
   const logs = [];
@@ -45,6 +53,7 @@ async function probeUrl(url, retries = MAX_RETRIES) {
 
       const response = await fetch(url, {
         method: "GET",
+        headers: { "User-Agent": "PTD-Monitor/1.0" },
         redirect: "follow",
         signal: controller.signal,
       });
@@ -53,6 +62,12 @@ async function probeUrl(url, retries = MAX_RETRIES) {
       const latency = Date.now() - start;
 
       if (response.ok || (response.status >= 300 && response.status < 400)) {
+        return { status: "up", latency, logs };
+      }
+
+      // Treat Cloudflare WAF as reachable
+      if (isCloudflareWAF(response)) {
+        logs.push(`    [${attempt}/${retries}] HTTP ${response.status} Cloudflare WAF (${latency}ms)`);
         return { status: "up", latency, logs };
       }
 
