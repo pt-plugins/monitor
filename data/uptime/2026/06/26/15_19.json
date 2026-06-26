@@ -1,0 +1,2951 @@
+{
+  "timestamp": "2026-06-26T15:16:38.483Z",
+  "sites": [
+    {
+      "id": "1337x",
+      "name": "1337x",
+      "type": "public",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://1337x.to/",
+          "status": "up",
+          "latency": 103
+        }
+      ]
+    },
+    {
+      "id": "1ptba",
+      "name": "1PTBar",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://1ptba.com/",
+          "status": "up",
+          "latency": 150
+        }
+      ]
+    },
+    {
+      "id": "52movie",
+      "name": "52movie",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://www.52movie.top/",
+          "status": "up",
+          "latency": 185
+        }
+      ]
+    },
+    {
+      "id": "0magnet",
+      "name": "0Magnet",
+      "type": "public",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://16mag.net/",
+          "status": "up",
+          "latency": 631
+        }
+      ]
+    },
+    {
+      "id": "acgrip",
+      "name": "ACG.RIP",
+      "type": "public",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://acg.rip/",
+          "status": "up",
+          "latency": 625
+        }
+      ]
+    },
+    {
+      "id": "52pt",
+      "name": "52PT",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://52pt.site/",
+          "status": "up",
+          "latency": 716
+        }
+      ]
+    },
+    {
+      "id": "aidoruonline",
+      "name": "Aidoru!Online",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://aidoru-online.me/",
+          "status": "up",
+          "latency": 430
+        }
+      ]
+    },
+    {
+      "id": "aither",
+      "name": "Aither",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://aither.cc/",
+          "status": "up",
+          "latency": 936
+        }
+      ]
+    },
+    {
+      "id": "alpharatio",
+      "name": "AlphaRatio",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://alpharatio.cc/",
+          "status": "up",
+          "latency": 392
+        }
+      ]
+    },
+    {
+      "id": "alingpt",
+      "name": "alingPT",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://pt.aling.de/",
+          "status": "up",
+          "latency": 1024
+        }
+      ]
+    },
+    {
+      "id": "animebytes",
+      "name": "AnimeBytes",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://animebytes.tv/",
+          "status": "up",
+          "latency": 607
+        }
+      ]
+    },
+    {
+      "id": "animetosho",
+      "name": "AnimeTosho",
+      "type": "public",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://animetosho.org/",
+          "status": "up",
+          "latency": 1010
+        }
+      ]
+    },
+    {
+      "id": "animez",
+      "name": "AnimeZ",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://animez.to/",
+          "status": "up",
+          "latency": 247
+        }
+      ]
+    },
+    {
+      "id": "anirena",
+      "name": "AniRena",
+      "type": "public",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://www.anirena.com/",
+          "status": "up",
+          "latency": 313
+        }
+      ]
+    },
+    {
+      "id": "afun",
+      "name": "Afun",
+      "type": "private",
+      "status": "down",
+      "urls": [
+        {
+          "url": "https://www.ptlover.cc/",
+          "status": "down",
+          "latency": null,
+          "error": "All retries exhausted"
+        }
+      ]
+    },
+    {
+      "id": "anthelion",
+      "name": "Anthelion",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://anthelion.me/",
+          "status": "up",
+          "latency": 945
+        }
+      ]
+    },
+    {
+      "id": "asiancinema",
+      "name": "AsianCinema",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://eiga.moi/",
+          "status": "up",
+          "latency": 1015
+        }
+      ]
+    },
+    {
+      "id": "audiences",
+      "name": "Audiences",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://audiences.me/",
+          "status": "up",
+          "latency": 216
+        }
+      ]
+    },
+    {
+      "id": "audiobookbay",
+      "name": "AudioBook Bay",
+      "type": "public",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://audiobookbay.lu/",
+          "status": "up",
+          "latency": 1222
+        }
+      ]
+    },
+    {
+      "id": "anisource",
+      "name": "AniSource",
+      "type": "public",
+      "status": "down",
+      "urls": [
+        {
+          "url": "https://asnet.pw/",
+          "status": "down",
+          "latency": null,
+          "error": "All retries exhausted"
+        }
+      ]
+    },
+    {
+      "id": "audionews",
+      "name": "AudioNews",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://audionews.org/",
+          "status": "up",
+          "latency": 473
+        }
+      ]
+    },
+    {
+      "id": "avistaz",
+      "name": "AvistaZ",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://avistaz.to/",
+          "status": "up",
+          "latency": 233
+        }
+      ]
+    },
+    {
+      "id": "13city",
+      "name": "13city",
+      "type": "private",
+      "status": "down",
+      "urls": [
+        {
+          "url": "https://13city.org/",
+          "status": "down",
+          "latency": null,
+          "error": "All retries exhausted"
+        },
+        {
+          "url": "https://www.13city.org/",
+          "status": "down",
+          "latency": null,
+          "error": "All retries exhausted"
+        }
+      ]
+    },
+    {
+      "id": "aura4k",
+      "name": "Aura4k",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://aura4k.net/",
+          "status": "up",
+          "latency": 619
+        }
+      ]
+    },
+    {
+      "id": "baozi",
+      "name": "包子",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://p.t-baozi.cc/",
+          "status": "up",
+          "latency": 466
+        }
+      ]
+    },
+    {
+      "id": "beyondhd",
+      "name": "BeyondHD",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://beyond-hd.me/",
+          "status": "up",
+          "latency": 878
+        }
+      ]
+    },
+    {
+      "id": "bitporn",
+      "name": "BitPorn",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://bitporn.eu/",
+          "status": "up",
+          "latency": 1027
+        }
+      ]
+    },
+    {
+      "id": "azusa",
+      "name": "梓喵",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://azusa.wiki/",
+          "status": "up",
+          "latency": 3950
+        }
+      ]
+    },
+    {
+      "id": "blutopia",
+      "name": "Blutopia",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://blutopia.cc/",
+          "status": "up",
+          "latency": 388
+        }
+      ]
+    },
+    {
+      "id": "bakabt",
+      "name": "BakaBT",
+      "type": "private",
+      "status": "down",
+      "urls": [
+        {
+          "url": "https://bakabt.me/",
+          "status": "down",
+          "latency": null,
+          "error": "All retries exhausted"
+        }
+      ]
+    },
+    {
+      "id": "broadcasthenet",
+      "name": "BroadcastTheNet",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://broadcasthe.net/",
+          "status": "up",
+          "latency": 423
+        }
+      ]
+    },
+    {
+      "id": "brokenstones",
+      "name": "BrokenStones",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://brokenstones.is/",
+          "status": "up",
+          "latency": 279
+        }
+      ]
+    },
+    {
+      "id": "btschool",
+      "name": "BTSCHOOL",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://pt.btschool.club/",
+          "status": "up",
+          "latency": 446
+        }
+      ]
+    },
+    {
+      "id": "btetree",
+      "name": "BT.etree",
+      "type": "public",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://bt.etree.org/",
+          "status": "up",
+          "latency": 2599
+        }
+      ]
+    },
+    {
+      "id": "bitpt",
+      "name": "极速之星",
+      "type": "private",
+      "status": "down",
+      "urls": [
+        {
+          "url": "https://bitpt.cn/",
+          "status": "down",
+          "latency": null,
+          "error": "All retries exhausted"
+        }
+      ]
+    },
+    {
+      "id": "capybarabr",
+      "name": "CapybaraBR",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://capybarabr.com/",
+          "status": "up",
+          "latency": 336
+        }
+      ]
+    },
+    {
+      "id": "carpt",
+      "name": "CarPT",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://carpt.net/",
+          "status": "up",
+          "latency": 247
+        }
+      ]
+    },
+    {
+      "id": "cathoderaytube",
+      "name": "Cathode-Ray.Tube",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://www.cathode-ray.tube/",
+          "status": "up",
+          "latency": 477
+        }
+      ]
+    },
+    {
+      "id": "cbg",
+      "name": "藏宝阁",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://cangbao.ge/",
+          "status": "up",
+          "latency": 1631
+        }
+      ]
+    },
+    {
+      "id": "byrbt",
+      "name": "北邮人-BYRBT",
+      "type": "private",
+      "status": "down",
+      "urls": [
+        {
+          "url": "https://byr.pt/",
+          "status": "down",
+          "latency": null,
+          "error": "All retries exhausted"
+        }
+      ]
+    },
+    {
+      "id": "chdbits",
+      "name": "CHDBits",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://ptchdbits.co/",
+          "status": "up",
+          "latency": 495
+        }
+      ]
+    },
+    {
+      "id": "cgpeers",
+      "name": "CGPeers",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://cgpeers.to/",
+          "status": "up",
+          "latency": 626
+        }
+      ]
+    },
+    {
+      "id": "cinemageddon",
+      "name": "Cinemageddon",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://cinemageddon.net/",
+          "status": "up",
+          "latency": 231
+        }
+      ]
+    },
+    {
+      "id": "cinemaz",
+      "name": "CinemaZ",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://cinemaz.to/",
+          "status": "up",
+          "latency": 221
+        }
+      ]
+    },
+    {
+      "id": "cinematik",
+      "name": "Cinematik",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://cinematik.net/",
+          "status": "up",
+          "latency": 512
+        }
+      ]
+    },
+    {
+      "id": "clearjav",
+      "name": "ClearJAV",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://clearjav.com/",
+          "status": "up",
+          "latency": 789
+        }
+      ]
+    },
+    {
+      "id": "cspt",
+      "name": "财神",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://cspt.top/",
+          "status": "up",
+          "latency": 513
+        }
+      ]
+    },
+    {
+      "id": "crabpt",
+      "name": "CrabPt",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://crabpt.vip/",
+          "status": "up",
+          "latency": 1754
+        }
+      ]
+    },
+    {
+      "id": "darkpeers",
+      "name": "darkpeers",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://darkpeers.org/",
+          "status": "up",
+          "latency": 321
+        }
+      ]
+    },
+    {
+      "id": "desigaane",
+      "name": "DesiGaane",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://desigaane.rocks/",
+          "status": "up",
+          "latency": 335
+        }
+      ]
+    },
+    {
+      "id": "cdy",
+      "name": "传道院",
+      "type": "private",
+      "status": "down",
+      "urls": [
+        {
+          "url": "https://pt.cdy.skin/",
+          "status": "down",
+          "latency": null,
+          "error": "All retries exhausted"
+        }
+      ]
+    },
+    {
+      "id": "cyanbug",
+      "name": "CyanBug",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://cyanbug.net/",
+          "status": "up",
+          "latency": 1747
+        }
+      ]
+    },
+    {
+      "id": "dicmusic",
+      "name": "DICMusic",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://dicmusic.com/",
+          "status": "up",
+          "latency": 837
+        }
+      ]
+    },
+    {
+      "id": "digitalcore",
+      "name": "DigitalCore",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://digitalcore.club/",
+          "status": "up",
+          "latency": 819
+        }
+      ]
+    },
+    {
+      "id": "discfan",
+      "name": "DiscFan",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://discfan.net/",
+          "status": "up",
+          "latency": 660
+        }
+      ]
+    },
+    {
+      "id": "dmhy",
+      "name": "動漫花園資源網",
+      "type": "public",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://share.dmhy.org/",
+          "status": "up",
+          "latency": 954
+        }
+      ]
+    },
+    {
+      "id": "dragonhd",
+      "name": "龍之家",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://www.dragonhd.xyz/",
+          "status": "up",
+          "latency": 1090
+        }
+      ]
+    },
+    {
+      "id": "dstudio",
+      "name": "Depth Studio",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://dstudio.me/",
+          "status": "up",
+          "latency": 889
+        }
+      ]
+    },
+    {
+      "id": "ehentai",
+      "name": "E-Hentai",
+      "type": "public",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://e-hentai.org/",
+          "status": "up",
+          "latency": 307
+        }
+      ]
+    },
+    {
+      "id": "exoticaz",
+      "name": "ExoticaZ",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://exoticaz.to/",
+          "status": "up",
+          "latency": 222
+        }
+      ]
+    },
+    {
+      "id": "exttorrents",
+      "name": "EXT Torrents",
+      "type": "public",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://ext.to/",
+          "status": "up",
+          "latency": 301
+        }
+      ]
+    },
+    {
+      "id": "empornium",
+      "name": "Empornium",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://emparadise.rs/",
+          "status": "up",
+          "latency": 985
+        }
+      ]
+    },
+    {
+      "id": "filelist",
+      "name": "FileList",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://filelist.io/",
+          "status": "up",
+          "latency": 645
+        }
+      ]
+    },
+    {
+      "id": "freefarm",
+      "name": "自由农场",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://pt.0ff.cc/",
+          "status": "up",
+          "latency": 1185
+        }
+      ]
+    },
+    {
+      "id": "gazellegames",
+      "name": "GazelleGames",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://gazellegames.net/",
+          "status": "up",
+          "latency": 953
+        }
+      ]
+    },
+    {
+      "id": "ggpt",
+      "name": "GGPT",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://www.gamegamept.com/",
+          "status": "up",
+          "latency": 650
+        }
+      ]
+    },
+    {
+      "id": "greatposterwall",
+      "name": "GreatPosterWall",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://greatposterwall.com/",
+          "status": "up",
+          "latency": 957
+        }
+      ]
+    },
+    {
+      "id": "gtnet",
+      "name": "Gay-Torrents.net",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://www.gay-torrents.net/",
+          "status": "up",
+          "latency": 481
+        }
+      ]
+    },
+    {
+      "id": "animelovers",
+      "name": "ANIMELOVERS",
+      "type": "private",
+      "status": "down",
+      "urls": [
+        {
+          "url": "https://animelovers.club/",
+          "status": "down",
+          "latency": null,
+          "error": "All retries exhausted"
+        }
+      ]
+    },
+    {
+      "id": "gtru",
+      "name": "GayTorrent.ru",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://www.gaytor.rent/",
+          "status": "up",
+          "latency": 317
+        }
+      ]
+    },
+    {
+      "id": "haidan",
+      "name": "海胆",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://www.haidan.cc/",
+          "status": "up",
+          "latency": 2080
+        }
+      ]
+    },
+    {
+      "id": "happyfappy",
+      "name": "HappyFappy",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://www.happyfappy.net/",
+          "status": "up",
+          "latency": 563
+        }
+      ]
+    },
+    {
+      "id": "hdarea",
+      "name": "HDArea",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://hdarea.club/",
+          "status": "up",
+          "latency": 6207
+        }
+      ]
+    },
+    {
+      "id": "fearnopeer",
+      "name": "FearNoPeer",
+      "type": "private",
+      "status": "down",
+      "urls": [
+        {
+          "url": "https://fearnopeer.com/",
+          "status": "down",
+          "latency": null,
+          "error": "All retries exhausted"
+        }
+      ]
+    },
+    {
+      "id": "gtorg",
+      "name": "Gay-Torrents.Org",
+      "type": "private",
+      "status": "down",
+      "urls": [
+        {
+          "url": "https://gay-torrents.org/",
+          "status": "down",
+          "latency": null,
+          "error": "All retries exhausted"
+        }
+      ]
+    },
+    {
+      "id": "hdbits",
+      "name": "HDBits",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://hdbits.org/",
+          "status": "up",
+          "latency": 1719
+        }
+      ]
+    },
+    {
+      "id": "hdclone",
+      "name": "HDClone",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://pt.hdclone.top/",
+          "status": "up",
+          "latency": 821
+        }
+      ]
+    },
+    {
+      "id": "hddolby",
+      "name": "HD Dolby",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://www.hddolby.com/",
+          "status": "up",
+          "latency": 131
+        }
+      ]
+    },
+    {
+      "id": "hdcity",
+      "name": "HDCity",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://hdcity.city/",
+          "status": "up",
+          "latency": 1074
+        }
+      ]
+    },
+    {
+      "id": "hdbao",
+      "name": "HDBao",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://hdbao.cc/",
+          "status": "up",
+          "latency": 3035
+        }
+      ]
+    },
+    {
+      "id": "hdfans",
+      "name": "HDFans",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://hdfans.org/",
+          "status": "up",
+          "latency": 597
+        }
+      ]
+    },
+    {
+      "id": "hdhome",
+      "name": "HDHome",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://hdhome.org/",
+          "status": "up",
+          "latency": 615
+        }
+      ]
+    },
+    {
+      "id": "hdroute",
+      "name": "HDRoute",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "http://hdroute.org/",
+          "status": "up",
+          "latency": 587
+        }
+      ]
+    },
+    {
+      "id": "hdsky",
+      "name": "HDSky",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://hdsky.me/",
+          "status": "up",
+          "latency": 886
+        }
+      ]
+    },
+    {
+      "id": "hdspace",
+      "name": "HD-Space",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://hd-space.org/",
+          "status": "up",
+          "latency": 751
+        }
+      ]
+    },
+    {
+      "id": "hdtime",
+      "name": "HDTime",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://hdtime.org/",
+          "status": "up",
+          "latency": 1009
+        }
+      ]
+    },
+    {
+      "id": "hdtorrents",
+      "name": "HD-Torrents",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://hd-torrents.org/",
+          "status": "up",
+          "latency": 872
+        }
+      ]
+    },
+    {
+      "id": "hdupt",
+      "name": "HDU",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://pt.hdupt.com/",
+          "status": "up",
+          "latency": 773
+        }
+      ]
+    },
+    {
+      "id": "hdvideo",
+      "name": "HDVideo",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://hdvideo.top/",
+          "status": "up",
+          "latency": 647
+        }
+      ]
+    },
+    {
+      "id": "hitpt",
+      "name": "百川PT",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://www.hitpt.com/",
+          "status": "up",
+          "latency": 408
+        }
+      ]
+    },
+    {
+      "id": "hhanclub",
+      "name": "憨憨",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://hhanclub.net/",
+          "status": "up",
+          "latency": 820
+        }
+      ]
+    },
+    {
+      "id": "htpt",
+      "name": "海棠PT",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://www.htpt.cc/",
+          "status": "up",
+          "latency": 486
+        }
+      ]
+    },
+    {
+      "id": "huno",
+      "name": "HUNO",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://hawke.uno/",
+          "status": "up",
+          "latency": 230
+        }
+      ]
+    },
+    {
+      "id": "hxpt",
+      "name": "好学",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://www.hxpt.org/",
+          "status": "up",
+          "latency": 294
+        }
+      ]
+    },
+    {
+      "id": "agsvpt",
+      "name": "AGSVPT",
+      "type": "private",
+      "status": "down",
+      "urls": [
+        {
+          "url": "https://pt.agsvpt.cn/",
+          "status": "down",
+          "latency": null,
+          "error": "All retries exhausted"
+        },
+        {
+          "url": "https://www.agsvpt.com/",
+          "status": "down",
+          "latency": null,
+          "error": "All retries exhausted"
+        },
+        {
+          "url": "https://new.agsvpt.cn/",
+          "status": "down",
+          "latency": null,
+          "error": "All retries exhausted"
+        }
+      ]
+    },
+    {
+      "id": "iptorrents",
+      "name": "IPTorrents",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://iptorrents.com/",
+          "status": "up",
+          "latency": 611
+        }
+      ]
+    },
+    {
+      "id": "ilolicon",
+      "name": "ilolicon",
+      "type": "private",
+      "status": "down",
+      "urls": [
+        {
+          "url": "https://mua.xloli.cc/",
+          "status": "down",
+          "latency": null,
+          "error": "All retries exhausted"
+        }
+      ]
+    },
+    {
+      "id": "hudbt",
+      "name": "蝴蝶-HUDBT",
+      "type": "private",
+      "status": "down",
+      "urls": [
+        {
+          "url": "https://hudbt.hust.edu.cn/",
+          "status": "down",
+          "latency": null,
+          "error": "All retries exhausted"
+        }
+      ]
+    },
+    {
+      "id": "dubhe",
+      "name": "天枢",
+      "type": "private",
+      "status": "down",
+      "urls": [
+        {
+          "url": "https://dubhe.site/",
+          "status": "down",
+          "latency": null,
+          "error": "All retries exhausted"
+        }
+      ]
+    },
+    {
+      "id": "jpopsuki",
+      "name": "JPopSuki",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://jpopsuki.eu/",
+          "status": "up",
+          "latency": 837
+        }
+      ]
+    },
+    {
+      "id": "kamept",
+      "name": "KamePT",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://kamept.com/",
+          "status": "up",
+          "latency": 721
+        }
+      ]
+    },
+    {
+      "id": "jptv4us",
+      "name": "JPTV4us",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://jptv4.us/",
+          "status": "up",
+          "latency": 1077
+        }
+      ]
+    },
+    {
+      "id": "karagarga",
+      "name": "KaraGarga",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://karagarga.in/",
+          "status": "up",
+          "latency": 664
+        }
+      ]
+    },
+    {
+      "id": "keepfrds",
+      "name": "PT@KEEPFRDS",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://pt.keepfrds.com/",
+          "status": "up",
+          "latency": 597
+        }
+      ]
+    },
+    {
+      "id": "kelu",
+      "name": "Kelu",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://our.kelu.one/",
+          "status": "up",
+          "latency": 734
+        }
+      ]
+    },
+    {
+      "id": "itzmx",
+      "name": "PT分享站",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://pt.itzmx.com/",
+          "status": "up",
+          "latency": 4345
+        }
+      ]
+    },
+    {
+      "id": "kufirc",
+      "name": "kufirc",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://kufirc.com/",
+          "status": "up",
+          "latency": 677
+        }
+      ]
+    },
+    {
+      "id": "latteam",
+      "name": "LAT-Team",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://lat-team.com/",
+          "status": "up",
+          "latency": 563
+        }
+      ]
+    },
+    {
+      "id": "lajidui",
+      "name": "lajidui",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://pt.lajidui.top/",
+          "status": "up",
+          "latency": 1046
+        }
+      ]
+    },
+    {
+      "id": "kufei",
+      "name": "库非",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://kufei.org/",
+          "status": "up",
+          "latency": 1911
+        }
+      ]
+    },
+    {
+      "id": "longpt",
+      "name": "LongPT",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://longpt.org/",
+          "status": "up",
+          "latency": 336
+        }
+      ]
+    },
+    {
+      "id": "lst",
+      "name": "LST",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://lst.gg/",
+          "status": "up",
+          "latency": 431
+        }
+      ]
+    },
+    {
+      "id": "luminarr",
+      "name": "Luminarr",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://luminarr.me/",
+          "status": "up",
+          "latency": 337
+        }
+      ]
+    },
+    {
+      "id": "lemonhdnet",
+      "name": "柠檬不甜",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://lemonhd.net/",
+          "status": "up",
+          "latency": 1184
+        }
+      ]
+    },
+    {
+      "id": "kunlun",
+      "name": "昆仑",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://www.yhpp.cc/",
+          "status": "up",
+          "latency": 2220
+        }
+      ]
+    },
+    {
+      "id": "milkie",
+      "name": "Milkie",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://milkie.cc/",
+          "status": "up",
+          "latency": 348
+        }
+      ]
+    },
+    {
+      "id": "midnightscene",
+      "name": "MidnightScene",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://midnightscene.cc/",
+          "status": "up",
+          "latency": 636
+        }
+      ]
+    },
+    {
+      "id": "march",
+      "name": "March-Media",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://duckboobee.org/",
+          "status": "up",
+          "latency": 968
+        }
+      ]
+    },
+    {
+      "id": "momentpt",
+      "name": "MomentPT",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://www.momentpt.top/",
+          "status": "up",
+          "latency": 948
+        }
+      ]
+    },
+    {
+      "id": "monikadesign",
+      "name": "Monikadesign",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://monikadesign.uk/",
+          "status": "up",
+          "latency": 900
+        }
+      ]
+    },
+    {
+      "id": "mteam",
+      "name": "M-Team - TP",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://kp.m-team.cc/",
+          "status": "up",
+          "latency": 436
+        }
+      ]
+    },
+    {
+      "id": "luckpt",
+      "name": "LuckPT",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://pt.luckpt.de/",
+          "status": "up",
+          "latency": 2712
+        }
+      ]
+    },
+    {
+      "id": "musopia",
+      "name": "音乐乌托邦",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://www.musopia.vip/",
+          "status": "up",
+          "latency": 616
+        }
+      ]
+    },
+    {
+      "id": "muxuege",
+      "name": "慕雪阁",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://pt.muxuege.org/",
+          "status": "up",
+          "latency": 667
+        }
+      ]
+    },
+    {
+      "id": "morethantv",
+      "name": "MoreThanTV",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://www.morethantv.me/",
+          "status": "up",
+          "latency": 1690
+        }
+      ]
+    },
+    {
+      "id": "nanyangpt",
+      "name": "南洋PT",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://nanyangpt.com/",
+          "status": "up",
+          "latency": 67
+        }
+      ]
+    },
+    {
+      "id": "myanonamouse",
+      "name": "MyAnonamouse",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://www.myanonamouse.net/",
+          "status": "up",
+          "latency": 764
+        }
+      ]
+    },
+    {
+      "id": "ncore",
+      "name": "nCore",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://ncore.pro/",
+          "status": "up",
+          "latency": 788
+        }
+      ]
+    },
+    {
+      "id": "nekobt",
+      "name": "nekoBT",
+      "type": "public",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://nekobt.to/",
+          "status": "up",
+          "latency": 583
+        }
+      ]
+    },
+    {
+      "id": "nebulance",
+      "name": "Nebulance",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://nebulance.io/",
+          "status": "up",
+          "latency": 795
+        }
+      ]
+    },
+    {
+      "id": "hdkylin",
+      "name": "HDKylin",
+      "type": "private",
+      "status": "down",
+      "urls": [
+        {
+          "url": "https://www.hdkyl.in/",
+          "status": "down",
+          "latency": null,
+          "error": "All retries exhausted"
+        },
+        {
+          "url": "https://na.hdkylin.com/",
+          "status": "down",
+          "latency": null,
+          "error": "All retries exhausted"
+        },
+        {
+          "url": "https://cf.hdkylin.com/",
+          "status": "down",
+          "latency": null,
+          "error": "All retries exhausted"
+        }
+      ]
+    },
+    {
+      "id": "nicept",
+      "name": "NicePT",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://www.nicept.net/",
+          "status": "up",
+          "latency": 612
+        }
+      ]
+    },
+    {
+      "id": "mypt",
+      "name": "MyPT",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://cc.mypt.cc/",
+          "status": "up",
+          "latency": 1989
+        }
+      ]
+    },
+    {
+      "id": "nordicquality",
+      "name": "NordicQuality",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://nordicq.org/",
+          "status": "up",
+          "latency": 775
+        }
+      ]
+    },
+    {
+      "id": "nordicbytes",
+      "name": "NordicBytes",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://nordicbytes.org/",
+          "status": "up",
+          "latency": 1223
+        }
+      ]
+    },
+    {
+      "id": "njtupt",
+      "name": "浦园",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://njtupt.top/",
+          "status": "up",
+          "latency": 1636
+        }
+      ]
+    },
+    {
+      "id": "nyaa",
+      "name": "Nyaa",
+      "type": "public",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://nyaa.si/",
+          "status": "up",
+          "latency": 383
+        }
+      ]
+    },
+    {
+      "id": "novahd",
+      "name": "NovaHD",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://pt.novahd.top/",
+          "status": "up",
+          "latency": 985
+        }
+      ]
+    },
+    {
+      "id": "onlyencodes",
+      "name": "OnlyEncodes+",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://onlyencodes.cc/",
+          "status": "up",
+          "latency": 370
+        }
+      ]
+    },
+    {
+      "id": "oldtoonsworld",
+      "name": "OldToonsWorld",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://oldtoons.world/",
+          "status": "up",
+          "latency": 598
+        }
+      ]
+    },
+    {
+      "id": "okpt",
+      "name": "OKPT",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://www.okpt.net/",
+          "status": "up",
+          "latency": 808
+        }
+      ]
+    },
+    {
+      "id": "ourbits",
+      "name": "OurBits",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://ourbits.club/",
+          "status": "up",
+          "latency": 204
+        }
+      ]
+    },
+    {
+      "id": "opencd",
+      "name": "OpenCD",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://open.cd/",
+          "status": "up",
+          "latency": 759
+        }
+      ]
+    },
+    {
+      "id": "passthepopcorn",
+      "name": "PassThePopcorn",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://passthepopcorn.me/",
+          "status": "up",
+          "latency": 401
+        }
+      ]
+    },
+    {
+      "id": "orpheus",
+      "name": "Orpheus",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://orpheus.network/",
+          "status": "up",
+          "latency": 943
+        }
+      ]
+    },
+    {
+      "id": "piggo",
+      "name": "Piggo",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://piggo.me/",
+          "status": "up",
+          "latency": 58
+        }
+      ]
+    },
+    {
+      "id": "pandapt",
+      "name": "PandaPT",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://pandapt.net/",
+          "status": "up",
+          "latency": 1056
+        }
+      ]
+    },
+    {
+      "id": "pixelcove",
+      "name": "PixelCove",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://www.pixelcove.me/",
+          "status": "up",
+          "latency": 642
+        }
+      ]
+    },
+    {
+      "id": "oshenpt",
+      "name": "OshenPT",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://www.oshen.win/",
+          "status": "up",
+          "latency": 1552
+        }
+      ]
+    },
+    {
+      "id": "privatehd",
+      "name": "PrivateHD",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://privatehd.to/",
+          "status": "up",
+          "latency": 161
+        }
+      ]
+    },
+    {
+      "id": "pornolab",
+      "name": "PornoLab",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://pornolab.net/",
+          "status": "up",
+          "latency": 473
+        }
+      ]
+    },
+    {
+      "id": "portugas",
+      "name": "Portugas",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://portugas.org/",
+          "status": "up",
+          "latency": 924
+        }
+      ]
+    },
+    {
+      "id": "pter",
+      "name": "PTer",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://pterclub.net/",
+          "status": "up",
+          "latency": 839
+        }
+      ]
+    },
+    {
+      "id": "ptgtk",
+      "name": "PT GTK",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://pt.gtkpw.xyz/",
+          "status": "up",
+          "latency": 651
+        }
+      ]
+    },
+    {
+      "id": "ptcafe",
+      "name": "咖啡",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://ptcafe.club/",
+          "status": "up",
+          "latency": 1630
+        }
+      ]
+    },
+    {
+      "id": "pthome",
+      "name": "PTHome",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://pthome.net/",
+          "status": "up",
+          "latency": 128
+        }
+      ]
+    },
+    {
+      "id": "ptlao",
+      "name": "PTLAO",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://ptlao.top/",
+          "status": "up",
+          "latency": 802
+        }
+      ]
+    },
+    {
+      "id": "ptfans",
+      "name": "PTFans",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://ptfans.cc/",
+          "status": "up",
+          "latency": 1803
+        }
+      ]
+    },
+    {
+      "id": "ptlgs",
+      "name": "PTLGS",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://ptlgs.org/",
+          "status": "up",
+          "latency": 904
+        }
+      ]
+    },
+    {
+      "id": "ptsbao",
+      "name": "PTSBao",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://ptsbao.club/",
+          "status": "up",
+          "latency": 1610
+        }
+      ]
+    },
+    {
+      "id": "ptskit",
+      "name": "PTSkit",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://www.ptskit.org/",
+          "status": "up",
+          "latency": 1575
+        }
+      ]
+    },
+    {
+      "id": "ptzone",
+      "name": "PTzone",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://ptzone.xyz/",
+          "status": "up",
+          "latency": 187
+        }
+      ]
+    },
+    {
+      "id": "pussytorrents",
+      "name": "Pussytorrents",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://pussytorrents.org/",
+          "status": "up",
+          "latency": 174
+        }
+      ]
+    },
+    {
+      "id": "pttime",
+      "name": "PTTime",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://www.pttime.org/",
+          "status": "up",
+          "latency": 1429
+        }
+      ]
+    },
+    {
+      "id": "qingwa",
+      "name": "QingWa",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://www.qingwapt.com/",
+          "status": "up",
+          "latency": 1946
+        }
+      ]
+    },
+    {
+      "id": "ptneko",
+      "name": "超科学PT喵",
+      "type": "private",
+      "status": "down",
+      "urls": [
+        {
+          "url": "https://ptneko.com/",
+          "status": "down",
+          "latency": null,
+          "error": "All retries exhausted"
+        }
+      ]
+    },
+    {
+      "id": "railgunpt",
+      "name": "RailgunPT",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://bilibili.download/",
+          "status": "up",
+          "latency": 1785
+        }
+      ]
+    },
+    {
+      "id": "redacted",
+      "name": "Redacted",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://redacted.sh/",
+          "status": "up",
+          "latency": 522
+        }
+      ]
+    },
+    {
+      "id": "raingfh",
+      "name": "雨",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://raingfh.top/",
+          "status": "up",
+          "latency": 1187
+        }
+      ]
+    },
+    {
+      "id": "reelflix",
+      "name": "ReelFliX",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://reelflix.cc/",
+          "status": "up",
+          "latency": 676
+        }
+      ]
+    },
+    {
+      "id": "rousipro",
+      "name": "Rousi Pro",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://rousi.pro/",
+          "status": "up",
+          "latency": 485
+        }
+      ]
+    },
+    {
+      "id": "retroflix",
+      "name": "RetroFlix",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://retroflix.net/",
+          "status": "up",
+          "latency": 1379
+        }
+      ]
+    },
+    {
+      "id": "rutracker",
+      "name": "RuTracker.org",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://rutracker.org/",
+          "status": "up",
+          "latency": 914
+        }
+      ]
+    },
+    {
+      "id": "sbpt",
+      "name": "SBPT",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://sbpt.link/",
+          "status": "up",
+          "latency": 127
+        }
+      ]
+    },
+    {
+      "id": "secretcinema",
+      "name": "Secret Cinema",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://secret-cinema.pw/",
+          "status": "up",
+          "latency": 729
+        }
+      ]
+    },
+    {
+      "id": "seedpool",
+      "name": "seedpool",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://seedpool.org/",
+          "status": "up",
+          "latency": 568
+        }
+      ]
+    },
+    {
+      "id": "sewerpt",
+      "name": "下水道",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://sewerpt.com/",
+          "status": "up",
+          "latency": 536
+        }
+      ]
+    },
+    {
+      "id": "rousi",
+      "name": "Rousi",
+      "type": "private",
+      "status": "down",
+      "urls": [
+        {
+          "url": "https://rousi.zip/",
+          "status": "down",
+          "latency": null,
+          "error": "All retries exhausted"
+        }
+      ]
+    },
+    {
+      "id": "playletpt",
+      "name": "PlayLet",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://playletpt.xyz/",
+          "status": "up",
+          "latency": 249
+        }
+      ]
+    },
+    {
+      "id": "siqi",
+      "name": "思齐",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://si-qi.xyz/",
+          "status": "up",
+          "latency": 725
+        }
+      ]
+    },
+    {
+      "id": "shareisland",
+      "name": "ShareIsland",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://shareisland.org/",
+          "status": "up",
+          "latency": 1074
+        }
+      ]
+    },
+    {
+      "id": "soulvoice",
+      "name": "SoulVoice",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://pt.soulvoice.club/",
+          "status": "up",
+          "latency": 332
+        }
+      ]
+    },
+    {
+      "id": "speedapp",
+      "name": "SpeedApp",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://speedapp.io/",
+          "status": "up",
+          "latency": 455
+        }
+      ]
+    },
+    {
+      "id": "sportscult",
+      "name": "SportsCult",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://sportscult.org/",
+          "status": "up",
+          "latency": 333
+        }
+      ]
+    },
+    {
+      "id": "springsunday",
+      "name": "SpringSunday",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://springsunday.net/",
+          "status": "up",
+          "latency": 551
+        }
+      ]
+    },
+    {
+      "id": "skyeysnow",
+      "name": "SkyeySnow",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://www.skyey2.com/",
+          "status": "up",
+          "latency": 2115
+        }
+      ]
+    },
+    {
+      "id": "starspace",
+      "name": "星空",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://star-space.net/",
+          "status": "up",
+          "latency": 723
+        }
+      ]
+    },
+    {
+      "id": "sunnypt",
+      "name": "Sunny",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://sunnypt.top/",
+          "status": "up",
+          "latency": 1606
+        }
+      ]
+    },
+    {
+      "id": "superbits",
+      "name": "Superbits",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://superbits.org/",
+          "status": "up",
+          "latency": 571
+        }
+      ]
+    },
+    {
+      "id": "tangpt",
+      "name": "躺平",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://www.tangpt.top/",
+          "status": "up",
+          "latency": 510
+        }
+      ]
+    },
+    {
+      "id": "sjtu",
+      "name": "葡萄",
+      "type": "private",
+      "status": "down",
+      "urls": [
+        {
+          "url": "https://pt.sjtu.edu.cn/",
+          "status": "down",
+          "latency": null,
+          "error": "All retries exhausted"
+        }
+      ]
+    },
+    {
+      "id": "tey",
+      "name": "tey",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://pt.tey.cc/",
+          "status": "up",
+          "latency": 1650
+        }
+      ]
+    },
+    {
+      "id": "tccf",
+      "name": "TorrentCCF",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://et8.org/",
+          "status": "up",
+          "latency": 6657
+        }
+      ]
+    },
+    {
+      "id": "thegeeks",
+      "name": "TheGeeks",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://thegeeks.click/",
+          "status": "up",
+          "latency": 962
+        }
+      ]
+    },
+    {
+      "id": "thevault",
+      "name": "TheVault",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://thevault.click/",
+          "status": "up",
+          "latency": 996
+        }
+      ]
+    },
+    {
+      "id": "tlfbits",
+      "name": "TLFBits",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://pt.eastgame.org/",
+          "status": "up",
+          "latency": 188
+        }
+      ]
+    },
+    {
+      "id": "tjupt",
+      "name": "北洋园PT",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://tjupt.org/",
+          "status": "up",
+          "latency": 821
+        }
+      ]
+    },
+    {
+      "id": "tmpt",
+      "name": "唐门",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://tmpt.top/",
+          "status": "up",
+          "latency": 733
+        }
+      ]
+    },
+    {
+      "id": "torrenthub",
+      "name": "TorrentHub",
+      "type": "private",
+      "status": "down",
+      "urls": [
+        {
+          "url": "https://torrenthub.club/",
+          "status": "down",
+          "latency": null,
+          "error": "All retries exhausted"
+        }
+      ]
+    },
+    {
+      "id": "torrentleech",
+      "name": "TorrentLeech",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://www.torrentleech.org/",
+          "status": "up",
+          "latency": 376
+        }
+      ]
+    },
+    {
+      "id": "torrentscsv",
+      "name": "Torrents-CSV",
+      "type": "public",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://torrents-csv.com/",
+          "status": "up",
+          "latency": 321
+        }
+      ]
+    },
+    {
+      "id": "totheglory",
+      "name": "ToTheGlory",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://totheglory.im/",
+          "status": "up",
+          "latency": 802
+        }
+      ]
+    },
+    {
+      "id": "nexushd",
+      "name": "NexusHD",
+      "type": "private",
+      "status": "down",
+      "urls": [
+        {
+          "url": "https://v6.nexushd.org/",
+          "status": "down",
+          "latency": null,
+          "error": "All retries exhausted"
+        },
+        {
+          "url": "https://www.nexushd.org/",
+          "status": "down",
+          "latency": null,
+          "error": "All retries exhausted"
+        }
+      ]
+    },
+    {
+      "id": "u2",
+      "name": "U2",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://u2.dmhy.org/",
+          "status": "up",
+          "latency": 891
+        }
+      ]
+    },
+    {
+      "id": "ubits",
+      "name": "UBits",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://ubits.club/",
+          "status": "up",
+          "latency": 98
+        }
+      ]
+    },
+    {
+      "id": "ultrahd",
+      "name": "UltraHD",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://ultrahd.net/",
+          "status": "up",
+          "latency": 147
+        }
+      ]
+    },
+    {
+      "id": "uploadcx",
+      "name": "ULCX",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://upload.cx/",
+          "status": "up",
+          "latency": 210
+        }
+      ]
+    },
+    {
+      "id": "tu88",
+      "name": "TU88",
+      "type": "private",
+      "status": "down",
+      "urls": [
+        {
+          "url": "https://pt.tu88.men/",
+          "status": "down",
+          "latency": null,
+          "error": "All retries exhausted"
+        }
+      ]
+    },
+    {
+      "id": "wintersakura",
+      "name": "WinterSakura",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://wintersakura.net/",
+          "status": "up",
+          "latency": 283
+        }
+      ]
+    },
+    {
+      "id": "vclib",
+      "name": "VC-Lib",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://pt.vclib.online/",
+          "status": "up",
+          "latency": 2142
+        }
+      ]
+    },
+    {
+      "id": "xingyunge",
+      "name": "星陨阁",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://pt.xingyungept.org/",
+          "status": "up",
+          "latency": 206
+        }
+      ]
+    },
+    {
+      "id": "yemapt",
+      "name": "YemaPT",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://www.yemapt.org/",
+          "status": "up",
+          "latency": 358
+        }
+      ]
+    },
+    {
+      "id": "xingtan",
+      "name": "杏坛",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://xingtan.one/",
+          "status": "up",
+          "latency": 1265
+        }
+      ]
+    },
+    {
+      "id": "yuscene",
+      "name": "YUSCENE",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://yu-scene.net/",
+          "status": "up",
+          "latency": 904
+        }
+      ]
+    },
+    {
+      "id": "yinguskg",
+      "name": "樱花",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://pt.ying.us.kg/",
+          "status": "up",
+          "latency": 1481
+        }
+      ]
+    },
+    {
+      "id": "zhuque",
+      "name": "朱雀",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://zhuque.in/",
+          "status": "up",
+          "latency": 694
+        }
+      ]
+    },
+    {
+      "id": "zmpt",
+      "name": "织梦",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://zmpt.cc/",
+          "status": "up",
+          "latency": 273
+        }
+      ]
+    },
+    {
+      "id": "zrpt",
+      "name": "ZRPT",
+      "type": "private",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://zrpt.cc/",
+          "status": "up",
+          "latency": 413
+        }
+      ]
+    },
+    {
+      "id": "rs",
+      "name": "睿思",
+      "type": "private",
+      "status": "down",
+      "urls": [
+        {
+          "url": "https://resource.xidian.edu.cn/",
+          "status": "down",
+          "latency": null,
+          "error": "All retries exhausted"
+        }
+      ]
+    },
+    {
+      "id": "zhixing",
+      "name": "知行PT",
+      "type": "private",
+      "status": "down",
+      "urls": [
+        {
+          "url": "http://pt.zhixing.bjtu.edu.cn/",
+          "status": "down",
+          "latency": null,
+          "error": "All retries exhausted"
+        }
+      ]
+    },
+    {
+      "id": "sugoimusic",
+      "name": "SugoiMusic",
+      "type": "private",
+      "status": "down",
+      "urls": [
+        {
+          "url": "https://sugoimusic.me/",
+          "status": "down",
+          "latency": null,
+          "error": "All retries exhausted"
+        }
+      ]
+    },
+    {
+      "id": "tokyotosho",
+      "name": "Tokyo Toshokan",
+      "type": "public",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://www.tokyotosho.info/",
+          "status": "up",
+          "latency": 4969
+        }
+      ]
+    }
+  ]
+}
