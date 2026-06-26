@@ -30,7 +30,6 @@ function formatTime(iso: string | null): string {
 
 <Layout title="Dashboard">
   <div class="dashboard-header">
-    <h1>PT Site Status</h1>
     <p class="updated">
       Last updated: <time datetime={latestTimestamp ?? ""}>{formatTime(latestTimestamp)}</time>
     </p>
@@ -93,7 +92,7 @@ function formatTime(iso: string | null): string {
   .dashboard-header {
     display: flex;
     align-items: baseline;
-    justify-content: space-between;
+    justify-content: flex-end;
     flex-wrap: wrap;
     gap: 0.5rem;
     margin-bottom: 1rem;
@@ -108,6 +107,7 @@ function formatTime(iso: string | null): string {
     display: flex;
     gap: 1rem;
     flex-wrap: wrap;
+    justify-content: center;
     margin-bottom: 1.5rem;
   }
 
