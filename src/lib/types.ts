@@ -45,6 +45,7 @@ export interface SiteSummary {
   uptime7d: number;
   uptime30d: number;
   avgLatency24h: number | null;
+  dailyStatus: Array<"up" | "down" | "mixed" | "nodata">; // last 7 days, oldest first
   history: Array<{
     timestamp: string;
     status: "up" | "down";

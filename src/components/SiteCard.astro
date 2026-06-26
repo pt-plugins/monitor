@@ -67,12 +67,10 @@ function uptimeClass(pct: number): string {
           </span>
         </div>
       </div>
-      <div class="uptime-bar">
-        <div
-          class="uptime-bar-fill"
-          style={`width: ${site.uptime24h}%`}
-          data-uptime={site.uptime24h}
-        ></div>
+      <div class="day-dots">
+        {site.dailyStatus.map((s) => (
+          <span class={`day-dot day-dot--${s}`} title={s}></span>
+        ))}
       </div>
     </>
   )}
@@ -179,21 +177,20 @@ function uptimeClass(pct: number): string {
   .uptime--ok { color: var(--color-warn); }
   .uptime--poor { color: var(--color-down); }
 
-  .uptime-bar {
-    height: 3px;
-    background: var(--color-border);
-    border-radius: 999px;
-    overflow: hidden;
+  .day-dots {
+    display: flex;
+    gap: 4px;
     margin-top: 0.5rem;
   }
 
-  .uptime-bar-fill {
-    height: 100%;
-    border-radius: 999px;
-    transition: width 0.3s;
+  .day-dot {
+    flex: 1;
+    height: 6px;
+    border-radius: 3px;
   }
 
-  .uptime-bar-fill[data-uptime="100"] { background: var(--color-up); }
-  .uptime-bar-fill:not([data-uptime="100"]) { background: var(--color-warn); }
-  .site-card[data-status="down"] .uptime-bar-fill { background: var(--color-down); }
+  .day-dot--up { background: var(--color-up); }
+  .day-dot--down { background: var(--color-down); }
+  .day-dot--mixed { background: var(--color-warn); }
+  .day-dot--nodata { background: var(--color-border); }
 </style>
