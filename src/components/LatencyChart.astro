@@ -26,14 +26,17 @@ for (const d of data) {
   }
 }
 
-// Build points: [0]=oldest → [last]=newest
+// Build points: skip buckets with no data (don't force to 0)
+// [0]=oldest → [last]=newest
 const pts: { x: number; y: number }[] = [];
 for (let i = bucketCount - 1; i >= 0; i--) {
-  const avg = counts[i] > 0 ? Math.round(buckets[i] / counts[i]) : 0;
-  pts.push({ x: pts.length / (bucketCount - 1), y: avg });
+  if (counts[i] > 0) {
+    const avg = Math.round(buckets[i] / counts[i]);
+    pts.push({ x: (bucketCount - i - 1) / bucketCount, y: avg });
+  }
 }
 
-const validMax = Math.max(...pts.map((p) => p.y), 1);
+const validMax = pts.length > 0 ? Math.max(...pts.map((p) => p.y), 1) : 1;
 
 const pad = { t: 22, r: 12, b: 26, l: 12 };
 const cw = 800;
@@ -57,7 +60,9 @@ function buildPath(): string {
 }
 
 const line = buildPath();
-const area = pts.length > 0 ? `${line} L${sx(1)},${sy(0)} L${sx(0)},${sy(0)} Z` : "";
+const firstX = pts.length > 0 ? pts[0].x : 0;
+const lastX = pts.length > 0 ? pts[pts.length - 1].x : 1;
+const area = pts.length > 0 ? `${line} L${sx(lastX)},${sy(0)} L${sx(firstX)},${sy(0)} Z` : "";
 
 // Calculate midnight markers for each day in the window
 function getMidnights(): { x: number; label: string }[] {
