@@ -261,7 +261,7 @@ export function computeSiteSummaries(): SiteSummary[] {
     const uptime30d = computeUptime(site.id, runs30d);
 
     const avgLatency24h = computeAvgLatency(site.id, runs24h);
-    const history = buildHistory(site.id, allRuns.slice(-288));
+    const history = buildHistory(site.id, allRuns.slice(-336)); // 7 days at 30min intervals
 
     let currentStatus: SiteSummary["currentStatus"];
     let currentLatency: number | null = null;

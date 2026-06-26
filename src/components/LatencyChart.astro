@@ -1,96 +1,134 @@
 ---
-// site/src/components/LatencyChart.astro
 export interface Props {
   data: Array<{ timestamp: string; latency: number | null }>;
   height?: number;
 }
 
-const { data, height = 120 } = Astro.props;
+const { data, height = 180 } = Astro.props;
 
-// Filter to valid latency points, take last N
-const valid = data
-  .filter((d) => d.latency !== null)
-  .slice(-96);
+const now = Date.now();
+const windowMs = 7 * 24 * 60 * 60 * 1000;
+const windowStart = now - windowMs;
+const bucketCount = 168;
+const bucketMs = windowMs / bucketCount;
 
-const maxLatency = Math.max(...valid.map((d) => d.latency!), 100);
-const chartWidth = valid.length > 1 ? valid.length * 8 : 100;
-const padding = 4;
-const w = chartWidth + padding * 2;
-const h = height + padding * 2 + 20;
+const buckets: number[] = new Array(bucketCount).fill(0);
+const counts: number[] = new Array(bucketCount).fill(0);
 
-function x(i: number) {
-  return padding + (valid.length > 1 ? (i / (valid.length - 1)) * chartWidth : chartWidth / 2);
+for (const d of data) {
+  const ts = new Date(d.timestamp).getTime();
+  const elapsed = now - ts;
+  if (elapsed < 0 || elapsed > windowMs) continue;
+  const idx = Math.floor(elapsed / bucketMs);
+  if (idx >= 0 && idx < bucketCount && d.latency !== null) {
+    buckets[idx] += d.latency;
+    counts[idx]++;
+  }
 }
 
-function y(latency: number) {
-  return padding + height - (latency / maxLatency) * height;
+// Build points: [0]=oldest → [last]=newest
+const pts: { x: number; y: number }[] = [];
+for (let i = bucketCount - 1; i >= 0; i--) {
+  const avg = counts[i] > 0 ? Math.round(buckets[i] / counts[i]) : 0;
+  pts.push({ x: pts.length / (bucketCount - 1), y: avg });
 }
 
-// Build polyline points
-const points = valid
-  .map((d, i) => `${x(i).toFixed(1)},${y(d.latency!).toFixed(1)}`)
-  .join(" ");
+const validMax = Math.max(...pts.map((p) => p.y), 1);
 
-// Bar representation: each point is a thin rect
-const bars = valid
-  .map((d, i) => {
-    const barH = Math.max((d.latency! / maxLatency) * height, 2);
-    const barX = x(i) - 2;
-    const barY = padding + height - barH;
-    return `<rect x="${barX.toFixed(1)}" y="${barY.toFixed(1)}" width="4" height="${barH.toFixed(1)}" rx="1" fill="var(--color-up)" opacity="0.7" />`;
-  })
-  .join("");
+const pad = { t: 22, r: 12, b: 26, l: 12 };
+const cw = 800;
+const ch = height;
+const tw = cw + pad.l + pad.r;
+const th = ch + pad.t + pad.b;
+
+function sx(x: number) { return pad.l + x * cw; }
+function sy(v: number) { return pad.t + ch - (v / validMax) * ch; }
+
+function buildPath(): string {
+  if (pts.length === 0) return "";
+  let d = `M${sx(pts[0].x)},${sy(pts[0].y)}`;
+  for (let i = 0; i < pts.length - 1; i++) {
+    const x0 = sx(pts[i].x), y0 = sy(pts[i].y);
+    const x3 = sx(pts[i + 1].x), y3 = sy(pts[i + 1].y);
+    const dx = (x3 - x0) / 3;
+    d += ` C${x0 + dx},${y0} ${x3 - dx},${y3} ${x3},${y3}`;
+  }
+  return d;
+}
+
+const line = buildPath();
+const area = pts.length > 0 ? `${line} L${sx(1)},${sy(0)} L${sx(0)},${sy(0)} Z` : "";
+
+// Calculate midnight markers for each day in the window
+function getMidnights(): { x: number; label: string }[] {
+  const result = [];
+  const d = new Date(windowStart);
+  // Advance to next midnight
+  d.setHours(24, 0, 0, 0);
+  while (d.getTime() <= now) {
+    const x = (d.getTime() - windowStart) / windowMs;
+    const label = `${String(d.getMonth() + 1).padStart(2, "0")}/${String(d.getDate()).padStart(2, "0")}`;
+    result.push({ x, label });
+    d.setDate(d.getDate() + 1);
+  }
+  return result;
+}
+
+const midnights = getMidnights();
+
+function fmtLat(ms: number): string {
+  return ms >= 1000 ? `${(ms / 1000).toFixed(1)}s` : `${ms}ms`;
+}
 ---
 
-<div class="chart-wrapper">
-  {valid.length > 0 ? (
-    <svg
-      viewBox={`0 0 ${w} ${h}`}
-      width="100%"
-      height={h}
-      role="img"
-      aria-label="Latency chart"
-    >
-      <!-- Grid lines -->
-      <line x1={padding} y1={padding} x2={w - padding} y2={padding} stroke="var(--color-border)" stroke-width="0.5" />
-      <line x1={padding} y1={padding + height / 2} x2={w - padding} y2={padding + height / 2} stroke="var(--color-border)" stroke-width="0.5" stroke-dasharray="2,2" />
-      <line x1={padding} y1={padding + height} x2={w - padding} y2={padding + height} stroke="var(--color-border)" stroke-width="0.5" />
+<div class="chart-wrap">
+  <svg
+    viewBox={`0 0 ${tw} ${th}`}
+    width="100%"
+    height={th}
+    role="img"
+    aria-label="7-day latency chart"
+    preserveAspectRatio="none"
+  >
+    <defs>
+      <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="var(--color-up)" stop-opacity="0.25" />
+        <stop offset="100%" stop-color="var(--color-up)" stop-opacity="0" />
+      </linearGradient>
+    </defs>
 
-      <!-- Bars -->
-      {bars}
+    <!-- Horizontal grid -->
+    <line x1={pad.l} y1={sy(0)} x2={sx(1)} y2={sy(0)} stroke="var(--color-border)" stroke-width="0.5" />
+    <line x1={pad.l} y1={sy(validMax / 2)} x2={sx(1)} y2={sy(validMax / 2)} stroke="var(--color-border)" stroke-width="0.5" stroke-dasharray="2,2" />
+    <line x1={pad.l} y1={sy(validMax)} x2={sx(1)} y2={sy(validMax)} stroke="var(--color-border)" stroke-width="0.5" stroke-dasharray="2,2" />
 
-      <!-- Max latency label -->
-      <text x={padding} y={padding - 2} fill="var(--color-text-secondary)" font-size="9">
-        {maxLatency}ms
-      </text>
-      <text x={padding} y={padding + height + 12} fill="var(--color-text-secondary)" font-size="9">
-        0ms
-      </text>
-    </svg>
-  ) : (
-    <p class="chart-empty">No latency data available</p>
-  )}
+    <!-- Midnight vertical markers -->
+    {midnights.map((m) => (
+      <>
+        <line x1={sx(m.x)} y1={sy(0)} x2={sx(m.x)} y2={sy(validMax)} stroke="var(--color-border)" stroke-width="0.5" stroke-dasharray="2,2" opacity="0.6" />
+        <text x={sx(m.x)} y={th - 2} fill="var(--color-text-secondary)" font-size="9" text-anchor="middle">{m.label}</text>
+      </>
+    ))}
+
+    {validMax > 0 && <path d={area} fill="url(#areaGrad)" />}
+    <path d={line} fill="none" stroke="var(--color-up)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+
+    <text x={pad.l} y={pad.t - 4} fill="var(--color-text-secondary)" font-size="10">{fmtLat(validMax)}</text>
+    <text x={pad.l} y={sy(0) - 2} fill="var(--color-text-secondary)" font-size="10">0ms</text>
+  </svg>
 </div>
 
 <style>
-  .chart-wrapper {
+  .chart-wrap {
     width: 100%;
-    overflow-x: auto;
     background: var(--color-surface);
     border-radius: var(--radius);
     border: 1px solid var(--color-border);
     padding: 0.5rem;
   }
 
-  .chart-wrapper svg {
+  .chart-wrap svg {
     display: block;
-    min-width: 200px;
-  }
-
-  .chart-empty {
-    text-align: center;
-    color: var(--color-text-secondary);
-    font-size: 0.85rem;
-    padding: 1rem;
+    width: 100%;
   }
 </style>
