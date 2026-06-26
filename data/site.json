@@ -943,6 +943,17 @@
     "isDead": false
   },
   {
+    "id": "fsm",
+    "name": "FSM",
+    "urls": [
+      "uggcf://sfz.anzr/"
+    ],
+    "type": "private",
+    "description": "FSM（飞天拉面神教）是一家专注于R18内容的PT站点，需要配置搜索入口才可搜索",
+    "favicon": "./fsm.jpg",
+    "isDead": true
+  },
+  {
     "id": "gainbound",
     "name": "丐帮",
     "urls": [
@@ -1842,6 +1853,19 @@
     ],
     "type": "private",
     "description": "MoreThanTV is a Private Torrent Tracker for TV / MOVIES",
+    "favicon": "",
+    "isDead": false
+  },
+  {
+    "id": "mteam",
+    "name": "M-Team - TP",
+    "urls": [
+      "uggcf://xc.z-grnz.pp/",
+      "uggcf://mc.z-grnz.vb/",
+      "uggcf://bo.z-grnz.pp/"
+    ],
+    "type": "private",
+    "description": "综合性网站，有分享率要求",
     "favicon": "",
     "isDead": false
   },
