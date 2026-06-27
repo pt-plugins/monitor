@@ -113,7 +113,7 @@
     "type": "private",
     "description": "希望都能找到各自的兴趣、爱好、欢喜",
     "favicon": "",
-    "isDead": false
+    "isDead": true
   },
   {
     "id": "agsvpt",
