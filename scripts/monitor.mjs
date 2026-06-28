@@ -144,8 +144,6 @@ async function main() {
       const siteStatus = urlResults.some((r) => r.status === "up") ? "up" : "down";
       const result = {
         id: site.id,
-        name: site.name,
-        type: site.type,
         status: siteStatus,
         urls: urlResults,
       };

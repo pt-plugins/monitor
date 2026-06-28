@@ -19,8 +19,6 @@ export interface UrlResult {
 
 export interface SiteResult {
   id: string;
-  name: string;
-  type: string;
   status: "up" | "down";
   urls: UrlResult[];
 }
