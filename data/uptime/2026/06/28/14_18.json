@@ -1,0 +1,2490 @@
+{
+  "timestamp": "2026-06-28T14:15:32.060Z",
+  "sites": [
+    {
+      "id": "1337x",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://1337x.to/",
+          "status": "up",
+          "latency": 71
+        }
+      ]
+    },
+    {
+      "id": "1ptba",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://1ptba.com/",
+          "status": "up",
+          "latency": 125
+        }
+      ]
+    },
+    {
+      "id": "52movie",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://www.52movie.top/",
+          "status": "up",
+          "latency": 213
+        }
+      ]
+    },
+    {
+      "id": "13city",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://13city.org/",
+          "status": "up",
+          "latency": 715
+        }
+      ]
+    },
+    {
+      "id": "52pt",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://52pt.site/",
+          "status": "up",
+          "latency": 663
+        }
+      ]
+    },
+    {
+      "id": "aidoruonline",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://aidoru-online.me/",
+          "status": "up",
+          "latency": 241
+        }
+      ]
+    },
+    {
+      "id": "acgrip",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://acg.rip/",
+          "status": "up",
+          "latency": 924
+        }
+      ]
+    },
+    {
+      "id": "alpharatio",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://alpharatio.cc/",
+          "status": "up",
+          "latency": 564
+        }
+      ]
+    },
+    {
+      "id": "0magnet",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://16mag.net/",
+          "status": "up",
+          "latency": 1840
+        }
+      ]
+    },
+    {
+      "id": "alingpt",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://pt.aling.de/",
+          "status": "up",
+          "latency": 974
+        }
+      ]
+    },
+    {
+      "id": "animebytes",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://animebytes.tv/",
+          "status": "up",
+          "latency": 339
+        }
+      ]
+    },
+    {
+      "id": "aither",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://aither.cc/",
+          "status": "up",
+          "latency": 1309
+        }
+      ]
+    },
+    {
+      "id": "anirena",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://www.anirena.com/",
+          "status": "up",
+          "latency": 385
+        }
+      ]
+    },
+    {
+      "id": "animez",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://animez.to/",
+          "status": "up",
+          "latency": 826
+        }
+      ]
+    },
+    {
+      "id": "animetosho",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://animetosho.org/",
+          "status": "up",
+          "latency": 2229
+        }
+      ]
+    },
+    {
+      "id": "asiancinema",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://eiga.moi/",
+          "status": "up",
+          "latency": 1013
+        }
+      ]
+    },
+    {
+      "id": "anthelion",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://anthelion.me/",
+          "status": "up",
+          "latency": 2498
+        }
+      ]
+    },
+    {
+      "id": "audiences",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://audiences.me/",
+          "status": "up",
+          "latency": 283
+        }
+      ]
+    },
+    {
+      "id": "audionews",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://audionews.org/",
+          "status": "up",
+          "latency": 537
+        }
+      ]
+    },
+    {
+      "id": "audiobookbay",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://audiobookbay.lu/",
+          "status": "up",
+          "latency": 1229
+        }
+      ]
+    },
+    {
+      "id": "avistaz",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://avistaz.to/",
+          "status": "up",
+          "latency": 255
+        }
+      ]
+    },
+    {
+      "id": "anisource",
+      "status": "down",
+      "urls": [
+        {
+          "url": "https://asnet.pw/",
+          "status": "down",
+          "latency": null,
+          "error": "All retries exhausted"
+        }
+      ]
+    },
+    {
+      "id": "azusa",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://azusa.wiki/",
+          "status": "up",
+          "latency": 423
+        }
+      ]
+    },
+    {
+      "id": "baozi",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://p.t-baozi.cc/",
+          "status": "up",
+          "latency": 261
+        }
+      ]
+    },
+    {
+      "id": "beyondhd",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://beyond-hd.me/",
+          "status": "up",
+          "latency": 1134
+        }
+      ]
+    },
+    {
+      "id": "bitporn",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://bitporn.eu/",
+          "status": "up",
+          "latency": 1041
+        }
+      ]
+    },
+    {
+      "id": "aura4k",
+      "status": "down",
+      "urls": [
+        {
+          "url": "https://aura4k.net/",
+          "status": "down",
+          "latency": null,
+          "error": "All retries exhausted"
+        }
+      ]
+    },
+    {
+      "id": "bakabt",
+      "status": "down",
+      "urls": [
+        {
+          "url": "https://bakabt.me/",
+          "status": "down",
+          "latency": null,
+          "error": "All retries exhausted"
+        }
+      ]
+    },
+    {
+      "id": "broadcasthenet",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://broadcasthe.net/",
+          "status": "up",
+          "latency": 567
+        }
+      ]
+    },
+    {
+      "id": "brokenstones",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://brokenstones.is/",
+          "status": "up",
+          "latency": 878
+        }
+      ]
+    },
+    {
+      "id": "btetree",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://bt.etree.org/",
+          "status": "up",
+          "latency": 1673
+        }
+      ]
+    },
+    {
+      "id": "btschool",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://pt.btschool.club/",
+          "status": "up",
+          "latency": 522
+        }
+      ]
+    },
+    {
+      "id": "bitpt",
+      "status": "down",
+      "urls": [
+        {
+          "url": "https://bitpt.cn/",
+          "status": "down",
+          "latency": null,
+          "error": "All retries exhausted"
+        }
+      ]
+    },
+    {
+      "id": "capybarabr",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://capybarabr.com/",
+          "status": "up",
+          "latency": 466
+        }
+      ]
+    },
+    {
+      "id": "carpt",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://carpt.net/",
+          "status": "up",
+          "latency": 292
+        }
+      ]
+    },
+    {
+      "id": "cathoderaytube",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://www.cathode-ray.tube/",
+          "status": "up",
+          "latency": 671
+        }
+      ]
+    },
+    {
+      "id": "cbg",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://cangbao.ge/",
+          "status": "up",
+          "latency": 737
+        }
+      ]
+    },
+    {
+      "id": "byrbt",
+      "status": "down",
+      "urls": [
+        {
+          "url": "https://byr.pt/",
+          "status": "down",
+          "latency": null,
+          "error": "All retries exhausted"
+        }
+      ]
+    },
+    {
+      "id": "cgpeers",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://cgpeers.to/",
+          "status": "up",
+          "latency": 926
+        }
+      ]
+    },
+    {
+      "id": "chdbits",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://ptchdbits.co/",
+          "status": "up",
+          "latency": 462
+        }
+      ]
+    },
+    {
+      "id": "cinemageddon",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://cinemageddon.net/",
+          "status": "up",
+          "latency": 424
+        }
+      ]
+    },
+    {
+      "id": "cdy",
+      "status": "down",
+      "urls": [
+        {
+          "url": "https://pt.cdy.skin/",
+          "status": "down",
+          "latency": null,
+          "error": "All retries exhausted"
+        }
+      ]
+    },
+    {
+      "id": "cinemaz",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://cinemaz.to/",
+          "status": "up",
+          "latency": 193
+        }
+      ]
+    },
+    {
+      "id": "clearjav",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://clearjav.com/",
+          "status": "up",
+          "latency": 790
+        }
+      ]
+    },
+    {
+      "id": "crabpt",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://crabpt.vip/",
+          "status": "up",
+          "latency": 515
+        }
+      ]
+    },
+    {
+      "id": "cspt",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://cspt.top/",
+          "status": "up",
+          "latency": 429
+        }
+      ]
+    },
+    {
+      "id": "cyanbug",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://cyanbug.net/",
+          "status": "up",
+          "latency": 537
+        }
+      ]
+    },
+    {
+      "id": "darkpeers",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://darkpeers.org/",
+          "status": "up",
+          "latency": 580
+        }
+      ]
+    },
+    {
+      "id": "desigaane",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://desigaane.rocks/",
+          "status": "up",
+          "latency": 856
+        }
+      ]
+    },
+    {
+      "id": "dicmusic",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://dicmusic.com/",
+          "status": "up",
+          "latency": 279
+        }
+      ]
+    },
+    {
+      "id": "digitalcore",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://digitalcore.club/",
+          "status": "up",
+          "latency": 611
+        }
+      ]
+    },
+    {
+      "id": "discfan",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://discfan.net/",
+          "status": "up",
+          "latency": 447
+        }
+      ]
+    },
+    {
+      "id": "dmhy",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://share.dmhy.org/",
+          "status": "up",
+          "latency": 2708
+        }
+      ]
+    },
+    {
+      "id": "dragonhd",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://www.dragonhd.xyz/",
+          "status": "up",
+          "latency": 490
+        }
+      ]
+    },
+    {
+      "id": "dstudio",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://dstudio.me/",
+          "status": "up",
+          "latency": 466
+        }
+      ]
+    },
+    {
+      "id": "dubhe",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://dubhe.site/",
+          "status": "up",
+          "latency": 466
+        }
+      ]
+    },
+    {
+      "id": "ehentai",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://e-hentai.org/",
+          "status": "up",
+          "latency": 321
+        }
+      ]
+    },
+    {
+      "id": "empornium",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://emparadise.rs/",
+          "status": "up",
+          "latency": 995
+        }
+      ]
+    },
+    {
+      "id": "exoticaz",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://exoticaz.to/",
+          "status": "up",
+          "latency": 271
+        }
+      ]
+    },
+    {
+      "id": "exttorrents",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://ext.to/",
+          "status": "up",
+          "latency": 70
+        }
+      ]
+    },
+    {
+      "id": "blutopia",
+      "status": "down",
+      "urls": [
+        {
+          "url": "https://blutopia.cc/",
+          "status": "down",
+          "latency": null,
+          "error": "All retries exhausted"
+        }
+      ]
+    },
+    {
+      "id": "filelist",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://filelist.io/",
+          "status": "up",
+          "latency": 514
+        }
+      ]
+    },
+    {
+      "id": "freefarm",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://pt.0ff.cc/",
+          "status": "up",
+          "latency": 438
+        }
+      ]
+    },
+    {
+      "id": "gazellegames",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://gazellegames.net/",
+          "status": "up",
+          "latency": 1165
+        }
+      ]
+    },
+    {
+      "id": "ggpt",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://www.gamegamept.com/",
+          "status": "up",
+          "latency": 493
+        }
+      ]
+    },
+    {
+      "id": "greatposterwall",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://greatposterwall.com/",
+          "status": "up",
+          "latency": 343
+        }
+      ]
+    },
+    {
+      "id": "gtnet",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://www.gay-torrents.net/",
+          "status": "up",
+          "latency": 647
+        }
+      ]
+    },
+    {
+      "id": "cinematik",
+      "status": "down",
+      "urls": [
+        {
+          "url": "https://cinematik.net/",
+          "status": "down",
+          "latency": null,
+          "error": "All retries exhausted"
+        }
+      ]
+    },
+    {
+      "id": "gtru",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://www.gaytor.rent/",
+          "status": "up",
+          "latency": 502
+        }
+      ]
+    },
+    {
+      "id": "haidan",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://www.haidan.cc/",
+          "status": "up",
+          "latency": 438
+        }
+      ]
+    },
+    {
+      "id": "agsvpt",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://pt.agsvpt.cn/",
+          "status": "down",
+          "latency": null,
+          "error": "All retries exhausted"
+        },
+        {
+          "url": "https://www.agsvpt.com/",
+          "status": "up",
+          "latency": 1138
+        }
+      ]
+    },
+    {
+      "id": "happyfappy",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://www.happyfappy.net/",
+          "status": "up",
+          "latency": 285
+        }
+      ]
+    },
+    {
+      "id": "animelovers",
+      "status": "down",
+      "urls": [
+        {
+          "url": "https://animelovers.club/",
+          "status": "down",
+          "latency": null,
+          "error": "All retries exhausted"
+        }
+      ]
+    },
+    {
+      "id": "hdarea",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://hdarea.club/",
+          "status": "up",
+          "latency": 1127
+        }
+      ]
+    },
+    {
+      "id": "hdbits",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://hdbits.org/",
+          "status": "up",
+          "latency": 1294
+        }
+      ]
+    },
+    {
+      "id": "hdbao",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://hdbao.cc/",
+          "status": "up",
+          "latency": 1781
+        }
+      ]
+    },
+    {
+      "id": "hddolby",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://www.hddolby.com/",
+          "status": "up",
+          "latency": 86
+        }
+      ]
+    },
+    {
+      "id": "hdcity",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://hdcity.city/",
+          "status": "up",
+          "latency": 1026
+        }
+      ]
+    },
+    {
+      "id": "hdclone",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://pt.hdclone.top/",
+          "status": "up",
+          "latency": 590
+        }
+      ]
+    },
+    {
+      "id": "hdfans",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://hdfans.org/",
+          "status": "up",
+          "latency": 728
+        }
+      ]
+    },
+    {
+      "id": "hdhome",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://hdhome.org/",
+          "status": "up",
+          "latency": 558
+        }
+      ]
+    },
+    {
+      "id": "hdroute",
+      "status": "up",
+      "urls": [
+        {
+          "url": "http://hdroute.org/",
+          "status": "up",
+          "latency": 734
+        }
+      ]
+    },
+    {
+      "id": "hdsky",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://hdsky.me/",
+          "status": "up",
+          "latency": 729
+        }
+      ]
+    },
+    {
+      "id": "hdspace",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://hd-space.org/",
+          "status": "up",
+          "latency": 406
+        }
+      ]
+    },
+    {
+      "id": "hdtorrents",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://hd-torrents.org/",
+          "status": "up",
+          "latency": 368
+        }
+      ]
+    },
+    {
+      "id": "hdtime",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://hdtime.org/",
+          "status": "up",
+          "latency": 967
+        }
+      ]
+    },
+    {
+      "id": "hdupt",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://pt.hdupt.com/",
+          "status": "up",
+          "latency": 450
+        }
+      ]
+    },
+    {
+      "id": "hdvideo",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://hdvideo.top/",
+          "status": "up",
+          "latency": 578
+        }
+      ]
+    },
+    {
+      "id": "hhanclub",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://hhanclub.net/",
+          "status": "up",
+          "latency": 458
+        }
+      ]
+    },
+    {
+      "id": "hitpt",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://www.hitpt.com/",
+          "status": "up",
+          "latency": 139
+        }
+      ]
+    },
+    {
+      "id": "htpt",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://www.htpt.cc/",
+          "status": "up",
+          "latency": 1214
+        }
+      ]
+    },
+    {
+      "id": "huno",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://hawke.uno/",
+          "status": "up",
+          "latency": 345
+        }
+      ]
+    },
+    {
+      "id": "hxpt",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://www.hxpt.org/",
+          "status": "up",
+          "latency": 520
+        }
+      ]
+    },
+    {
+      "id": "hudbt",
+      "status": "down",
+      "urls": [
+        {
+          "url": "https://hudbt.hust.edu.cn/",
+          "status": "down",
+          "latency": null,
+          "error": "All retries exhausted"
+        }
+      ]
+    },
+    {
+      "id": "ilolicon",
+      "status": "down",
+      "urls": [
+        {
+          "url": "https://mua.xloli.cc/",
+          "status": "down",
+          "latency": null,
+          "error": "All retries exhausted"
+        }
+      ]
+    },
+    {
+      "id": "iptorrents",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://iptorrents.com/",
+          "status": "up",
+          "latency": 1033
+        }
+      ]
+    },
+    {
+      "id": "jpopsuki",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://jpopsuki.eu/",
+          "status": "up",
+          "latency": 1611
+        }
+      ]
+    },
+    {
+      "id": "itzmx",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://pt.itzmx.com/",
+          "status": "up",
+          "latency": 2183
+        }
+      ]
+    },
+    {
+      "id": "jptv4us",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://jptv4.us/",
+          "status": "up",
+          "latency": 422
+        }
+      ]
+    },
+    {
+      "id": "karagarga",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://karagarga.in/",
+          "status": "up",
+          "latency": 303
+        }
+      ]
+    },
+    {
+      "id": "kamept",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://kamept.com/",
+          "status": "up",
+          "latency": 461
+        }
+      ]
+    },
+    {
+      "id": "keepfrds",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://pt.keepfrds.com/",
+          "status": "up",
+          "latency": 150
+        }
+      ]
+    },
+    {
+      "id": "kelu",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://our.kelu.one/",
+          "status": "up",
+          "latency": 480
+        }
+      ]
+    },
+    {
+      "id": "kufei",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://kufei.org/",
+          "status": "up",
+          "latency": 518
+        }
+      ]
+    },
+    {
+      "id": "kufirc",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://kufirc.com/",
+          "status": "up",
+          "latency": 867
+        }
+      ]
+    },
+    {
+      "id": "lajidui",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://pt.lajidui.top/",
+          "status": "up",
+          "latency": 433
+        }
+      ]
+    },
+    {
+      "id": "kunlun",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://www.yhpp.cc/",
+          "status": "up",
+          "latency": 1285
+        }
+      ]
+    },
+    {
+      "id": "latteam",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://lat-team.com/",
+          "status": "up",
+          "latency": 569
+        }
+      ]
+    },
+    {
+      "id": "lemonhdnet",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://lemonhd.net/",
+          "status": "up",
+          "latency": 691
+        }
+      ]
+    },
+    {
+      "id": "longpt",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://longpt.org/",
+          "status": "up",
+          "latency": 382
+        }
+      ]
+    },
+    {
+      "id": "lst",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://lst.gg/",
+          "status": "up",
+          "latency": 1213
+        }
+      ]
+    },
+    {
+      "id": "fearnopeer",
+      "status": "down",
+      "urls": [
+        {
+          "url": "https://fearnopeer.com/",
+          "status": "down",
+          "latency": null,
+          "error": "All retries exhausted"
+        }
+      ]
+    },
+    {
+      "id": "luminarr",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://luminarr.me/",
+          "status": "up",
+          "latency": 1199
+        }
+      ]
+    },
+    {
+      "id": "march",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://duckboobee.org/",
+          "status": "up",
+          "latency": 1059
+        }
+      ]
+    },
+    {
+      "id": "luckpt",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://pt.luckpt.de/",
+          "status": "up",
+          "latency": 2514
+        }
+      ]
+    },
+    {
+      "id": "momentpt",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://www.momentpt.top/",
+          "status": "up",
+          "latency": 308
+        }
+      ]
+    },
+    {
+      "id": "milkie",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://milkie.cc/",
+          "status": "up",
+          "latency": 494
+        }
+      ]
+    },
+    {
+      "id": "monikadesign",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://monikadesign.uk/",
+          "status": "up",
+          "latency": 454
+        }
+      ]
+    },
+    {
+      "id": "midnightscene",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://midnightscene.cc/",
+          "status": "up",
+          "latency": 1000
+        }
+      ]
+    },
+    {
+      "id": "mteam",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://kp.m-team.cc/",
+          "status": "up",
+          "latency": 208
+        }
+      ]
+    },
+    {
+      "id": "hdkylin",
+      "status": "down",
+      "urls": [
+        {
+          "url": "https://www.hdkyl.in/",
+          "status": "down",
+          "latency": null,
+          "error": "All retries exhausted"
+        },
+        {
+          "url": "https://na.hdkylin.com/",
+          "status": "down",
+          "latency": null,
+          "error": "All retries exhausted"
+        },
+        {
+          "url": "https://cf.hdkylin.com/",
+          "status": "down",
+          "latency": null,
+          "error": "All retries exhausted"
+        }
+      ]
+    },
+    {
+      "id": "musopia",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://www.musopia.vip/",
+          "status": "up",
+          "latency": 644
+        }
+      ]
+    },
+    {
+      "id": "muxuege",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://pt.muxuege.org/",
+          "status": "up",
+          "latency": 558
+        }
+      ]
+    },
+    {
+      "id": "nanyangpt",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://nanyangpt.com/",
+          "status": "up",
+          "latency": 72
+        }
+      ]
+    },
+    {
+      "id": "myanonamouse",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://www.myanonamouse.net/",
+          "status": "up",
+          "latency": 1302
+        }
+      ]
+    },
+    {
+      "id": "mypt",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://cc.mypt.cc/",
+          "status": "up",
+          "latency": 993
+        }
+      ]
+    },
+    {
+      "id": "morethantv",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://www.morethantv.me/",
+          "status": "up",
+          "latency": 1944
+        }
+      ]
+    },
+    {
+      "id": "ncore",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://ncore.pro/",
+          "status": "up",
+          "latency": 1232
+        }
+      ]
+    },
+    {
+      "id": "nebulance",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://nebulance.io/",
+          "status": "up",
+          "latency": 644
+        }
+      ]
+    },
+    {
+      "id": "nekobt",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://nekobt.to/",
+          "status": "up",
+          "latency": 766
+        }
+      ]
+    },
+    {
+      "id": "nicept",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://www.nicept.net/",
+          "status": "up",
+          "latency": 1104
+        }
+      ]
+    },
+    {
+      "id": "njtupt",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://njtupt.top/",
+          "status": "up",
+          "latency": 1023
+        }
+      ]
+    },
+    {
+      "id": "novahd",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://pt.novahd.top/",
+          "status": "up",
+          "latency": 617
+        }
+      ]
+    },
+    {
+      "id": "nordicquality",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://nordicq.org/",
+          "status": "up",
+          "latency": 728
+        }
+      ]
+    },
+    {
+      "id": "okpt",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://www.okpt.net/",
+          "status": "up",
+          "latency": 470
+        }
+      ]
+    },
+    {
+      "id": "nordicbytes",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://nordicbytes.org/",
+          "status": "up",
+          "latency": 2026
+        }
+      ]
+    },
+    {
+      "id": "nyaa",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://nyaa.si/",
+          "status": "up",
+          "latency": 600
+        }
+      ]
+    },
+    {
+      "id": "onlyencodes",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://onlyencodes.cc/",
+          "status": "up",
+          "latency": 690
+        }
+      ]
+    },
+    {
+      "id": "opencd",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://open.cd/",
+          "status": "up",
+          "latency": 917
+        }
+      ]
+    },
+    {
+      "id": "oldtoonsworld",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://oldtoons.world/",
+          "status": "up",
+          "latency": 1207
+        }
+      ]
+    },
+    {
+      "id": "ourbits",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://ourbits.club/",
+          "status": "up",
+          "latency": 69
+        }
+      ]
+    },
+    {
+      "id": "oshenpt",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://www.oshen.win/",
+          "status": "up",
+          "latency": 475
+        }
+      ]
+    },
+    {
+      "id": "orpheus",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://orpheus.network/",
+          "status": "up",
+          "latency": 881
+        }
+      ]
+    },
+    {
+      "id": "pandapt",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://pandapt.net/",
+          "status": "up",
+          "latency": 498
+        }
+      ]
+    },
+    {
+      "id": "piggo",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://piggo.me/",
+          "status": "up",
+          "latency": 170
+        }
+      ]
+    },
+    {
+      "id": "passthepopcorn",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://passthepopcorn.me/",
+          "status": "up",
+          "latency": 514
+        }
+      ]
+    },
+    {
+      "id": "pornolab",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://pornolab.net/",
+          "status": "up",
+          "latency": 558
+        }
+      ]
+    },
+    {
+      "id": "pixelcove",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://www.pixelcove.me/",
+          "status": "up",
+          "latency": 825
+        }
+      ]
+    },
+    {
+      "id": "privatehd",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://privatehd.to/",
+          "status": "up",
+          "latency": 521
+        }
+      ]
+    },
+    {
+      "id": "portugas",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://portugas.org/",
+          "status": "up",
+          "latency": 799
+        }
+      ]
+    },
+    {
+      "id": "pter",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://pterclub.net/",
+          "status": "up",
+          "latency": 523
+        }
+      ]
+    },
+    {
+      "id": "ptcafe",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://ptcafe.club/",
+          "status": "up",
+          "latency": 1132
+        }
+      ]
+    },
+    {
+      "id": "ptfans",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://ptfans.cc/",
+          "status": "up",
+          "latency": 486
+        }
+      ]
+    },
+    {
+      "id": "pthome",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://pthome.net/",
+          "status": "up",
+          "latency": 115
+        }
+      ]
+    },
+    {
+      "id": "ptlao",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://ptlao.top/",
+          "status": "up",
+          "latency": 141
+        }
+      ]
+    },
+    {
+      "id": "ptgtk",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://pt.gtkpw.xyz/",
+          "status": "up",
+          "latency": 458
+        }
+      ]
+    },
+    {
+      "id": "ptlgs",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://ptlgs.org/",
+          "status": "up",
+          "latency": 551
+        }
+      ]
+    },
+    {
+      "id": "ptsbao",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://ptsbao.club/",
+          "status": "up",
+          "latency": 531
+        }
+      ]
+    },
+    {
+      "id": "gtorg",
+      "status": "down",
+      "urls": [
+        {
+          "url": "https://gay-torrents.org/",
+          "status": "down",
+          "latency": null,
+          "error": "All retries exhausted"
+        }
+      ]
+    },
+    {
+      "id": "ptskit",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://www.ptskit.org/",
+          "status": "up",
+          "latency": 1697
+        }
+      ]
+    },
+    {
+      "id": "pttime",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://www.pttime.org/",
+          "status": "up",
+          "latency": 543
+        }
+      ]
+    },
+    {
+      "id": "ptzone",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://ptzone.xyz/",
+          "status": "up",
+          "latency": 270
+        }
+      ]
+    },
+    {
+      "id": "pussytorrents",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://pussytorrents.org/",
+          "status": "up",
+          "latency": 264
+        }
+      ]
+    },
+    {
+      "id": "railgunpt",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://bilibili.download/",
+          "status": "up",
+          "latency": 784
+        }
+      ]
+    },
+    {
+      "id": "raingfh",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://raingfh.top/",
+          "status": "up",
+          "latency": 437
+        }
+      ]
+    },
+    {
+      "id": "qingwa",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://www.qingwapt.com/",
+          "status": "up",
+          "latency": 1736
+        }
+      ]
+    },
+    {
+      "id": "redacted",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://redacted.sh/",
+          "status": "up",
+          "latency": 647
+        }
+      ]
+    },
+    {
+      "id": "ptneko",
+      "status": "down",
+      "urls": [
+        {
+          "url": "https://ptneko.com/",
+          "status": "down",
+          "latency": null,
+          "error": "All retries exhausted"
+        }
+      ]
+    },
+    {
+      "id": "reelflix",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://reelflix.cc/",
+          "status": "up",
+          "latency": 1028
+        }
+      ]
+    },
+    {
+      "id": "rousipro",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://rousi.pro/",
+          "status": "up",
+          "latency": 84
+        }
+      ]
+    },
+    {
+      "id": "retroflix",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://retroflix.net/",
+          "status": "up",
+          "latency": 1394
+        }
+      ]
+    },
+    {
+      "id": "rutracker",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://rutracker.org/",
+          "status": "up",
+          "latency": 2526
+        }
+      ]
+    },
+    {
+      "id": "sbpt",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://sbpt.link/",
+          "status": "up",
+          "latency": 265
+        }
+      ]
+    },
+    {
+      "id": "rousi",
+      "status": "down",
+      "urls": [
+        {
+          "url": "https://rousi.zip/",
+          "status": "down",
+          "latency": null,
+          "error": "All retries exhausted"
+        }
+      ]
+    },
+    {
+      "id": "secretcinema",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://secret-cinema.pw/",
+          "status": "up",
+          "latency": 1243
+        }
+      ]
+    },
+    {
+      "id": "playletpt",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://playletpt.xyz/",
+          "status": "up",
+          "latency": 608
+        }
+      ]
+    },
+    {
+      "id": "seedpool",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://seedpool.org/",
+          "status": "up",
+          "latency": 864
+        }
+      ]
+    },
+    {
+      "id": "sewerpt",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://sewerpt.com/",
+          "status": "up",
+          "latency": 665
+        }
+      ]
+    },
+    {
+      "id": "siqi",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://si-qi.xyz/",
+          "status": "up",
+          "latency": 410
+        }
+      ]
+    },
+    {
+      "id": "shareisland",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://shareisland.org/",
+          "status": "up",
+          "latency": 700
+        }
+      ]
+    },
+    {
+      "id": "soulvoice",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://pt.soulvoice.club/",
+          "status": "up",
+          "latency": 430
+        }
+      ]
+    },
+    {
+      "id": "speedapp",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://speedapp.io/",
+          "status": "up",
+          "latency": 467
+        }
+      ]
+    },
+    {
+      "id": "skyeysnow",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://www.skyey2.com/",
+          "status": "up",
+          "latency": 1104
+        }
+      ]
+    },
+    {
+      "id": "springsunday",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://springsunday.net/",
+          "status": "up",
+          "latency": 164
+        }
+      ]
+    },
+    {
+      "id": "starspace",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://star-space.net/",
+          "status": "up",
+          "latency": 733
+        }
+      ]
+    },
+    {
+      "id": "sportscult",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://sportscult.org/",
+          "status": "up",
+          "latency": 947
+        }
+      ]
+    },
+    {
+      "id": "sunnypt",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://sunnypt.top/",
+          "status": "up",
+          "latency": 410
+        }
+      ]
+    },
+    {
+      "id": "superbits",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://superbits.org/",
+          "status": "up",
+          "latency": 702
+        }
+      ]
+    },
+    {
+      "id": "tangpt",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://www.tangpt.top/",
+          "status": "up",
+          "latency": 368
+        }
+      ]
+    },
+    {
+      "id": "tccf",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://et8.org/",
+          "status": "up",
+          "latency": 1745
+        }
+      ]
+    },
+    {
+      "id": "tey",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://pt.tey.cc/",
+          "status": "up",
+          "latency": 473
+        }
+      ]
+    },
+    {
+      "id": "thegeeks",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://thegeeks.click/",
+          "status": "up",
+          "latency": 1375
+        }
+      ]
+    },
+    {
+      "id": "thevault",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://thevault.click/",
+          "status": "up",
+          "latency": 1313
+        }
+      ]
+    },
+    {
+      "id": "tjupt",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://tjupt.org/",
+          "status": "up",
+          "latency": 603
+        }
+      ]
+    },
+    {
+      "id": "sjtu",
+      "status": "down",
+      "urls": [
+        {
+          "url": "https://pt.sjtu.edu.cn/",
+          "status": "down",
+          "latency": null,
+          "error": "All retries exhausted"
+        }
+      ]
+    },
+    {
+      "id": "tlfbits",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://pt.eastgame.org/",
+          "status": "up",
+          "latency": 338
+        }
+      ]
+    },
+    {
+      "id": "tmpt",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://tmpt.top/",
+          "status": "up",
+          "latency": 243
+        }
+      ]
+    },
+    {
+      "id": "torrenthub",
+      "status": "down",
+      "urls": [
+        {
+          "url": "https://torrenthub.club/",
+          "status": "down",
+          "latency": null,
+          "error": "All retries exhausted"
+        }
+      ]
+    },
+    {
+      "id": "torrentleech",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://www.torrentleech.org/",
+          "status": "up",
+          "latency": 452
+        }
+      ]
+    },
+    {
+      "id": "torrentscsv",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://torrents-csv.com/",
+          "status": "up",
+          "latency": 453
+        }
+      ]
+    },
+    {
+      "id": "totheglory",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://totheglory.im/",
+          "status": "up",
+          "latency": 687
+        }
+      ]
+    },
+    {
+      "id": "nexushd",
+      "status": "down",
+      "urls": [
+        {
+          "url": "https://v6.nexushd.org/",
+          "status": "down",
+          "latency": null,
+          "error": "All retries exhausted"
+        },
+        {
+          "url": "https://www.nexushd.org/",
+          "status": "down",
+          "latency": null,
+          "error": "All retries exhausted"
+        }
+      ]
+    },
+    {
+      "id": "u2",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://u2.dmhy.org/",
+          "status": "up",
+          "latency": 561
+        }
+      ]
+    },
+    {
+      "id": "ubits",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://ubits.club/",
+          "status": "up",
+          "latency": 247
+        }
+      ]
+    },
+    {
+      "id": "tu88",
+      "status": "down",
+      "urls": [
+        {
+          "url": "https://pt.tu88.men/",
+          "status": "down",
+          "latency": null,
+          "error": "All retries exhausted"
+        }
+      ]
+    },
+    {
+      "id": "ultrahd",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://ultrahd.net/",
+          "status": "up",
+          "latency": 273
+        }
+      ]
+    },
+    {
+      "id": "uploadcx",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://upload.cx/",
+          "status": "up",
+          "latency": 425
+        }
+      ]
+    },
+    {
+      "id": "wintersakura",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://wintersakura.net/",
+          "status": "up",
+          "latency": 369
+        }
+      ]
+    },
+    {
+      "id": "vclib",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://pt.vclib.online/",
+          "status": "up",
+          "latency": 979
+        }
+      ]
+    },
+    {
+      "id": "xingyunge",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://pt.xingyungept.org/",
+          "status": "up",
+          "latency": 355
+        }
+      ]
+    },
+    {
+      "id": "yemapt",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://www.yemapt.org/",
+          "status": "up",
+          "latency": 180
+        }
+      ]
+    },
+    {
+      "id": "xingtan",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://xingtan.one/",
+          "status": "up",
+          "latency": 846
+        }
+      ]
+    },
+    {
+      "id": "yinguskg",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://pt.ying.us.kg/",
+          "status": "up",
+          "latency": 495
+        }
+      ]
+    },
+    {
+      "id": "yuscene",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://yu-scene.net/",
+          "status": "up",
+          "latency": 1304
+        }
+      ]
+    },
+    {
+      "id": "zhuque",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://zhuque.in/",
+          "status": "up",
+          "latency": 423
+        }
+      ]
+    },
+    {
+      "id": "zmpt",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://zmpt.cc/",
+          "status": "up",
+          "latency": 301
+        }
+      ]
+    },
+    {
+      "id": "zrpt",
+      "status": "up",
+      "urls": [
+        {
+          "url": "https://zrpt.cc/",
+          "status": "up",
+          "latency": 443
+        }
+      ]
+    },
+    {
+      "id": "rs",
+      "status": "down",
+      "urls": [
+        {
+          "url": "https://resource.xidian.edu.cn/",
+          "status": "down",
+          "latency": null,
+          "error": "All retries exhausted"
+        }
+      ]
+    },
+    {
+      "id": "zhixing",
+      "status": "down",
+      "urls": [
+        {
+          "url": "http://pt.zhixing.bjtu.edu.cn/",
+          "status": "down",
+          "latency": null,
+          "error": "All retries exhausted"
+        }
+      ]
+    },
+    {
+      "id": "sugoimusic",
+      "status": "down",
+      "urls": [
+        {
+          "url": "https://sugoimusic.me/",
+          "status": "down",
+          "latency": null,
+          "error": "All retries exhausted"
+        }
+      ]
+    },
+    {
+      "id": "tokyotosho",
+      "status": "down",
+      "urls": [
+        {
+          "url": "https://www.tokyotosho.info/",
+          "status": "down",
+          "latency": null,
+          "error": "All retries exhausted"
+        },
+        {
+          "url": "https://tokyo-tosho.net/",
+          "status": "down",
+          "latency": null,
+          "error": "All retries exhausted"
+        }
+      ]
+    }
+  ]
+}
