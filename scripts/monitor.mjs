@@ -127,13 +127,15 @@ async function main() {
     activeSites.map((site) => async () => {
       const lines = [`[TEST] ${site.id} (${site.name}) — ${site.urls.length} URL(s)`];
 
-      const urlResults = [];
+      let siteLatency = null;
+      let siteStatus = "down";
       for (const rawUrl of site.urls) {
         const url = decodeUrl(rawUrl);
         const { logs: attemptLogs, ...urlResult } = await probeUrl(url);
         lines.push(...attemptLogs);
-        urlResults.push({ url, ...urlResult });
         if (urlResult.status === "up") {
+          siteStatus = "up";
+          siteLatency = urlResult.latency;
           lines.push(`  ✓ ${url} — ${urlResult.latency}ms`);
           break;
         } else {
@@ -141,11 +143,10 @@ async function main() {
         }
       }
 
-      const siteStatus = urlResults.some((r) => r.status === "up") ? "up" : "down";
       const result = {
         id: site.id,
         status: siteStatus,
-        urls: urlResults,
+        latency: siteLatency,
       };
 
       // One console.log per site = atomic output, no interleaving

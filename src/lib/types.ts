@@ -10,17 +10,10 @@ export interface SiteDefinition {
   isDead: boolean;
 }
 
-export interface UrlResult {
-  url: string;
-  status: "up" | "down";
-  latency: number | null;
-  error?: string;
-}
-
 export interface SiteResult {
   id: string;
   status: "up" | "down";
-  urls: UrlResult[];
+  latency: number | null;
 }
 
 export interface MonitorRun {

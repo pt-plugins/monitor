@@ -101,7 +101,15 @@ function computeAvgLatency(siteId: string, runs: MonitorRun[]): number | null {
   let t = 0, c = 0;
   for (const run of runs) {
     const s = run.sites.find((s) => s.id === siteId);
-    if (s) for (const u of s.urls) { if (u.latency !== null) { t += u.latency; c++; } }
+    if (!s) continue;
+    // Backward compat: new format has s.latency; old format has s.urls[*].latency
+    if ("latency" in s && s.latency !== null) {
+      t += s.latency; c++;
+    } else if ("urls" in s && Array.isArray((s as any).urls)) {
+      for (const u of (s as any).urls) {
+        if (u.latency !== null) { t += u.latency; c++; }
+      }
+    }
   }
   return c > 0 ? Math.round(t / c) : null;
 }
@@ -110,8 +118,15 @@ function buildHistory(siteId: string, runs: MonitorRun[]): SiteSummary["history"
   return runs.map((run) => {
     const s = run.sites.find((s) => s.id === siteId);
     if (s) {
-      const l = s.urls.filter((u) => u.latency !== null).reduce((min, u) => u.latency! < min ? u.latency! : min, Infinity);
-      return { timestamp: run.timestamp, status: s.status, latency: l === Infinity ? null : l };
+      // Backward compat: new format has s.latency; old format has s.urls[*].latency
+      let latency: number | null = null;
+      if ("latency" in s) {
+        latency = s.latency;
+      } else if ("urls" in s && Array.isArray((s as any).urls)) {
+        const vals = (s as any).urls.map((u: any) => u.latency).filter((l: any) => l !== null);
+        latency = vals.length > 0 ? Math.min(...vals) : null;
+      }
+      return { timestamp: run.timestamp, status: s.status, latency };
     }
     return { timestamp: run.timestamp, status: "down" as const, latency: null };
   });
@@ -180,8 +195,13 @@ export function computeSiteSummaries(): SiteSummary[] {
       const dataDays = dailyStatus.filter((s) => s !== "nodata");
       currentStatus = dataDays.length > 0 && dataDays.every((s) => s === "down") ? "down" : "up";
       if (csr) {
-        currentLatency = csr.urls.filter((u) => u.latency !== null).reduce((min, u) => u.latency! < min ? u.latency! : min, Infinity) ?? null;
-        if (currentLatency === Infinity) currentLatency = null;
+        // Backward compat: new format has csr.latency; old format has csr.urls[*].latency
+        if ("latency" in csr) {
+          currentLatency = csr.latency;
+        } else if ("urls" in csr && Array.isArray((csr as any).urls)) {
+          const vals = (csr as any).urls.map((u: any) => u.latency).filter((l: any) => l !== null);
+          currentLatency = vals.length > 0 ? Math.min(...vals) : null;
+        }
       }
     }
 
