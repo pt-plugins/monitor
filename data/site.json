@@ -1209,6 +1209,17 @@
     "isDead": false
   },
   {
+    "id": "hdf",
+    "name": "HD-Forever",
+    "urls": [
+      "uggcf://uqs.jbeyq/"
+    ],
+    "type": "private",
+    "description": "HD-Forever (HD-F) is a FRENCH Private Torrent Tracker for HD MOVIES",
+    "favicon": "",
+    "isDead": false
+  },
+  {
     "id": "hdfans",
     "name": "HDFans",
     "urls": [
