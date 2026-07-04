@@ -6,7 +6,7 @@ Uptime monitoring for PT sites, driven by **GitHub Actions** and **Astro**.
 
 | Workflow | Schedule | Action |
 |---|---|---|
-| `monitor.yml` | Every 30 min | HTTP probes all sites, writes results to `data/uptime/` |
+| `monitor.yml` | Every 15 min | HTTP probes all sites, writes results to `data/uptime/` |
 | `build.yml` | Every 2 hours | Builds Astro static site, deploys to GitHub Pages |
 | `update-source.yml` | Every day | Fetches site definitions from PT-depiler, runs data cleanup |
 

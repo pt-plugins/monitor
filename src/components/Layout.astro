@@ -45,6 +45,12 @@ const { title } = Astro.props;
     <footer class="site-footer">
       <div class="container">
         <p>
+          <span class="friend-label">Links: </span>
+          <a href="https://savept.icu/" target="_blank" rel="noopener">PT监护室</a>
+          &middot;
+          <a href="https://hdvinnie.github.io/TrackerHub/" target="_blank" rel="noopener">TrackerHub</a>
+        </p>
+        <p>
           Powered by <a href="https://github.com/pt-plugins/PT-depiler" target="_blank" rel="noopener">PT-depiler</a> &middot;
           Auto-updated every 15 minutes
         </p>
@@ -286,6 +292,12 @@ const { title } = Astro.props;
 
   .site-card.hidden {
     display: none !important;
+  }
+
+
+  .friend-sep {
+    margin: 0 0.5rem;
+    color: var(--color-border);
   }
 
   /* Mobile: icon toggle, search overlay */
