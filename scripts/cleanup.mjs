@@ -1,7 +1,6 @@
 // scripts/cleanup.mjs
 // Processes all non-today daily data and non-current-month monthly data.
 // Merges raw HH_MM.json files → DD.json, then DD.json → MM.json (JSONLines).
-// Generates data/uptime.json as an index of all merged files.
 
 import { existsSync, mkdirSync, readFileSync, readdirSync, rmdirSync, statSync, unlinkSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
@@ -11,7 +10,6 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "..");
 const DATA_DIR = join(ROOT, "data");
 const UPTIME_DIR = join(DATA_DIR, "uptime");
-const INDEX_FILE = join(DATA_DIR, "uptime.json");
 
 // Get today and this month identifiers
 function getToday() {
@@ -172,84 +170,6 @@ function mergeMonthly(year, month) {
   return totalLines;
 }
 
-// Generate uptime.json index
-function generateIndex() {
-  const index = [];
-
-  if (!existsSync(UPTIME_DIR)) {
-    writeFileSync(INDEX_FILE, JSON.stringify(index, null, 2));
-    return index;
-  }
-
-  const years = readdirSync(UPTIME_DIR, { withFileTypes: true }).filter((e) => e.isDirectory());
-
-  for (const year of years) {
-    const yearPath = join(UPTIME_DIR, year.name);
-    const months = readdirSync(yearPath, { withFileTypes: true }).filter((e) => e.isDirectory());
-
-    for (const month of months) {
-      const monthPath = join(yearPath, month.name);
-
-      // Daily merged files (DD.jsonl)
-      const dailies = readdirSync(monthPath)
-        .filter((f) => /^\d{2}\.jsonl$/.test(f.name))
-        .sort();
-
-      for (const file of dailies) {
-        const day = file.replace(".jsonl", "");
-        const fp = join(monthPath, file);
-        let runs = 0;
-        try {
-          runs = readFileSync(fp, "utf-8").trim().split("\n").filter(Boolean).length;
-        } catch {}
-        index.push({
-          path: `data/uptime/${year.name}/${month.name}/${file}`,
-          date: `${year.name}-${month.name}-${day}`,
-          type: "daily",
-          runs,
-        });
-      }
-
-      // Raw per-run files (still unmerged)
-      const rawDays = readdirSync(monthPath, { withFileTypes: true }).filter((e) => e.isDirectory());
-      for (const rawDay of rawDays) {
-        const rawPath = join(monthPath, rawDay.name);
-        const rawFiles = readdirSync(rawPath).filter((f) => f.endsWith(".json"));
-        index.push({
-          path: `data/uptime/${year.name}/${month.name}/${rawDay.name}/`,
-          date: `${year.name}-${month.name}-${rawDay.name}`,
-          type: "raw",
-          runs: rawFiles.length,
-        });
-      }
-    }
-
-    // Monthly merged files
-    const monthFiles = readdirSync(yearPath)
-      .filter((f) => /^\d{2}\.jsonl$/.test(f.name))
-      .sort();
-
-    for (const file of monthFiles) {
-      const month = file.replace(".jsonl", "");
-      const fp = join(yearPath, file);
-      let runs = 0;
-      try {
-        runs = readFileSync(fp, "utf-8").trim().split("\n").filter(Boolean).length;
-      } catch {}
-      index.push({
-        path: `data/uptime/${year.name}/${file}`,
-        month: `${year.name}-${month}`,
-        type: "monthly",
-        runs,
-      });
-    }
-  }
-
-  writeFileSync(INDEX_FILE, JSON.stringify(index, null, 2));
-  console.log(`[INDEX] Generated ${INDEX_FILE} with ${index.length} entries`);
-  return index;
-}
-
 // Main
 function main() {
   const today = getToday();
@@ -263,7 +183,6 @@ function main() {
 
   if (!existsSync(UPTIME_DIR)) {
     console.log("[SKIP] No uptime data directory yet.");
-    generateIndex();
     return;
   }
 
@@ -303,9 +222,6 @@ function main() {
       }
     }
   }
-
-  // Generate index
-  generateIndex();
 
   console.log(`\n[DONE] Daily merges: ${totalMerged} runs | Monthly merges: ${totalMonthly} records`);
 }
