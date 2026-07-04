@@ -2597,7 +2597,7 @@
     "type": "private",
     "description": "你也喜欢 Rousi 对吧？",
     "favicon": "./rousi.ico",
-    "isDead": false
+    "isDead": true
   },
   {
     "id": "rousipro",
@@ -2997,7 +2997,7 @@
     "type": "private",
     "description": "分享每个人的力量",
     "favicon": "",
-    "isDead": false
+    "isDead": true
   },
   {
     "id": "torrentleech",
