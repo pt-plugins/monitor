@@ -3192,6 +3192,17 @@
     "isDead": false
   },
   {
+    "id": "xingwan",
+    "name": "星湾",
+    "urls": [
+      "https://xingwan.cc/"
+    ],
+    "type": "private",
+    "description": "XingWan - 星湾 是一个专注中文字幕资源的站点。",
+    "favicon": "./_default_nexusphp.png",
+    "isDead": false
+  },
+  {
     "id": "xingyunge",
     "name": "星陨阁",
     "urls": [
