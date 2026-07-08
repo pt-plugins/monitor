@@ -17,6 +17,8 @@ if (!site) {
   return Astro.redirect("/");
 }
 
+const isDead = site.currentStatus === "dead";
+
 function fmtLatency(ms: number | null): string {
   if (ms === null) return "—";
   if (ms < 1000) return `${ms}ms`;
@@ -34,10 +36,17 @@ function fmtTime(iso: string): string {
 }
 
 function uptimeColor(pct: number): string {
+  if (isDead) return "var(--color-dead)";
   if (pct >= 99) return "var(--color-up)";
   if (pct >= 95) return "var(--color-warn)";
   return "var(--color-down)";
 }
+
+function fmtUptime(pct: number): string {
+  if (isDead) return "—";
+  return `${pct}%`;
+}
+
 
 // Recent history (last 50 entries, reversed for table)
 const recentHistory = [...site.history].reverse().slice(0, 50);
@@ -71,15 +80,15 @@ const hasMore = site.history.length > recentHistory.length;
     <h2>Uptime</h2>
     <div class="uptime-grid">
       <div class="uptime-card">
-        <div class="uptime-value" style={`color: ${uptimeColor(site.uptime24h)}`}>{site.uptime24h}%</div>
+        <div class="uptime-value" style={`color: ${uptimeColor(site.uptime24h)}`}>{fmtUptime(site.uptime24h)}</div>
         <div class="uptime-label">24 hours</div>
       </div>
       <div class="uptime-card">
-        <div class="uptime-value" style={`color: ${uptimeColor(site.uptime7d)}`}>{site.uptime7d}%</div>
+        <div class="uptime-value" style={`color: ${uptimeColor(site.uptime7d)}`}>{fmtUptime(site.uptime7d)}</div>
         <div class="uptime-label">7 days</div>
       </div>
       <div class="uptime-card">
-        <div class="uptime-value" style={`color: ${uptimeColor(site.uptime30d)}`}>{site.uptime30d}%</div>
+        <div class="uptime-value" style={`color: ${uptimeColor(site.uptime30d)}`}>{fmtUptime(site.uptime30d)}</div>
         <div class="uptime-label">30 days</div>
       </div>
       <div class="uptime-card">
