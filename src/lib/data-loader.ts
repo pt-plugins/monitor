@@ -15,7 +15,7 @@ function getLocalIconSet(): Map<string, string> {
   if (!existsSync(ICONS_DIR)) return map;
   try {
     for (const f of readdirSync(ICONS_DIR)) {
-      const match = f.match(/^(.+)\.(png|ico|svg)$/i);
+      const match = f.match(/^(.+)\.(png|ico|svg|webp)$/i);
       if (match) map.set(match[1], `/monitor/siteIcons/${f}`);
     }
   } catch {}
@@ -27,7 +27,7 @@ function resolveFaviconUrl(site: SiteDefinition, iconSet: Map<string, string>): 
   if (favicon && /^https?:\/\//i.test(favicon)) return favicon;
   if (favicon && favicon.startsWith("./")) {
     const base = favicon.replace(/^\.\//, "").replace(/\.[^.]+$/, "");
-    for (const ext of ["png", "ico", "svg"]) {
+    for (const ext of ["png", "ico", "svg", "webp"]) {
       const key = `${base}.${ext}`;
       const url = `/monitor/siteIcons/${key}`;
       if (existsSync(join(ICONS_DIR, key))) return url;
