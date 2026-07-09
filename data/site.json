@@ -581,7 +581,7 @@
     ],
     "type": "private",
     "description": "道可道，非常道，摆烂。",
-    "favicon": "",
+    "favicon": "./_default_nexusphp.png",
     "isDead": false
   },
   {
@@ -2000,7 +2000,7 @@
     ],
     "type": "private",
     "description": "老师",
-    "favicon": "",
+    "favicon": "./_default_nexusphp.png",
     "isDead": false
   },
   {
@@ -2360,7 +2360,7 @@
     ],
     "type": "private",
     "description": "分享好看的电影剧集",
-    "favicon": "",
+    "favicon": "./_default_nexusphp.png",
     "isDead": false
   },
   {
@@ -3077,7 +3077,7 @@
     ],
     "type": "private",
     "description": "",
-    "favicon": "",
+    "favicon": "./dmhy.ico",
     "isDead": false
   },
   {
