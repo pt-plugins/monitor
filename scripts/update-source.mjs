@@ -173,6 +173,14 @@ function main() {
       }
     }
     console.log(`[INFO] Copied ${copied} site icons to ${targetIconsDir}`);
+
+    // Step 6: Stage new/changed site icons for git tracking
+    try {
+      execSync(`git add "${targetIconsDir}"`, { cwd: ROOT, stdio: "pipe" });
+      console.log(`[INFO] Staged ${targetIconsDir} for git commit`);
+    } catch (err) {
+      console.warn(`[WARN] Failed to git add site icons: ${err.message}`);
+    }
   }
 }
 
