@@ -42,9 +42,68 @@ function isCloudflareWAF(response) {
   return (response.status === 403 || response.status === 503) && (server.includes("cloudflare") || cfRay);
 }
 
-// Test a single URL with retry logic — silent, returns result + attempt logs
+// Check if response is a non-Cloudflare 403 (site blocking direct fetch)
+function isNonCloudflare403(response) {
+  return response.status === 403 && !isCloudflareWAF(response);
+}
+
+// Test a URL with Playwright (headless browser) — fallback for non-Cloudflare 403
+async function probeUrlWithPlaywright(url) {
+  const logs = [];
+  const start = Date.now();
+  try {
+    const { chromium } = await import("playwright");
+    const browser = await chromium.launch({ headless: true });
+    const context = await browser.newContext({
+      userAgent:
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
+    });
+    const page = await context.newPage();
+
+    // Track the main request response status
+    let mainResponse = null;
+    page.on("response", (res) => {
+      const reqUrl = res.url().replace(/\/$/, "");
+      const targetUrl = url.replace(/\/$/, "");
+      if (reqUrl === targetUrl) {
+        mainResponse = res;
+      }
+    });
+
+    await page.goto(url, { waitUntil: "networkidle", timeout: REQUEST_TIMEOUT_MS });
+    const latency = Date.now() - start;
+
+    const title = await page.title();
+    await browser.close();
+
+    // If the main response is ok (2xx / 3xx), treat as up
+    if (mainResponse && (mainResponse.ok() || (mainResponse.status() >= 300 && mainResponse.status() < 400))) {
+      logs.push(`    [playwright] HTTP ${mainResponse.status()} — "${title}" (${latency}ms)`);
+      return { status: "up", latency, logs };
+    }
+
+    // If page has a meaningful title and no error, treat as up too
+    if (title && title.length > 0 && !title.toLowerCase().includes("403") && !title.toLowerCase().includes("forbidden")) {
+      logs.push(`    [playwright] loaded — "${title}" (${latency}ms)`);
+      return { status: "up", latency, logs };
+    }
+
+    const statusCode = mainResponse ? mainResponse.status() : "?";
+    logs.push(`    [playwright] HTTP ${statusCode} — "${title}" (${latency}ms)`);
+    return { status: "down", latency: null, error: "Playwright probe failed", logs };
+  } catch (err) {
+    const latency = Date.now() - start;
+    const errorMsg = err.name === "TimeoutError" ? "ETIMEDOUT" : err.message;
+    logs.push(`    [playwright] ${errorMsg} (${latency}ms)`);
+    return { status: "down", latency: null, error: errorMsg, logs };
+  }
+}
+
+// Test a single URL with retry logic — falls back to Playwright on non-Cloudflare 403
 async function probeUrl(url, retries = MAX_RETRIES) {
   const logs = [];
+  let hasNonCloudflare403 = false;
+
   for (let attempt = 1; attempt <= retries; attempt++) {
     const start = Date.now();
     try {
@@ -71,7 +130,13 @@ async function probeUrl(url, retries = MAX_RETRIES) {
         return { status: "up", latency, logs };
       }
 
-      logs.push(`    [${attempt}/${retries}] HTTP ${response.status} (${latency}ms)`);
+      // Track non-Cloudflare 403 for Playwright fallback
+      if (isNonCloudflare403(response)) {
+        hasNonCloudflare403 = true;
+        logs.push(`    [${attempt}/${retries}] HTTP ${response.status} non-Cloudflare 403 (${latency}ms)`);
+      } else {
+        logs.push(`    [${attempt}/${retries}] HTTP ${response.status} (${latency}ms)`);
+      }
     } catch (err) {
       const latency = Date.now() - start;
       const errorMsg = err.name === "AbortError" ? "ETIMEDOUT" : err.message;
@@ -80,6 +145,16 @@ async function probeUrl(url, retries = MAX_RETRIES) {
 
     if (attempt < retries) {
       await sleep(RETRY_DELAY_MS);
+    }
+  }
+
+  // If any attempt got a non-Cloudflare 403, fall back to Playwright
+  if (hasNonCloudflare403) {
+    logs.push(`  → Fetch retries exhausted with non-Cloudflare 403, retrying with Playwright...`);
+    const pwResult = await probeUrlWithPlaywright(url);
+    logs.push(...pwResult.logs);
+    if (pwResult.status === "up") {
+      return { status: "up", latency: pwResult.latency, logs };
     }
   }
 
