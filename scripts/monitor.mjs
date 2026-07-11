@@ -15,6 +15,7 @@ const SOURCE_FILE = join(DATA_DIR, "site.json");
 const REQUEST_TIMEOUT_MS = 15_000;
 const MAX_RETRIES = 3;
 const RETRY_DELAY_MS = 2_000;
+const OVERRIDES_FILE = join(DATA_DIR, "request-overrides.json");
 
 // ROT13 decode: each alphabetic char shifted by 13, preserving case
 function rot13(str) {
@@ -99,21 +100,65 @@ async function probeUrlWithPlaywright(url) {
   }
 }
 
+// Apply request overrides to a URL and return merged fetch options
+function applyOverrides(rawUrl, overrides) {
+  let url = rawUrl;
+  const fetchOptions = {
+    method: "GET",
+    headers: { "User-Agent": "PTD-Monitor/1.0" },
+    redirect: "follow",
+  };
+
+  if (!overrides) return { url, fetchOptions };
+
+  // Override HTTP method
+  if (overrides.method) {
+    fetchOptions.method = overrides.method.toUpperCase();
+  }
+
+  // Override URL path: replace the path component
+  if (overrides.path) {
+    try {
+      const parsed = new URL(url);
+      // Normalise the path: ensure it starts with /
+      const newPath = overrides.path.startsWith("/") ? overrides.path : `/${overrides.path}`;
+      parsed.pathname = newPath;
+      url = parsed.toString();
+    } catch {
+      // If URL parsing fails, ignore path override
+    }
+  }
+
+  // Merge extra headers
+  if (overrides.headers && typeof overrides.headers === "object") {
+    fetchOptions.headers = { ...fetchOptions.headers, ...overrides.headers };
+  }
+
+  // Request body (for POST/PUT etc.)
+  if (overrides.body !== undefined) {
+    fetchOptions.body = overrides.body;
+  }
+
+  return { url, fetchOptions };
+}
+
 // Test a single URL with retry logic — falls back to Playwright on non-Cloudflare 403
-async function probeUrl(url, retries = MAX_RETRIES) {
+async function probeUrl(url, retries = MAX_RETRIES, overrides = null) {
   const logs = [];
   let hasNonCloudflare403 = false;
+
+  // Apply overrides to get the effective URL and fetch options
+  const { url: effectiveUrl, fetchOptions } = applyOverrides(url, overrides);
+  const timeoutMs = overrides?.timeoutMs ?? REQUEST_TIMEOUT_MS;
 
   for (let attempt = 1; attempt <= retries; attempt++) {
     const start = Date.now();
     try {
       const controller = new AbortController();
-      const timer = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
+      const timer = setTimeout(() => controller.abort(), timeoutMs);
 
-      const response = await fetch(url, {
-        method: "GET",
-        headers: { "User-Agent": "PTD-Monitor/1.0" },
-        redirect: "follow",
+      const response = await fetch(effectiveUrl, {
+        ...fetchOptions,
         signal: controller.signal,
       });
       clearTimeout(timer);
@@ -151,7 +196,7 @@ async function probeUrl(url, retries = MAX_RETRIES) {
   // If any attempt got a non-Cloudflare 403, fall back to Playwright
   if (hasNonCloudflare403) {
     logs.push(`  → Fetch retries exhausted with non-Cloudflare 403, retrying with Playwright...`);
-    const pwResult = await probeUrlWithPlaywright(url);
+    const pwResult = await probeUrlWithPlaywright(effectiveUrl);
     logs.push(...pwResult.logs);
     if (pwResult.status === "up") {
       return { status: "up", latency: pwResult.latency, logs };
@@ -186,7 +231,22 @@ async function main() {
   const sites = JSON.parse(readFileSync(SOURCE_FILE, "utf-8"));
   console.log(`[INFO] Loaded ${sites.length} sites from source`);
 
-  // Step 2: Filter out dead sites
+  // Step 2: Load per-site request overrides (optional)
+  let requestOverrides = {};
+  if (existsSync(OVERRIDES_FILE)) {
+    try {
+      const raw = JSON.parse(readFileSync(OVERRIDES_FILE, "utf-8"));
+      requestOverrides = raw.sites || {};
+      const overrideCount = Object.keys(requestOverrides).length;
+      if (overrideCount > 0) {
+        console.log(`[INFO] Loaded request overrides for ${overrideCount} site(s)`);
+      }
+    } catch (err) {
+      console.warn(`[WARN] Failed to parse ${OVERRIDES_FILE}: ${err.message}. Continuing without overrides.`);
+    }
+  }
+
+  // Step 3: Filter out dead sites
   const activeSites = sites.filter((s) => !s.isDead);
   const deadCount = sites.length - activeSites.length;
   if (deadCount > 0) {
@@ -206,7 +266,8 @@ async function main() {
       let siteStatus = "down";
       for (const rawUrl of site.urls) {
         const url = decodeUrl(rawUrl);
-        const { logs: attemptLogs, ...urlResult } = await probeUrl(url);
+        const siteOverride = requestOverrides[site.id] || null;
+        const { logs: attemptLogs, ...urlResult } = await probeUrl(url, MAX_RETRIES, siteOverride);
         lines.push(...attemptLogs);
         if (urlResult.status === "up") {
           siteStatus = "up";

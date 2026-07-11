@@ -1,0 +1,17 @@
+{
+  "sites": {
+    "example-site": {
+      "comment": "示例配置 — 按需修改",
+      "method": "GET",
+      "path": "/api/health",
+      "headers": {
+        "Authorization": "Bearer your-token-here",
+        "Referer": "https://example.com/"
+      },
+      "timeoutMs": 15000
+    },
+    "ilolicon": {
+      "path": "/login.php"
+    }
+  }
+}
