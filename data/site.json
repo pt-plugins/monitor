@@ -192,7 +192,7 @@
     "type": "private",
     "description": "",
     "favicon": "./_default_unit3d.ico",
-    "isDead": false
+    "isDead": true
   },
   {
     "id": "animetosho",
@@ -907,7 +907,7 @@
     "type": "private",
     "description": "FearNoPear is a Private Torrent Tracker for MOVIES / TV / GENERAL",
     "favicon": "",
-    "isDead": false
+    "isDead": true
   },
   {
     "id": "filelist",
@@ -2220,7 +2220,7 @@
     "id": "playletpt",
     "name": "PlayLet",
     "urls": [
-      "https://playletpt.xyz/"
+      "https://playlet.cc/"
     ],
     "type": "private",
     "description": "微而精，短而美",
@@ -2841,7 +2841,7 @@
     "type": "private",
     "description": "SugoiMusic is a private tracker focused on Asian music: music, concerts, PVs, variety & drama shows, Blu-ray/DVDs, and pictures.",
     "favicon": "",
-    "isDead": false
+    "isDead": true
   },
   {
     "id": "sunnypt",
@@ -2963,7 +2963,7 @@
     "type": "private",
     "description": "欢迎来到唐门",
     "favicon": "",
-    "isDead": false
+    "isDead": true
   },
   {
     "id": "tokyopt",
