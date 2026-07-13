@@ -730,6 +730,17 @@
     "isDead": false
   },
   {
+    "id": "daxiangjiao",
+    "name": "DaXiangJiao",
+    "urls": [
+      "uggcf://cg.qnkvnatwvnb.bet/"
+    ],
+    "type": "private",
+    "description": "DaXiangJiao 私有资源分享站",
+    "favicon": "",
+    "isDead": false
+  },
+  {
     "id": "desigaane",
     "name": "DesiGaane",
     "urls": [
