@@ -577,7 +577,7 @@
     "id": "cdy",
     "name": "传道院",
     "urls": [
-      "uggcf://cg.pql.fxva/"
+      "uggcf://cg.pql.cvpf/"
     ],
     "type": "private",
     "description": "道可道，非常道，摆烂。",
@@ -1676,7 +1676,7 @@
     "type": "private",
     "description": "生生不息，相伴永恒",
     "favicon": "./_default_nexusphp.png",
-    "isDead": false
+    "isDead": true
   },
   {
     "id": "lajidui",
@@ -2600,6 +2600,17 @@
     "isDead": false
   },
   {
+    "id": "retrotoon",
+    "name": "RetroToon World",
+    "urls": [
+      "uggcf://ergebgbba.jbeyq/"
+    ],
+    "type": "private",
+    "description": "RetroToon World is a Private Torrent Tracker for ANIMATED MOVIES / TV",
+    "favicon": "https://retrotoon.world/favicon.ico",
+    "isDead": false
+  },
+  {
     "id": "rousi",
     "name": "Rousi",
     "urls": [
@@ -2731,6 +2742,17 @@
     "description": "",
     "favicon": "",
     "isDead": true
+  },
+  {
+    "id": "simurg",
+    "name": "Simurg",
+    "urls": [
+      "https://simurg.world/"
+    ],
+    "type": "private",
+    "description": "Simurg is a private digital library focused on carefully catalogued e-books and audiobooks.",
+    "favicon": "",
+    "isDead": false
   },
   {
     "id": "siqi",
