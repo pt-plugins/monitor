@@ -921,6 +921,17 @@
     "isDead": true
   },
   {
+    "id": "fhpt",
+    "name": "凤凰PT",
+    "urls": [
+      "https://pt.521.best/"
+    ],
+    "type": "private",
+    "description": "个人站，定位小体积压制、WEB-DL 电影资源，全站 Free",
+    "favicon": "",
+    "isDead": false
+  },
+  {
     "id": "filelist",
     "name": "FileList",
     "urls": [
