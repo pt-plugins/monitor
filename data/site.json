@@ -3225,6 +3225,18 @@
     "isDead": true
   },
   {
+    "id": "xdypt",
+    "name": "修道院",
+    "urls": [
+      "uggcf://kqlcg.ivc/",
+      "uggcf://cg.1pgey.pa/"
+    ],
+    "type": "private",
+    "description": "修身为始，修道为终。",
+    "favicon": "",
+    "isDead": false
+  },
+  {
     "id": "xingtan",
     "name": "杏坛",
     "urls": [
