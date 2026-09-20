@@ -94,6 +94,17 @@
     "isDead": false
   },
   {
+    "id": "abtorrents",
+    "name": "ABTorrents",
+    "urls": [
+      "https://usefultrash.net/"
+    ],
+    "type": "private",
+    "description": "ABTorrents (ABT) is a Private Torrent Tracker for AUDIOBOOKS and EBOOKS",
+    "favicon": "",
+    "isDead": false
+  },
+  {
     "id": "acgrip",
     "name": "ACG.RIP",
     "urls": [
@@ -409,6 +420,17 @@
     "isDead": true
   },
   {
+    "id": "bemaniso",
+    "name": "Bemaniso",
+    "urls": [
+      "https://bemaniso.ws/"
+    ],
+    "type": "private",
+    "description": "Bemaniso is a Private Torrent Tracker for GAME MUSIC / BEMANI（音游原声）",
+    "favicon": "",
+    "isDead": false
+  },
+  {
     "id": "beyondhd",
     "name": "BeyondHD",
     "urls": [
@@ -416,6 +438,17 @@
     ],
     "type": "private",
     "description": "Beyond Your Imagination, BeyondHD is a community-built Movie/TV database.",
+    "favicon": "",
+    "isDead": false
+  },
+  {
+    "id": "bitbr",
+    "name": "bitbr",
+    "urls": [
+      "https://bitbr.cc/"
+    ],
+    "type": "private",
+    "description": "bitbr 是一个葡萄牙语综合类私有种子站点",
     "favicon": "",
     "isDead": false
   },
@@ -497,6 +530,20 @@
     "isDead": false
   },
   {
+    "id": "bwtorrents",
+    "name": "BWT",
+    "urls": [
+      "https://bwtorrents.tv/",
+      "https://bwtorrents.cc/",
+      "https://bwtorrents.xyz/",
+      "https://bwtorrents.us/"
+    ],
+    "type": "private",
+    "description": "BwTorrents (BWT) is an INDIAN Private Torrent Tracker for MOVIES / TV",
+    "favicon": "",
+    "isDead": false
+  },
+  {
     "id": "byrbt",
     "name": "北邮人-BYRBT",
     "urls": [
@@ -571,7 +618,7 @@
     "type": "private",
     "description": "专注于Blu-Ray、DVD、CD等高品质光盘镜像资源，致力于打造光盘档案室",
     "favicon": "",
-    "isDead": false
+    "isDead": true
   },
   {
     "id": "cdy",
@@ -673,6 +720,28 @@
     "isDead": true
   },
   {
+    "id": "concen",
+    "name": "ConCen",
+    "urls": [
+      "https://concen.org/"
+    ],
+    "type": "private",
+    "description": "ConCen (Conspiracy Central) is a Private conspiracy related torrent index",
+    "favicon": "",
+    "isDead": false
+  },
+  {
+    "id": "concertos",
+    "name": "Concertos",
+    "urls": [
+      "https://concertos.live/"
+    ],
+    "type": "private",
+    "description": "Concertos is a Private Torrent Tracker for Live Concerts with Strict Quality Control",
+    "favicon": "",
+    "isDead": false
+  },
+  {
     "id": "crabpt",
     "name": "CrabPt",
     "urls": [
@@ -748,6 +817,19 @@
     ],
     "type": "private",
     "description": "DesiGaane is a private tracker focused on Indian music",
+    "favicon": "",
+    "isDead": false
+  },
+  {
+    "id": "desitorrents",
+    "name": "DesiTorrents",
+    "urls": [
+      "https://torrent.desi/",
+      "https://desitorrents.tv/",
+      "https://desitorrents.rocks/"
+    ],
+    "type": "private",
+    "description": "DesiTorrents is an INDIAN Private Torrent Tracker for MOVIES / TV",
     "favicon": "",
     "isDead": false
   },
@@ -910,6 +992,17 @@
     "isDead": false
   },
   {
+    "id": "fappaizuri",
+    "name": "Fappaizuri",
+    "urls": [
+      "https://www.fappaizuri.me/"
+    ],
+    "type": "private",
+    "description": "Fappaizuri is a Private Torrent Tracker for HENTAI / JAV",
+    "favicon": "",
+    "isDead": false
+  },
+  {
     "id": "fearnopeer",
     "name": "FearNoPeer",
     "urls": [
@@ -919,6 +1012,17 @@
     "description": "FearNoPear is a Private Torrent Tracker for MOVIES / TV / GENERAL",
     "favicon": "",
     "isDead": true
+  },
+  {
+    "id": "femdomcult",
+    "name": "Femdomcult",
+    "urls": [
+      "https://femdomcult.org/"
+    ],
+    "type": "private",
+    "description": "Femdomcult is a Private Torrent Tracker for FETISH 3X",
+    "favicon": "",
+    "isDead": false
   },
   {
     "id": "fhpt",
@@ -995,6 +1099,17 @@
     "type": "private",
     "description": "GazelleGames is a Private gaming tracker",
     "favicon": "",
+    "isDead": false
+  },
+  {
+    "id": "generationfree",
+    "name": "Generation-Free",
+    "urls": [
+      "https://generation-free.org/"
+    ],
+    "type": "private",
+    "description": "Generation-Free (GF-Free) 是一个法语综合类私有 PT 站点，资源涵盖影视、音乐、书籍、游戏与软件",
+    "favicon": "./_default_unit3d.ico",
     "isDead": false
   },
   {
@@ -1712,6 +1827,17 @@
     "isDead": false
   },
   {
+    "id": "learnflakes",
+    "name": "LearnFlakes",
+    "urls": [
+      "https://learnflakes.net/"
+    ],
+    "type": "private",
+    "description": "LearnFlakes is a Private Torrent Tracker for CERTIFICATE / TRAINING E-LEARNING（IT 认证与在线培训课程）",
+    "favicon": "",
+    "isDead": false
+  },
+  {
     "id": "lemonhd",
     "name": "LemonHD",
     "urls": [
@@ -1757,6 +1883,17 @@
     "isDead": false
   },
   {
+    "id": "losslessclub",
+    "name": "LosslessClub",
+    "urls": [
+      "https://losslessclub.com/"
+    ],
+    "type": "private",
+    "description": "LosslessClub is a RUSSIAN Private Torrent Tracker for High Quality Music（无损音乐）",
+    "favicon": "",
+    "isDead": false
+  },
+  {
     "id": "lst",
     "name": "LST",
     "urls": [
@@ -1786,6 +1923,17 @@
     ],
     "type": "private",
     "description": "Luminarr is a Private Torrent Tracker for MOVIES / TV",
+    "favicon": "",
+    "isDead": false
+  },
+  {
+    "id": "lztr",
+    "name": "LzTr",
+    "urls": [
+      "https://lztr.me/"
+    ],
+    "type": "private",
+    "description": "LzTr is a Private site for Original Soundtracks and Classical Music（原声带与古典音乐）",
     "favicon": "",
     "isDead": false
   },
@@ -1895,7 +2043,8 @@
     "urls": [
       "uggcf://xc.z-grnz.pp/",
       "uggcf://mc.z-grnz.vb/",
-      "uggcf://bo.z-grnz.pp/"
+      "uggcf://bo.z-grnz.pp/",
+      "uggcf://u5.z-grnz.pp/"
     ],
     "type": "private",
     "description": "综合性网站，有分享率要求",
@@ -2062,7 +2211,8 @@
     "id": "novahd",
     "name": "NovaHD",
     "urls": [
-      "uggcf://cg.abinuq.gbc/"
+      "uggcf://cg.abinuq.gbc/",
+      "uggcf://genpxre.abinuq.gbc/"
     ],
     "type": "private",
     "description": "",
@@ -2562,7 +2712,7 @@
     "type": "private",
     "description": "与你相逢，就是奇迹",
     "favicon": "",
-    "isDead": false
+    "isDead": true
   },
   {
     "id": "redacted",
@@ -2932,6 +3082,17 @@
     "isDead": false
   },
   {
+    "id": "teamhd",
+    "name": "TeamHD",
+    "urls": [
+      "https://teamhd.org/"
+    ],
+    "type": "private",
+    "description": "TeamHD is a RUSSIAN Private Torrent Tracker for HD MOVIES / TV",
+    "favicon": "",
+    "isDead": false
+  },
+  {
     "id": "telly",
     "name": "Telly",
     "urls": [
@@ -3013,12 +3174,12 @@
     "id": "tokyopt",
     "name": "Tokyo",
     "urls": [
-      "uggcf://jjj.gbxlbcg.klm/"
+      "uggcf://jjj.gbxlb-znatn.gbc/"
     ],
     "type": "private",
     "description": "",
     "favicon": "",
-    "isDead": true
+    "isDead": false
   },
   {
     "id": "tokyotosho",
@@ -3029,6 +3190,29 @@
     ],
     "type": "public",
     "description": "Tokyo Toshokan is a Public BitTorrent Library for JAPANESE Media",
+    "favicon": "",
+    "isDead": false
+  },
+  {
+    "id": "torrentday",
+    "name": "TorrentsTD",
+    "urls": [
+      "https://tday.love/",
+      "https://torrentday.cool/",
+      "https://secure.torrentday.com/",
+      "https://classic.torrentday.com/",
+      "https://www.torrentday.com/",
+      "https://www.torrentday.me/",
+      "https://torrentday.it/",
+      "https://td.findnemo.net/",
+      "https://td.getcrazy.me/",
+      "https://td.workisboring.net/",
+      "https://tday.findnemo.net/",
+      "https://tday.getcrazy.me/",
+      "https://tday.workisboring.net/"
+    ],
+    "type": "private",
+    "description": "TorrentDay (TD) is a Private site for TV / MOVIES / GENERAL",
     "favicon": "",
     "isDead": false
   },
@@ -3099,6 +3283,17 @@
     ],
     "type": "private",
     "description": "ToTheGlory（TTG）是一个综合性PT站点，以高清电影、电视剧、音乐、动漫资源为主。",
+    "favicon": "",
+    "isDead": false
+  },
+  {
+    "id": "trancetraffic",
+    "name": "TranceTraffic",
+    "urls": [
+      "https://www.trancetraffic.com/"
+    ],
+    "type": "private",
+    "description": "TranceTraffic is a Private Torrent Tracker for MUSIC（Trance 电子音乐）",
     "favicon": "",
     "isDead": false
   },
@@ -3191,6 +3386,17 @@
     "isDead": true
   },
   {
+    "id": "wihd",
+    "name": "WiHD",
+    "urls": [
+      "https://world-in-hd.net/"
+    ],
+    "type": "private",
+    "description": "World-In-HD is a French Private Torrent Tracker for HD内容",
+    "favicon": "",
+    "isDead": false
+  },
+  {
     "id": "wintersakura",
     "name": "WinterSakura",
     "urls": [
@@ -3267,6 +3473,28 @@
     ],
     "type": "private",
     "description": "三十年河东，三十年河西！莫欺少年穷！",
+    "favicon": "",
+    "isDead": false
+  },
+  {
+    "id": "xite",
+    "name": "x·ite.me",
+    "urls": [
+      "https://x-ite.me/"
+    ],
+    "type": "private",
+    "description": "x·ite.me 是一个综合类私有种子站点",
+    "favicon": "",
+    "isDead": true
+  },
+  {
+    "id": "xtr",
+    "name": "XTR",
+    "urls": [
+      "https://extremlymtorrents.ws/"
+    ],
+    "type": "private",
+    "description": "ExtremlyMTorrents (XTR) is a Private Torrent Tracker for GENERAL",
     "favicon": "",
     "isDead": false
   },
@@ -3374,7 +3602,7 @@
     "id": "zrpt",
     "name": "ZRPT",
     "urls": [
-      "https://zrpt.cc/"
+      "https://naturept.top/"
     ],
     "type": "private",
     "description": "探索自然之美，专注纪录片的PT站点",
