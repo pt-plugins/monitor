@@ -442,6 +442,17 @@
     "isDead": false
   },
   {
+    "id": "bibliotik",
+    "name": "Bibliotik",
+    "urls": [
+      "uggcf://ovoyvbgvx.zr/"
+    ],
+    "type": "private",
+    "description": "Bibliotik is a Private Torrent Tracker for EBOOKS and AUDIOBOOKS",
+    "favicon": "",
+    "isDead": false
+  },
+  {
     "id": "bitbr",
     "name": "bitbr",
     "urls": [
