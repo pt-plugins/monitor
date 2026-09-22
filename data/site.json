@@ -26,11 +26,11 @@
     "id": "1337x",
     "name": "1337x",
     "urls": [
-      "https://1337x.to/",
-      "https://1337x.st/",
-      "https://x1337x.ws/",
-      "https://x1337x.eu/",
-      "https://x1337x.cc/"
+      "uggcf://1337k.gb/",
+      "uggcf://1337k.fg/",
+      "uggcf://k1337k.jf/",
+      "uggcf://k1337k.rh/",
+      "uggcf://k1337k.pp/"
     ],
     "type": "public",
     "description": "1337X is a Public torrent site that offers verified torrent downloads",
@@ -64,7 +64,7 @@
     "id": "2xfree",
     "name": "2xFree",
     "urls": [
-      "https://pt.2xfree.org/"
+      "uggcf://cg.2kserr.bet/"
     ],
     "type": "private",
     "description": "",
@@ -97,7 +97,7 @@
     "id": "abtorrents",
     "name": "ABTorrents",
     "urls": [
-      "https://usefultrash.net/"
+      "uggcf://hfrshygenfu.arg/"
     ],
     "type": "private",
     "description": "ABTorrents (ABT) is a Private Torrent Tracker for AUDIOBOOKS and EBOOKS",
@@ -176,7 +176,7 @@
     "id": "alpharatio",
     "name": "AlphaRatio",
     "urls": [
-      "https://alpharatio.cc/"
+      "uggcf://nycunengvb.pp/"
     ],
     "type": "private",
     "description": "AlphaRatio (AR) is a Private Torrent Tracker for 0DAY / GENERAL",
@@ -231,7 +231,7 @@
     "id": "anirena",
     "name": "AniRena",
     "urls": [
-      "https://www.anirena.com/"
+      "uggcf://jjj.naveran.pbz/"
     ],
     "type": "public",
     "description": "AniRena is a Public torrent tracker for the latest anime and Japanese related torrents",
@@ -297,12 +297,12 @@
     "id": "audiobookbay",
     "name": "AudioBook Bay",
     "urls": [
-      "https://audiobookbay.lu/",
-      "http://audiobookbay.is/",
-      "http://audiobookbay.se/",
-      "http://audiobookbay.fi/",
-      "http://audiobookbay.ws/",
-      "http://theaudiobookbay.se/"
+      "uggcf://nhqvbobbxonl.yh/",
+      "uggc://nhqvbobbxonl.vf/",
+      "uggc://nhqvbobbxonl.fr/",
+      "uggc://nhqvbobbxonl.sv/",
+      "uggc://nhqvbobbxonl.jf/",
+      "uggc://gurnhqvbobbxonl.fr/"
     ],
     "type": "public",
     "description": "AudioBook Bay (ABB) is a Public Torrent Tracker for AUDIOBOOKS",
@@ -335,7 +335,7 @@
     "id": "avgv",
     "name": "爱薇网",
     "urls": [
-      "https://avgv.cc/"
+      "uggcf://niti.pp/"
     ],
     "type": "private",
     "description": "新加坡华人PT站，很有特色。",
@@ -456,7 +456,7 @@
     "id": "bitbr",
     "name": "bitbr",
     "urls": [
-      "https://bitbr.cc/"
+      "uggcf://ovgoe.pp/"
     ],
     "type": "private",
     "description": "bitbr 是一个葡萄牙语综合类私有种子站点",
@@ -544,10 +544,10 @@
     "id": "bwtorrents",
     "name": "BWT",
     "urls": [
-      "https://bwtorrents.tv/",
-      "https://bwtorrents.cc/",
-      "https://bwtorrents.xyz/",
-      "https://bwtorrents.us/"
+      "uggcf://ojgbeeragf.gi/",
+      "uggcf://ojgbeeragf.pp/",
+      "uggcf://ojgbeeragf.klm/",
+      "uggcf://ojgbeeragf.hf/"
     ],
     "type": "private",
     "description": "BwTorrents (BWT) is an INDIAN Private Torrent Tracker for MOVIES / TV",
@@ -643,6 +643,17 @@
     "isDead": false
   },
   {
+    "id": "ceskeforum",
+    "name": "CeskeForum",
+    "urls": [
+      "https://t.ceskeforum.com/"
+    ],
+    "type": "private",
+    "description": "CeskeForum 是一个捷克私有站点，提供电影/剧集/音乐/软件/游戏/书籍资源。",
+    "favicon": "",
+    "isDead": false
+  },
+  {
     "id": "cgpeers",
     "name": "CGPeers",
     "urls": [
@@ -668,7 +679,7 @@
     "id": "cinemageddon",
     "name": "Cinemageddon",
     "urls": [
-      "https://cinemageddon.net/"
+      "uggcf://pvarzntrqqba.arg/"
     ],
     "type": "private",
     "description": "Cinemageddon is a Private Torrent Tracker for B-movies",
@@ -701,7 +712,7 @@
     "id": "clearjav",
     "name": "ClearJAV",
     "urls": [
-      "https://clearjav.com/"
+      "uggcf://pyrnewni.pbz/"
     ],
     "type": "private",
     "description": "",
@@ -788,6 +799,17 @@
     "isDead": false
   },
   {
+    "id": "dabaojian",
+    "name": "大宝剑",
+    "urls": [
+      "https://pt.525968.xyz/"
+    ],
+    "type": "private",
+    "description": "大宝剑是一个中文私有站点，提供电影/剧集/综艺/动漫/纪录片/短剧资源。",
+    "favicon": "",
+    "isDead": false
+  },
+  {
     "id": "dajiao",
     "name": "DAJIAO",
     "urls": [
@@ -799,14 +821,47 @@
     "isDead": true
   },
   {
+    "id": "danishbytes",
+    "name": "DanishBytes",
+    "urls": [
+      "https://danishbytes.club/"
+    ],
+    "type": "private",
+    "description": "DanishBytes（DBy）是一个丹麦私有站点，提供电影/剧集/音乐/软件/书籍/播客资源。",
+    "favicon": "",
+    "isDead": false
+  },
+  {
+    "id": "darkland",
+    "name": "Darkland",
+    "urls": [
+      "https://darkland.top/"
+    ],
+    "type": "private",
+    "description": "",
+    "favicon": "",
+    "isDead": false
+  },
+  {
     "id": "darkpeers",
     "name": "darkpeers",
     "urls": [
-      "https://darkpeers.org/"
+      "uggcf://qnexcrref.bet/"
     ],
     "type": "private",
     "description": "",
     "favicon": "https://darkpeers.org/favicon.ico",
+    "isDead": false
+  },
+  {
+    "id": "datascene",
+    "name": "DataScene",
+    "urls": [
+      "uggcf://qngnfprar.klm/"
+    ],
+    "type": "private",
+    "description": "DataScene（DS）是一个罗马尼亚私有站点，提供电影/剧集/综合资源。支持 Unit3D 官方 JSON API（api/torrents/filter）。",
+    "favicon": "",
     "isDead": false
   },
   {
@@ -958,8 +1013,8 @@
     "id": "ehentai",
     "name": "E-Hentai",
     "urls": [
-      "https://e-hentai.org/",
-      "https://exhentai.org/"
+      "uggcf://r-uragnv.bet/",
+      "uggcf://rkuragnv.bet/"
     ],
     "type": "public",
     "description": "E-Hentai is a Public site for Hentai doujinshi, manga.",
@@ -979,6 +1034,17 @@
     "isDead": false
   },
   {
+    "id": "emuwarez",
+    "name": "eMuwarez",
+    "urls": [
+      "https://emuwarez.com/"
+    ],
+    "type": "private",
+    "description": "eMuwarez（eMz）是一个西班牙私有站点，提供电影/剧集/音乐/游戏/软件资源。支持 Unit3D 官方 JSON API（api/torrents/filter）。",
+    "favicon": "",
+    "isDead": false
+  },
+  {
     "id": "exoticaz",
     "name": "ExoticaZ",
     "urls": [
@@ -993,9 +1059,9 @@
     "id": "exttorrents",
     "name": "EXT Torrents",
     "urls": [
-      "https://ext.to/",
-      "https://search.extto.com/",
-      "https://extranet.torrentbay.st/"
+      "uggcf://rkg.gb/",
+      "uggcf://frnepu.rkggb.pbz/",
+      "uggcf://rkgenarg.gbeeragonl.fg/"
     ],
     "type": "public",
     "description": "EXT Torrents is a Public torrent site for MOVIES / TV / GENERAL",
@@ -1006,7 +1072,7 @@
     "id": "fappaizuri",
     "name": "Fappaizuri",
     "urls": [
-      "https://www.fappaizuri.me/"
+      "uggcf://jjj.snccnvmhev.zr/"
     ],
     "type": "private",
     "description": "Fappaizuri is a Private Torrent Tracker for HENTAI / JAV",
@@ -1028,7 +1094,7 @@
     "id": "femdomcult",
     "name": "Femdomcult",
     "urls": [
-      "https://femdomcult.org/"
+      "uggcf://srzqbzphyg.bet/"
     ],
     "type": "private",
     "description": "Femdomcult is a Private Torrent Tracker for FETISH 3X",
@@ -1039,7 +1105,7 @@
     "id": "fhpt",
     "name": "凤凰PT",
     "urls": [
-      "https://pt.521.best/"
+      "uggcf://cg.521.orfg/"
     ],
     "type": "private",
     "description": "个人站，定位小体积压制、WEB-DL 电影资源，全站 Free",
@@ -1113,6 +1179,17 @@
     "isDead": false
   },
   {
+    "id": "geminitracker",
+    "name": "GeminiTracker",
+    "urls": [
+      "https://gemini-tracker.org/"
+    ],
+    "type": "private",
+    "description": "",
+    "favicon": "",
+    "isDead": false
+  },
+  {
     "id": "generationfree",
     "name": "Generation-Free",
     "urls": [
@@ -1160,7 +1237,7 @@
     "id": "gtnet",
     "name": "Gay-Torrents.net",
     "urls": [
-      "https://www.gay-torrents.net/"
+      "uggcf://jjj.tnl-gbeeragf.arg/"
     ],
     "type": "private",
     "description": "",
@@ -1171,7 +1248,7 @@
     "id": "gtorg",
     "name": "Gay-Torrents.Org",
     "urls": [
-      "https://gay-torrents.org/"
+      "uggcf://tnl-gbeeragf.bet/"
     ],
     "type": "private",
     "description": "",
@@ -1292,7 +1369,7 @@
     "id": "hdbits",
     "name": "HDBits",
     "urls": [
-      "https://hdbits.org/"
+      "uggcf://uqovgf.bet/"
     ],
     "type": "private",
     "description": "HDBits is a Private site for the HighDefinition Bittorrent Community",
@@ -1505,6 +1582,17 @@
     "isDead": false
   },
   {
+    "id": "hdunited",
+    "name": "HD-UNiT3D",
+    "urls": [
+      "https://hd-united.vn/"
+    ],
+    "type": "private",
+    "description": "",
+    "favicon": "",
+    "isDead": false
+  },
+  {
     "id": "hdupt",
     "name": "HDU",
     "urls": [
@@ -1539,6 +1627,17 @@
     "isDead": true
   },
   {
+    "id": "hellenichd",
+    "name": "HELLENIC-HD",
+    "urls": [
+      "https://hellenic-hd.cc/"
+    ],
+    "type": "private",
+    "description": "HELLENIC-HD 是一个希腊私有站点，提供电影/剧集/音乐/游戏/软件/书籍/体育资源。支持 Unit3D 官方 JSON API（api/torrents/filter）。",
+    "favicon": "",
+    "isDead": false
+  },
+  {
     "id": "hhanclub",
     "name": "憨憨",
     "urls": [
@@ -1557,6 +1656,28 @@
     ],
     "type": "private",
     "description": "校内10兆高速下载，优质高清资源共享！",
+    "favicon": "",
+    "isDead": false
+  },
+  {
+    "id": "homiehelpdesk",
+    "name": "HomieHelpdesk",
+    "urls": [
+      "uggcf://ubzvrurycqrfx.arg/"
+    ],
+    "type": "private",
+    "description": "HomieHelpdesk（HHD）是一个私有站点，提供电影/剧集/动漫/音乐/游戏/软件/书籍资源。支持 Unit3D 官方 JSON API（api/torrents/filter）。",
+    "favicon": "",
+    "isDead": false
+  },
+  {
+    "id": "hqmusic",
+    "name": "HQMusic",
+    "urls": [
+      "https://tracker.hqmusic.info/"
+    ],
+    "type": "private",
+    "description": "HQMusic 是一个越南音乐私有站点。",
     "favicon": "",
     "isDead": false
   },
@@ -1665,7 +1786,7 @@
     "id": "iptorrents",
     "name": "IPTorrents",
     "urls": [
-      "https://iptorrents.com/"
+      "uggcf://vcgbeeragf.pbz/"
     ],
     "type": "private",
     "description": "IPTorrents - #1 Private Tracker",
@@ -1731,7 +1852,7 @@
     "id": "kamept",
     "name": "KamePT",
     "urls": [
-      "https://kamept.com/"
+      "uggcf://xnzrcg.pbz/"
     ],
     "type": "private",
     "description": "主打二次元同人AV的站点",
@@ -1764,7 +1885,7 @@
     "id": "kelu",
     "name": "Kelu",
     "urls": [
-      "https://our.kelu.one/"
+      "uggcf://bhe.xryh.bar/"
     ],
     "type": "private",
     "description": "",
@@ -1905,6 +2026,17 @@
     "isDead": false
   },
   {
+    "id": "lpbits",
+    "name": "LP-Bits",
+    "urls": [
+      "https://lp-bits.com/"
+    ],
+    "type": "private",
+    "description": "LP-Bits 是专注于 Linkin Park 音乐发布的私有站点。",
+    "favicon": "",
+    "isDead": false
+  },
+  {
     "id": "lst",
     "name": "LST",
     "urls": [
@@ -1975,7 +2107,7 @@
     "id": "milkie",
     "name": "Milkie",
     "urls": [
-      "https://milkie.cc/"
+      "uggcf://zvyxvr.pp/"
     ],
     "type": "private",
     "description": "Milkie.cc (ME) is Private Torrent Tracker for 0DAY / GENERAL",
@@ -2313,7 +2445,7 @@
     "id": "oppaiti",
     "name": "Oppaitime",
     "urls": [
-      "https://oppaiti.me/"
+      "uggcf://bccnvgv.zr/"
     ],
     "type": "private",
     "description": "成人动漫站",
@@ -2411,6 +2543,17 @@
     "isDead": false
   },
   {
+    "id": "polishtorrent",
+    "name": "PolishTorrent",
+    "urls": [
+      "https://polishtorrent.top/"
+    ],
+    "type": "private",
+    "description": "PolishTorrent（PTT）是一个波兰私有站点，提供电影/剧集资源。",
+    "favicon": "",
+    "isDead": false
+  },
+  {
     "id": "pornbay",
     "name": "Pornbay",
     "urls": [
@@ -2425,8 +2568,8 @@
     "id": "pornbits",
     "name": "Pornbits",
     "urls": [
-      "https://pornbits.net/",
-      "https://pornbits.org/"
+      "uggcf://cbeaovgf.arg/",
+      "uggcf://cbeaovgf.bet/"
     ],
     "type": "private",
     "description": "",
@@ -2437,7 +2580,7 @@
     "id": "pornolab",
     "name": "PornoLab",
     "urls": [
-      "https://pornolab.net/"
+      "uggcf://cbeabyno.arg/"
     ],
     "type": "private",
     "description": "PornoLab is a Semi-Private Russian site for 3X",
@@ -2605,7 +2748,7 @@
     "id": "ptneko",
     "name": "超科学PT喵",
     "urls": [
-      "https://ptneko.com/"
+      "uggcf://cgarxb.pbz/"
     ],
     "type": "private",
     "description": "这里什么也没有",
@@ -2671,7 +2814,7 @@
     "id": "pussytorrents",
     "name": "Pussytorrents",
     "urls": [
-      "https://pussytorrents.org/"
+      "uggcf://chfflgbeeragf.bet/"
     ],
     "type": "private",
     "description": "PussyTorrents is a Semi-Private Torrent Tracker for 3X",
@@ -2704,6 +2847,17 @@
     "isDead": true
   },
   {
+    "id": "racing4everyone",
+    "name": "Racing4Everyone",
+    "urls": [
+      "https://racing4everyone.eu/"
+    ],
+    "type": "private",
+    "description": "Racing4Everyone（R4E）是一个专注于赛车运动的私有站点，提供赛事/影视资源。",
+    "favicon": "",
+    "isDead": false
+  },
+  {
     "id": "railgunpt",
     "name": "RailgunPT",
     "urls": [
@@ -2724,6 +2878,17 @@
     "description": "与你相逢，就是奇迹",
     "favicon": "",
     "isDead": true
+  },
+  {
+    "id": "rastastugan",
+    "name": "Rastastugan",
+    "urls": [
+      "uggcf://enfgnfghtna.bet/"
+    ],
+    "type": "private",
+    "description": "",
+    "favicon": "",
+    "isDead": false
   },
   {
     "id": "redacted",
@@ -2780,6 +2945,17 @@
     "type": "private",
     "description": "RetroToon World is a Private Torrent Tracker for ANIMATED MOVIES / TV",
     "favicon": "https://retrotoon.world/favicon.ico",
+    "isDead": false
+  },
+  {
+    "id": "rockethd",
+    "name": "RocketHD",
+    "urls": [
+      "https://rocket-hd.cc/"
+    ],
+    "type": "private",
+    "description": "",
+    "favicon": "",
     "isDead": false
   },
   {
@@ -2945,6 +3121,17 @@
     ],
     "type": "private",
     "description": "Free Share, Join us",
+    "favicon": "",
+    "isDead": false
+  },
+  {
+    "id": "skipthecommercials",
+    "name": "SkipTheCommercials",
+    "urls": [
+      "https://skipthecommercials.xyz/"
+    ],
+    "type": "private",
+    "description": "SkipTheCommercials（STC）是一个专注于去除广告的影视资源私有站点（主要收录 TV 节目）。",
     "favicon": "",
     "isDead": false
   },
@@ -3171,6 +3358,17 @@
     "isDead": false
   },
   {
+    "id": "tlzdigital",
+    "name": "TLZ Digital",
+    "urls": [
+      "https://tlzdigital.com/"
+    ],
+    "type": "private",
+    "description": "",
+    "favicon": "",
+    "isDead": false
+  },
+  {
     "id": "tmpt",
     "name": "唐门",
     "urls": [
@@ -3196,8 +3394,8 @@
     "id": "tokyotosho",
     "name": "Tokyo Toshokan",
     "urls": [
-      "https://www.tokyotosho.info/",
-      "https://tokyo-tosho.net/"
+      "uggcf://jjj.gbxlbgbfub.vasb/",
+      "uggcf://gbxlb-gbfub.arg/"
     ],
     "type": "public",
     "description": "Tokyo Toshokan is a Public BitTorrent Library for JAPANESE Media",
@@ -3208,19 +3406,19 @@
     "id": "torrentday",
     "name": "TorrentsTD",
     "urls": [
-      "https://tday.love/",
-      "https://torrentday.cool/",
-      "https://secure.torrentday.com/",
-      "https://classic.torrentday.com/",
-      "https://www.torrentday.com/",
-      "https://www.torrentday.me/",
-      "https://torrentday.it/",
-      "https://td.findnemo.net/",
-      "https://td.getcrazy.me/",
-      "https://td.workisboring.net/",
-      "https://tday.findnemo.net/",
-      "https://tday.getcrazy.me/",
-      "https://tday.workisboring.net/"
+      "uggcf://gqnl.ybir/",
+      "uggcf://gbeeragqnl.pbby/",
+      "uggcf://frpher.gbeeragqnl.pbz/",
+      "uggcf://pynffvp.gbeeragqnl.pbz/",
+      "uggcf://jjj.gbeeragqnl.pbz/",
+      "uggcf://jjj.gbeeragqnl.zr/",
+      "uggcf://gbeeragqnl.vg/",
+      "uggcf://gq.svaqarzb.arg/",
+      "uggcf://gq.trgpenml.zr/",
+      "uggcf://gq.jbexvfobevat.arg/",
+      "uggcf://gqnl.svaqarzb.arg/",
+      "uggcf://gqnl.trgpenml.zr/",
+      "uggcf://gqnl.jbexvfobevat.arg/"
     ],
     "type": "private",
     "description": "TorrentDay (TD) is a Private site for TV / MOVIES / GENERAL",
@@ -3312,10 +3510,21 @@
     "id": "tu88",
     "name": "TU88",
     "urls": [
-      "https://pt.tu88.men/"
+      "uggcf://cg.gh88.zra/"
     ],
     "type": "private",
     "description": "僅分享圖片,適合手機平板PT客戶端直接下載",
+    "favicon": "",
+    "isDead": false
+  },
+  {
+    "id": "turkseed",
+    "name": "TURKSEED",
+    "urls": [
+      "https://turkseed.com/"
+    ],
+    "type": "private",
+    "description": "",
     "favicon": "",
     "isDead": false
   },
@@ -3513,7 +3722,7 @@
     "id": "ydypt",
     "name": "伊甸园",
     "urls": [
-      "https://pt.hdbd.us/"
+      "uggcf://cg.uqoq.hf/"
     ],
     "type": "private",
     "description": "这里是伊甸园 让我们赤裸坦诚相见",
