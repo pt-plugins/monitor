@@ -1,0 +1,1300 @@
+{
+  "timestamp": "2026-09-24T00:30:26.650Z",
+  "sites": [
+    {
+      "id": "1337x",
+      "status": "up",
+      "latency": 58
+    },
+    {
+      "id": "1ptba",
+      "status": "up",
+      "latency": 79
+    },
+    {
+      "id": "0magnet",
+      "status": "up",
+      "latency": 290
+    },
+    {
+      "id": "52movie",
+      "status": "up",
+      "latency": 332
+    },
+    {
+      "id": "52pt",
+      "status": "up",
+      "latency": 486
+    },
+    {
+      "id": "acgrip",
+      "status": "up",
+      "latency": 522
+    },
+    {
+      "id": "13city",
+      "status": "up",
+      "latency": 795
+    },
+    {
+      "id": "abtorrents",
+      "status": "up",
+      "latency": 1122
+    },
+    {
+      "id": "aidoruonline",
+      "status": "up",
+      "latency": 736
+    },
+    {
+      "id": "animebytes",
+      "status": "up",
+      "latency": 299
+    },
+    {
+      "id": "alpharatio",
+      "status": "up",
+      "latency": 496
+    },
+    {
+      "id": "alingpt",
+      "status": "up",
+      "latency": 1038
+    },
+    {
+      "id": "aither",
+      "status": "up",
+      "latency": 1109
+    },
+    {
+      "id": "animez",
+      "status": "up",
+      "latency": 236
+    },
+    {
+      "id": "anirena",
+      "status": "up",
+      "latency": 334
+    },
+    {
+      "id": "animetosho",
+      "status": "up",
+      "latency": 663
+    },
+    {
+      "id": "agsvpt",
+      "status": "up",
+      "latency": 2144
+    },
+    {
+      "id": "audiences",
+      "status": "up",
+      "latency": 257
+    },
+    {
+      "id": "anisource",
+      "status": "up",
+      "latency": 881
+    },
+    {
+      "id": "audionews",
+      "status": "up",
+      "latency": 515
+    },
+    {
+      "id": "asiancinema",
+      "status": "up",
+      "latency": 870
+    },
+    {
+      "id": "avistaz",
+      "status": "up",
+      "latency": 239
+    },
+    {
+      "id": "azusa",
+      "status": "up",
+      "latency": 448
+    },
+    {
+      "id": "anthelion",
+      "status": "up",
+      "latency": 1893
+    },
+    {
+      "id": "baozi",
+      "status": "up",
+      "latency": 540
+    },
+    {
+      "id": "bemaniso",
+      "status": "up",
+      "latency": 739
+    },
+    {
+      "id": "bibliotik",
+      "status": "up",
+      "latency": 201
+    },
+    {
+      "id": "beyondhd",
+      "status": "up",
+      "latency": 868
+    },
+    {
+      "id": "bitbr",
+      "status": "up",
+      "latency": 842
+    },
+    {
+      "id": "bitpt",
+      "status": "up",
+      "latency": 249
+    },
+    {
+      "id": "bitporn",
+      "status": "up",
+      "latency": 1130
+    },
+    {
+      "id": "blutopia",
+      "status": "up",
+      "latency": 482
+    },
+    {
+      "id": "broadcasthenet",
+      "status": "up",
+      "latency": 510
+    },
+    {
+      "id": "btetree",
+      "status": "up",
+      "latency": 63
+    },
+    {
+      "id": "brokenstones",
+      "status": "up",
+      "latency": 311
+    },
+    {
+      "id": "aura4k",
+      "status": "down",
+      "latency": null
+    },
+    {
+      "id": "bwtorrents",
+      "status": "up",
+      "latency": 437
+    },
+    {
+      "id": "btschool",
+      "status": "up",
+      "latency": 525
+    },
+    {
+      "id": "carpt",
+      "status": "up",
+      "latency": 228
+    },
+    {
+      "id": "capybarabr",
+      "status": "up",
+      "latency": 427
+    },
+    {
+      "id": "bakabt",
+      "status": "down",
+      "latency": null
+    },
+    {
+      "id": "cbg",
+      "status": "up",
+      "latency": 746
+    },
+    {
+      "id": "byrbt",
+      "status": "up",
+      "latency": 1529
+    },
+    {
+      "id": "cathoderaytube",
+      "status": "up",
+      "latency": 1668
+    },
+    {
+      "id": "ceskeforum",
+      "status": "up",
+      "latency": 1085
+    },
+    {
+      "id": "chdbits",
+      "status": "up",
+      "latency": 377
+    },
+    {
+      "id": "cinematik",
+      "status": "up",
+      "latency": 472
+    },
+    {
+      "id": "cinemageddon",
+      "status": "up",
+      "latency": 636
+    },
+    {
+      "id": "cinemaz",
+      "status": "up",
+      "latency": 171
+    },
+    {
+      "id": "clearjav",
+      "status": "up",
+      "latency": 849
+    },
+    {
+      "id": "concertos",
+      "status": "up",
+      "latency": 1343
+    },
+    {
+      "id": "crabpt",
+      "status": "up",
+      "latency": 522
+    },
+    {
+      "id": "cspt",
+      "status": "up",
+      "latency": 469
+    },
+    {
+      "id": "concen",
+      "status": "down",
+      "latency": null
+    },
+    {
+      "id": "cyanbug",
+      "status": "up",
+      "latency": 1116
+    },
+    {
+      "id": "dabaojian",
+      "status": "up",
+      "latency": 1232
+    },
+    {
+      "id": "danishbytes",
+      "status": "up",
+      "latency": 1109
+    },
+    {
+      "id": "darkland",
+      "status": "up",
+      "latency": 474
+    },
+    {
+      "id": "darkpeers",
+      "status": "up",
+      "latency": 437
+    },
+    {
+      "id": "datascene",
+      "status": "up",
+      "latency": 106
+    },
+    {
+      "id": "cdy",
+      "status": "down",
+      "latency": null
+    },
+    {
+      "id": "cgpeers",
+      "status": "down",
+      "latency": null
+    },
+    {
+      "id": "daxiangjiao",
+      "status": "up",
+      "latency": 596
+    },
+    {
+      "id": "dicmusic",
+      "status": "up",
+      "latency": 506
+    },
+    {
+      "id": "desigaane",
+      "status": "up",
+      "latency": 1038
+    },
+    {
+      "id": "digitalcore",
+      "status": "up",
+      "latency": 575
+    },
+    {
+      "id": "dmhy",
+      "status": "up",
+      "latency": 118
+    },
+    {
+      "id": "desitorrents",
+      "status": "up",
+      "latency": 1191
+    },
+    {
+      "id": "discfan",
+      "status": "up",
+      "latency": 444
+    },
+    {
+      "id": "dragonhd",
+      "status": "up",
+      "latency": 527
+    },
+    {
+      "id": "dstudio",
+      "status": "up",
+      "latency": 463
+    },
+    {
+      "id": "dubhe",
+      "status": "up",
+      "latency": 510
+    },
+    {
+      "id": "ehentai",
+      "status": "up",
+      "latency": 520
+    },
+    {
+      "id": "emuwarez",
+      "status": "up",
+      "latency": 384
+    },
+    {
+      "id": "exttorrents",
+      "status": "up",
+      "latency": 53
+    },
+    {
+      "id": "exoticaz",
+      "status": "up",
+      "latency": 593
+    },
+    {
+      "id": "fappaizuri",
+      "status": "up",
+      "latency": 785
+    },
+    {
+      "id": "fhpt",
+      "status": "up",
+      "latency": 328
+    },
+    {
+      "id": "empornium",
+      "status": "up",
+      "latency": 1180
+    },
+    {
+      "id": "femdomcult",
+      "status": "up",
+      "latency": 956
+    },
+    {
+      "id": "freefarm",
+      "status": "up",
+      "latency": 401
+    },
+    {
+      "id": "filelist",
+      "status": "up",
+      "latency": 624
+    },
+    {
+      "id": "gazellegames",
+      "status": "up",
+      "latency": 1157
+    },
+    {
+      "id": "ggpt",
+      "status": "up",
+      "latency": 580
+    },
+    {
+      "id": "geminitracker",
+      "status": "up",
+      "latency": 1426
+    },
+    {
+      "id": "generationfree",
+      "status": "up",
+      "latency": 1233
+    },
+    {
+      "id": "greatposterwall",
+      "status": "up",
+      "latency": 601
+    },
+    {
+      "id": "gtnet",
+      "status": "up",
+      "latency": 617
+    },
+    {
+      "id": "gtru",
+      "status": "up",
+      "latency": 216
+    },
+    {
+      "id": "happyfappy",
+      "status": "up",
+      "latency": 268
+    },
+    {
+      "id": "hdarea",
+      "status": "up",
+      "latency": 425
+    },
+    {
+      "id": "haidan",
+      "status": "up",
+      "latency": 686
+    },
+    {
+      "id": "hdbits",
+      "status": "up",
+      "latency": 877
+    },
+    {
+      "id": "hdbao",
+      "status": "up",
+      "latency": 1070
+    },
+    {
+      "id": "hddolby",
+      "status": "up",
+      "latency": 120
+    },
+    {
+      "id": "hdcity",
+      "status": "up",
+      "latency": 862
+    },
+    {
+      "id": "hdclone",
+      "status": "up",
+      "latency": 534
+    },
+    {
+      "id": "hdfans",
+      "status": "up",
+      "latency": 502
+    },
+    {
+      "id": "hdhome",
+      "status": "up",
+      "latency": 472
+    },
+    {
+      "id": "hdf",
+      "status": "up",
+      "latency": 1505
+    },
+    {
+      "id": "hdroute",
+      "status": "up",
+      "latency": 752
+    },
+    {
+      "id": "hdspace",
+      "status": "up",
+      "latency": 289
+    },
+    {
+      "id": "hdsky",
+      "status": "up",
+      "latency": 999
+    },
+    {
+      "id": "hdtime",
+      "status": "up",
+      "latency": 810
+    },
+    {
+      "id": "hdtorrents",
+      "status": "up",
+      "latency": 277
+    },
+    {
+      "id": "hdupt",
+      "status": "up",
+      "latency": 452
+    },
+    {
+      "id": "hdunited",
+      "status": "up",
+      "latency": 1012
+    },
+    {
+      "id": "hdvideo",
+      "status": "up",
+      "latency": 576
+    },
+    {
+      "id": "hellenichd",
+      "status": "up",
+      "latency": 450
+    },
+    {
+      "id": "hhanclub",
+      "status": "up",
+      "latency": 449
+    },
+    {
+      "id": "hitpt",
+      "status": "up",
+      "latency": 320
+    },
+    {
+      "id": "homiehelpdesk",
+      "status": "up",
+      "latency": 583
+    },
+    {
+      "id": "htpt",
+      "status": "up",
+      "latency": 189
+    },
+    {
+      "id": "hqmusic",
+      "status": "up",
+      "latency": 3257
+    },
+    {
+      "id": "huno",
+      "status": "up",
+      "latency": 271
+    },
+    {
+      "id": "hxpt",
+      "status": "up",
+      "latency": 234
+    },
+    {
+      "id": "ilolicon",
+      "status": "up",
+      "latency": 218
+    },
+    {
+      "id": "iptorrents",
+      "status": "up",
+      "latency": 990
+    },
+    {
+      "id": "gtorg",
+      "status": "down",
+      "latency": null
+    },
+    {
+      "id": "itzmx",
+      "status": "up",
+      "latency": 2954
+    },
+    {
+      "id": "jpopsuki",
+      "status": "up",
+      "latency": 852
+    },
+    {
+      "id": "jptv4us",
+      "status": "up",
+      "latency": 513
+    },
+    {
+      "id": "kamept",
+      "status": "up",
+      "latency": 484
+    },
+    {
+      "id": "karagarga",
+      "status": "up",
+      "latency": 288
+    },
+    {
+      "id": "keepfrds",
+      "status": "up",
+      "latency": 316
+    },
+    {
+      "id": "kelu",
+      "status": "up",
+      "latency": 461
+    },
+    {
+      "id": "kufei",
+      "status": "up",
+      "latency": 551
+    },
+    {
+      "id": "kufirc",
+      "status": "up",
+      "latency": 741
+    },
+    {
+      "id": "lajidui",
+      "status": "up",
+      "latency": 518
+    },
+    {
+      "id": "learnflakes",
+      "status": "up",
+      "latency": 703
+    },
+    {
+      "id": "lemonhdnet",
+      "status": "up",
+      "latency": 486
+    },
+    {
+      "id": "latteam",
+      "status": "up",
+      "latency": 1457
+    },
+    {
+      "id": "longpt",
+      "status": "up",
+      "latency": 1126
+    },
+    {
+      "id": "losslessclub",
+      "status": "up",
+      "latency": 1540
+    },
+    {
+      "id": "lpbits",
+      "status": "up",
+      "latency": 657
+    },
+    {
+      "id": "lst",
+      "status": "up",
+      "latency": 538
+    },
+    {
+      "id": "luckpt",
+      "status": "up",
+      "latency": 824
+    },
+    {
+      "id": "luminarr",
+      "status": "up",
+      "latency": 459
+    },
+    {
+      "id": "lztr",
+      "status": "up",
+      "latency": 512
+    },
+    {
+      "id": "march",
+      "status": "up",
+      "latency": 452
+    },
+    {
+      "id": "hdkylin",
+      "status": "down",
+      "latency": null
+    },
+    {
+      "id": "milkie",
+      "status": "up",
+      "latency": 621
+    },
+    {
+      "id": "momentpt",
+      "status": "up",
+      "latency": 300
+    },
+    {
+      "id": "mteam",
+      "status": "up",
+      "latency": 95
+    },
+    {
+      "id": "midnightscene",
+      "status": "up",
+      "latency": 1024
+    },
+    {
+      "id": "muxuege",
+      "status": "up",
+      "latency": 408
+    },
+    {
+      "id": "monikadesign",
+      "status": "up",
+      "latency": 789
+    },
+    {
+      "id": "musopia",
+      "status": "up",
+      "latency": 528
+    },
+    {
+      "id": "mypt",
+      "status": "up",
+      "latency": 556
+    },
+    {
+      "id": "myanonamouse",
+      "status": "up",
+      "latency": 1139
+    },
+    {
+      "id": "nebulance",
+      "status": "up",
+      "latency": 606
+    },
+    {
+      "id": "ncore",
+      "status": "up",
+      "latency": 1294
+    },
+    {
+      "id": "nanyangpt",
+      "status": "up",
+      "latency": 1951
+    },
+    {
+      "id": "nekobt",
+      "status": "up",
+      "latency": 448
+    },
+    {
+      "id": "nicept",
+      "status": "up",
+      "latency": 520
+    },
+    {
+      "id": "njtupt",
+      "status": "up",
+      "latency": 561
+    },
+    {
+      "id": "nexushd",
+      "status": "up",
+      "latency": 950
+    },
+    {
+      "id": "nordicbytes",
+      "status": "up",
+      "latency": 580
+    },
+    {
+      "id": "nyaa",
+      "status": "up",
+      "latency": 380
+    },
+    {
+      "id": "novahd",
+      "status": "up",
+      "latency": 772
+    },
+    {
+      "id": "okpt",
+      "status": "up",
+      "latency": 480
+    },
+    {
+      "id": "onlyencodes",
+      "status": "up",
+      "latency": 511
+    },
+    {
+      "id": "oldtoonsworld",
+      "status": "up",
+      "latency": 1034
+    },
+    {
+      "id": "opencd",
+      "status": "up",
+      "latency": 500
+    },
+    {
+      "id": "oshenpt",
+      "status": "up",
+      "latency": 470
+    },
+    {
+      "id": "orpheus",
+      "status": "up",
+      "latency": 884
+    },
+    {
+      "id": "ourbits",
+      "status": "up",
+      "latency": 73
+    },
+    {
+      "id": "pandapt",
+      "status": "up",
+      "latency": 495
+    },
+    {
+      "id": "piggo",
+      "status": "up",
+      "latency": 62
+    },
+    {
+      "id": "pixelcove",
+      "status": "up",
+      "latency": 951
+    },
+    {
+      "id": "playletpt",
+      "status": "up",
+      "latency": 474
+    },
+    {
+      "id": "polishtorrent",
+      "status": "up",
+      "latency": 1157
+    },
+    {
+      "id": "pornolab",
+      "status": "up",
+      "latency": 553
+    },
+    {
+      "id": "portugas",
+      "status": "up",
+      "latency": 963
+    },
+    {
+      "id": "privatehd",
+      "status": "up",
+      "latency": 333
+    },
+    {
+      "id": "ptcafe",
+      "status": "up",
+      "latency": 505
+    },
+    {
+      "id": "pter",
+      "status": "up",
+      "latency": 517
+    },
+    {
+      "id": "passthepopcorn",
+      "status": "down",
+      "latency": null
+    },
+    {
+      "id": "ptfans",
+      "status": "up",
+      "latency": 474
+    },
+    {
+      "id": "pthome",
+      "status": "up",
+      "latency": 99
+    },
+    {
+      "id": "ptgtk",
+      "status": "up",
+      "latency": 781
+    },
+    {
+      "id": "ptlgs",
+      "status": "up",
+      "latency": 544
+    },
+    {
+      "id": "ptlao",
+      "status": "up",
+      "latency": 845
+    },
+    {
+      "id": "ptsbao",
+      "status": "up",
+      "latency": 484
+    },
+    {
+      "id": "ptneko",
+      "status": "up",
+      "latency": 1110
+    },
+    {
+      "id": "pttime",
+      "status": "up",
+      "latency": 742
+    },
+    {
+      "id": "ptskit",
+      "status": "up",
+      "latency": 1345
+    },
+    {
+      "id": "ptzone",
+      "status": "up",
+      "latency": 261
+    },
+    {
+      "id": "pussytorrents",
+      "status": "up",
+      "latency": 243
+    },
+    {
+      "id": "racing4everyone",
+      "status": "up",
+      "latency": 1098
+    },
+    {
+      "id": "qingwa",
+      "status": "up",
+      "latency": 1692
+    },
+    {
+      "id": "rastastugan",
+      "status": "up",
+      "latency": 481
+    },
+    {
+      "id": "redacted",
+      "status": "up",
+      "latency": 632
+    },
+    {
+      "id": "reelflix",
+      "status": "up",
+      "latency": 1099
+    },
+    {
+      "id": "retroflix",
+      "status": "up",
+      "latency": 709
+    },
+    {
+      "id": "hudbt",
+      "status": "down",
+      "latency": null
+    },
+    {
+      "id": "retrotoon",
+      "status": "up",
+      "latency": 974
+    },
+    {
+      "id": "rousipro",
+      "status": "up",
+      "latency": 100
+    },
+    {
+      "id": "rockethd",
+      "status": "up",
+      "latency": 1362
+    },
+    {
+      "id": "rutracker",
+      "status": "up",
+      "latency": 1041
+    },
+    {
+      "id": "sbpt",
+      "status": "up",
+      "latency": 266
+    },
+    {
+      "id": "secretcinema",
+      "status": "up",
+      "latency": 652
+    },
+    {
+      "id": "seedpool",
+      "status": "up",
+      "latency": 522
+    },
+    {
+      "id": "sewerpt",
+      "status": "up",
+      "latency": 455
+    },
+    {
+      "id": "shareisland",
+      "status": "up",
+      "latency": 552
+    },
+    {
+      "id": "simurg",
+      "status": "up",
+      "latency": 542
+    },
+    {
+      "id": "siqi",
+      "status": "up",
+      "latency": 473
+    },
+    {
+      "id": "sjtu",
+      "status": "down",
+      "latency": null
+    },
+    {
+      "id": "skipthecommercials",
+      "status": "up",
+      "latency": 788
+    },
+    {
+      "id": "skyeysnow",
+      "status": "up",
+      "latency": 1343
+    },
+    {
+      "id": "soulvoice",
+      "status": "up",
+      "latency": 483
+    },
+    {
+      "id": "speedapp",
+      "status": "up",
+      "latency": 423
+    },
+    {
+      "id": "sportscult",
+      "status": "up",
+      "latency": 266
+    },
+    {
+      "id": "springsunday",
+      "status": "up",
+      "latency": 139
+    },
+    {
+      "id": "starspace",
+      "status": "up",
+      "latency": 616
+    },
+    {
+      "id": "sunnypt",
+      "status": "up",
+      "latency": 405
+    },
+    {
+      "id": "superbits",
+      "status": "up",
+      "latency": 710
+    },
+    {
+      "id": "tangpt",
+      "status": "up",
+      "latency": 480
+    },
+    {
+      "id": "tccf",
+      "status": "up",
+      "latency": 1062
+    },
+    {
+      "id": "teamhd",
+      "status": "up",
+      "latency": 1359
+    },
+    {
+      "id": "tey",
+      "status": "up",
+      "latency": 970
+    },
+    {
+      "id": "nordicquality",
+      "status": "down",
+      "latency": null
+    },
+    {
+      "id": "rs",
+      "status": "down",
+      "latency": null
+    },
+    {
+      "id": "tjupt",
+      "status": "up",
+      "latency": 467
+    },
+    {
+      "id": "tlfbits",
+      "status": "up",
+      "latency": 296
+    },
+    {
+      "id": "tlzdigital",
+      "status": "up",
+      "latency": 686
+    },
+    {
+      "id": "tokyopt",
+      "status": "up",
+      "latency": 752
+    },
+    {
+      "id": "tokyotosho",
+      "status": "up",
+      "latency": 526
+    },
+    {
+      "id": "torrentday",
+      "status": "up",
+      "latency": 1276
+    },
+    {
+      "id": "torrentleech",
+      "status": "up",
+      "latency": 307
+    },
+    {
+      "id": "torrentscsv",
+      "status": "up",
+      "latency": 577
+    },
+    {
+      "id": "totheglory",
+      "status": "up",
+      "latency": 589
+    },
+    {
+      "id": "trancetraffic",
+      "status": "up",
+      "latency": 554
+    },
+    {
+      "id": "railgunpt",
+      "status": "down",
+      "latency": null
+    },
+    {
+      "id": "turkseed",
+      "status": "up",
+      "latency": 1144
+    },
+    {
+      "id": "u2",
+      "status": "up",
+      "latency": 512
+    },
+    {
+      "id": "ubits",
+      "status": "up",
+      "latency": 134
+    },
+    {
+      "id": "ultrahd",
+      "status": "up",
+      "latency": 170
+    },
+    {
+      "id": "uploadcx",
+      "status": "up",
+      "latency": 184
+    },
+    {
+      "id": "vclib",
+      "status": "up",
+      "latency": 1200
+    },
+    {
+      "id": "wihd",
+      "status": "up",
+      "latency": 191
+    },
+    {
+      "id": "wintersakura",
+      "status": "up",
+      "latency": 237
+    },
+    {
+      "id": "xdypt",
+      "status": "up",
+      "latency": 526
+    },
+    {
+      "id": "xingtan",
+      "status": "up",
+      "latency": 647
+    },
+    {
+      "id": "xingwan",
+      "status": "up",
+      "latency": 542
+    },
+    {
+      "id": "xingyunge",
+      "status": "up",
+      "latency": 224
+    },
+    {
+      "id": "xtr",
+      "status": "up",
+      "latency": 646
+    },
+    {
+      "id": "yemapt",
+      "status": "up",
+      "latency": 213
+    },
+    {
+      "id": "yinguskg",
+      "status": "up",
+      "latency": 479
+    },
+    {
+      "id": "yuscene",
+      "status": "up",
+      "latency": 1103
+    },
+    {
+      "id": "yzyy",
+      "status": "up",
+      "latency": 949
+    },
+    {
+      "id": "zhixing",
+      "status": "up",
+      "latency": 1315
+    },
+    {
+      "id": "zhuque",
+      "status": "up",
+      "latency": 475
+    },
+    {
+      "id": "zmpt",
+      "status": "up",
+      "latency": 252
+    },
+    {
+      "id": "thegeeks",
+      "status": "down",
+      "latency": null
+    },
+    {
+      "id": "tu88",
+      "status": "down",
+      "latency": null
+    },
+    {
+      "id": "zrpt",
+      "status": "up",
+      "latency": 777
+    },
+    {
+      "id": "thevault",
+      "status": "down",
+      "latency": null
+    },
+    {
+      "id": "audiobookbay",
+      "status": "down",
+      "latency": null
+    }
+  ]
+}
