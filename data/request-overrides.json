@@ -12,6 +12,15 @@
     },
     "ilolicon": {
       "path": "/login.php"
-    }
+    },
+	"bakabt": {
+	  "path": "/resources/css/HereNow.css"
+	},
+	"hdkylin": {
+	  "path": "/styles/HFKylin/theme.css"
+	},
+	"passthepopcorn": {
+	  "path": "/login.php"
+	}
   }
 }
