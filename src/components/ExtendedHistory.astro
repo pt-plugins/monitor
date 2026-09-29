@@ -2,20 +2,16 @@
 interface Props {
   siteId: string;
   builtCount: number;
-  /** Whether the built-in history is truncated, i.e. whether fetching can add anything. */
-  hasMore: boolean;
 }
 
-const { siteId, builtCount, hasMore } = Astro.props;
+const { siteId, builtCount } = Astro.props;
 ---
 
-{hasMore && (
-  <p class="more-link">
-    <button type="button" id="history-open" class="btn btn--ghost" aria-haspopup="dialog">
-      Load Extend History
-    </button>
-  </p>
-)}
+<p class="more-link">
+  <button type="button" id="history-open" class="btn btn--ghost" aria-haspopup="dialog">
+    Load Extend History
+  </button>
+</p>
 
 <!-- Extended History (browser-side, cached locally). Kept in a dialog so the
      page stays scannable; the loader anchor lives inside it. -->

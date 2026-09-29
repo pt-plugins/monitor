@@ -40,10 +40,13 @@ Site definitions are pulled from [`pt-plugins/PT-depiler`](https://github.com/pt
 ### Extended History (client-side)
 
 Each site detail page (`src/pages/site/[id].astro`) renders the **Extended History** component
-(`src/components/ExtendedHistory.astro`), whose trigger button sits in the header of the *Checks History* section and
+(`src/components/ExtendedHistory.astro`), whose trigger button sits at the foot of the *Checks History* section and
 whose dialog markup, client script and styles live in that component. The static build already embeds the most recent
 runs; this dialog additionally fetches the merged history files from the repository in the browser, so long-term
 history is available without rebuilding the site on every data update.
+
+- Every site page gets the trigger, regardless of how much history the build embedded, so the dialog is always
+  reachable. Sites with little or no built-in history can still pull their full history from the repository.
 
 - On page entry the dialog loads whatever is already in the cache, **without any network request**. It only fetches
   after an explicit **Load** click, so opening a site page never spends API quota.

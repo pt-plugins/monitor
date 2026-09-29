@@ -48,10 +48,8 @@ function fmtUptime(pct: number): string {
   return `${pct}%`;
 }
 
-
-// Recent history (last 50 entries, reversed for table)
+// Built-in history shown in the table (last 50 entries, reversed for the table)
 const recentHistory = [...site.history].reverse().slice(0, 50);
-const hasMore = site.history.length > recentHistory.length;
 ---
 
 <Layout title={site.name}>
@@ -135,7 +133,7 @@ const hasMore = site.history.length > recentHistory.length;
       </table>
       {recentHistory.length === 0 && <p class="empty">No monitoring data yet.</p>}
     </div>
-    <ExtendedHistory siteId={site.id} builtCount={site.history.length} hasMore={hasMore} />
+    <ExtendedHistory siteId={site.id} builtCount={site.history.length} />
   </section>
 </Layout>
 
