@@ -5,6 +5,9 @@
   "description": "Uptime monitor for PT sites, driven by GitHub Actions and Astro",
   "type": "module",
   "packageManager": "pnpm@10.14.0",
+  "engines": {
+    "node": ">=22.12.0"
+  },
   "scripts": {
     "build": "astro build",
     "dev": "astro dev",
@@ -14,7 +17,7 @@
     "cleanup": "node scripts/cleanup.mjs"
   },
   "dependencies": {
-    "astro": "^5.0.0",
+    "astro": "^7.3.5",
     "p-queue": "^9.3.0",
     "playwright": "^1.52.0"
   },

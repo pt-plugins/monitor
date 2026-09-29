@@ -76,7 +76,7 @@ rebuilding the site on every data update.
 
 ### Prerequisites
 
-- Node.js 20+
+- Node.js 22.12+ (Astro 7 requires it; CI and `.nvmrc` pin Node 26)
 - pnpm 10+
 - Git
 
