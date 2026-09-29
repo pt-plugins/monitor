@@ -56,6 +56,7 @@ const hasMore = site.history.length > recentHistory.length;
 <script>
   import {
     CACHE_NAME,
+    HISTORY_DATA_DIR,
     TOKEN_STORAGE_KEY,
     contentsApiUrl,
     dailyFilePath,
@@ -82,6 +83,13 @@ const hasMore = site.history.length > recentHistory.length;
     const summaryEl = document.getElementById("history-summary");
     const tableBody = document.getElementById("history-table-body");
     const tableEl = document.getElementById("history-table");
+
+    const dialogEl = document.getElementById("history-dialog") as HTMLDialogElement | null;
+    const openBtn = document.getElementById("history-open") as HTMLButtonElement | null;
+    const closeBtn = document.getElementById("history-close") as HTMLButtonElement | null;
+    const progressEl = document.getElementById("history-progress");
+    const progressFill = document.getElementById("history-progress-fill");
+    const progressText = document.getElementById("history-progress-text");
 
     const STATUS_TEXT: Record<string, string> = {
       idle: "",
@@ -147,8 +155,107 @@ const hasMore = site.history.length > recentHistory.length;
       }
     }
 
+    /** Data paths currently present in the cache bucket. */
+    async function cachedPaths(): Promise<string[]> {
+      if (!cacheStorageAvailable) return [];
+      try {
+        const cache = await caches.open(CACHE_NAME);
+        const keys = await cache.keys();
+        // Derive the prefix from a real data key so no trailing-slash guess is
+        // involved: contentsApiUrl("") would end in "/contents/?ref=…".
+        const marker = "/contents/";
+        return keys
+          .map((k) => k.url)
+          .map((u) => {
+            const i = u.indexOf(marker);
+            if (i === -1) return null;
+            const rest = u.slice(i + marker.length);
+            const q = rest.indexOf("?");
+            const path = q === -1 ? rest : rest.slice(0, q);
+            return path.startsWith("data/uptime/") ? path : null;
+          })
+          .filter((p): p is string => p !== null);
+      } catch {
+        return [];
+      }
+    }
+
+    /**
+     * Drop cached daily files for any month whose monthly file is now present.
+     * cleanup.mjs deletes the daily files upstream after merging them, so the
+     * monthly file is the authoritative copy — keeping the dailies would
+     * double-count every record in that month.
+     */
+    async function pruneCompactedDays(monthlyPaths: string[]): Promise<number> {
+      if (!cacheStorageAvailable || monthlyPaths.length === 0) return 0;
+      try {
+        const compacted = new Set(
+          monthlyPaths.map(monthKeyOfPath).filter((m): m is string => m !== null),
+        );
+        if (compacted.size === 0) return 0;
+
+        const stale = (await cachedPaths()).filter((p) => {
+          if (!isDailyPath(p)) return false;
+          const mk = monthKeyOfPath(p);
+          return mk !== null && compacted.has(mk);
+        });
+        if (stale.length === 0) return 0;
+
+        const cache = await caches.open(CACHE_NAME);
+        await Promise.all(stale.map((p) => cache.delete(contentsApiUrl(p))));
+        return stale.length;
+      } catch {
+        return 0;
+      }
+    }
+
     function entryKey(e: HistoryEntry): string {
       return `${e.timestamp}|${e.status}|${e.latency ?? ""}`;
+    }
+
+    /**
+     * Human label for a data path, e.g. "2026/08 monthly" or "2026/09/28 daily".
+     * Kept separate from the URL so progress reads as a data file, not an API call.
+     */
+    function pathLabel(path: string): string {
+      const rel = path.slice(path.lastIndexOf("data/uptime/") + "data/uptime/".length);
+      const m = rel.match(/^(\d{4})\/(\d{2})\/(\d{2})\.jsonl$/);
+      if (m) return `${m[1]}/${m[2]}/${m[3]} daily`;
+      const mm = rel.match(/^(\d{4})\/(\d{2})\.jsonl$/);
+      if (mm) return `${mm[1]}/${mm[2]} monthly`;
+      return rel;
+    }
+
+    /** Strip the data dir so these helpers work on either full or relative paths. */
+    function relDataPath(path: string): string {
+      const i = path.indexOf(HISTORY_DATA_DIR);
+      return i === -1 ? path : path.slice(i + HISTORY_DATA_DIR.length + 1);
+    }
+
+    /** Which calendar month a cache key belongs to, or null when unrecognised. */
+    function monthKeyOfPath(path: string): string | null {
+      const m = relDataPath(path).match(/^(\d{4})\/(\d{2})(?:\/\d{2})?\.jsonl$/);
+      return m ? `${m[1]}/${m[2]}` : null;
+    }
+
+    function isDailyPath(path: string): boolean {
+      return /^\d{4}\/\d{2}\/\d{2}\.jsonl$/.test(relDataPath(path));
+    }
+
+    function setProgress(done: number, total: number, label: string) {
+      if (!progressEl) return;
+      progressEl.hidden = false;
+      const pct = total > 0 ? Math.round((done / total) * 100) : 0;
+      if (progressFill) (progressFill as HTMLElement).style.width = `${pct}%`;
+      if (progressText) {
+        progressText.textContent = total > 0 ? `${done}/${total} · ${label}` : label;
+      }
+    }
+
+    function hideProgress() {
+      if (progressEl) progressEl.hidden = true;
+      if (progressFill) (progressFill as HTMLElement).style.width = "0%";
+      if (progressText) progressText.textContent = "";
     }
 
     /** Last observed rate-limit state, surfaced in the status line. */
@@ -184,10 +291,76 @@ const hasMore = site.history.length > recentHistory.length;
       return entries;
     }
 
+    /**
+     * Fold fetched history into the Recent Checks table. Entries already
+     * present in the built-in history (same timestamp) are dropped rather than
+     * duplicated, and the merged list is ordered by absolute instant so a
+     * December entry never sorts after the following January.
+     */
+    function mergeIntoRecentChecks(entries: HistoryEntry[]) {
+      const tbody = document.getElementById("recent-checks-body");
+      if (!tbody) return;
+
+      const builtInIso = new Set<string>();
+      tbody.querySelectorAll<HTMLTableRowElement>("tr[data-ts]").forEach((tr) => {
+        const ts = tr.dataset.ts;
+        if (ts) builtInIso.add(ts);
+      });
+
+      // Timestamps already rendered, so a re-load does not append duplicates.
+      const seen = new Set(builtInIso);
+      const merged = [...entries]
+        .filter((e) => {
+          if (seen.has(e.timestamp)) return false;
+          seen.add(e.timestamp);
+          return true;
+        })
+        .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
+
+      if (merged.length === 0) return;
+
+      const frag = document.createDocumentFragment();
+      for (const e of merged) {
+        const tr = document.createElement("tr");
+        tr.dataset.ts = e.timestamp;
+        tr.dataset.source = "fetched";
+
+        const tdTime = document.createElement("td");
+        tdTime.className = "td-time";
+        tdTime.textContent = fmtTime(e.timestamp);
+        tr.appendChild(tdTime);
+
+        const tdStatus = document.createElement("td");
+        const badge = document.createElement("span");
+        badge.className = `status-pill status-pill--${e.status}`;
+        badge.textContent = e.status;
+        tdStatus.appendChild(badge);
+        tr.appendChild(tdStatus);
+
+        const tdLatency = document.createElement("td");
+        tdLatency.className = "td-latency";
+        tdLatency.textContent = fmtLatency(e.latency);
+        tr.appendChild(tdLatency);
+
+        frag.appendChild(tr);
+      }
+      tbody.appendChild(frag);
+
+      // Built-in rows carry no marker; sort every row by its absolute instant.
+      const rows = Array.from(tbody.querySelectorAll<HTMLTableRowElement>("tr"));
+      rows.sort((a, b) => {
+        const ta = a.dataset.ts ? new Date(a.dataset.ts).getTime() : 0;
+        const tb = b.dataset.ts ? new Date(b.dataset.ts).getTime() : 0;
+        return tb - ta;
+      });
+      for (const tr of rows) tbody.appendChild(tr);
+    }
+
     function render(entries: HistoryEntry[]) {
       if (summaryEl) {
         summaryEl.textContent = `${entries.length} additional records merged (${builtCount} built-in).`;
       }
+      mergeIntoRecentChecks(entries);
       if (!tableEl || !tableBody) return;
 
       const recent = [...entries]
@@ -257,7 +430,13 @@ const hasMore = site.history.length > recentHistory.length;
       }
     }
 
-    async function load() {
+    /**
+     * Load the selected range. `auto` marks the cache-only pass done on page
+     * entry: it must never hit the network, so cached files are used and
+     * uncached ones are simply skipped.
+     */
+    async function load(opts: { auto?: boolean } = {}) {
+      const auto = opts.auto === true;
       if (!loadBtn) return;
       loadBtn.disabled = true;
       setStatus("loading");
@@ -274,26 +453,43 @@ const hasMore = site.history.length > recentHistory.length;
       let fromCache = 0;
       const failures: string[] = [];
       let rateLimited = false;
+      const monthlySeen: string[] = [];
 
-      for (const path of targets) {
+      setProgress(0, targets.length, auto ? "reading cache" : "starting");
+
+      for (let i = 0; i < targets.length; i++) {
+        const path = targets[i];
+        const label = pathLabel(path);
+        setProgress(i, targets.length, label);
+
         const cached = await cacheGet(path);
         if (cached) {
           fromCache++;
           for (const e of cached) merged.set(entryKey(e), e);
-          continue;
+        } else {
+          // The cache-only pass on page entry never fetches.
+          if (auto) {
+            setProgress(i + 1, targets.length, label);
+            continue;
+          }
+          try {
+            const entries = await fetchFile(path, token);
+            fetched++;
+            for (const e of entries) merged.set(entryKey(e), e);
+          } catch (err) {
+            const msg = err instanceof Error ? err.message : String(err);
+            if (msg === "rate-limited") rateLimited = true;
+            failures.push(path);
+            // Once the API refuses, the remaining requests would fail too.
+            if (rateLimited) break;
+          }
         }
 
-        try {
-          const entries = await fetchFile(path, token);
-          fetched++;
-          for (const e of entries) merged.set(entryKey(e), e);
-        } catch (err) {
-          const msg = err instanceof Error ? err.message : String(err);
-          if (msg === "rate-limited") rateLimited = true;
-          failures.push(path);
-          // Once the API refuses, the remaining requests would fail too.
-          if (rateLimited) break;
-        }
+        if (!isDailyPath(path)) monthlySeen.push(path);
+        // A monthly file that exists means its daily files are redundant.
+        await pruneCompactedDays(monthlySeen);
+
+        setProgress(i + 1, targets.length, label);
       }
 
       const entries = [...merged.values()];
@@ -307,7 +503,7 @@ const hasMore = site.history.length > recentHistory.length;
       const detail = parts.join(" · ") + ".";
 
       if (entries.length === 0) {
-        setStatus(rateLimited ? "error" : "empty", detail);
+        setStatus(auto || rateLimited ? "idle" : "empty", auto ? "" : detail);
       } else {
         setStatus(failures.length > 0 ? "error" : "done", detail);
       }
@@ -317,6 +513,20 @@ const hasMore = site.history.length > recentHistory.length;
 
       if (clearBtn) clearBtn.disabled = false;
       loadBtn.disabled = false;
+      // Keep the bar visible briefly so the final step is readable.
+      window.setTimeout(hideProgress, auto ? 0 : 400);
+      return entries.length;
+    }
+
+    /** Fill the table from whatever is already cached, without any network use. */
+    async function autoLoadFromCache() {
+      const paths = await cachedPaths();
+      if (paths.length === 0) {
+        setStatus("idle", "No cached history yet — open the dialog to load it.");
+        return;
+      }
+      if (summaryEl) summaryEl.textContent = "Showing cached history…";
+      await load({ auto: true });
     }
 
     async function clearCache() {
@@ -340,8 +550,22 @@ const hasMore = site.history.length > recentHistory.length;
     const savedToken = loadSavedToken();
     if (savedToken && tokenInput) tokenInput.value = savedToken;
 
-    loadBtn?.addEventListener("click", load);
+    loadBtn?.addEventListener("click", () => void load());
     clearBtn?.addEventListener("click", clearCache);
+    openBtn?.addEventListener("click", () => {
+      dialogEl?.showModal();
+      // First open with an empty view: pull anything already cached.
+      if (summaryEl && !summaryEl.textContent) void autoLoadFromCache();
+    });
+    closeBtn?.addEventListener("click", () => dialogEl?.close());
+    // Click outside the panel (on the backdrop) closes the dialog.
+    dialogEl?.addEventListener("click", (ev) => {
+      if (ev.target === dialogEl) dialogEl.close();
+    });
+
+    // On page entry, if history is already cached, load it without touching
+    // the network. A saved token alone is not enough to trigger a fetch.
+    void autoLoadFromCache();
   })();
 </script>
 
@@ -402,7 +626,12 @@ const hasMore = site.history.length > recentHistory.length;
 
   <!-- Recent Checks -->
   <section class="section">
-    <h2>Recent Checks</h2>
+    <div class="section-head">
+      <h2>Recent Checks</h2>
+      <button type="button" id="history-open" class="btn btn--ghost" aria-haspopup="dialog">
+        Extended History
+      </button>
+    </div>
     <div class="table-wrap">
       <table>
         <thead>
@@ -412,9 +641,9 @@ const hasMore = site.history.length > recentHistory.length;
             <th>Latency</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody id="recent-checks-body">
           {recentHistory.map((entry) => (
-            <tr>
+            <tr data-ts={entry.timestamp}>
               <td class="td-time">{fmtTime(entry.timestamp)}</td>
               <td><StatusBadge status={entry.status} size="sm" /></td>
               <td class="td-latency">{fmtLatency(entry.latency)}</td>
@@ -431,15 +660,23 @@ const hasMore = site.history.length > recentHistory.length;
         </a>
       </p>
     )}
-  <!-- Extended History (browser-side, cached locally) -->
-  <section
-    class="section"
-    id="history-loader"
-    data-site-id={site.id}
-    data-built-count={site.history.length}
+  <!-- Extended History (browser-side, cached locally). Kept in a dialog so the
+       page stays scannable; the loader anchor lives inside it. -->
+  <dialog
+    id="history-dialog"
+    class="history-dialog"
+    aria-labelledby="history-dialog-title"
   >
-    <h2>Extended History</h2>
-    <div class="history-panel">
+    <div
+      class="history-panel"
+      id="history-loader"
+      data-site-id={site.id}
+      data-built-count={site.history.length}
+    >
+      <div class="history-dialog-head">
+        <h2 id="history-dialog-title">Extended History</h2>
+        <button type="button" id="history-close" class="btn btn--ghost" aria-label="Close">Close</button>
+      </div>
       <div class="history-controls">
         <label class="field">
           <span class="field-label">Range</span>
@@ -475,6 +712,10 @@ const hasMore = site.history.length > recentHistory.length;
       </p>
 
       <p id="history-status" class="history-status" data-kind="idle" aria-live="polite"></p>
+      <div id="history-progress" class="history-progress" hidden>
+        <div class="history-progress-bar"><span id="history-progress-fill"></span></div>
+        <p id="history-progress-text" class="history-progress-text"></p>
+      </div>
       <p id="history-summary" class="history-summary"></p>
 
       <div class="table-wrap">
@@ -490,7 +731,7 @@ const hasMore = site.history.length > recentHistory.length;
         </table>
       </div>
     </div>
-  </section>
+  </dialog>
 </Layout>
 
 <style>
@@ -517,6 +758,185 @@ const hasMore = site.history.length > recentHistory.length;
   .source-link:hover { opacity: 1; color: var(--color-text); }
 
   .section { margin-bottom: 2rem; }
+
+  .section-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .section-head h2 { margin-bottom: 0; }
+
+  .btn--ghost {
+    background: transparent;
+    border: 1px solid var(--color-border);
+    color: var(--color-text-secondary);
+    font-size: 0.75rem;
+    padding: 0.3rem 0.7rem;
+  }
+
+  .btn--ghost:hover {
+    color: var(--color-text);
+    border-color: var(--color-text-secondary);
+  }
+
+  .history-dialog {
+    width: min(60rem, calc(100vw - 2rem));
+    max-height: calc(100vh - 4rem);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    background: var(--color-bg);
+    color: var(--color-text);
+    padding: 1.25rem;
+    overflow: auto;
+  }
+
+  .history-dialog::backdrop {
+    background: rgb(0 0 0 / 0.55);
+  }
+
+  .history-dialog-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .history-dialog-head h2 { margin-bottom: 0; }
+
+  .history-progress { margin-top: 0.5rem; }
+
+  .history-progress-bar {
+    height: 4px;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--color-text-secondary) 25%, transparent);
+    overflow: hidden;
+  }
+
+  .history-progress-bar > span {
+    display: block;
+    height: 100%;
+    width: 0%;
+    border-radius: 999px;
+    background: var(--color-accent, var(--color-up));
+    transition: width 0.15s ease-out;
+  }
+
+  .history-progress-text {
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+    margin-top: 0.3rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .table-wrap { overflow-x: auto; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+  }
+
+  th, td {
+    text-align: left;
+    padding: 0.4rem 0.6rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  th {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0;
+    color: var(--color-text-secondary);
+    font-weight: 600;
+  }
+
+  tbody tr:hover { background: color-mix(in srgb, var(--color-text-secondary) 8%, transparent); }
+
+  .td-time, .td-latency { font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+  .empty {
+    color: var(--color-text-secondary);
+    font-size: 0.85rem;
+    padding: 0.75rem 0;
+  }
+
+  .more-link { margin-top: 0.5rem; font-size: 0.8rem; }
+
+  .btn {
+    font: inherit;
+    cursor: pointer;
+    border-radius: 6px;
+    border: 1px solid var(--color-border);
+    background: var(--color-bg);
+    color: var(--color-text);
+    padding: 0.35rem 0.75rem;
+    transition: opacity 0.15s, border-color 0.15s;
+  }
+
+  .btn:hover:not(:disabled) { border-color: var(--color-text-secondary); }
+  .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  .btn--primary {
+    background: var(--color-text);
+    color: var(--color-bg);
+    border-color: var(--color-text);
+  }
+
+  .history-controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 0.75rem;
+  }
+
+  .field { display: flex; flex-direction: column; gap: 0.25rem; min-width: 9rem; }
+  .field--wide { flex: 1 1 18rem; }
+
+  .field-label {
+    font-size: 0.7rem;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+  }
+
+  .field-input {
+    font: inherit;
+    font-size: 0.85rem;
+    padding: 0.35rem 0.5rem;
+    border-radius: 6px;
+    border: 1px solid var(--color-border);
+    background: var(--color-bg);
+    color: var(--color-text);
+  }
+
+  .history-actions { display: flex; gap: 0.5rem; }
+
+  .history-note {
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+    margin-top: 0.75rem;
+    line-height: 1.5;
+  }
+
+  .history-status {
+    font-size: 0.8rem;
+    min-height: 1.2em;
+    margin-top: 0.5rem;
+  }
+
+  .history-status[data-kind="done"] { color: #1a7f37; }
+  .history-status[data-kind="empty"] { color: var(--color-text-secondary); }
+  .history-status[data-kind="error"] { color: #b42318; }
+  .history-status[data-kind="loading"] { color: var(--color-text-secondary); }
+  .history-status[data-kind="idle"] { color: var(--color-text-secondary); }
+
+  .history-summary {
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+    margin-top: 0.25rem;
+  }
 
   .section h2 {
     font-size: 1rem;
@@ -679,7 +1099,12 @@ const hasMore = site.history.length > recentHistory.length;
 
   .history-panel .table-wrap { margin-top: 0.75rem; }
 
-  .status-pill {
+  /*
+   * Rows created by `mergeIntoRecentChecks` are built at runtime, so they never
+   * carry Astro's scoping attribute. Everything they rely on must therefore be
+   * global, or the fetched rows render unstyled.
+   */
+  :global(.status-pill) {
     display: inline-block;
     padding: 0.05rem 0.5rem;
     border-radius: 999px;
@@ -689,6 +1114,7 @@ const hasMore = site.history.length > recentHistory.length;
     letter-spacing: 0.03em;
   }
 
-  .status-pill--up { background: color-mix(in srgb, var(--color-up) 18%, transparent); color: var(--color-up); }
-  .status-pill--down { background: color-mix(in srgb, var(--color-down) 18%, transparent); color: var(--color-down); }
+  :global(.status-pill--up) { background: color-mix(in srgb, var(--color-up) 18%, transparent); color: var(--color-up); }
+  :global(.status-pill--down) { background: color-mix(in srgb, var(--color-down) 18%, transparent); color: var(--color-down); }
+  :global(.td-time), :global(.td-latency) { font-variant-numeric: tabular-nums; white-space: nowrap; }
 </style>

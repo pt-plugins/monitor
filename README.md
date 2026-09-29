@@ -39,24 +39,35 @@ Site definitions are pulled from [`pt-plugins/PT-depiler`](https://github.com/pt
 
 ### Extended History (client-side)
 
-Each site detail page (`src/pages/site/[id].astro`) has an **Extended History** panel. The static build already
-embeds the most recent runs; this panel additionally fetches the merged history files from the repository in the
-browser, so long-term history is available without rebuilding the site on every data update.
+Each site detail page (`src/pages/site/[id].astro`) has an **Extended History** dialog, opened from the button in the
+header of the *Recent Checks* section. The static build already embeds the most recent runs; this dialog additionally
+fetches the merged history files from the repository in the browser, so long-term history is available without
+rebuilding the site on every data update.
 
+- On page entry the dialog loads whatever is already in the cache, **without any network request**. It only fetches
+  after an explicit **Load** click, so opening a site page never spends API quota.
+- Loading reports per-file progress (`n/total · 2026/08 monthly`, `n/total · 2026/09/28 daily`).
+- Fetched records are merged into *Recent Checks* as well, deduplicated by timestamp and ordered by absolute instant
+  (so ordering stays correct across a year boundary); the dialog table remains the full fetched view.
 - Targets, relative to the repo's `data/uptime/`:
   - whole past months → `YYYY/MM.jsonl` (monthly merge)
   - completed days of the current month → `YYYY/MM/DD.jsonl` (daily merge)
   - nothing earlier than **2026-06**, the first month with merged history data
 - Fetched with `fetch()` from the GitHub REST API (`api.github.com/repos/.../contents/...`), requesting the
   `application/vnd.github.v3.raw` media type so the file body is returned directly; then filtered to the current
-  site's runs.
+  site's runs. `raw.githubusercontent.com` is never used.
 - Each fetched file is cached with the **Cache API** (`caches.open("ptd-monitor-history-v1")`), keyed by its API URL,
   including an empty result, so repeated loads and other sites sharing the same file do not re-download it.
+- Once a month's `MM.jsonl` is confirmed present, that month's cached **daily** files are deleted as redundant. This
+  is driven by the monthly file actually being observed, never by guessing from the calendar date.
 - **Clear cache** deletes the whole history cache bucket.
 - The optional **GitHub token** is stored in `localStorage` under `ptd-monitor:gh-token` and sent as a `Bearer`
-  header to `api.github.com` only. It raises the API rate limit from 60 to 5000 requests per hour; the status line
-  shows the remaining quota reported by the API.
+  header to `api.github.com` only. Only the token is persisted this way; history payloads live in the Cache API. It
+  raises the API rate limit from 60 to 5000 requests per hour; the status line shows the remaining quota reported by
+  the API.
 - Files that do not exist for a given month/day are treated as "no data" rather than an error.
+- Styles for rows created at runtime use `:global(...)`, because Astro's scoped CSS does not apply to elements built
+  by `document.createElement` in the page script.
 - When the API reports rate limiting (403/429), loading stops early and the panel asks for a token.
 - The Cache API requires a secure context. On plain `http://` origins caching is skipped and files are always
   re-fetched.
