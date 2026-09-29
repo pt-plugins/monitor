@@ -53,6 +53,230 @@ const recentHistory = [...site.history].reverse().slice(0, 50);
 const hasMore = site.history.length > recentHistory.length;
 ---
 
+<script>
+  import {
+    HISTORY_BRANCH,
+    HISTORY_REPO,
+    cacheKeyFor,
+    dailyFilePath,
+    monthlyFilePath,
+    parseJsonlForSite,
+    rawFileUrl,
+    type HistoryEntry,
+  } from "../../lib/history-fetch";
+
+  (function () {
+    const root = document.getElementById("history-loader");
+    if (!root) return;
+
+    const siteId = root.dataset.siteId || "";
+    const builtCount = Number(root.dataset.builtCount || "0") || 0;
+    if (!siteId) return;
+
+    const statusEl = document.getElementById("history-status");
+    const loadBtn = document.getElementById("history-load") as HTMLButtonElement | null;
+    const clearBtn = document.getElementById("history-clear") as HTMLButtonElement | null;
+    const tokenInput = document.getElementById("history-token") as HTMLInputElement | null;
+    const monthsInput = document.getElementById("history-months") as HTMLSelectElement | null;
+
+    const summaryEl = document.getElementById("history-summary");
+    const tableBody = document.getElementById("history-table-body");
+    const tableEl = document.getElementById("history-table");
+
+    const STATUS_TEXT: Record<string, string> = {
+      idle: "",
+      loading: "Fetching history…",
+      done: "History loaded.",
+      empty: "No additional history found in the selected range.",
+      error: "Failed to load history.",
+    };
+
+    function setStatus(kind: string, detail?: string) {
+      if (!statusEl) return;
+      const base = STATUS_TEXT[kind] || "";
+      statusEl.textContent = detail ? `${base} ${detail}` : base;
+      statusEl.dataset.kind = kind;
+    }
+
+    function fmtTime(iso: string): string {
+      const d = new Date(iso);
+      if (Number.isNaN(d.getTime())) return iso;
+      return d.toLocaleString("zh-CN", {
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+    }
+
+    function fmtLatency(ms: number | null): string {
+      if (ms === null) return "—";
+      return ms < 1000 ? `${ms}ms` : `${(ms / 1000).toFixed(1)}s`;
+    }
+
+    function cacheGet(path: string): HistoryEntry[] | null {
+      try {
+        const raw = localStorage.getItem(cacheKeyFor(path));
+        if (!raw) return null;
+        const parsed = JSON.parse(raw) as { entries?: HistoryEntry[] };
+        return Array.isArray(parsed.entries) ? parsed.entries : null;
+      } catch {
+        return null;
+      }
+    }
+
+    function cacheSet(path: string, entries: HistoryEntry[]) {
+      try {
+        localStorage.setItem(
+          cacheKeyFor(path),
+          JSON.stringify({ fetchedAt: new Date().toISOString(), entries }),
+        );
+      } catch {
+        // Quota exceeded or storage disabled — fetching still works, caching is best-effort.
+      }
+    }
+
+    function entryKey(e: HistoryEntry): string {
+      return `${e.timestamp}|${e.status}|${e.latency ?? ""}`;
+    }
+
+    async function fetchFile(path: string, token: string): Promise<HistoryEntry[]> {
+      const url = rawFileUrl(path);
+      const headers: Record<string, string> = { Accept: "text/plain" };
+
+      // A token is optional: it only raises the anonymous rate limit.
+      if (token) headers.Authorization = `Bearer ${token}`;
+
+      const res = await fetch(url, token ? { headers } : {});
+      if (res.status === 404) return [];
+      if (!res.ok) throw new Error(`HTTP ${res.status} for ${path}`);
+
+      const text = await res.text();
+      const entries = parseJsonlForSite(text, siteId);
+      cacheSet(path, entries);
+      return entries;
+    }
+
+    function render(entries: HistoryEntry[]) {
+      if (summaryEl) {
+        summaryEl.textContent = `${entries.length} additional records merged (${builtCount} built-in).`;
+      }
+      if (!tableEl || !tableBody) return;
+
+      const recent = [...entries]
+        .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
+        .slice(0, 200);
+
+      tableBody.innerHTML = "";
+      for (const e of recent) {
+        const tr = document.createElement("tr");
+
+        const tdTime = document.createElement("td");
+        tdTime.className = "td-time";
+        tdTime.textContent = fmtTime(e.timestamp);
+
+        const tdStatus = document.createElement("td");
+        const span = document.createElement("span");
+        span.className = `status-pill status-pill--${e.status}`;
+        span.textContent = e.status;
+        tdStatus.appendChild(span);
+
+        const tdLatency = document.createElement("td");
+        tdLatency.className = "td-latency";
+        tdLatency.textContent = fmtLatency(e.latency);
+
+        tr.append(tdTime, tdStatus, tdLatency);
+        tableBody.appendChild(tr);
+      }
+      tableEl.hidden = recent.length === 0;
+    }
+
+    function buildTargets(monthsBack: number): string[] {
+      const now = new Date();
+      const y = now.getFullYear();
+      const m = now.getMonth() + 1; // 1-12
+
+      const paths: string[] = [];
+      // Whole past months are already merged into monthly JSONL files.
+      for (let i = 1; i <= monthsBack; i++) {
+        const total = y * 12 + (m - 1) - i;
+        const yy = Math.floor(total / 12);
+        const mm = (total % 12) + 1;
+        paths.push(monthlyFilePath(yy, mm));
+      }
+      // Current month: daily files exist for every completed day (today is still raw).
+      for (let day = 1; day < now.getDate(); day++) {
+        paths.push(dailyFilePath(y, m, day));
+      }
+      return paths;
+    }
+
+    async function load() {
+      if (!loadBtn) return;
+      loadBtn.disabled = true;
+      setStatus("loading");
+
+      const token = (tokenInput?.value || "").trim();
+      const monthsBack = Number(monthsInput?.value || "6") || 6;
+      const targets = buildTargets(monthsBack);
+
+      const merged = new Map<string, HistoryEntry>();
+      let fetched = 0;
+      let fromCache = 0;
+      const failures: string[] = [];
+
+      for (const path of targets) {
+        const cached = cacheGet(path);
+        if (cached) {
+          fromCache++;
+          for (const e of cached) merged.set(entryKey(e), e);
+          continue;
+        }
+
+        try {
+          const entries = await fetchFile(path, token);
+          fetched++;
+          for (const e of entries) merged.set(entryKey(e), e);
+        } catch (err) {
+          failures.push(path);
+        }
+      }
+
+      const entries = [...merged.values()];
+      render(entries);
+
+      if (entries.length === 0) {
+        setStatus("empty", `Checked ${targets.length} files.`);
+      } else {
+        const detail = `${entries.length} records · ${fetched} files fetched · ${fromCache} from cache.`;
+        setStatus(failures.length > 0 ? "error" : "done", `${detail} ${failures.length} failed.`);
+      }
+
+      if (clearBtn) clearBtn.disabled = false;
+      loadBtn.disabled = false;
+    }
+
+    function clearCache() {
+      const prefix = cacheKeyFor("");
+      let removed = 0;
+      for (let i = localStorage.length - 1; i >= 0; i--) {
+        const key = localStorage.key(i);
+        if (key && key.startsWith(prefix)) {
+          localStorage.removeItem(key);
+          removed++;
+        }
+      }
+      if (tableEl) tableEl.hidden = true;
+      if (tableBody) tableBody.innerHTML = "";
+      if (summaryEl) summaryEl.textContent = "";
+      setStatus("idle", `Cleared ${removed} cached file(s).`);
+    }
+
+    loadBtn?.addEventListener("click", load);
+    clearBtn?.addEventListener("click", clearCache);
+  })();
+</script>
+
 <Layout title={site.name}>
   <div class="detail-header">
     <div class="detail-title">
@@ -139,6 +363,64 @@ const hasMore = site.history.length > recentHistory.length;
         </a>
       </p>
     )}
+  <!-- Extended History (browser-side, cached locally) -->
+  <section
+    class="section"
+    id="history-loader"
+    data-site-id={site.id}
+    data-built-count={site.history.length}
+  >
+    <h2>Extended History</h2>
+    <div class="history-panel">
+      <div class="history-controls">
+        <label class="field">
+          <span class="field-label">Range</span>
+          <select id="history-months" class="field-input">
+            <option value="3">Last 3 months</option>
+            <option value="6" selected>Last 6 months</option>
+            <option value="12">Last 12 months</option>
+          </select>
+        </label>
+        <label class="field field--wide">
+          <span class="field-label">GitHub token (optional)</span>
+          <input
+            type="password"
+            id="history-token"
+            class="field-input"
+            placeholder="ghp_… / github_pat_…"
+            autocomplete="off"
+            spellcheck="false"
+          />
+        </label>
+        <div class="history-actions">
+          <button type="button" id="history-load" class="btn btn--primary">Load history</button>
+          <button type="button" id="history-clear" class="btn" disabled>Clear cache</button>
+        </div>
+      </div>
+
+      <p class="history-note">
+        Fetches merged daily/monthly JSONL files from
+        <a href="https://github.com/pt-plugins/monitor/tree/main/data/uptime" target="_blank" rel="noopener">data/uptime</a>
+        in the browser and caches each file in local storage. The token stays in this tab and is only
+        sent to raw.githubusercontent.com to raise the API rate limit.
+      </p>
+
+      <p id="history-status" class="history-status" data-kind="idle" aria-live="polite"></p>
+      <p id="history-summary" class="history-summary"></p>
+
+      <div class="table-wrap">
+        <table id="history-table" hidden>
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Status</th>
+              <th>Latency</th>
+            </tr>
+          </thead>
+          <tbody id="history-table-body"></tbody>
+        </table>
+      </div>
+    </div>
   </section>
 </Layout>
 
@@ -229,4 +511,115 @@ const hasMore = site.history.length > recentHistory.length;
   .more-link a { color: var(--color-link); text-decoration: none; }
 
   .more-link a:hover { text-decoration: underline; }
+
+  .history-panel {
+    background: var(--color-surface);
+    border-radius: var(--radius);
+    border: 1px solid var(--color-border);
+    padding: 1rem;
+  }
+
+  .history-controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 0.75rem;
+  }
+
+  .field { display: flex; flex-direction: column; gap: 0.25rem; }
+
+  .field--wide { flex: 1; min-width: 200px; }
+
+  .field-label {
+    font-size: 0.7rem;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .field-input {
+    appearance: none;
+    -webkit-appearance: none;
+    padding: 0.4rem 0.6rem;
+    font-size: 0.85rem;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    color: var(--color-text);
+    outline: none;
+    font-family: inherit;
+  }
+
+  .field-input:focus {
+    border-color: var(--color-link);
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-link) 20%, transparent);
+  }
+
+  .history-actions { display: flex; gap: 0.5rem; }
+
+  .btn {
+    padding: 0.4rem 0.9rem;
+    font-size: 0.85rem;
+    font-family: inherit;
+    border-radius: var(--radius);
+    border: 1px solid var(--color-border);
+    background: var(--color-bg);
+    color: var(--color-text);
+    cursor: pointer;
+    transition: opacity 0.15s, background 0.15s;
+  }
+
+  .btn:hover:not(:disabled) { background: var(--color-border); }
+
+  .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  .btn--primary {
+    background: var(--color-link);
+    border-color: var(--color-link);
+    color: #fff;
+  }
+
+  .btn--primary:hover:not(:disabled) {
+    background: color-mix(in srgb, var(--color-link) 85%, #000);
+  }
+
+  .history-note {
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+    margin-top: 0.75rem;
+    line-height: 1.5;
+  }
+
+  .history-status {
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+    min-height: 1.2em;
+  }
+
+  .history-status[data-kind="done"] { color: var(--color-up); }
+  .history-status[data-kind="empty"] { color: var(--color-text-secondary); }
+  .history-status[data-kind="error"] { color: var(--color-down); }
+  .history-status[data-kind="loading"] { color: var(--color-text-secondary); }
+  .history-status[data-kind="idle"] { color: var(--color-text-secondary); }
+
+  .history-summary {
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+    margin-top: 0.25rem;
+  }
+
+  .history-panel .table-wrap { margin-top: 0.75rem; }
+
+  .status-pill {
+    display: inline-block;
+    padding: 0.05rem 0.5rem;
+    border-radius: 999px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+
+  .status-pill--up { background: color-mix(in srgb, var(--color-up) 18%, transparent); color: var(--color-up); }
+  .status-pill--down { background: color-mix(in srgb, var(--color-down) 18%, transparent); color: var(--color-down); }
 </style>

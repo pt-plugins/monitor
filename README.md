@@ -37,6 +37,23 @@ Site definitions are pulled from [`pt-plugins/PT-depiler`](https://github.com/pt
 - Skips today's data and current month's data (monitoring in progress)
 - Generates `data/uptime.json` index of all merged files
 
+### Extended History (client-side)
+
+Each site detail page (`src/pages/site/[id].astro`) has an **Extended History** panel. The static build already
+embeds the most recent runs; this panel additionally fetches the merged history files from the repository in the
+browser, so long-term history is available without rebuilding the site on every data update.
+
+- Targets, relative to the repo's `data/uptime/`:
+  - whole past months → `YYYY/MM.jsonl` (monthly merge)
+  - completed days of the current month → `YYYY/MM/DD.jsonl` (daily merge)
+- Fetched with `fetch()` from `raw.githubusercontent.com`, then filtered to the current site's runs.
+- Each fetched file is cached in `localStorage` under `ptd-monitor:history:v1:<path>`, including an empty result,
+  so repeated loads and other sites sharing the same file do not re-download it.
+- **Clear cache** drops every cached history file.
+- The optional **GitHub token** field only raises the anonymous rate limit. It stays in the page and is sent as a
+  `Bearer` header to `raw.githubusercontent.com` only; it is never stored or sent anywhere else.
+- Files that do not exist for a given month/day are treated as "no data" rather than an error.
+
 ## Local Development
 
 ### Prerequisites
@@ -93,6 +110,7 @@ pnpm dev
 │   │   └── LatencyChart.astro
 │   └── lib/
 │       ├── data-loader.ts
+│       ├── history-fetch.ts
 │       └── types.ts
 ├── public/                 # Static assets (favicon)
 ├── data/
