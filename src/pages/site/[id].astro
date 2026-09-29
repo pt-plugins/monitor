@@ -749,22 +749,43 @@ const hasMore = site.history.length > recentHistory.length;
   .empty { text-align: center; padding: 1rem; color: var(--color-text-secondary); font-size: 0.85rem; }
 
   /*
-   * Rows fetched by ExtendedHistory are appended to this page's Recent Checks
-   * table at runtime, so they never carry Astro's scoping attribute. Their
-   * styles must stay global or the merged rows render unstyled.
+   * Rows fetched by ExtendedHistory are appended to this table at runtime, so
+   * they never carry Astro's scoping attribute and StatusBadge.astro's scoped
+   * rules cannot reach them. These global copies mirror that component exactly
+   * so merged rows render identically to the server-rendered ones.
    */
-  :global(.status-pill) {
-    display: inline-block;
-    padding: 0.05rem 0.5rem;
-    border-radius: 999px;
-    font-size: 0.7rem;
+  :global(.badge) {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35em;
     font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.03em;
+    border-radius: 999px;
+    padding: 0.15em 0.65em;
+    white-space: nowrap;
   }
 
-  :global(.status-pill--up) { background: color-mix(in srgb, var(--color-up) 18%, transparent); color: var(--color-up); }
-  :global(.status-pill--down) { background: color-mix(in srgb, var(--color-down) 18%, transparent); color: var(--color-down); }
+  :global(.badge--sm) {
+    font-size: 0.7rem;
+    padding: 0.1em 0.5em;
+  }
+
+  :global(.badge-dot) {
+    width: 0.5em;
+    height: 0.5em;
+    border-radius: 50%;
+    display: inline-block;
+    flex-shrink: 0;
+  }
+
+  :global(.badge--up) { background: color-mix(in srgb, var(--color-up) 15%, transparent); color: var(--color-up); }
+  :global(.badge--up .badge-dot) { background: var(--color-up); }
+
+  :global(.badge--down) { background: color-mix(in srgb, var(--color-down) 15%, transparent); color: var(--color-down); }
+  :global(.badge--down .badge-dot) { background: var(--color-down); }
+
+  :global(.badge--dead) { background: color-mix(in srgb, var(--color-dead) 15%, transparent); color: var(--color-dead); }
+  :global(.badge--dead .badge-dot) { background: var(--color-dead); }
+
   :global(.td-time), :global(.td-latency) { font-variant-numeric: tabular-nums; white-space: nowrap; }
 
 </style>

@@ -67,8 +67,10 @@ history is available without rebuilding the site on every data update.
   raises the API rate limit from 60 to 5000 requests per hour; the status line shows the remaining quota reported by
   the API.
 - Files that do not exist for a given month/day are treated as "no data" rather than an error.
-- Styles for rows created at runtime use `:global(...)`, because Astro's scoped CSS does not apply to elements built
-  by `document.createElement` in the page script.
+- Fetched rows reuse `StatusBadge`'s exact markup (`badge badge--<status> badge--sm`, with a `badge-dot`), so merged
+  rows are visually identical to the server-rendered ones rather than a separate pill style. Because those rows are
+  built by `document.createElement` they carry no Astro scoping attribute, so the `badge`/`badge-dot` rules that must
+  apply to them are duplicated as `:global(...)` in both the page and the component.
 - When the API reports rate limiting (403/429), loading stops early and the panel asks for a token.
 - The Cache API requires a secure context. On plain `http://` origins caching is skipped and files are always
   re-fetched.

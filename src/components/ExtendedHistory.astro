@@ -153,6 +153,27 @@ const { siteId, builtCount, hasMore } = Astro.props;
       return ms < 1000 ? `${ms}ms` : `${(ms / 1000).toFixed(1)}s`;
     }
 
+    // Mirrors StatusBadge.astro so fetched rows are visually identical to the
+    // server-rendered ones rather than a separate pill style.
+    const BADGE_LABELS: Record<string, string> = {
+      up: "UP",
+      down: "DOWN",
+      dead: "DEAD",
+    };
+
+    function createBadge(status: string): HTMLSpanElement {
+      const badge = document.createElement("span");
+      badge.className = `badge badge--${status} badge--sm`;
+
+      const dot = document.createElement("span");
+      dot.className = "badge-dot";
+      dot.setAttribute("aria-hidden", "true");
+      badge.appendChild(dot);
+
+      badge.appendChild(document.createTextNode(BADGE_LABELS[status] ?? status.toUpperCase()));
+      return badge;
+    }
+
     // ---- Cache API storage -------------------------------------------------
     // Payloads live in the Cache API; only the token and small UI preferences
     // use localStorage. The Cache API is unavailable on insecure origins, in
@@ -362,10 +383,7 @@ const { siteId, builtCount, hasMore } = Astro.props;
         tr.appendChild(tdTime);
 
         const tdStatus = document.createElement("td");
-        const badge = document.createElement("span");
-        badge.className = `status-pill status-pill--${e.status}`;
-        badge.textContent = e.status;
-        tdStatus.appendChild(badge);
+        tdStatus.appendChild(createBadge(e.status));
         tr.appendChild(tdStatus);
 
         const tdLatency = document.createElement("td");
@@ -407,10 +425,7 @@ const { siteId, builtCount, hasMore } = Astro.props;
         tdTime.textContent = fmtTime(e.timestamp);
 
         const tdStatus = document.createElement("td");
-        const span = document.createElement("span");
-        span.className = `status-pill status-pill--${e.status}`;
-        span.textContent = e.status;
-        tdStatus.appendChild(span);
+        tdStatus.appendChild(createBadge(e.status));
 
         const tdLatency = document.createElement("td");
         tdLatency.className = "td-latency";
@@ -768,21 +783,42 @@ const { siteId, builtCount, hasMore } = Astro.props;
   .history-panel .table-wrap { margin-top: 0.75rem; }
 
   /*
-   * The fetched rows in the dialog table are created at runtime, so they never
-   * carry Astro's scoping attribute. Everything they rely on must therefore be
-   * global, or the fetched rows render unstyled.
+   * Fetched rows are created at runtime, so they never carry Astro's scoping
+   * attribute and StatusBadge.astro's own scoped rules cannot reach them.
+   * These global copies mirror that component exactly so both kinds of row
+   * render identically.
    */
-  :global(.status-pill) {
-    display: inline-block;
-    padding: 0.05rem 0.5rem;
-    border-radius: 999px;
-    font-size: 0.7rem;
+  :global(.badge) {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35em;
     font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.03em;
+    border-radius: 999px;
+    padding: 0.15em 0.65em;
+    white-space: nowrap;
   }
 
-  :global(.status-pill--up) { background: color-mix(in srgb, var(--color-up) 18%, transparent); color: var(--color-up); }
-  :global(.status-pill--down) { background: color-mix(in srgb, var(--color-down) 18%, transparent); color: var(--color-down); }
+  :global(.badge--sm) {
+    font-size: 0.7rem;
+    padding: 0.1em 0.5em;
+  }
+
+  :global(.badge-dot) {
+    width: 0.5em;
+    height: 0.5em;
+    border-radius: 50%;
+    display: inline-block;
+    flex-shrink: 0;
+  }
+
+  :global(.badge--up) { background: color-mix(in srgb, var(--color-up) 15%, transparent); color: var(--color-up); }
+  :global(.badge--up .badge-dot) { background: var(--color-up); }
+
+  :global(.badge--down) { background: color-mix(in srgb, var(--color-down) 15%, transparent); color: var(--color-down); }
+  :global(.badge--down .badge-dot) { background: var(--color-down); }
+
+  :global(.badge--dead) { background: color-mix(in srgb, var(--color-dead) 15%, transparent); color: var(--color-dead); }
+  :global(.badge--dead .badge-dot) { background: var(--color-dead); }
+
   :global(.td-time), :global(.td-latency) { font-variant-numeric: tabular-nums; white-space: nowrap; }
 </style>
