@@ -39,10 +39,11 @@ Site definitions are pulled from [`pt-plugins/PT-depiler`](https://github.com/pt
 
 ### Extended History (client-side)
 
-Each site detail page (`src/pages/site/[id].astro`) has an **Extended History** dialog, opened from the button in the
-header of the *Recent Checks* section. The static build already embeds the most recent runs; this dialog additionally
-fetches the merged history files from the repository in the browser, so long-term history is available without
-rebuilding the site on every data update.
+Each site detail page (`src/pages/site/[id].astro`) renders the **Extended History** component
+(`src/components/ExtendedHistory.astro`), whose trigger button sits in the header of the *Recent Checks* section and
+whose dialog markup, client script and styles live in that component. The static build already embeds the most recent
+runs; this dialog additionally fetches the merged history files from the repository in the browser, so long-term
+history is available without rebuilding the site on every data update.
 
 - On page entry the dialog loads whatever is already in the cache, **without any network request**. It only fetches
   after an explicit **Load** click, so opening a site page never spends API quota.
@@ -125,7 +126,8 @@ pnpm dev
 │   │   ├── Layout.astro
 │   │   ├── SiteCard.astro
 │   │   ├── StatusBadge.astro
-│   │   └── LatencyChart.astro
+│   │   ├── LatencyChart.astro
+│   │   └── ExtendedHistory.astro
 │   └── lib/
 │       ├── data-loader.ts
 │       ├── history-fetch.ts

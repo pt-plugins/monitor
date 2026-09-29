@@ -1,58 +1,88 @@
 ---
-import Layout from "../../components/Layout.astro";
-import StatusBadge from "../../components/StatusBadge.astro";
-import LatencyChart from "../../components/LatencyChart.astro";
-import ExtendedHistory from "../../components/ExtendedHistory.astro";
-import { computeSiteSummaries } from "../../lib/data-loader";
-
-export function getStaticPaths() {
-  const summaries = computeSiteSummaries();
-  return summaries.map((s) => ({ params: { id: s.id } }));
+interface Props {
+  siteId: string;
+  builtCount: number;
+  /** Whether the built-in history is truncated, i.e. whether fetching can add anything. */
+  hasMore: boolean;
 }
 
-const { id } = Astro.params;
-const summaries = computeSiteSummaries();
-const site = summaries.find((s) => s.id === id);
-
-if (!site) {
-  return Astro.redirect("/");
-}
-
-const isDead = site.currentStatus === "dead";
-
-function fmtLatency(ms: number | null): string {
-  if (ms === null) return "—";
-  if (ms < 1000) return `${ms}ms`;
-  return `${(ms / 1000).toFixed(1)}s`;
-}
-
-function fmtTime(iso: string): string {
-  const d = new Date(iso);
-  return d.toLocaleString("zh-CN", {
-    month: "2-digit",
-    day: "2-digit",
-    hour: "2-digit",
-    minute: "2-digit",
-  });
-}
-
-function uptimeColor(pct: number): string {
-  if (isDead) return "var(--color-dead)";
-  if (pct >= 99) return "var(--color-up)";
-  if (pct >= 95) return "var(--color-warn)";
-  return "var(--color-down)";
-}
-
-function fmtUptime(pct: number): string {
-  if (isDead) return "—";
-  return `${pct}%`;
-}
-
-
-// Recent history (last 50 entries, reversed for table)
-const recentHistory = [...site.history].reverse().slice(0, 50);
-const hasMore = site.history.length > recentHistory.length;
+const { siteId, builtCount, hasMore } = Astro.props;
 ---
+
+{hasMore && (
+  <p class="more-link">
+    <button type="button" id="history-open" class="btn btn--ghost" aria-haspopup="dialog">
+      Load Extend History
+    </button>
+  </p>
+)}
+
+<!-- Extended History (browser-side, cached locally). Kept in a dialog so the
+     page stays scannable; the loader anchor lives inside it. -->
+<dialog id="history-dialog" class="history-dialog" aria-labelledby="history-dialog-title">
+  <div class="history-panel" id="history-loader" data-site-id={siteId} data-built-count={builtCount}>
+    <div class="history-dialog-head">
+      <h2 id="history-dialog-title">Extended History</h2>
+      <button type="button" id="history-close" class="btn btn--ghost" aria-label="Close">Close</button>
+    </div>
+    <div class="history-controls">
+      <label class="field">
+        <span class="field-label">Range</span>
+        <select id="history-months" class="field-input">
+          <option value="3">Last 3 months</option>
+          <option value="6" selected>Last 6 months</option>
+          <option value="12">Last 12 months</option>
+        </select>
+      </label>
+      <label class="field field--wide">
+        <span class="field-label">GitHub token (optional, saved locally)</span>
+        <input
+          type="password"
+          id="history-token"
+          class="field-input"
+          placeholder="ghp_… / github_pat_…"
+          autocomplete="off"
+          spellcheck="false"
+        />
+      </label>
+      <div class="history-actions">
+        <button type="button" id="history-load" class="btn btn--primary">Load history</button>
+        <button type="button" id="history-clear" class="btn" disabled>Clear cache</button>
+      </div>
+    </div>
+
+    <p class="history-note">
+      Fetches merged daily/monthly JSONL files from
+      <a href="https://github.com/pt-plugins/monitor/tree/main/data/uptime" target="_blank" rel="noopener">data/uptime</a>
+      through the GitHub REST API and caches each file with the Cache API. The optional token is
+      stored in this browser and raises the API rate limit from 60 to 5000 requests per hour.
+      History starts at 2026-06, the earliest month with merged data.
+      <a href="https://github.com/pt-plugins/monitor/tree/main/data/uptime/" target="_blank" rel="noopener">
+        View full history on GitHub →
+      </a>
+    </p>
+
+    <p id="history-status" class="history-status" data-kind="idle" aria-live="polite"></p>
+    <div id="history-progress" class="history-progress" hidden>
+      <div class="history-progress-bar"><span id="history-progress-fill"></span></div>
+      <p id="history-progress-text" class="history-progress-text"></p>
+    </div>
+    <p id="history-summary" class="history-summary"></p>
+
+    <div class="table-wrap">
+      <table id="history-table" hidden>
+        <thead>
+          <tr>
+            <th>Time</th>
+            <th>Status</th>
+            <th>Latency</th>
+          </tr>
+        </thead>
+        <tbody id="history-table-body"></tbody>
+      </table>
+    </div>
+  </div>
+</dialog>
 
 <script>
   import {
@@ -65,7 +95,7 @@ const hasMore = site.history.length > recentHistory.length;
     monthlyFilePath,
     parseJsonlForSite,
     type HistoryEntry,
-  } from "../../lib/history-fetch";
+  } from "../lib/history-fetch";
 
   (function () {
     const root = document.getElementById("history-loader");
@@ -570,188 +600,177 @@ const hasMore = site.history.length > recentHistory.length;
   })();
 </script>
 
-<Layout title={site.name}>
-  <div class="detail-header">
-    <div class="detail-title">
-      <h1>
-        {site.faviconUrl && (
-          <img class="card-favicon" src={site.faviconUrl} alt="" width="16" height="16" loading="lazy" onerror="this.style.display='none'" />
-        )}
-        {site.name}
-      </h1>
-      <StatusBadge status={site.currentStatus} />
-      <a
-        class="source-link"
-        href={`https://github.com/pt-plugins/PT-depiler/tree/master/src/packages/site/definitions/${site.id}.ts`}
-        target="_blank"
-        rel="noopener"
-        title="View source in PT-depiler"
-      >
-        <img src="/monitor/icons/github.svg" alt="GitHub" width="18" height="18" />
-      </a>
-    </div>
-  </div>
-
-  <!-- Uptime Summary -->
-  <section class="section">
-    <h2>Uptime</h2>
-    <div class="uptime-grid">
-      <div class="uptime-card">
-        <div class="uptime-value" style={`color: ${uptimeColor(site.uptime24h)}`}>{fmtUptime(site.uptime24h)}</div>
-        <div class="uptime-label">24 hours</div>
-      </div>
-      <div class="uptime-card">
-        <div class="uptime-value" style={`color: ${uptimeColor(site.uptime7d)}`}>{fmtUptime(site.uptime7d)}</div>
-        <div class="uptime-label">7 days</div>
-      </div>
-      <div class="uptime-card">
-        <div class="uptime-value" style={`color: ${uptimeColor(site.uptime30d)}`}>{fmtUptime(site.uptime30d)}</div>
-        <div class="uptime-label">30 days</div>
-      </div>
-      <div class="uptime-card">
-        <div class="uptime-value">{fmtLatency(site.currentLatency)}</div>
-        <div class="uptime-label">Current Latency</div>
-      </div>
-      <div class="uptime-card">
-        <div class="uptime-value">{fmtLatency(site.avgLatency24h)}</div>
-        <div class="uptime-label">Avg Latency (24h)</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Latency Chart -->
-  <section class="section">
-    <h2>Response Time (7 days)</h2>
-    <LatencyChart data={site.history} />
-  </section>
-
-  <!-- Recent Checks -->
-  <section class="section">
-    <div class="section-head">
-      <h2>Recent Checks</h2>
-    </div>
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>Time</th>
-            <th>Status</th>
-            <th>Latency</th>
-          </tr>
-        </thead>
-        <tbody id="recent-checks-body">
-          {recentHistory.map((entry) => (
-            <tr data-ts={entry.timestamp}>
-              <td class="td-time">{fmtTime(entry.timestamp)}</td>
-              <td><StatusBadge status={entry.status} size="sm" /></td>
-              <td class="td-latency">{fmtLatency(entry.latency)}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      {recentHistory.length === 0 && <p class="empty">No monitoring data yet.</p>}
-    </div>
-    <ExtendedHistory siteId={site.id} builtCount={site.history.length} hasMore={hasMore} />
-  </section>
-</Layout>
-
 <style>
-  .detail-header { margin-bottom: 1.5rem; }
+  .more-link { margin-top: 0.75rem; text-align: right; font-size: 0.8rem; }
 
-  .detail-title {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    margin-bottom: 0.25rem;
+  .btn {
+    padding: 0.4rem 0.9rem;
+    font-size: 0.85rem;
+    font-family: inherit;
+    border-radius: var(--radius);
+    border: 1px solid var(--color-border);
+    background: var(--color-bg);
+    color: var(--color-text);
+    cursor: pointer;
+    transition: opacity 0.15s, background 0.15s;
   }
 
-  .detail-title h1 { margin-bottom: 0; }
+  .btn:hover:not(:disabled) { background: var(--color-border); }
+  .btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
-  .source-link {
+  .btn--primary {
+    background: var(--color-link);
+    border-color: var(--color-link);
+    color: #fff;
+  }
+
+  .btn--primary:hover:not(:disabled) {
+    background: color-mix(in srgb, var(--color-link) 85%, #000);
+  }
+
+  .btn--ghost {
+    background: transparent;
+    border: 1px solid var(--color-border);
     color: var(--color-text-secondary);
-    margin-left: auto;
-    display: flex;
-    align-items: center;
-    opacity: 0.6;
-    transition: opacity 0.15s;
+    font-size: 0.75rem;
+    padding: 0.3rem 0.7rem;
   }
 
-  .source-link:hover { opacity: 1; color: var(--color-text); }
+  .btn--ghost:hover {
+    color: var(--color-text);
+    border-color: var(--color-text-secondary);
+  }
 
-  .section { margin-bottom: 2rem; }
+  .history-dialog {
+    /* The global `* { margin: 0 }` reset in Layout.astro also clears the UA's
+       `margin: auto`, which is what centers a modal <dialog> in the top layer.
+       Restore it explicitly, otherwise the dialog pins to the top-left. */
+    margin: auto;
+    width: min(60rem, calc(100vw - 2rem));
+    max-height: calc(100vh - 4rem);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    background: var(--color-bg);
+    color: var(--color-text);
+    padding: 1.25rem;
+    overflow: auto;
+  }
 
-  .section-head {
+  .history-dialog::backdrop {
+    background: rgb(0 0 0 / 0.55);
+  }
+
+  .history-dialog-head {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
-  }
-
-  .section-head h2 { margin-bottom: 0; }
-
-  tbody tr:hover { background: color-mix(in srgb, var(--color-text-secondary) 8%, transparent); }
-
-  .section h2 {
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--color-text-secondary);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
     margin-bottom: 0.75rem;
   }
 
-  .uptime-grid { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .history-dialog-head h2 { margin-bottom: 0; }
 
-  .uptime-card {
+  .history-progress { margin-top: 0.5rem; }
+
+  .history-progress-bar {
+    height: 4px;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--color-text-secondary) 25%, transparent);
+    overflow: hidden;
+  }
+
+  .history-progress-bar > span {
+    display: block;
+    height: 100%;
+    width: 0%;
+    border-radius: 999px;
+    background: var(--color-accent, var(--color-up));
+    transition: width 0.15s ease-out;
+  }
+
+  .history-progress-text {
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+    margin-top: 0.3rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .history-panel {
     background: var(--color-surface);
     border-radius: var(--radius);
-    padding: 1rem 1.25rem;
-    box-shadow: var(--shadow);
     border: 1px solid var(--color-border);
-    text-align: center;
-    min-width: 100px;
+    padding: 1rem;
   }
 
-  .uptime-value {
-    font-size: 1.5rem; font-weight: 700;
-    font-variant-numeric: tabular-nums; line-height: 1.2;
+  .history-controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 0.75rem;
   }
 
-  .uptime-label {
-    font-size: 0.7rem; color: var(--color-text-secondary);
-    text-transform: uppercase; letter-spacing: 0.04em; margin-top: 0.2rem;
+  .field { display: flex; flex-direction: column; gap: 0.25rem; }
+
+  .field--wide { flex: 1; min-width: 200px; }
+
+  .field-label {
+    font-size: 0.7rem;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
   }
 
-  .table-wrap {
-    background: var(--color-surface);
-    border-radius: var(--radius); border: 1px solid var(--color-border);
-    overflow: hidden; max-height: 400px; overflow-y: auto;
+  .field-input {
+    appearance: none;
+    -webkit-appearance: none;
+    padding: 0.4rem 0.6rem;
+    font-size: 0.85rem;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    color: var(--color-text);
+    outline: none;
+    font-family: inherit;
   }
 
-  table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
-
-  th {
-    text-align: left; padding: 0.5rem 0.75rem;
-    background: var(--color-bg); font-size: 0.7rem;
-    color: var(--color-text-secondary); text-transform: uppercase;
-    letter-spacing: 0.04em; position: sticky; top: 0;
+  .field-input:focus {
+    border-color: var(--color-link);
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-link) 20%, transparent);
   }
 
-  td { padding: 0.4rem 0.75rem; border-top: 1px solid var(--color-border); }
+  .history-actions { display: flex; gap: 0.5rem; }
 
-  .td-time {
-    font-variant-numeric: tabular-nums; white-space: nowrap;
-    color: var(--color-text-secondary); font-size: 0.8rem;
+  .history-note {
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+    margin-top: 0.75rem;
+    line-height: 1.5;
   }
 
-  .td-latency { font-variant-numeric: tabular-nums; }
+  .history-status {
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+    min-height: 1.2em;
+  }
 
-  .empty { text-align: center; padding: 1rem; color: var(--color-text-secondary); font-size: 0.85rem; }
+  .history-status[data-kind="done"] { color: var(--color-up); }
+  .history-status[data-kind="empty"] { color: var(--color-text-secondary); }
+  .history-status[data-kind="error"] { color: var(--color-down); }
+  .history-status[data-kind="loading"] { color: var(--color-text-secondary); }
+  .history-status[data-kind="idle"] { color: var(--color-text-secondary); }
+
+  .history-summary {
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+    margin-top: 0.25rem;
+  }
+
+  .history-panel .table-wrap { margin-top: 0.75rem; }
 
   /*
-   * Rows fetched by ExtendedHistory are appended to this page's Recent Checks
-   * table at runtime, so they never carry Astro's scoping attribute. Their
-   * styles must stay global or the merged rows render unstyled.
+   * The fetched rows in the dialog table are created at runtime, so they never
+   * carry Astro's scoping attribute. Everything they rely on must therefore be
+   * global, or the fetched rows render unstyled.
    */
   :global(.status-pill) {
     display: inline-block;
@@ -766,5 +785,4 @@ const hasMore = site.history.length > recentHistory.length;
   :global(.status-pill--up) { background: color-mix(in srgb, var(--color-up) 18%, transparent); color: var(--color-up); }
   :global(.status-pill--down) { background: color-mix(in srgb, var(--color-down) 18%, transparent); color: var(--color-down); }
   :global(.td-time), :global(.td-latency) { font-variant-numeric: tabular-nums; white-space: nowrap; }
-
 </style>
