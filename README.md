@@ -40,7 +40,7 @@ Site definitions are pulled from [`pt-plugins/PT-depiler`](https://github.com/pt
 ### Extended History (client-side)
 
 Each site detail page (`src/pages/site/[id].astro`) renders the **Extended History** component
-(`src/components/ExtendedHistory.astro`), whose trigger button sits in the header of the *Recent Checks* section and
+(`src/components/ExtendedHistory.astro`), whose trigger button sits in the header of the *Checks History* section and
 whose dialog markup, client script and styles live in that component. The static build already embeds the most recent
 runs; this dialog additionally fetches the merged history files from the repository in the browser, so long-term
 history is available without rebuilding the site on every data update.
@@ -48,7 +48,7 @@ history is available without rebuilding the site on every data update.
 - On page entry the dialog loads whatever is already in the cache, **without any network request**. It only fetches
   after an explicit **Load** click, so opening a site page never spends API quota.
 - Loading reports per-file progress (`n/total · 2026/08 monthly`, `n/total · 2026/09/28 daily`).
-- Fetched records are merged into *Recent Checks* as well, deduplicated by timestamp and ordered by absolute instant
+- Fetched records are merged into *Checks History* as well, deduplicated by timestamp and ordered by absolute instant
   (so ordering stays correct across a year boundary); the dialog table remains the full fetched view.
 - Targets, relative to the repo's `data/uptime/`:
   - whole past months → `YYYY/MM.jsonl` (monthly merge)
