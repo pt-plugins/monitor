@@ -783,6 +783,10 @@ const hasMore = site.history.length > recentHistory.length;
   }
 
   .history-dialog {
+    /* The global `* { margin: 0 }` reset in Layout.astro also clears the UA's
+       `margin: auto`, which is what centers a modal <dialog> in the top layer.
+       Restore it explicitly, otherwise the dialog pins to the top-left. */
+    margin: auto;
     width: min(60rem, calc(100vw - 2rem));
     max-height: calc(100vh - 4rem);
     border: 1px solid var(--color-border);
