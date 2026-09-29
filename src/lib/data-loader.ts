@@ -10,6 +10,9 @@ const UPTIME_DIR = join(DATA_DIR, "uptime");
 const SOURCE_FILE = join(DATA_DIR, "site.json");
 const ICONS_DIR = join(process.cwd(), "public", "siteIcons");
 
+/** Per-site history entries kept in the built pages. */
+const HISTORY_LIMIT = 336;
+
 function getLocalIconSet(): Map<string, string> {
   const map = new Map<string, string>();
   if (!existsSync(ICONS_DIR)) return map;
@@ -109,15 +112,16 @@ function computeAvgLatency(siteId: string, runs: MonitorRun[]): number | null {
   return c > 0 ? Math.round(t / c) : null;
 }
 
-function buildHistory(siteId: string, runs: MonitorRun[]): SiteSummary["history"] {
+function buildHistory(siteId: string, runs: MonitorRun[], limit: number): SiteSummary["history"] {
   const result: SiteSummary["history"] = [];
-  for (const run of runs) {
-    const s = run.sites.find((s) => s.id === siteId);
-    if (s) {
-      result.push({ timestamp: run.timestamp, status: s.status, latency: s.latency });
-    }
-    // Skip runs where the site was not present — no actual check data
+  // Walk newest-first so the limit counts runs *containing this site* rather
+  // than a global slice of runs shared by every site.
+  for (let i = runs.length - 1; i >= 0 && result.length < limit; i--) {
+    const s = runs[i].sites.find((s) => s.id === siteId);
+    if (!s) continue; // site absent from this run — not a real check
+    result.push({ timestamp: runs[i].timestamp, status: s.status, latency: s.latency });
   }
+  result.reverse(); // oldest-first, matching the previous contract
   return result;
 }
 
@@ -173,7 +177,7 @@ export function computeSiteSummaries(): SiteSummary[] {
     const u7d = computeUptime(site.id, runs7d);
     const u30d = computeUptime(site.id, runs30d);
     const avgLat = computeAvgLatency(site.id, runs24h);
-    const history = buildHistory(site.id, allRuns.slice(-336));
+    const history = buildHistory(site.id, allRuns, HISTORY_LIMIT);
     const dailyStatus = computeDailyStatus(site.id, allRuns);
 
     let currentStatus: SiteSummary["currentStatus"];
