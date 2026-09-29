@@ -628,9 +628,6 @@ const hasMore = site.history.length > recentHistory.length;
   <section class="section">
     <div class="section-head">
       <h2>Recent Checks</h2>
-      <button type="button" id="history-open" class="btn btn--ghost" aria-haspopup="dialog">
-        Extended History
-      </button>
     </div>
     <div class="table-wrap">
       <table>
@@ -655,9 +652,9 @@ const hasMore = site.history.length > recentHistory.length;
     </div>
     {hasMore && (
       <p class="more-link">
-        <a href="https://github.com/pt-plugins/monitor/tree/main/data/uptime/" target="_blank" rel="noopener">
-          View full history on GitHub →
-        </a>
+        <button type="button" id="history-open" class="btn btn--ghost" aria-haspopup="dialog">
+          Load Extend History
+        </button>
       </p>
     )}
   <!-- Extended History (browser-side, cached locally). Kept in a dialog so the
@@ -709,6 +706,9 @@ const hasMore = site.history.length > recentHistory.length;
         through the GitHub REST API and caches each file with the Cache API. The optional token is
         stored in this browser and raises the API rate limit from 60 to 5000 requests per hour.
         History starts at 2026-06, the earliest month with merged data.
+        <a href="https://github.com/pt-plugins/monitor/tree/main/data/uptime/" target="_blank" rel="noopener">
+          View full history on GitHub →
+        </a>
       </p>
 
       <p id="history-status" class="history-status" data-kind="idle" aria-live="polite"></p>
