@@ -13,9 +13,6 @@
     "update-source": "node scripts/update-source.mjs",
     "cleanup": "node scripts/cleanup.mjs"
   },
-  "pnpm": {
-    "onlyBuiltDependencies": ["esbuild", "sharp"]
-  },
   "dependencies": {
     "astro": "^5.0.0",
     "p-queue": "^9.3.0",

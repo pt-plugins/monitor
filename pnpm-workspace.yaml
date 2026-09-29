@@ -1,0 +1,5 @@
+# pnpm 10 no longer reads settings from the "pnpm" field in package.json.
+# Dependency build scripts are opt-in here; esbuild and sharp both need theirs.
+onlyBuiltDependencies:
+  - esbuild
+  - sharp
