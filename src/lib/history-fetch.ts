@@ -6,9 +6,18 @@ export const HISTORY_REPO = "pt-plugins/monitor";
 export const HISTORY_BRANCH = "main";
 export const HISTORY_DATA_DIR = "data/uptime";
 
-/** Cache schema version — bump to invalidate all previously cached payloads. */
-export const CACHE_VERSION = 1;
-export const CACHE_KEY_PREFIX = `ptd-monitor:history:v${CACHE_VERSION}`;
+/**
+ * Earliest month with merged history data. Nothing exists before this, so requests
+ * for earlier months would only produce pointless 404s.
+ */
+export const EARLIEST_YEAR = 2026;
+export const EARLIEST_MONTH = 6;
+
+/** Cache API bucket for history payloads. */
+export const CACHE_NAME = "ptd-monitor-history-v1";
+
+/** localStorage key holding the optional GitHub token. */
+export const TOKEN_STORAGE_KEY = "ptd-monitor:gh-token";
 
 /** Monthly file: data/uptime/YYYY/MM.jsonl */
 export function monthlyFilePath(year: number, month: number): string {
@@ -20,8 +29,26 @@ export function dailyFilePath(year: number, month: number, day: number): string 
   return `${HISTORY_DATA_DIR}/${year}/${pad2(month)}/${pad2(day)}.jsonl`;
 }
 
-export function rawFileUrl(path: string): string {
-  return `https://raw.githubusercontent.com/${HISTORY_REPO}/${HISTORY_BRANCH}/${path}`;
+/**
+ * REST endpoint that returns the raw file body.
+ * The `.raw` media type avoids base64 decoding and the 1 MB inline-content limit.
+ */
+export function contentsApiUrl(path: string): string {
+  return `https://api.github.com/repos/${HISTORY_REPO}/contents/${path}?ref=${HISTORY_BRANCH}`;
+}
+
+/** Absolute month index (year * 12 + month - 1), for ordering/range math. */
+export function monthIndex(year: number, month: number): number {
+  return year * 12 + (month - 1);
+}
+
+export function earliestMonthIndex(): number {
+  return monthIndex(EARLIEST_YEAR, EARLIEST_MONTH);
+}
+
+/** True when the given year/month is at or after the earliest month that has data. */
+export function isWithinHistoryRange(year: number, month: number): boolean {
+  return monthIndex(year, month) >= earliestMonthIndex();
 }
 
 function pad2(n: number): string {
@@ -76,21 +103,4 @@ export function parseJsonlForSite(text: string, siteId: string): HistoryEntry[] 
     entries.push({ timestamp: run.timestamp, status, latency });
   }
   return entries;
-}
-
-/** Build the list of monthly file paths covering `monthsBack` whole months before lastMonth. */
-export function monthsBackFrom(lastMonth: number, monthsBack: number): Array<{ year: number; month: number }> {
-  const out: Array<{ year: number; month: number }> = [];
-  for (let i = 1; i <= monthsBack; i++) {
-    const total = lastMonth - i;
-    const year = Math.floor(total / 12);
-    const month = ((total % 12) + 12) % 12;
-    out.push({ year, month: month + 1 });
-  }
-  return out;
-}
-
-/** Stable cache key for one fetched file. */
-export function cacheKeyFor(path: string): string {
-  return `${CACHE_KEY_PREFIX}:${path}`;
 }

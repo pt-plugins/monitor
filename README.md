@@ -46,13 +46,20 @@ browser, so long-term history is available without rebuilding the site on every 
 - Targets, relative to the repo's `data/uptime/`:
   - whole past months → `YYYY/MM.jsonl` (monthly merge)
   - completed days of the current month → `YYYY/MM/DD.jsonl` (daily merge)
-- Fetched with `fetch()` from `raw.githubusercontent.com`, then filtered to the current site's runs.
-- Each fetched file is cached in `localStorage` under `ptd-monitor:history:v1:<path>`, including an empty result,
-  so repeated loads and other sites sharing the same file do not re-download it.
-- **Clear cache** drops every cached history file.
-- The optional **GitHub token** field only raises the anonymous rate limit. It stays in the page and is sent as a
-  `Bearer` header to `raw.githubusercontent.com` only; it is never stored or sent anywhere else.
+  - nothing earlier than **2026-06**, the first month with merged history data
+- Fetched with `fetch()` from the GitHub REST API (`api.github.com/repos/.../contents/...`), requesting the
+  `application/vnd.github.v3.raw` media type so the file body is returned directly; then filtered to the current
+  site's runs.
+- Each fetched file is cached with the **Cache API** (`caches.open("ptd-monitor-history-v1")`), keyed by its API URL,
+  including an empty result, so repeated loads and other sites sharing the same file do not re-download it.
+- **Clear cache** deletes the whole history cache bucket.
+- The optional **GitHub token** is stored in `localStorage` under `ptd-monitor:gh-token` and sent as a `Bearer`
+  header to `api.github.com` only. It raises the API rate limit from 60 to 5000 requests per hour; the status line
+  shows the remaining quota reported by the API.
 - Files that do not exist for a given month/day are treated as "no data" rather than an error.
+- When the API reports rate limiting (403/429), loading stops early and the panel asks for a token.
+- The Cache API requires a secure context. On plain `http://` origins caching is skipped and files are always
+  re-fetched.
 
 ## Local Development
 

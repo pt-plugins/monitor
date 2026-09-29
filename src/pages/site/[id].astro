@@ -55,13 +55,13 @@ const hasMore = site.history.length > recentHistory.length;
 
 <script>
   import {
-    HISTORY_BRANCH,
-    HISTORY_REPO,
-    cacheKeyFor,
+    CACHE_NAME,
+    TOKEN_STORAGE_KEY,
+    contentsApiUrl,
     dailyFilePath,
+    isWithinHistoryRange,
     monthlyFilePath,
     parseJsonlForSite,
-    rawFileUrl,
     type HistoryEntry,
   } from "../../lib/history-fetch";
 
@@ -114,25 +114,36 @@ const hasMore = site.history.length > recentHistory.length;
       return ms < 1000 ? `${ms}ms` : `${(ms / 1000).toFixed(1)}s`;
     }
 
-    function cacheGet(path: string): HistoryEntry[] | null {
+    // ---- Cache API storage -------------------------------------------------
+    // Payloads live in the Cache API; only the token and small UI preferences
+    // use localStorage. The Cache API is unavailable on insecure origins, in
+    // which case caching silently degrades to "always fetch".
+    const cacheStorageAvailable = typeof caches !== "undefined";
+
+    async function cacheGet(path: string): Promise<HistoryEntry[] | null> {
+      if (!cacheStorageAvailable) return null;
       try {
-        const raw = localStorage.getItem(cacheKeyFor(path));
-        if (!raw) return null;
-        const parsed = JSON.parse(raw) as { entries?: HistoryEntry[] };
-        return Array.isArray(parsed.entries) ? parsed.entries : null;
+        const cache = await caches.open(CACHE_NAME);
+        const hit = await cache.match(contentsApiUrl(path));
+        if (!hit) return null;
+        return (await hit.json()) as HistoryEntry[];
       } catch {
         return null;
       }
     }
 
-    function cacheSet(path: string, entries: HistoryEntry[]) {
+    async function cacheSet(path: string, entries: HistoryEntry[]) {
+      if (!cacheStorageAvailable) return;
       try {
-        localStorage.setItem(
-          cacheKeyFor(path),
-          JSON.stringify({ fetchedAt: new Date().toISOString(), entries }),
+        const cache = await caches.open(CACHE_NAME);
+        await cache.put(
+          contentsApiUrl(path),
+          new Response(JSON.stringify(entries), {
+            headers: { "Content-Type": "application/json" },
+          }),
         );
       } catch {
-        // Quota exceeded or storage disabled — fetching still works, caching is best-effort.
+        // Quota exceeded or storage disabled — fetching still works.
       }
     }
 
@@ -140,20 +151,36 @@ const hasMore = site.history.length > recentHistory.length;
       return `${e.timestamp}|${e.status}|${e.latency ?? ""}`;
     }
 
-    async function fetchFile(path: string, token: string): Promise<HistoryEntry[]> {
-      const url = rawFileUrl(path);
-      const headers: Record<string, string> = { Accept: "text/plain" };
+    /** Last observed rate-limit state, surfaced in the status line. */
+    let rateLimit: { remaining: number; limit: number } | null = null;
 
-      // A token is optional: it only raises the anonymous rate limit.
+    async function fetchFile(path: string, token: string): Promise<HistoryEntry[]> {
+      const headers: Record<string, string> = {
+        // `.raw` returns the file body directly instead of base64 JSON, and
+        // lifts the 1 MB inline-content limit.
+        Accept: "application/vnd.github.v3.raw",
+        "X-GitHub-Api-Version": "2022-11-28",
+      };
       if (token) headers.Authorization = `Bearer ${token}`;
 
-      const res = await fetch(url, token ? { headers } : {});
+      const res = await fetch(contentsApiUrl(path), { headers });
+
+      const remaining = res.headers.get("x-ratelimit-remaining");
+      const limit = res.headers.get("x-ratelimit-limit");
+      if (remaining !== null && limit !== null) {
+        rateLimit = { remaining: Number(remaining), limit: Number(limit) };
+      }
+
+      // A month/day that never existed is "no data", not a failure.
       if (res.status === 404) return [];
-      if (!res.ok) throw new Error(`HTTP ${res.status} for ${path}`);
+      if (res.status === 403 || res.status === 429) {
+        throw new Error("rate-limited");
+      }
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
       const text = await res.text();
       const entries = parseJsonlForSite(text, siteId);
-      cacheSet(path, entries);
+      await cacheSet(path, entries);
       return entries;
     }
 
@@ -202,6 +229,8 @@ const hasMore = site.history.length > recentHistory.length;
         const total = y * 12 + (m - 1) - i;
         const yy = Math.floor(total / 12);
         const mm = (total % 12) + 1;
+        // Skip months before the earliest month that has any history data.
+        if (!isWithinHistoryRange(yy, mm)) break;
         paths.push(monthlyFilePath(yy, mm));
       }
       // Current month: daily files exist for every completed day (today is still raw).
@@ -211,12 +240,32 @@ const hasMore = site.history.length > recentHistory.length;
       return paths;
     }
 
+    function saveToken(token: string) {
+      try {
+        if (token) localStorage.setItem(TOKEN_STORAGE_KEY, token);
+        else localStorage.removeItem(TOKEN_STORAGE_KEY);
+      } catch {
+        // Storage disabled — the token simply will not persist.
+      }
+    }
+
+    function loadSavedToken(): string {
+      try {
+        return localStorage.getItem(TOKEN_STORAGE_KEY) || "";
+      } catch {
+        return "";
+      }
+    }
+
     async function load() {
       if (!loadBtn) return;
       loadBtn.disabled = true;
       setStatus("loading");
 
       const token = (tokenInput?.value || "").trim();
+      saveToken(token);
+      rateLimit = null;
+
       const monthsBack = Number(monthsInput?.value || "6") || 6;
       const targets = buildTargets(monthsBack);
 
@@ -224,9 +273,10 @@ const hasMore = site.history.length > recentHistory.length;
       let fetched = 0;
       let fromCache = 0;
       const failures: string[] = [];
+      let rateLimited = false;
 
       for (const path of targets) {
-        const cached = cacheGet(path);
+        const cached = await cacheGet(path);
         if (cached) {
           fromCache++;
           for (const e of cached) merged.set(entryKey(e), e);
@@ -238,32 +288,46 @@ const hasMore = site.history.length > recentHistory.length;
           fetched++;
           for (const e of entries) merged.set(entryKey(e), e);
         } catch (err) {
+          const msg = err instanceof Error ? err.message : String(err);
+          if (msg === "rate-limited") rateLimited = true;
           failures.push(path);
+          // Once the API refuses, the remaining requests would fail too.
+          if (rateLimited) break;
         }
       }
 
       const entries = [...merged.values()];
       render(entries);
 
+      const parts: string[] = [`${entries.length} records`];
+      if (fetched > 0) parts.push(`${fetched} files fetched`);
+      if (fromCache > 0) parts.push(`${fromCache} from cache`);
+      if (failures.length > 0) parts.push(`${failures.length} failed`);
+      if (rateLimit) parts.push(`API quota ${rateLimit.remaining}/${rateLimit.limit}`);
+      const detail = parts.join(" · ") + ".";
+
       if (entries.length === 0) {
-        setStatus("empty", `Checked ${targets.length} files.`);
+        setStatus(rateLimited ? "error" : "empty", detail);
       } else {
-        const detail = `${entries.length} records · ${fetched} files fetched · ${fromCache} from cache.`;
-        setStatus(failures.length > 0 ? "error" : "done", `${detail} ${failures.length} failed.`);
+        setStatus(failures.length > 0 ? "error" : "done", detail);
+      }
+      if (rateLimited) {
+        setStatus("error", `${detail} GitHub rate limit reached — add a token and retry.`);
       }
 
       if (clearBtn) clearBtn.disabled = false;
       loadBtn.disabled = false;
     }
 
-    function clearCache() {
-      const prefix = cacheKeyFor("");
+    async function clearCache() {
       let removed = 0;
-      for (let i = localStorage.length - 1; i >= 0; i--) {
-        const key = localStorage.key(i);
-        if (key && key.startsWith(prefix)) {
-          localStorage.removeItem(key);
-          removed++;
+      if (cacheStorageAvailable) {
+        try {
+          const cache = await caches.open(CACHE_NAME);
+          removed = (await cache.keys()).length;
+          await caches.delete(CACHE_NAME);
+        } catch {
+          // Ignore — nothing else to clean up.
         }
       }
       if (tableEl) tableEl.hidden = true;
@@ -271,6 +335,10 @@ const hasMore = site.history.length > recentHistory.length;
       if (summaryEl) summaryEl.textContent = "";
       setStatus("idle", `Cleared ${removed} cached file(s).`);
     }
+
+    // Restore a previously saved token.
+    const savedToken = loadSavedToken();
+    if (savedToken && tokenInput) tokenInput.value = savedToken;
 
     loadBtn?.addEventListener("click", load);
     clearBtn?.addEventListener("click", clearCache);
@@ -382,7 +450,7 @@ const hasMore = site.history.length > recentHistory.length;
           </select>
         </label>
         <label class="field field--wide">
-          <span class="field-label">GitHub token (optional)</span>
+          <span class="field-label">GitHub token (optional, saved locally)</span>
           <input
             type="password"
             id="history-token"
@@ -401,8 +469,9 @@ const hasMore = site.history.length > recentHistory.length;
       <p class="history-note">
         Fetches merged daily/monthly JSONL files from
         <a href="https://github.com/pt-plugins/monitor/tree/main/data/uptime" target="_blank" rel="noopener">data/uptime</a>
-        in the browser and caches each file in local storage. The token stays in this tab and is only
-        sent to raw.githubusercontent.com to raise the API rate limit.
+        through the GitHub REST API and caches each file with the Cache API. The optional token is
+        stored in this browser and raises the API rate limit from 60 to 5000 requests per hour.
+        History starts at 2026-06, the earliest month with merged data.
       </p>
 
       <p id="history-status" class="history-status" data-kind="idle" aria-live="polite"></p>
