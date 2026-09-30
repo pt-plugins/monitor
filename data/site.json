@@ -328,8 +328,8 @@
     ],
     "type": "private",
     "description": "",
-    "favicon": "https://aura4k.net/favicon.ico",
-    "isDead": false
+    "favicon": "",
+    "isDead": true
   },
   {
     "id": "avgv",
@@ -640,7 +640,7 @@
     "type": "private",
     "description": "道可道，非常道，摆烂。",
     "favicon": "./_default_nexusphp.png",
-    "isDead": false
+    "isDead": true
   },
   {
     "id": "ceskeforum",
@@ -750,7 +750,7 @@
     "type": "private",
     "description": "ConCen (Conspiracy Central) is a Private conspiracy related torrent index",
     "favicon": "",
-    "isDead": false
+    "isDead": true
   },
   {
     "id": "concertos",
