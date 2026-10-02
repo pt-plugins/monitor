@@ -45,14 +45,17 @@ whose dialog markup, client script and styles live in that component. The static
 runs; this dialog additionally fetches the merged history files from the repository in the browser, so long-term
 history is available without rebuilding the site on every data update.
 
+The dialog holds only the loader controls and a status line. It renders **no table** of its own: everything it fetches
+is merged into the page's *Checks History* table, which is the single place records are read.
+
 - Every site page gets the trigger, regardless of how much history the build embedded, so the dialog is always
   reachable. Sites with little or no built-in history can still pull their full history from the repository.
 
 - On page entry the dialog loads whatever is already in the cache, **without any network request**. It only fetches
   after an explicit **Load** click, so opening a site page never spends API quota.
 - Loading reports per-file progress (`n/total · 2026/08 monthly`, `n/total · 2026/09/28 daily`).
-- Fetched records are merged into *Checks History* as well, deduplicated by timestamp and ordered by absolute instant
-  (so ordering stays correct across a year boundary); the dialog table remains the full fetched view.
+- Fetched records are merged into *Checks History*, deduplicated by timestamp and ordered by absolute instant (so
+  ordering stays correct across a year boundary).
 - Targets, relative to the repo's `data/uptime/`:
   - whole past months → `YYYY/MM.jsonl` (monthly merge)
   - completed days of the current month → `YYYY/MM/DD.jsonl` (daily merge)
@@ -72,8 +75,8 @@ history is available without rebuilding the site on every data update.
 - Files that do not exist for a given month/day are treated as "no data" rather than an error.
 - Fetched rows reuse `StatusBadge`'s exact markup (`badge badge--<status> badge--sm`, with a `badge-dot`), so merged
   rows are visually identical to the server-rendered ones rather than a separate pill style. Because those rows are
-  built by `document.createElement` they carry no Astro scoping attribute, so the `badge`/`badge-dot` rules that must
-  apply to them are duplicated as `:global(...)` in both the page and the component.
+  built by `document.createElement` they carry no Astro scoping attribute, so the page duplicates the `badge` /
+  `badge-dot` and cell rules it needs as `:global(...)`; the page owns all styling for its own table.
 - When the API reports rate limiting (403/429), loading stops early and the panel asks for a token.
 - The Cache API requires a secure context. On plain `http://` origins caching is skipped and files are always
   re-fetched.

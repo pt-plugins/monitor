@@ -171,7 +171,7 @@ const recentHistory = [...site.history].reverse().slice(0, 50);
 
   .section-head h2 { margin-bottom: 0; }
 
-  tbody tr:hover { background: color-mix(in srgb, var(--color-text-secondary) 8%, transparent); }
+  :global(#recent-checks-body tr:hover) { background: color-mix(in srgb, var(--color-text-secondary) 8%, transparent); }
 
   .section h2 {
     font-size: 1rem;
@@ -219,14 +219,20 @@ const recentHistory = [...site.history].reverse().slice(0, 50);
     letter-spacing: 0.04em; position: sticky; top: 0;
   }
 
-  td { padding: 0.4rem 0.75rem; border-top: 1px solid var(--color-border); }
+  /*
+   * Rows merged in by ExtendedHistory are created at runtime, so they carry no
+   * Astro scoping attribute and cannot be reached by the scoped rules above.
+   * These global copies (keyed to this table) keep merged and built-in rows
+   * looking identical.
+   */
+  :global(#recent-checks-body td) { padding: 0.4rem 0.75rem; border-top: 1px solid var(--color-border); }
 
-  .td-time {
+  :global(.td-time) {
     font-variant-numeric: tabular-nums; white-space: nowrap;
     color: var(--color-text-secondary); font-size: 0.8rem;
   }
 
-  .td-latency { font-variant-numeric: tabular-nums; }
+  :global(.td-latency) { font-variant-numeric: tabular-nums; white-space: nowrap; }
 
   .empty { text-align: center; padding: 1rem; color: var(--color-text-secondary); font-size: 0.85rem; }
 
@@ -267,7 +273,5 @@ const recentHistory = [...site.history].reverse().slice(0, 50);
 
   :global(.badge--dead) { background: color-mix(in srgb, var(--color-dead) 15%, transparent); color: var(--color-dead); }
   :global(.badge--dead .badge-dot) { background: var(--color-dead); }
-
-  :global(.td-time), :global(.td-latency) { font-variant-numeric: tabular-nums; white-space: nowrap; }
 
 </style>

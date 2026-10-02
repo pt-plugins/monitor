@@ -47,15 +47,11 @@ const { siteId, builtCount } = Astro.props;
       </div>
     </div>
 
+    {/* Keep this paragraph on a single line: Astro trims whitespace at a line
+        break that sits next to an inline tag, which jams the words together
+        (e.g. "from" + the data/uptime link). */}
     <p class="history-note">
-      Fetches merged daily/monthly JSONL files from
-      <a href="https://github.com/pt-plugins/monitor/tree/main/data/uptime" target="_blank" rel="noopener">data/uptime</a>
-      through the GitHub REST API and caches each file with the Cache API. The optional token is
-      stored in this browser and raises the API rate limit from 60 to 5000 requests per hour.
-      History starts at 2026-06, the earliest month with merged data.
-      <a href="https://github.com/pt-plugins/monitor/tree/main/data/uptime/" target="_blank" rel="noopener">
-        View full history on GitHub →
-      </a>
+      Fetches merged daily/monthly JSONL files from <a href="https://github.com/pt-plugins/monitor/tree/main/data/uptime" target="_blank" rel="noopener">data/uptime</a> through the GitHub REST API and caches each file with the Cache API. Fetched records are merged into the <strong>Checks History</strong> list on this page, deduplicated by timestamp — close this dialog to read them. The optional token is stored in this browser and raises the API rate limit from 60 to 5000 requests per hour. History starts at 2026-06, the earliest month with merged data. <a href="https://github.com/pt-plugins/monitor/tree/main/data/uptime/" target="_blank" rel="noopener">View full history on GitHub →</a>
     </p>
 
     <p id="history-status" class="history-status" data-kind="idle" aria-live="polite"></p>
@@ -64,19 +60,6 @@ const { siteId, builtCount } = Astro.props;
       <p id="history-progress-text" class="history-progress-text"></p>
     </div>
     <p id="history-summary" class="history-summary"></p>
-
-    <div class="table-wrap">
-      <table id="history-table" hidden>
-        <thead>
-          <tr>
-            <th>Time</th>
-            <th>Status</th>
-            <th>Latency</th>
-          </tr>
-        </thead>
-        <tbody id="history-table-body"></tbody>
-      </table>
-    </div>
   </div>
 </dialog>
 
@@ -108,8 +91,6 @@ const { siteId, builtCount } = Astro.props;
     const monthsInput = document.getElementById("history-months") as HTMLSelectElement | null;
 
     const summaryEl = document.getElementById("history-summary");
-    const tableBody = document.getElementById("history-table-body");
-    const tableEl = document.getElementById("history-table");
 
     const dialogEl = document.getElementById("history-dialog") as HTMLDialogElement | null;
     const openBtn = document.getElementById("history-open") as HTMLButtonElement | null;
@@ -403,34 +384,9 @@ const { siteId, builtCount } = Astro.props;
 
     function render(entries: HistoryEntry[]) {
       if (summaryEl) {
-        summaryEl.textContent = `${entries.length} additional records merged (${builtCount} built-in).`;
+        summaryEl.textContent = `${entries.length} records merged into Checks History (${builtCount} built-in).`;
       }
       mergeIntoRecentChecks(entries);
-      if (!tableEl || !tableBody) return;
-
-      const recent = [...entries]
-        .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
-        .slice(0, 200);
-
-      tableBody.innerHTML = "";
-      for (const e of recent) {
-        const tr = document.createElement("tr");
-
-        const tdTime = document.createElement("td");
-        tdTime.className = "td-time";
-        tdTime.textContent = fmtTime(e.timestamp);
-
-        const tdStatus = document.createElement("td");
-        tdStatus.appendChild(createBadge(e.status));
-
-        const tdLatency = document.createElement("td");
-        tdLatency.className = "td-latency";
-        tdLatency.textContent = fmtLatency(e.latency);
-
-        tr.append(tdTime, tdStatus, tdLatency);
-        tableBody.appendChild(tr);
-      }
-      tableEl.hidden = recent.length === 0;
     }
 
     function buildTargets(monthsBack: number): string[] {
@@ -560,14 +516,14 @@ const { siteId, builtCount } = Astro.props;
       return entries.length;
     }
 
-    /** Fill the table from whatever is already cached, without any network use. */
+    /** Merge whatever is already cached into the page, without any network use. */
     async function autoLoadFromCache() {
       const paths = await cachedPaths();
       if (paths.length === 0) {
         setStatus("idle", "No cached history yet — open the dialog to load it.");
         return;
       }
-      if (summaryEl) summaryEl.textContent = "Showing cached history…";
+      if (summaryEl) summaryEl.textContent = "Merging cached history…";
       await load({ auto: true });
     }
 
@@ -582,8 +538,6 @@ const { siteId, builtCount } = Astro.props;
           // Ignore — nothing else to clean up.
         }
       }
-      if (tableEl) tableEl.hidden = true;
-      if (tableBody) tableBody.innerHTML = "";
       if (summaryEl) summaryEl.textContent = "";
       setStatus("idle", `Cleared ${removed} cached file(s).`);
     }
@@ -776,45 +730,10 @@ const { siteId, builtCount } = Astro.props;
     margin-top: 0.25rem;
   }
 
-  .history-panel .table-wrap { margin-top: 0.75rem; }
-
   /*
-   * Fetched rows are created at runtime, so they never carry Astro's scoping
-   * attribute and StatusBadge.astro's own scoped rules cannot reach them.
-   * These global copies mirror that component exactly so both kinds of row
-   * render identically.
+   * This component renders no table of its own: fetched records are merged into
+   * the page's Checks History table, which owns the styling for those rows —
+   * including the :global(...) copies that runtime-created rows need, since
+   * they never carry Astro's scoping attribute.
    */
-  :global(.badge) {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35em;
-    font-weight: 600;
-    border-radius: 999px;
-    padding: 0.15em 0.65em;
-    white-space: nowrap;
-  }
-
-  :global(.badge--sm) {
-    font-size: 0.7rem;
-    padding: 0.1em 0.5em;
-  }
-
-  :global(.badge-dot) {
-    width: 0.5em;
-    height: 0.5em;
-    border-radius: 50%;
-    display: inline-block;
-    flex-shrink: 0;
-  }
-
-  :global(.badge--up) { background: color-mix(in srgb, var(--color-up) 15%, transparent); color: var(--color-up); }
-  :global(.badge--up .badge-dot) { background: var(--color-up); }
-
-  :global(.badge--down) { background: color-mix(in srgb, var(--color-down) 15%, transparent); color: var(--color-down); }
-  :global(.badge--down .badge-dot) { background: var(--color-down); }
-
-  :global(.badge--dead) { background: color-mix(in srgb, var(--color-dead) 15%, transparent); color: var(--color-dead); }
-  :global(.badge--dead .badge-dot) { background: var(--color-dead); }
-
-  :global(.td-time), :global(.td-latency) { font-variant-numeric: tabular-nums; white-space: nowrap; }
 </style>
