@@ -28,8 +28,14 @@ jobs:
       - name: Install Playwright browser (Chromium)
         run: npx playwright install chromium --with-deps
 
+      # Only IPv6 goes through WARP: GitHub runners have no native IPv6, so the
+      # IPv6-only trackers still need the tunnel, while IPv4 keeps using the
+      # runner's native egress (WARP egress gets 403 from cgpeers/passthepopcorn).
       - name: Set up WARP
         uses: fscarmen/warp-on-actions@v1.4
+        with:
+          stack: ipv6
+          mode: wireguard
 
       - name: Run uptime monitor
         run: pnpm monitor
