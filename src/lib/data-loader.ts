@@ -3,7 +3,7 @@
 
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
-import type { MonitorRun, SiteDefinition, SiteSummary } from "./types";
+import type { MonitorRun, SiteDefinition, SiteResult, SiteSummary } from "./types";
 
 const DATA_DIR = join(process.cwd(), "data");
 const UPTIME_DIR = join(DATA_DIR, "uptime");
@@ -14,14 +14,19 @@ const ICONS_DIR = join(process.cwd(), "public", "siteIcons");
 const HISTORY_LIMIT = 336;
 
 function getLocalIconSet(): Map<string, string> {
+  if (cachedIconSet) return cachedIconSet;
   const map = new Map<string, string>();
-  if (!existsSync(ICONS_DIR)) return map;
+  if (!existsSync(ICONS_DIR)) {
+    cachedIconSet = map;
+    return map;
+  }
   try {
     for (const f of readdirSync(ICONS_DIR)) {
       const match = f.match(/^(.+)\.(png|ico|svg|webp)$/i);
       if (match) map.set(match[1], `/monitor/siteIcons/${f}`);
     }
   } catch {}
+  cachedIconSet = map;
   return map;
 }
 
@@ -41,12 +46,32 @@ function resolveFaviconUrl(site: SiteDefinition, iconSet: Map<string, string>): 
 }
 
 export function loadSiteDefinitions(): SiteDefinition[] {
+  if (cachedSiteDefinitions) return cachedSiteDefinitions;
   try {
-    return JSON.parse(readFileSync(SOURCE_FILE, "utf-8"));
+    cachedSiteDefinitions = JSON.parse(readFileSync(SOURCE_FILE, "utf-8")) as SiteDefinition[];
   } catch {
-    return [];
+    cachedSiteDefinitions = [];
   }
+  return cachedSiteDefinitions;
 }
+
+/*
+ * Build-time caching.
+ *
+ * Astro renders every page in one Node process, so this module is evaluated
+ * once but its helpers run once per page — 341 times for the site pages alone.
+ * Both the parsed data and the site-level summaries are derived purely from
+ * files that do not change during a build, so they are computed once and
+ * reused. Nothing here mutates the cached values, but callers must not either;
+ * treat what these functions return as read-only.
+ *
+ * `undefined` means "not computed yet" so a genuine empty result still caches.
+ */
+let cachedRuns: MonitorRun[] | undefined;
+let cachedSiteDefinitions: SiteDefinition[] | undefined;
+let cachedSummaries: SiteSummary[] | undefined;
+let cachedLatestTimestamp: string | null | undefined;
+let cachedIconSet: Map<string, string> | undefined;
 
 function parseJsonLines(content: string): MonitorRun[] {
   const runs: MonitorRun[] = [];
@@ -57,8 +82,13 @@ function parseJsonLines(content: string): MonitorRun[] {
 }
 
 export function loadAllMonitorRuns(): MonitorRun[] {
+  if (cachedRuns) return cachedRuns;
+
   const runs: MonitorRun[] = [];
-  if (!existsSync(UPTIME_DIR)) return runs;
+  if (!existsSync(UPTIME_DIR)) {
+    cachedRuns = runs;
+    return runs;
+  }
 
   const years = readdirSync(UPTIME_DIR, { withFileTypes: true }).filter((e) => e.isDirectory());
   for (const year of years) {
@@ -88,66 +118,115 @@ export function loadAllMonitorRuns(): MonitorRun[] {
     }
   }
   runs.sort((a, b) => new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime());
+  cachedRuns = runs;
   return runs;
 }
 
-function computeUptime(siteId: string, runs: MonitorRun[]): { uptime: number; total: number; up: number } {
+/*
+ * Per-run lookups by site id.
+ *
+ * The computations below are run for every site, and each one walked the whole
+ * run list calling `.find()` on the run's sites array — sites x runs probes,
+ * about 400k of them, re-paid on every page. Indexing the runs by site id once
+ * turns those scans into a map lookup.
+ *
+ * The index lives beside the cached runs and is rebuilt with them.
+ */
+let cachedIndex: Map<string, RunSiteEntry[]> | undefined;
+
+interface RunSiteEntry {
+  /** Position in the sorted runs array, so callers can keep run order. */
+  index: number;
+  timestamp: string;
+  status: SiteResult["status"];
+  latency: number | null;
+}
+
+function runsBySite(): Map<string, RunSiteEntry[]> {
+  if (cachedIndex) return cachedIndex;
+  const index = new Map<string, RunSiteEntry[]>();
+  const runs = loadAllMonitorRuns();
+  for (let i = 0; i < runs.length; i++) {
+    const run = runs[i];
+    for (const s of run.sites) {
+      let list = index.get(s.id);
+      if (!list) {
+        list = [];
+        index.set(s.id, list);
+      }
+      list.push({ index: i, timestamp: run.timestamp, status: s.status, latency: s.latency });
+    }
+  }
+  cachedIndex = index;
+  return index;
+}
+
+/** Entries for one site, oldest-first, matching the order of loadAllMonitorRuns. */
+function entriesForSite(siteId: string): RunSiteEntry[] {
+  return runsBySite().get(siteId) ?? [];
+}
+
+/**
+ * Entries for one site since `hours` ago (or all of them when omitted).
+ * Replaces the old "scan every run, .find() the site" pattern.
+ */
+function recentEntries(siteId: string, hours?: number): RunSiteEntry[] {
+  const all = entriesForSite(siteId);
+  if (hours === undefined) return all;
+  const cutoff = new Date();
+  cutoff.setHours(cutoff.getHours() - hours);
+  // Entries are oldest-first, so the window is a suffix; scan back to find it.
+  let start = 0;
+  for (let i = all.length - 1; i >= 0; i--) {
+    if (new Date(all[i].timestamp) < cutoff) { start = i + 1; break; }
+  }
+  return all.slice(start);
+}
+
+function computeUptime(entries: RunSiteEntry[]): { uptime: number; total: number; up: number } {
   let up = 0, total = 0;
-  for (const run of runs) {
-    const s = run.sites.find((s) => s.id === siteId);
-    if (s) { total++; if (s.status === "up") up++; }
+  for (const e of entries) {
+    total++;
+    if (e.status === "up") up++;
   }
   return { uptime: total > 0 ? Math.round((up / total) * 10000) / 100 : 100, total, up };
 }
 
-function computeAvgLatency(siteId: string, runs: MonitorRun[]): number | null {
+function computeAvgLatency(entries: RunSiteEntry[]): number | null {
   let t = 0, c = 0;
-  for (const run of runs) {
-    const s = run.sites.find((s) => s.id === siteId);
-    if (!s) continue;
-    if (s.latency !== null) {
-      t += s.latency; c++;
+  for (const e of entries) {
+    if (e.latency !== null) {
+      t += e.latency; c++;
     }
   }
   return c > 0 ? Math.round(t / c) : null;
 }
 
-function buildHistory(siteId: string, runs: MonitorRun[], limit: number): SiteSummary["history"] {
-  const result: SiteSummary["history"] = [];
-  // Walk newest-first so the limit counts runs *containing this site* rather
-  // than a global slice of runs shared by every site.
-  for (let i = runs.length - 1; i >= 0 && result.length < limit; i--) {
-    const s = runs[i].sites.find((s) => s.id === siteId);
-    if (!s) continue; // site absent from this run — not a real check
-    result.push({ timestamp: runs[i].timestamp, status: s.status, latency: s.latency });
-  }
-  result.reverse(); // oldest-first, matching the previous contract
-  return result;
-}
-
-function getRecentRuns(runs: MonitorRun[], hours: number): MonitorRun[] {
-  const cutoff = new Date();
-  cutoff.setHours(cutoff.getHours() - hours);
-  let start = 0;
-  for (let i = runs.length - 1; i >= 0; i--) {
-    if (new Date(runs[i].timestamp) < cutoff) { start = i + 1; break; }
-  }
-  return runs.slice(start);
+function buildHistory(entries: RunSiteEntry[], limit: number): SiteSummary["history"] {
+  // Entries are oldest-first; the history contract is also oldest-first, so
+  // take the newest `limit` and keep their order.
+  const start = Math.max(0, entries.length - limit);
+  return entries.slice(start).map((e) => ({ timestamp: e.timestamp, status: e.status, latency: e.latency }));
 }
 
 // Compute per-day status for last 7 days (oldest first)
-function computeDailyStatus(siteId: string, runs: MonitorRun[]): Array<"up" | "down" | "mixed" | "nodata"> {
+function computeDailyStatus(entries: RunSiteEntry[]): Array<"up" | "down" | "mixed" | "nodata"> {
   const result: Array<"up" | "down" | "mixed" | "nodata"> = [];
+  // Bucket this site's entries by UTC date once, instead of rescanning the
+  // whole run list for each of the 7 days.
+  const byDay = new Map<string, { up: number; down: number }>();
+  for (const e of entries) {
+    const ds = e.timestamp.slice(0, 10);
+    let b = byDay.get(ds);
+    if (!b) { b = { up: 0, down: 0 }; byDay.set(ds, b); }
+    if (e.status === "up") b.up++; else b.down++;
+  }
   for (let d = 6; d >= 0; d--) {
     const date = new Date();
     date.setDate(date.getDate() - d);
     const ds = date.toISOString().slice(0, 10);
-    let up = 0, down = 0;
-    for (const run of runs) {
-      if (!run.timestamp.startsWith(ds)) continue;
-      const s = run.sites.find((s) => s.id === siteId);
-      if (s) { if (s.status === "up") up++; else down++; }
-    }
+    const b = byDay.get(ds);
+    const up = b?.up ?? 0, down = b?.down ?? 0;
     if (up === 0 && down === 0) result.push("nodata");
     else if (down === 0) result.push("up");
     else if (up === 0) result.push("down");
@@ -157,28 +236,35 @@ function computeDailyStatus(siteId: string, runs: MonitorRun[]): Array<"up" | "d
 }
 
 export function getLatestTimestamp(): string | null {
+  if (cachedLatestTimestamp !== undefined) return cachedLatestTimestamp;
   const runs = loadAllMonitorRuns();
-  return runs.length > 0 ? runs[runs.length - 1].timestamp : null;
+  cachedLatestTimestamp = runs.length > 0 ? runs[runs.length - 1].timestamp : null;
+  return cachedLatestTimestamp;
 }
 
 export function computeSiteSummaries(): SiteSummary[] {
+  if (cachedSummaries) return cachedSummaries;
+
   const sites = loadSiteDefinitions();
   const allRuns = loadAllMonitorRuns();
   const iconSet = getLocalIconSet();
 
-  const runs24h = getRecentRuns(allRuns, 24);
-  const runs7d = getRecentRuns(allRuns, 7 * 24);
-  const runs30d = getRecentRuns(allRuns, 30 * 24);
+  // The current status comes from the newest run that actually contains the
+  // site, so look that up per site rather than assuming it is the last run.
   const latestRun = allRuns.length > 0 ? allRuns[allRuns.length - 1] : null;
+  const latestRunIndex = allRuns.length - 1;
 
   const summaries: SiteSummary[] = sites.map((site) => {
-    const csr = latestRun?.sites.find((s) => s.id === site.id);
-    const u24 = computeUptime(site.id, runs24h);
-    const u7d = computeUptime(site.id, runs7d);
-    const u30d = computeUptime(site.id, runs30d);
-    const avgLat = computeAvgLatency(site.id, runs24h);
-    const history = buildHistory(site.id, allRuns, HISTORY_LIMIT);
-    const dailyStatus = computeDailyStatus(site.id, allRuns);
+    const entries = entriesForSite(site.id);
+    // Newest entry, when it belongs to the newest run overall.
+    const newest = entries.length > 0 ? entries[entries.length - 1] : undefined;
+    const csr = newest && newest.index === latestRunIndex && latestRun ? { latency: newest.latency } : undefined;
+    const u24 = computeUptime(recentEntries(site.id, 24));
+    const u7d = computeUptime(recentEntries(site.id, 7 * 24));
+    const u30d = computeUptime(recentEntries(site.id, 30 * 24));
+    const avgLat = computeAvgLatency(recentEntries(site.id, 24));
+    const history = buildHistory(entries, HISTORY_LIMIT);
+    const dailyStatus = computeDailyStatus(entries);
 
     let currentStatus: SiteSummary["currentStatus"];
     let currentLatency: number | null = null;
@@ -210,5 +296,6 @@ export function computeSiteSummaries(): SiteSummary[] {
     const d = (order[a.currentStatus] ?? 3) - (order[b.currentStatus] ?? 3);
     return d !== 0 ? d : a.name.localeCompare(b.name);
   });
+  cachedSummaries = summaries;
   return summaries;
 }
