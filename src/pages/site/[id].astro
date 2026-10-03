@@ -4,6 +4,7 @@ import StatusBadge from "../../components/StatusBadge.astro";
 import LatencyChart from "../../components/LatencyChart.astro";
 import ExtendedHistory from "../../components/ExtendedHistory.astro";
 import { computeSiteSummaries } from "../../lib/data-loader";
+import { DISPLAY_TIME_ZONE_LABEL, formatCheckTime } from "../../lib/history-fetch";
 
 export function getStaticPaths() {
   const summaries = computeSiteSummaries();
@@ -27,13 +28,9 @@ function fmtLatency(ms: number | null): string {
 }
 
 function fmtTime(iso: string): string {
-  const d = new Date(iso);
-  return d.toLocaleString("zh-CN", {
-    month: "2-digit",
-    day: "2-digit",
-    hour: "2-digit",
-    minute: "2-digit",
-  });
+  // Rendered in a fixed zone shared with the browser-side merge; formatting in
+  // the build machine's zone made the two disagree on a visitor in another zone.
+  return formatCheckTime(iso);
 }
 
 function uptimeColor(pct: number): string {
@@ -116,7 +113,7 @@ const recentHistory = [...site.history].reverse().slice(0, 50);
       <table>
         <thead>
           <tr>
-            <th>Time</th>
+            <th>Time <span class="th-note">({DISPLAY_TIME_ZONE_LABEL})</span></th>
             <th>Status</th>
             <th>Latency</th>
             <th>Source</th>
@@ -220,6 +217,10 @@ const recentHistory = [...site.history].reverse().slice(0, 50);
     color: var(--color-text-secondary); text-transform: uppercase;
     letter-spacing: 0.04em; position: sticky; top: 0;
   }
+
+  /* The zone suffix is a qualifier on the column, not a second label, so it
+     stays in the header's muted colour at a slightly smaller size. */
+  .th-note { font-weight: 400; opacity: 0.75; text-transform: none; }
 
   /*
    * Rows merged in by ExtendedHistory are created at runtime, so they carry no

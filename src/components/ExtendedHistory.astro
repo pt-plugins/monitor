@@ -29,6 +29,7 @@ const { siteId, builtCount } = Astro.props;
           <option value="3">Last 3 months</option>
           <option value="6" selected>Last 6 months</option>
           <option value="12">Last 12 months</option>
+          <option value="all">All history</option>
         </select>
       </label>
       <label class="field field--wide">
@@ -72,6 +73,7 @@ const { siteId, builtCount } = Astro.props;
     TOKEN_STORAGE_KEY,
     contentsApiUrl,
     dailyFilePath,
+    formatCheckTime,
     isWithinHistoryRange,
     monthlyFilePath,
     parseJsonlForSite,
@@ -141,14 +143,9 @@ const { siteId, builtCount } = Astro.props;
     }
 
     function fmtTime(iso: string): string {
-      const d = new Date(iso);
-      if (Number.isNaN(d.getTime())) return iso;
-      return d.toLocaleString("zh-CN", {
-        month: "2-digit",
-        day: "2-digit",
-        hour: "2-digit",
-        minute: "2-digit",
-      });
+      // Shared with the build-time page: formatting in the visitor's own zone
+      // made merged rows disagree with the built-in ones by the UTC offset.
+      return formatCheckTime(iso);
     }
 
     function fmtLatency(ms: number | null): string {
@@ -470,20 +467,29 @@ const { siteId, builtCount } = Astro.props;
       updateTrigger(added);
     }
 
-    function buildTargets(monthsBack: number): string[] {
+    /**
+     * Data files to load for the selected range. `monthsBack` is a count, or
+     * `"all"` to walk back to the earliest month that has data.
+     */
+    function buildTargets(monthsBack: number | "all"): string[] {
       const now = new Date();
       const y = now.getFullYear();
       const m = now.getMonth() + 1; // 1-12
 
       const paths: string[] = [];
-      // Whole past months are already merged into monthly JSONL files.
-      for (let i = 1; i <= monthsBack; i++) {
-        const total = y * 12 + (m - 1) - i;
+      // Whole past months are already merged into monthly JSONL files. "all"
+      // runs back to EARLIEST_YEAR/MONTH instead of a fixed count; the
+      // isWithinHistoryRange guard below stops it at that boundary either way.
+      let back = 1;
+      for (;;) {
+        if (monthsBack !== "all" && back > monthsBack) break;
+        const total = y * 12 + (m - 1) - back;
         const yy = Math.floor(total / 12);
         const mm = (total % 12) + 1;
         // Skip months before the earliest month that has any history data.
         if (!isWithinHistoryRange(yy, mm)) break;
         paths.push(monthlyFilePath(yy, mm));
+        back++;
       }
       // Current month: daily files exist for every completed day (today is still raw).
       for (let day = 1; day < now.getDate(); day++) {
@@ -524,7 +530,8 @@ const { siteId, builtCount } = Astro.props;
       saveToken(token);
       rateLimit = null;
 
-      const monthsBack = Number(monthsInput?.value || "6") || 6;
+      const rangeValue = monthsInput?.value || "6";
+      const monthsBack = rangeValue === "all" ? "all" : Number(rangeValue) || 6;
       const targets = buildTargets(monthsBack);
 
       const merged = new Map<string, HistoryEntry>();
