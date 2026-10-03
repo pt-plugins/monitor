@@ -12,6 +12,9 @@ concurrency:
 jobs:
   monitor:
     runs-on: ubuntu-latest
+    # Guard the shared "uptime-pipeline" concurrency group: a stuck step would
+    # otherwise queue every following scheduled run behind it for hours.
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v7
 
@@ -33,6 +36,7 @@ jobs:
       # runner's native egress (WARP egress gets 403 from cgpeers/passthepopcorn).
       - name: Set up WARP
         uses: fscarmen/warp-on-actions@v1.4
+        timeout-minutes: 6
         with:
           stack: ipv6
           mode: wireguard
