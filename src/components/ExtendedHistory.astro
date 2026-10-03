@@ -9,7 +9,8 @@ const { siteId, builtCount } = Astro.props;
 
 <p class="more-link">
   <button type="button" id="history-open" class="btn btn--ghost" aria-haspopup="dialog">
-    Load Extend History
+    <span id="history-open-label">Load Extended History</span>
+    <span id="history-open-badge" class="more-badge" hidden></span>
   </button>
 </p>
 
@@ -94,6 +95,8 @@ const { siteId, builtCount } = Astro.props;
 
     const dialogEl = document.getElementById("history-dialog") as HTMLDialogElement | null;
     const openBtn = document.getElementById("history-open") as HTMLButtonElement | null;
+    const openLabel = document.getElementById("history-open-label");
+    const openBadge = document.getElementById("history-open-badge");
     const closeBtn = document.getElementById("history-close") as HTMLButtonElement | null;
     const progressEl = document.getElementById("history-progress");
     const progressFill = document.getElementById("history-progress-fill");
@@ -112,6 +115,28 @@ const { siteId, builtCount } = Astro.props;
       const base = STATUS_TEXT[kind] || "";
       statusEl.textContent = detail ? `${base} ${detail}` : base;
       statusEl.dataset.kind = kind;
+    }
+
+    /**
+     * Reflect what has been merged on the trigger that lives outside the dialog,
+     * so the result stays readable after the dialog closes — the page's Checks
+     * History table gains rows at the top, far from the button that loaded them.
+     */
+    function updateTrigger(added: number) {
+      if (openLabel) {
+        openLabel.textContent = added > 0 ? "Update Extended History" : "Extended History";
+      }
+      if (openBadge) {
+        openBadge.hidden = added === 0;
+        openBadge.textContent = added > 0 ? `+${added}` : "";
+      }
+      if (openBtn) {
+        openBtn.dataset.state = added > 0 ? "merged" : "idle";
+        openBtn.title =
+          added > 0
+            ? `${added} fetched records merged into Checks History on this page.`
+            : "No fetched records merged into Checks History yet.";
+      }
     }
 
     function fmtTime(iso: string): string {
@@ -321,14 +346,18 @@ const { siteId, builtCount } = Astro.props;
     }
 
     /**
-     * Fold fetched history into the Checks History table. Entries already
-     * present in the built-in history (same timestamp) are dropped rather than
-     * duplicated, and the merged list is ordered by absolute instant so a
-     * December entry never sorts after the following January.
+     * Fold fetched history into the Checks History table and report what was
+     * actually new. Entries already present in the built-in history (same
+     * timestamp) are dropped rather than duplicated, and the merged list is
+     * ordered by absolute instant so a December entry never sorts after the
+     * following January.
      */
-    function mergeIntoRecentChecks(entries: HistoryEntry[]) {
+    function mergeIntoRecentChecks(entries: HistoryEntry[]): {
+      added: number;
+      duplicates: number;
+    } {
       const tbody = document.getElementById("recent-checks-body");
-      if (!tbody) return;
+      if (!tbody) return { added: 0, duplicates: 0 };
 
       const builtInIso = new Set<string>();
       tbody.querySelectorAll<HTMLTableRowElement>("tr[data-ts]").forEach((tr) => {
@@ -346,7 +375,7 @@ const { siteId, builtCount } = Astro.props;
         })
         .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
 
-      if (merged.length === 0) return;
+      if (merged.length === 0) return { added: 0, duplicates: entries.length };
 
       const frag = document.createDocumentFragment();
       for (const e of merged) {
@@ -380,13 +409,25 @@ const { siteId, builtCount } = Astro.props;
         return tb - ta;
       });
       for (const tr of rows) tbody.appendChild(tr);
+
+      return { added: merged.length, duplicates: entries.length - merged.length };
     }
 
-    function render(entries: HistoryEntry[]) {
+    /**
+     * `loaded` records came back for this site; only `added` of them were new
+     * rows. The trigger badge reports the additions, the summary the split, so
+     * "merged" never overstates what the table actually gained.
+     */
+    function render(entries: HistoryEntry[], loaded: number) {
+      const { added, duplicates } = mergeIntoRecentChecks(entries);
+
       if (summaryEl) {
-        summaryEl.textContent = `${entries.length} records merged into Checks History (${builtCount} built-in).`;
+        const parts = [`${added} of ${loaded} records merged into Checks History`];
+        if (duplicates > 0) parts.push(`${duplicates} already listed`);
+        summaryEl.textContent = `${parts.join(" · ")} (${builtCount} built-in).`;
       }
-      mergeIntoRecentChecks(entries);
+
+      updateTrigger(added);
     }
 
     function buildTargets(monthsBack: number): string[] {
@@ -491,8 +532,10 @@ const { siteId, builtCount } = Astro.props;
       }
 
       const entries = [...merged.values()];
-      render(entries);
+      render(entries, entries.length);
 
+      // Only an explicit load replaces the error wording; the cache-only pass
+      // stays silent so page entry never reads like a failure.
       const parts: string[] = [`${entries.length} records`];
       if (fetched > 0) parts.push(`${fetched} files fetched`);
       if (fromCache > 0) parts.push(`${fromCache} from cache`);
@@ -540,18 +583,29 @@ const { siteId, builtCount } = Astro.props;
       }
       if (summaryEl) summaryEl.textContent = "";
       setStatus("idle", `Cleared ${removed} cached file(s).`);
+      // The rows already merged into the table stay there, but nothing is
+      // "loaded" any more — the trigger returns to its pre-load wording.
+      updateTrigger(0);
     }
 
     // Restore a previously saved token.
     const savedToken = loadSavedToken();
     if (savedToken && tokenInput) tokenInput.value = savedToken;
 
+    /**
+     * Automatic merging is only for visitors who never fetched with a token.
+     * Once a token is saved the cache can hold a year of records, and merging it
+     * unasked would run on every page entry. With a token, history loads only
+     * after an explicit **Load history** click.
+     */
+    const autoMergeEnabled = savedToken === "";
+
     loadBtn?.addEventListener("click", () => void load());
     clearBtn?.addEventListener("click", clearCache);
     openBtn?.addEventListener("click", () => {
       dialogEl?.showModal();
       // First open with an empty view: pull anything already cached.
-      if (summaryEl && !summaryEl.textContent) void autoLoadFromCache();
+      if (autoMergeEnabled && summaryEl && !summaryEl.textContent) void autoLoadFromCache();
     });
     closeBtn?.addEventListener("click", () => dialogEl?.close());
     // Click outside the panel (on the backdrop) closes the dialog.
@@ -559,14 +613,35 @@ const { siteId, builtCount } = Astro.props;
       if (ev.target === dialogEl) dialogEl.close();
     });
 
-    // On page entry, if history is already cached, load it without touching
-    // the network. A saved token alone is not enough to trigger a fetch.
-    void autoLoadFromCache();
+    // On page entry, load cached history without touching the network — but
+    // only when no token is saved (see autoMergeEnabled above).
+    if (autoMergeEnabled) void autoLoadFromCache();
   })();
 </script>
 
 <style>
   .more-link { margin-top: 0.75rem; text-align: right; font-size: 0.8rem; }
+
+  /* The trigger goes from a dashed "load" affordance to a solid "already
+     merged" state, so the page reads as loaded after the dialog is closed. */
+  #history-open[data-state="merged"] {
+    color: var(--color-text);
+    border-color: var(--color-up);
+    border-style: solid;
+  }
+
+  .more-badge {
+    display: inline-block;
+    margin-left: 0.4rem;
+    padding: 0.05rem 0.35rem;
+    border-radius: 999px;
+    background: var(--color-up);
+    color: #fff;
+    font-size: 0.7rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .more-badge[hidden] { display: none; }
 
   .btn {
     padding: 0.4rem 0.9rem;

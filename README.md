@@ -52,7 +52,9 @@ is merged into the page's *Checks History* table, which is the single place reco
   reachable. Sites with little or no built-in history can still pull their full history from the repository.
 
 - On page entry the dialog loads whatever is already in the cache, **without any network request**. It only fetches
-  after an explicit **Load** click, so opening a site page never spends API quota.
+  after an explicit **Load** click, so opening a site page never spends API quota. This cache merge is skipped when a
+  GitHub token is saved: a token makes the cache grow to the full fetched range, so with one, history loads only after
+  a **Load history** click.
 - Loading reports per-file progress (`n/total · 2026/08 monthly`, `n/total · 2026/09/28 daily`).
 - Fetched records are merged into *Checks History*, deduplicated by timestamp and ordered by absolute instant (so
   ordering stays correct across a year boundary).
