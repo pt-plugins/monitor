@@ -68,6 +68,7 @@ const { siteId, builtCount } = Astro.props;
   import {
     CACHE_NAME,
     HISTORY_DATA_DIR,
+    LEGACY_CACHE_PREFIX,
     TOKEN_STORAGE_KEY,
     contentsApiUrl,
     dailyFilePath,
@@ -182,30 +183,56 @@ const { siteId, builtCount } = Astro.props;
     // which case caching silently degrades to "always fetch".
     const cacheStorageAvailable = typeof caches !== "undefined";
 
-    async function cacheGet(path: string): Promise<HistoryEntry[] | null> {
+    /**
+     * A cached file holds the raw JSONL body exactly as the API returned it,
+     * unfiltered. Filtering to the current site happens after the read, so one
+     * cache entry serves every site that shares the file — keying on a filtered
+     * payload is what previously let one site render another site's rows.
+     *
+     * The body is read through a clone: a Response body can only be consumed
+     * once, and `cache.match()` hands back the stored object itself, so reading
+     * it directly would leave the entry unusable and make every later read look
+     * like a miss.
+     */
+    async function cacheGetText(path: string): Promise<string | null> {
       if (!cacheStorageAvailable) return null;
       try {
         const cache = await caches.open(CACHE_NAME);
         const hit = await cache.match(contentsApiUrl(path));
         if (!hit) return null;
-        return (await hit.json()) as HistoryEntry[];
+        return await hit.clone().text();
       } catch {
         return null;
       }
     }
 
-    async function cacheSet(path: string, entries: HistoryEntry[]) {
+    async function cacheSetText(path: string, text: string) {
       if (!cacheStorageAvailable) return;
       try {
         const cache = await caches.open(CACHE_NAME);
         await cache.put(
           contentsApiUrl(path),
-          new Response(JSON.stringify(entries), {
-            headers: { "Content-Type": "application/json" },
+          new Response(text, {
+            headers: { "Content-Type": "application/vnd.github.v3.raw" },
           }),
         );
       } catch {
         // Quota exceeded or storage disabled — fetching still works.
+      }
+    }
+
+    /**
+     * Remove cache buckets written by earlier versions. Their entries stored a
+     * payload already filtered to one site under a site-specific key, which is
+     * incompatible with the raw-body format above.
+     */
+    async function dropLegacyCaches() {
+      if (!cacheStorageAvailable) return;
+      try {
+        const names = await caches.keys();
+        await Promise.all(names.filter((n) => n.startsWith(LEGACY_CACHE_PREFIX)).map((n) => caches.delete(n)));
+      } catch {
+        // Nothing to clean up, or storage is unavailable.
       }
     }
 
@@ -315,7 +342,11 @@ const { siteId, builtCount } = Astro.props;
     /** Last observed rate-limit state, surfaced in the status line. */
     let rateLimit: { remaining: number; limit: number } | null = null;
 
-    async function fetchFile(path: string, token: string): Promise<HistoryEntry[]> {
+    /**
+     * Fetch a data file and cache its raw body. Returns the bytes so the caller
+     * can filter for the current site; the cache never holds filtered data.
+     */
+    async function fetchFileText(path: string, token: string): Promise<string> {
       const headers: Record<string, string> = {
         // `.raw` returns the file body directly instead of base64 JSON, and
         // lifts the 1 MB inline-content limit.
@@ -333,16 +364,15 @@ const { siteId, builtCount } = Astro.props;
       }
 
       // A month/day that never existed is "no data", not a failure.
-      if (res.status === 404) return [];
+      if (res.status === 404) return "";
       if (res.status === 403 || res.status === 429) {
         throw new Error("rate-limited");
       }
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
       const text = await res.text();
-      const entries = parseJsonlForSite(text, siteId);
-      await cacheSet(path, entries);
-      return entries;
+      await cacheSetText(path, text);
+      return text;
     }
 
     /**
@@ -501,10 +531,11 @@ const { siteId, builtCount } = Astro.props;
         const label = pathLabel(path);
         setProgress(i, targets.length, label);
 
-        const cached = await cacheGet(path);
-        if (cached) {
+        // The cache always holds the full file body, so the site filter runs
+        // here, on the way out, for both cache hits and fresh fetches.
+        let text = await cacheGetText(path);
+        if (text !== null) {
           fromCache++;
-          for (const e of cached) merged.set(entryKey(e), e);
         } else {
           // The cache-only pass on page entry never fetches.
           if (auto) {
@@ -512,9 +543,8 @@ const { siteId, builtCount } = Astro.props;
             continue;
           }
           try {
-            const entries = await fetchFile(path, token);
+            text = await fetchFileText(path, token);
             fetched++;
-            for (const e of entries) merged.set(entryKey(e), e);
           } catch (err) {
             const msg = err instanceof Error ? err.message : String(err);
             if (msg === "rate-limited") rateLimited = true;
@@ -522,6 +552,10 @@ const { siteId, builtCount } = Astro.props;
             // Once the API refuses, the remaining requests would fail too.
             if (rateLimited) break;
           }
+        }
+
+        if (text) {
+          for (const e of parseJsonlForSite(text, siteId)) merged.set(entryKey(e), e);
         }
 
         if (!isDailyPath(path)) monthlySeen.push(path);
@@ -613,9 +647,14 @@ const { siteId, builtCount } = Astro.props;
       if (ev.target === dialogEl) dialogEl.close();
     });
 
-    // On page entry, load cached history without touching the network — but
-    // only when no token is saved (see autoMergeEnabled above).
-    if (autoMergeEnabled) void autoLoadFromCache();
+    // Purge pre-v2 buckets before anything reads the cache, so a stale bucket
+    // can never be mistaken for current data. Runs on every page entry and is
+    // cheap once the buckets are gone.
+    void dropLegacyCaches().then(() => {
+      // On page entry, load cached history without touching the network — but
+      // only when no token is saved (see autoMergeEnabled above).
+      if (autoMergeEnabled) void autoLoadFromCache();
+    });
   })();
 </script>
 

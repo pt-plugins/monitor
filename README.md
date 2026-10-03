@@ -65,8 +65,12 @@ is merged into the page's *Checks History* table, which is the single place reco
 - Fetched with `fetch()` from the GitHub REST API (`api.github.com/repos/.../contents/...`), requesting the
   `application/vnd.github.v3.raw` media type so the file body is returned directly; then filtered to the current
   site's runs. `raw.githubusercontent.com` is never used.
-- Each fetched file is cached with the **Cache API** (`caches.open("ptd-monitor-history-v1")`), keyed by its API URL,
-  including an empty result, so repeated loads and other sites sharing the same file do not re-download it.
+- Each fetched file is cached with the **Cache API** (`caches.open("ptd-monitor-history-v2")`) under its plain API
+  URL, holding the **raw JSONL body exactly as returned**, including an empty result. Filtering to the current site
+  happens after the read, so one entry serves every site sharing that file and repeated loads never re-download it.
+  Caching a pre-filtered payload under a per-site key is what once let a site render another site's rows.
+- Buckets from the older layout (`ptd-monitor-history-v1*`) are deleted automatically on first load; their entries
+  cannot be read by the current code.
 - Once a month's `MM.jsonl` is confirmed present, that month's cached **daily** files are deleted as redundant. This
   is driven by the monthly file actually being observed, never by guessing from the calendar date.
 - **Clear cache** deletes the whole history cache bucket.

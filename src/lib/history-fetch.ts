@@ -13,8 +13,18 @@ export const HISTORY_DATA_DIR = "data/uptime";
 export const EARLIEST_YEAR = 2026;
 export const EARLIEST_MONTH = 6;
 
-/** Cache API bucket for history payloads. */
-export const CACHE_NAME = "ptd-monitor-history-v1";
+/**
+ * Cache API bucket for history payloads. Entries hold the raw JSONL body of a
+ * data file, unfiltered, so one entry serves every site that shares the file.
+ */
+export const CACHE_NAME = "ptd-monitor-history-v2";
+
+/**
+ * Buckets from earlier versions. They stored a payload already filtered to one
+ * site under a site-specific key, so they cannot be read by the current code
+ * and are deleted on first load.
+ */
+export const LEGACY_CACHE_PREFIX = "ptd-monitor-history-v1";
 
 /** localStorage key holding the optional GitHub token. */
 export const TOKEN_STORAGE_KEY = "ptd-monitor:gh-token";
