@@ -1,9 +1,15 @@
 ---
 export interface Props {
   title: string;
+  /**
+   * The header filter searches the site cards on the index page. Pages that
+   * render no cards (site detail pages) turn it off instead of showing an input
+   * that can never match anything.
+   */
+  showFilter?: boolean;
 }
 
-const { title } = Astro.props;
+const { title, showFilter = true } = Astro.props;
 ---
 
 <!doctype html>
@@ -22,10 +28,10 @@ const { title } = Astro.props;
           <img src="/monitor/icons/logo.svg" alt="" width="24" height="24" class="logo-icon" />
           <span class="logo-text">PT Site Status</span>
         </a>
-        <button class="search-toggle" id="search-toggle" aria-label="Toggle search" type="button">
+        <button class="search-toggle" id="search-toggle" aria-label="Toggle search" type="button" hidden={!showFilter}>
           <img src="/monitor/icons/search.svg" alt="Search" width="20" height="20" class="search-icon" />
         </button>
-        <div class="header-search" id="header-search">
+        <div class="header-search" id="header-search" hidden={!showFilter}>
           <input
             type="search"
             id="filter"
@@ -214,6 +220,17 @@ const { title } = Astro.props;
     background: var(--color-bg);
   }
 
+  /*
+   * The hidden attribute is how a page opts out of the filter (site detail
+   * pages). The flex rules below would otherwise beat the UA `display: none`,
+   * so it is repeated here — on mobile `.header-search` is only shown when it
+   * carries `.open`, which a hidden element can never get.
+   */
+  .search-toggle[hidden],
+  .header-search[hidden] {
+    display: none;
+  }
+
   .header-search {
     display: flex;
     align-items: center;
@@ -302,7 +319,7 @@ const { title } = Astro.props;
 
   /* Mobile: icon toggle, search overlay */
   @media (max-width: 640px) {
-    .search-toggle {
+    .search-toggle:not([hidden]) {
       display: flex;
     }
 

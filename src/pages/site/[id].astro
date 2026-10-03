@@ -52,7 +52,7 @@ function fmtUptime(pct: number): string {
 const recentHistory = [...site.history].reverse().slice(0, 50);
 ---
 
-<Layout title={site.name}>
+<Layout title={site.name} showFilter={false}>
   <div class="detail-header">
     <div class="detail-title">
       <h1>
