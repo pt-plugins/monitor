@@ -119,6 +119,7 @@ const recentHistory = [...site.history].reverse().slice(0, 50);
             <th>Time</th>
             <th>Status</th>
             <th>Latency</th>
+            <th>Source</th>
           </tr>
         </thead>
         <tbody id="recent-checks-body">
@@ -127,6 +128,7 @@ const recentHistory = [...site.history].reverse().slice(0, 50);
               <td class="td-time">{fmtTime(entry.timestamp)}</td>
               <td><StatusBadge status={entry.status} size="sm" /></td>
               <td class="td-latency">{fmtLatency(entry.latency)}</td>
+              <td class="td-source"><span class="source-tag source-tag--builtin">Built</span></td>
             </tr>
           ))}
         </tbody>
@@ -233,6 +235,47 @@ const recentHistory = [...site.history].reverse().slice(0, 50);
   }
 
   :global(.td-latency) { font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+  :global(.td-source) { white-space: nowrap; }
+
+  /*
+   * Source tag: distinguishes records fetched on demand by Extended History
+   * from the ones the build embedded. Built-in rows get their tag in the
+   * template; merged rows are created at runtime, so every rule they need is
+   * global.
+   */
+  :global(.source-tag) {
+    display: inline-block;
+    padding: 0.05em 0.45em;
+    border-radius: 999px;
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    border: 1px solid transparent;
+  }
+
+  :global(.source-tag--builtin) {
+    color: var(--color-text-secondary);
+    border-color: var(--color-border);
+    background: var(--color-bg);
+  }
+
+  :global(.source-tag--fetched) {
+    color: var(--color-link);
+    border-color: color-mix(in srgb, var(--color-link) 40%, transparent);
+    background: color-mix(in srgb, var(--color-link) 10%, transparent);
+  }
+
+  /* A fetched row also carries a tint and a leading accent, so the two kinds of
+     row are told apart at a glance and not only by reading the tag. */
+  :global(#recent-checks-body tr[data-source="fetched"]) {
+    background: color-mix(in srgb, var(--color-link) 5%, transparent);
+  }
+
+  :global(#recent-checks-body tr[data-source="fetched"] td:first-child) {
+    box-shadow: inset 2px 0 0 var(--color-link);
+  }
 
   .empty { text-align: center; padding: 1rem; color: var(--color-text-secondary); font-size: 0.85rem; }
 

@@ -52,7 +52,7 @@ const { siteId, builtCount } = Astro.props;
         break that sits next to an inline tag, which jams the words together
         (e.g. "from" + the data/uptime link). */}
     <p class="history-note">
-      Fetches merged daily/monthly JSONL files from <a href="https://github.com/pt-plugins/monitor/tree/main/data/uptime" target="_blank" rel="noopener">data/uptime</a> through the GitHub REST API and caches each file with the Cache API. Fetched records are merged into the <strong>Checks History</strong> list on this page, deduplicated by timestamp — close this dialog to read them. The optional token is stored in this browser and raises the API rate limit from 60 to 5000 requests per hour. History starts at 2026-06, the earliest month with merged data. <a href="https://github.com/pt-plugins/monitor/tree/main/data/uptime/" target="_blank" rel="noopener">View full history on GitHub →</a>
+      Fetches merged daily/monthly JSONL files from <a href="https://github.com/pt-plugins/monitor/tree/main/data/uptime" target="_blank" rel="noopener">data/uptime</a> through the GitHub REST API and caches each file with the Cache API. Fetched records are merged into the <strong>Checks History</strong> list on this page, deduplicated by timestamp — close this dialog to read them. Merged rows are marked <strong>Fetched</strong> in the Source column so they are never mistaken for the records the build embedded; the page's own rows read <strong>Built</strong>. The optional token is stored in this browser and raises the API rate limit from 60 to 5000 requests per hour. History starts at 2026-06, the earliest month with merged data. <a href="https://github.com/pt-plugins/monitor/tree/main/data/uptime/" target="_blank" rel="noopener">View full history on GitHub →</a>
     </p>
 
     <p id="history-status" class="history-status" data-kind="idle" aria-live="polite"></p>
@@ -426,6 +426,16 @@ const { siteId, builtCount } = Astro.props;
         tdLatency.className = "td-latency";
         tdLatency.textContent = fmtLatency(e.latency);
         tr.appendChild(tdLatency);
+
+        // Mirrors the built-in rows' Source cell, which carries "Built".
+        const tdSource = document.createElement("td");
+        tdSource.className = "td-source";
+        const tag = document.createElement("span");
+        tag.className = "source-tag source-tag--fetched";
+        tag.textContent = "Fetched";
+        tag.title = "Loaded on demand by Extended History, not part of the built page.";
+        tdSource.appendChild(tag);
+        tr.appendChild(tdSource);
 
         frag.appendChild(tr);
       }
