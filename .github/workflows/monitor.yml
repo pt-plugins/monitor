@@ -35,7 +35,7 @@ jobs:
         run: pnpm monitor
 
       - name: Commit results
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: stefanzweifel/git-auto-commit-action@v7
         with:
           commit_message: "monitor: [auto] uptime monitoring run"
           file_pattern: "data/"
