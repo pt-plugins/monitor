@@ -1,6 +1,7 @@
 ---
 // site/src/components/SiteCard.astro
 import type { SiteSummary } from "../lib/types";
+import { decodeUrl } from "../lib/site-url.mjs";
 import StatusBadge from "./StatusBadge.astro";
 
 export interface Props {
@@ -8,17 +9,6 @@ export interface Props {
 }
 
 const { site } = Astro.props;
-
-function rot13(str: string): string {
-  return str.replace(/[a-zA-Z]/g, (c) => {
-    const base = c <= "Z" ? 65 : 97;
-    return String.fromCharCode(((c.charCodeAt(0) - base + 13) % 26) + base);
-  });
-}
-
-function decodeUrl(url: string): string {
-  return /^uggcf?:\/\//i.test(url) ? rot13(url) : url;
-}
 
 function fmtLatency(ms: number | null): string {
   if (ms === null) return "—";

@@ -3,7 +3,11 @@
 
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
-import type { MonitorRun, SiteDefinition, SiteResult, SiteSummary } from "./types";
+import type { DailyCheckCount, MonitorRun, SiteDefinition, SiteResult, SiteSummary } from "./types";
+// Plain ESM rather than a sibling .ts module: scripts/monitor.mjs decodes the
+// same URLs and cannot import TypeScript on the Node version this package
+// declares support for.
+import { decodeUrl } from "./site-url.mjs";
 
 const DATA_DIR = join(process.cwd(), "data");
 const UPTIME_DIR = join(DATA_DIR, "uptime");
@@ -71,6 +75,7 @@ let cachedRuns: MonitorRun[] | undefined;
 let cachedSiteDefinitions: SiteDefinition[] | undefined;
 let cachedSummaries: SiteSummary[] | undefined;
 let cachedLatestTimestamp: string | null | undefined;
+let cachedDailyCheckCounts: DailyCheckCount[] | undefined;
 let cachedIconSet: Map<string, string> | undefined;
 
 function parseJsonLines(content: string): MonitorRun[] {
@@ -242,6 +247,51 @@ export function getLatestTimestamp(): string | null {
   return cachedLatestTimestamp;
 }
 
+/** The following UTC calendar day. */
+function nextDay(day: string): string {
+  const d = new Date(`${day}T00:00:00Z`);
+  d.setUTCDate(d.getUTCDate() + 1);
+  return d.toISOString().slice(0, 10);
+}
+
+/**
+ * Monitor runs per UTC calendar day, oldest first and contiguous, for the
+ * dashboard heatmap.
+ *
+ * Days are bucketed on the date part of the run timestamp — the same UTC day
+ * boundary computeDailyStatus and DISPLAY_TIME_ZONE use — so "a day" means the
+ * same span everywhere on the page.
+ *
+ * A day with no run is kept as 0 rather than dropped: on a monitor dashboard a
+ * silent day is the finding, not an absence to hide. The series is extended to
+ * today even when monitoring stopped earlier, so a lapse shows as trailing
+ * empty days instead of the window quietly shrinking to the last run.
+ */
+export function computeDailyCheckCounts(): DailyCheckCount[] {
+  if (cachedDailyCheckCounts) return cachedDailyCheckCounts;
+
+  const byDay = new Map<string, number>();
+  for (const run of loadAllMonitorRuns()) {
+    const day = run.timestamp.slice(0, 10);
+    byDay.set(day, (byDay.get(day) ?? 0) + 1);
+  }
+
+  const days = [...byDay.keys()].sort();
+  const series: DailyCheckCount[] = [];
+  if (days.length > 0) {
+    const today = new Date().toISOString().slice(0, 10);
+    const newest = days[days.length - 1];
+    // ISO dates compare correctly as plain strings.
+    const end = newest > today ? newest : today;
+    for (let day = days[0]; day <= end; day = nextDay(day)) {
+      series.push({ date: day, count: byDay.get(day) ?? 0 });
+    }
+  }
+
+  cachedDailyCheckCounts = series;
+  return series;
+}
+
 export function computeSiteSummaries(): SiteSummary[] {
   if (cachedSummaries) return cachedSummaries;
 
@@ -284,6 +334,8 @@ export function computeSiteSummaries(): SiteSummary[] {
       favicon: site.favicon, faviconUrl: resolveFaviconUrl(site, iconSet),
       isDead: site.isDead,
       currentStatus, currentLatency,
+      // Decoded here, once per site: the definition stores these ROT13-encoded.
+      primaryUrl: site.urls.length > 0 ? decodeUrl(site.urls[0]) : null,
       uptime24h: u24.uptime, uptime7d: u7d.uptime, uptime30d: u30d.uptime,
       avgLatency24h: avgLat,
       dailyStatus,

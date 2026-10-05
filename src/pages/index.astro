@@ -1,10 +1,13 @@
 ---
 import Layout from "../components/Layout.astro";
 import SiteCard from "../components/SiteCard.astro";
-import { computeSiteSummaries, getLatestTimestamp } from "../lib/data-loader";
+import CheckHeatmap from "../components/CheckHeatmap.astro";
+import { computeDailyCheckCounts, computeSiteSummaries, getLatestTimestamp } from "../lib/data-loader";
+import { DISPLAY_TIME_ZONE_LABEL, formatCheckTime } from "../lib/history-fetch";
 
 const summaries = computeSiteSummaries();
 const latestTimestamp = getLatestTimestamp();
+const checkCounts = computeDailyCheckCounts();
 
 const total = summaries.length;
 const upCount = summaries.filter((s) => s.currentStatus === "up").length;
@@ -15,48 +18,53 @@ const activeSites = summaries.filter((s) => s.currentStatus !== "dead");
 const deadSites = summaries.filter((s) => s.currentStatus === "dead");
 
 function formatTime(iso: string | null): string {
-  if (!iso) return "N/A";
-  const d = new Date(iso);
-  return d.toLocaleString("zh-CN", {
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-    hour: "2-digit",
-    minute: "2-digit",
-    timeZoneName: "short",
-  });
+  // Rendered in the fixed zone every other check timestamp on the site uses
+  // (see history-fetch). Formatting in the runtime's own zone made this line
+  // read GMT+8 off a build machine in Asia/Shanghai and UTC in CI.
+  return iso ? formatCheckTime(iso) : "N/A";
 }
 ---
 
 <Layout title="Dashboard">
-  <div class="dashboard-header">
-    <p class="updated">
-      Last updated: <time datetime={latestTimestamp ?? ""}>{formatTime(latestTimestamp)}</time>
-    </p>
-  </div>
+  {/* The summary block and the check heatmap are one panel: "how are the
+      checks doing" is a single question, answered by the current numbers and
+      the shape of the recent activity together. */}
+  <section class="section">
+    <div class="section-head">
+      <h2 class="section-title">Checks Status</h2>
+      <p class="updated">
+        Last updated: <time datetime={latestTimestamp ?? ""}>{formatTime(latestTimestamp)}</time>
+        {latestTimestamp && <span class="updated-zone">({DISPLAY_TIME_ZONE_LABEL})</span>}
+      </p>
+    </div>
 
-  <div class="stats-bar">
-    <div class="stat-item stat-item--total">
-      <span class="stat-number">{total}</span>
-      <span class="stat-label">Sites</span>
+    <div class="checks-panel">
+      <div class="stats-bar">
+        <div class="stat-item stat-item--total">
+          <span class="stat-number">{total}</span>
+          <span class="stat-label">Sites</span>
+        </div>
+        <div class="stat-item stat-item--up">
+          <span class="stat-number">{upCount}</span>
+          <span class="stat-label">Up</span>
+        </div>
+        <div class="stat-item stat-item--down">
+          <span class="stat-number">{downCount}</span>
+          <span class="stat-label">Down</span>
+        </div>
+        <div class="stat-item stat-item--dead">
+          <span class="stat-number">{deadCount}</span>
+          <span class="stat-label">Dead</span>
+        </div>
+        <div class="stat-item stat-item--uptime">
+          <span class="stat-number">{overallUptime}%</span>
+          <span class="stat-label">Uptime</span>
+        </div>
+      </div>
+
+      {checkCounts.length > 0 && <CheckHeatmap days={checkCounts} />}
     </div>
-    <div class="stat-item stat-item--up">
-      <span class="stat-number">{upCount}</span>
-      <span class="stat-label">Up</span>
-    </div>
-    <div class="stat-item stat-item--down">
-      <span class="stat-number">{downCount}</span>
-      <span class="stat-label">Down</span>
-    </div>
-    <div class="stat-item stat-item--dead">
-      <span class="stat-number">{deadCount}</span>
-      <span class="stat-label">Dead</span>
-    </div>
-    <div class="stat-item stat-item--uptime">
-      <span class="stat-number">{overallUptime}%</span>
-      <span class="stat-label">Uptime</span>
-    </div>
-  </div>
+  </section>
 
   {
     summaries.length === 0 ? (
@@ -89,13 +97,23 @@ function formatTime(iso: string | null): string {
 </Layout>
 
 <style>
-  .dashboard-header {
+  /* Heading row: the section title and the "last updated" stamp share one rule,
+     so the stamp belongs to the block it dates rather than floating above it. */
+  .section-head {
     display: flex;
     align-items: baseline;
-    justify-content: flex-end;
+    justify-content: space-between;
+    gap: 0.25rem 1rem;
     flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 0.35rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .section-head .section-title {
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 0;
   }
 
   .updated {
@@ -103,22 +121,64 @@ function formatTime(iso: string | null): string {
     color: var(--color-text-secondary);
   }
 
-  .stats-bar {
+  /* Names the zone the timestamp is in, as the Checks History column header
+     does — the value alone cannot say which zone it is. */
+  .updated-zone { opacity: 0.75; }
+
+  /* The two blocks keep their natural size and are centred as a pair, with the
+     spare width left on both sides. Growing them only produced wide, empty
+     tiles, and pushing them to the edges opened a hole between them. */
+  .checks-panel {
     display: flex;
-    gap: 1rem;
     flex-wrap: wrap;
+    /* Stretch, not flex-start: side by side, the two blocks then share one
+       bottom edge instead of a ragged step. A wrapped line holds a single item,
+       whose height is its own, so this only affects that row. */
+    align-items: stretch;
     justify-content: center;
-    margin-bottom: 1.5rem;
+    gap: 1.5rem;
+  }
+
+  /* Two tiles to a line in the sidebar, five when the counters own a wide line
+     — never three or four: four counters do not divide evenly into those, and
+     the leftover tile leaves a hole. Thresholds are rem so they track the
+     reader's font size, which is what the tiles scale with. */
+  .stats-bar {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+    width: 17.5rem;
+    flex: 0 0 auto;
+  }
+
+  /* Uptime closes the block as a full-width summary tile. */
+  .stat-item--uptime {
+    grid-column: 1 / -1;
+  }
+
+  /* Stacked panel: the counters own the whole line. */
+  @media (max-width: 55rem) {
+    .stats-bar { width: 100%; }
+  }
+
+  /* Five even tiles fit, so Uptime takes its place in the row rather than
+     stretching into a banner the width of the card. */
+  @media (min-width: 36rem) and (max-width: 55rem) {
+    .stats-bar { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+    .stat-item--uptime { grid-column: auto; }
   }
 
   .stat-item {
     background: var(--color-surface);
     border-radius: var(--radius);
-    padding: 0.75rem 1.25rem;
+    padding: 0.55rem 1rem;
     box-shadow: var(--shadow);
     border: 1px solid var(--color-border);
     text-align: center;
-    min-width: 80px;
+    min-width: 0;
+    /* The tile's own line box would otherwise be set by the body's 1.6 strut,
+       adding ~10px under a label that is already single-line. */
+    line-height: 1.1;
   }
 
   .stat-number {
@@ -131,6 +191,7 @@ function formatTime(iso: string | null): string {
 
   .stat-label {
     font-size: 0.7rem;
+    line-height: 1.4;
     color: var(--color-text-secondary);
     text-transform: uppercase;
     letter-spacing: 0.05em;

@@ -5,6 +5,7 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import PQueue from "p-queue";
+import { decodeUrl } from "../src/lib/site-url.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "..");
@@ -16,19 +17,6 @@ const REQUEST_TIMEOUT_MS = 15_000;
 const MAX_RETRIES = 3;
 const RETRY_DELAY_MS = 2_000;
 const OVERRIDES_FILE = join(DATA_DIR, "request-overrides.json");
-
-// ROT13 decode: each alphabetic char shifted by 13, preserving case
-function rot13(str) {
-  return str.replace(/[a-zA-Z]/g, (c) => {
-    const base = c <= "Z" ? 65 : 97;
-    return String.fromCharCode(((c.charCodeAt(0) - base + 13) % 26) + base);
-  });
-}
-
-// Decode a URL if it looks rot13-encoded (starts with uggcf:// or uggc://)
-function decodeUrl(str) {
-  return /^uggcf?:\/\//i.test(str) ? rot13(str) : str;
-}
 
 // Sleep helper
 function sleep(ms) {

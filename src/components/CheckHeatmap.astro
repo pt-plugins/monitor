@@ -1,0 +1,347 @@
+---
+// site/src/components/CheckHeatmap.astro
+// Contribution-graph style calendar of monitor activity: one cell per UTC day.
+import type { DailyCheckCount } from "../lib/types";
+
+interface Props {
+  /**
+   * Monitor runs per UTC calendar day, oldest first and contiguous — the shape
+   * computeDailyCheckCounts returns. Must not be empty.
+   */
+  days: DailyCheckCount[];
+  /** Weeks of history to show; anything older falls out of the window. */
+  weeks?: number;
+}
+
+const { days, weeks = 26 } = Astro.props;
+
+const MS_PER_DAY = 86_400_000;
+const MONTH_NAMES = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+/** Labels sit on Mon/Wed/Fri; the empty strings keep all seven rows aligned. */
+const WEEKDAY_LABELS = ["Mon", "", "Wed", "", "Fri", "", ""];
+const LEGEND_LEVELS = [0, 1, 2, 3, 4];
+
+/** Monday-first weekday index: 0 = Monday … 6 = Sunday. */
+function weekdayIndex(ms: number): number {
+  return (new Date(ms).getUTCDay() + 6) % 7;
+}
+
+function utcMs(date: string): number {
+  return Date.parse(`${date}T00:00:00Z`);
+}
+
+function isoDay(ms: number): string {
+  return new Date(ms).toISOString().slice(0, 10);
+}
+
+/**
+ * 0 = no runs, 4 = the busiest day in the window. The ramp is relative, the way
+ * a contribution graph's is: monitor cadence has varied by an order of magnitude
+ * over the project's life, and fixed thresholds would flatten whole months into
+ * one colour.
+ */
+function levelOf(count: number, peak: number): number {
+  if (count <= 0) return 0;
+  if (peak <= 1) return 4;
+  return Math.min(4, Math.max(1, Math.ceil((count / peak) * 4)));
+}
+
+interface Cell {
+  date: string;
+  /** null outside the recorded range; drawn as an outline placeholder. */
+  count: number | null;
+  level: number;
+}
+
+// Window: the newest `weeks` weeks, widened to whole weeks so every column is a
+// Monday-to-Sunday block.
+const visible = days.slice(Math.max(0, days.length - weeks * 7));
+const firstMs = utcMs(visible[0].date);
+const lastMs = utcMs(visible[visible.length - 1].date);
+const gridStartMs = firstMs - weekdayIndex(firstMs) * MS_PER_DAY;
+const gridEndMs = lastMs + (6 - weekdayIndex(lastMs)) * MS_PER_DAY;
+// Both ends are week-aligned, so the day count is always a whole number of weeks.
+const weekCount = (Math.round((gridEndMs - gridStartMs) / MS_PER_DAY) + 1) / 7;
+
+const countByDay = new Map(visible.map((d) => [d.date, d.count]));
+const total = visible.reduce((sum, d) => sum + d.count, 0);
+const peakDay = visible.reduce((best, d) => (d.count > best.count ? d : best));
+const peak = peakDay.count;
+
+const cells: Cell[] = [];
+for (let ms = gridStartMs; ms <= gridEndMs; ms += MS_PER_DAY) {
+  const date = isoDay(ms);
+  const count = countByDay.get(date) ?? null;
+  cells.push({ date, count, level: count === null ? 0 : levelOf(count, peak) });
+}
+
+/**
+ * One label per month, on the column where that month starts. The first column
+ * has no month start to find when the data begins mid-month, so it takes the
+ * month of its first recorded day. Two labels a single column apart would touch
+ * at this size, and the later month is the one worth naming, so it takes the
+ * place of the label it collides with — dropping the later one instead would
+ * leave a five-week stretch reading as the month before it.
+ */
+const monthLabels: Array<{ week: number; label: string }> = [];
+for (let week = 0; week < weekCount; week++) {
+  const weekStartMs = gridStartMs + week * 7 * MS_PER_DAY;
+  let month = -1;
+  for (let d = 0; d < 7; d++) {
+    const day = new Date(weekStartMs + d * MS_PER_DAY);
+    if (day.getUTCDate() === 1) month = day.getUTCMonth();
+  }
+  if (month === -1 && week === 0) month = new Date(firstMs).getUTCMonth();
+  if (month === -1) continue;
+
+  const previous = monthLabels[monthLabels.length - 1];
+  if (previous && week - previous.week < 2) monthLabels.pop();
+  monthLabels.push({ week, label: MONTH_NAMES[month] });
+}
+
+const firstDate = visible[0].date;
+const lastDate = visible[visible.length - 1].date;
+const gridLabel =
+  `Daily monitor runs, ${firstDate} to ${lastDate}: ${total} runs in total, ` +
+  `peak of ${peak} on ${peakDay.date}.`;
+---
+
+<div class="heatmap">
+  <div class="hm-main">
+    <div class="hm-scroll">
+      <div class="hm-months" style={`--hm-weeks:${weekCount}`}>
+        {
+          monthLabels.map(({ week, label }) => (
+            <span class="hm-month" style={`grid-column: ${week + 1} / span 2`}>
+              {label}
+            </span>
+          ))
+        }
+      </div>
+      <div class="hm-weeks">
+        <div class="hm-weekdays" aria-hidden="true">
+          {WEEKDAY_LABELS.map((label) => <span class="hm-weekday">{label}</span>)}
+        </div>
+        <div class="hm-grid" role="img" aria-label={gridLabel}>
+          {
+            cells.map((cell) =>
+              cell.count === null ? (
+                <span class="hm-cell hm-cell--blank"></span>
+              ) : (
+                <span
+                  class={`hm-cell hm-cell--l${cell.level}`}
+                  title={`${cell.date} · ${cell.count} ${cell.count === 1 ? "run" : "runs"}`}
+                ></span>
+              ),
+            )
+          }
+        </div>
+      </div>
+    </div>
+    <dl class="hm-facts">
+      <div class="hm-fact">
+        <dt>Total runs</dt>
+        <dd>{total.toLocaleString("en-US")}</dd>
+      </div>
+      <div class="hm-fact">
+        <dt>Peak / day</dt>
+        <dd>{peak}</dd>
+      </div>
+    </dl>
+  </div>
+  <div class="hm-footer">
+    {/* The card carries its own unit: it sits inside a section that reports
+        several different measures, so "runs per day" cannot come from the
+        heading above it. */}
+    <span class="hm-meta">Runs per day (UTC) · {firstDate} → {lastDate}</span>
+    <span class="hm-legend" aria-hidden="true">
+      <span class="hm-legend-label">Less</span>
+      {LEGEND_LEVELS.map((level) => <span class={`hm-cell hm-cell--l${level}`}></span>)}
+      <span class="hm-legend-label">More</span>
+    </span>
+  </div>
+</div>
+
+<style>
+  .heatmap {
+    --hm-size: 16px;
+    --hm-gap: 3px;
+    --hm-gutter: 1.8rem;
+    /* Height of the month-label row, reused below to line the counters up with
+       the top of the grid rather than with its labels. */
+    --hm-months-h: 1.05rem;
+
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 0.875rem 1rem;
+    /* Sized to its content: a 16-week grid cannot fill a wide row, and growing
+       the card only widens the empty space around the chart. */
+    flex: 0 1 auto;
+    width: fit-content;
+    max-width: 100%;
+  }
+
+  .hm-main {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    /* The day counters sit at the card's right edge when there is room and
+       drop under the grid when there is not, so the grid is never left with a
+       block of dead space beside it. */
+    justify-content: space-between;
+    gap: 1rem 1.5rem;
+  }
+
+  /* min-width lets the grid actually scroll on a narrow screen: a flex item
+     defaults to its content width and would otherwise push the page wide. */
+  .hm-scroll {
+    overflow-x: auto;
+    min-width: 0;
+  }
+
+  .hm-months {
+    display: grid;
+    grid-template-columns: repeat(var(--hm-weeks), var(--hm-size));
+    gap: var(--hm-gap);
+    /* Line the label row up with the grid, past the weekday gutter. */
+    margin-left: calc(var(--hm-gutter) + 0.4rem);
+    height: var(--hm-months-h);
+  }
+
+  .hm-month {
+    font-size: 0.65rem;
+    line-height: 1;
+    color: var(--color-text-secondary);
+    white-space: nowrap;
+  }
+
+  .hm-weeks { display: flex; gap: 0.4rem; }
+
+  .hm-weekdays {
+    display: grid;
+    grid-template-rows: repeat(7, var(--hm-size));
+    gap: var(--hm-gap);
+    width: var(--hm-gutter);
+    flex-shrink: 0;
+  }
+
+  .hm-weekday {
+    font-size: 0.6rem;
+    line-height: var(--hm-size);
+    text-align: right;
+    white-space: nowrap;
+    color: var(--color-text-secondary);
+  }
+
+  .hm-grid {
+    display: grid;
+    /* Column flow: seven rows (Mon…Sun) filled top to bottom, then the next
+       week — which is exactly the order the cells are emitted in. */
+    grid-auto-flow: column;
+    grid-template-rows: repeat(7, var(--hm-size));
+    grid-auto-columns: var(--hm-size);
+    gap: var(--hm-gap);
+  }
+
+  .hm-cell {
+    width: var(--hm-size);
+    height: var(--hm-size);
+    border-radius: 2px;
+  }
+
+  .hm-cell--l0 { background: color-mix(in srgb, var(--color-text-secondary) 16%, transparent); }
+  .hm-cell--l1 { background: color-mix(in srgb, var(--color-up) 28%, transparent); }
+  .hm-cell--l2 { background: color-mix(in srgb, var(--color-up) 50%, transparent); }
+  .hm-cell--l3 { background: color-mix(in srgb, var(--color-up) 74%, transparent); }
+  .hm-cell--l4 { background: var(--color-up); }
+
+  /* Days the record does not reach at all (before the first run, or the tail of
+     the current week): an outline, so they read as "no data" rather than
+     "no checks" — which is what a l0 cell means. */
+  .hm-cell--blank {
+    background: transparent;
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-border) 70%, transparent);
+  }
+
+  .hm-facts {
+    display: flex;
+    gap: 1.5rem;
+    /* Clears the month row so the counters start level with the grid's first
+       week, the block they describe. */
+    margin-top: var(--hm-months-h);
+  }
+
+  .hm-fact dt {
+    font-size: 0.65rem;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+  }
+
+  .hm-fact dd {
+    font-size: 1.15rem;
+    font-weight: 700;
+    line-height: 1.2;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .hm-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+    margin-top: 0.75rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--color-border);
+    font-size: 0.7rem;
+    color: var(--color-text-secondary);
+  }
+
+  .hm-meta { font-variant-numeric: tabular-nums; }
+
+  .hm-legend {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .hm-legend-label { margin: 0 0.15rem; }
+
+  /* Mirrors the panel's stack threshold in index.astro: on a line of its own,
+     the card takes the full width instead of shrinking to its content, so it
+     lines up with the counters above it. */
+  @media (max-width: 55rem) {
+    .heatmap { width: 100%; }
+  }
+
+  /* Narrow: tighter cells, and the counters stack into a column so they sit
+     beside the grid rather than dropping below it and leaving the right half of
+     the grid's rows empty. */
+  @media (max-width: 40rem) {
+    .heatmap { --hm-size: 0.625rem; --hm-gutter: 1.45rem; }
+
+    .hm-main { gap: 0.75rem; }
+  }
+
+  @media (max-width: 32rem) {
+    .hm-facts { flex-direction: column; gap: 0.5rem; }
+  }
+
+  /* Too narrow even for that column: the counters spread across the line under
+     the grid instead. The cells stop at the widest grid that still fits the
+     card beside the weekday gutter — one step larger and the last week, with
+     its month label, is clipped off the right edge. */
+  @media (max-width: 25rem) {
+    .heatmap { --hm-size: 0.875rem; }
+
+    .hm-facts {
+      flex-direction: row;
+      justify-content: space-between;
+      width: 100%;
+    }
+  }
+</style>

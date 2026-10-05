@@ -16,7 +16,9 @@ Site definitions are pulled from [`pt-plugins/PT-depiler`](https://github.com/pt
 
 - `id` — unique site identifier
 - `name` — display name
-- `urls` — array of URLs to probe (ROT13-encoded URLs with `uggcf://` / `uggc://` prefix are auto-decoded)
+- `urls` — array of URLs to probe (ROT13-encoded URLs with `uggcf://` / `uggc://` prefix are auto-decoded by
+  `src/lib/site-url.mjs`, the one copy shared by the build and the monitor). Probed in order, stopping at the first
+  that answers; the first one also backs the site-URL icon in the detail page header
 - `type` — site category
 - `descriptions` — optional description
 - `isDead` — optional flag to skip monitoring (default: `false`)
@@ -36,6 +38,35 @@ Site definitions are pulled from [`pt-plugins/PT-depiler`](https://github.com/pt
 - **Monthly**: merges daily files into `data/uptime/YYYY/MM.json`
 - Skips today's data and current month's data (monitoring in progress)
 - Generates `data/uptime.json` index of all merged files
+
+### Checks Status (dashboard)
+
+The index page (`src/pages/index.astro`) opens with one **Checks Status** panel above *Active Sites*. Its heading row
+carries the last-updated stamp — rendered in **UTC**, like every other check timestamp on the site, whatever zone the
+build machine happens to be in. Below it sit the five counters (Sites / Up / Down / Dead / Uptime) and the check heatmap
+(`src/components/CheckHeatmap.astro`). Both blocks keep their natural size and are centred as a pair — the spare width
+is left on either side rather than stretched into wide, empty tiles or a gap between them — and they stack below 55rem.
+The counters say how the sites are doing right now, the heatmap whether monitoring is actually running — a
+contribution-graph style calendar with one cell per day, darkening with the number of monitor runs that day.
+
+- The counts come from `computeDailyCheckCounts()` in `src/lib/data-loader.ts`, at build time. Days are bucketed on the
+  date part of the run timestamp — the same UTC boundary the rest of the page uses — and the grid is labelled
+  accordingly.
+- A day with **no** run is kept as an empty cell rather than skipped, and the series is padded through *today*, so a
+  lapse in monitoring shows up as trailing empty days instead of the window quietly shrinking to the last run. Days the
+  record never reaches are drawn as outlines.
+- Columns are Monday-to-Sunday weeks (the newest **26**, older ones fall out of the window), with month labels on the
+  column where each month starts and Mon/Wed/Fri labels down the left.
+- The counters are a tile grid of two or five per line — never three or four, because four counters do not divide evenly
+  into those and the leftover tile leaves a hole. In the narrow two-column form Uptime closes the block as a full-width
+  summary tile; on a wide stacked line it takes its place as the fifth tile. The breakpoints are in `rem` so they track
+  the reader's font size, which is what the tiles scale with.
+- The colour ramp is relative to the busiest day in the window (4 levels): cadence has varied by an order of magnitude
+  over the project's life, and fixed thresholds would flatten whole months into one colour. The busiest day and the
+  total are printed beside the grid so the ramp is readable.
+- Each cell carries a `title` with its date and run count; the grid as a whole is exposed to assistive tech as a single
+  labelled image. The card prints its own unit and range (`Runs per day (UTC) · … → …`), since the section heading
+  covers several measures and cannot name just one.
 
 ### Extended History (client-side)
 
@@ -139,12 +170,14 @@ pnpm dev
 │   ├── components/
 │   │   ├── Layout.astro
 │   │   ├── SiteCard.astro
+│   │   ├── CheckHeatmap.astro
 │   │   ├── StatusBadge.astro
 │   │   ├── LatencyChart.astro
 │   │   └── ExtendedHistory.astro
 │   └── lib/
 │       ├── data-loader.ts
 │       ├── history-fetch.ts
+│       ├── site-url.mjs     # shared with scripts/monitor.mjs
 │       └── types.ts
 ├── public/                 # Static assets (favicon)
 ├── data/

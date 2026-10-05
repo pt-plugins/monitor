@@ -21,6 +21,14 @@ export interface MonitorRun {
   sites: SiteResult[];
 }
 
+/** One UTC calendar day of monitoring activity, for the dashboard heatmap. */
+export interface DailyCheckCount {
+  /** UTC calendar day, YYYY-MM-DD. */
+  date: string;
+  /** Monitor runs started that day; 0 for a day that has none. */
+  count: number;
+}
+
 export interface SiteSummary {
   id: string;
   name: string;
@@ -32,6 +40,12 @@ export interface SiteSummary {
   isDead: boolean;
   currentStatus: "up" | "down" | "dead";
   currentLatency: number | null;
+  /**
+   * First URL in the site definition, decoded. The monitor probes a site's URLs
+   * in this order and stops at the first one that answers, so this is the
+   * address it normally used.
+   */
+  primaryUrl: string | null;
   uptime24h: number; // 0-100
   uptime7d: number;
   uptime30d: number;
