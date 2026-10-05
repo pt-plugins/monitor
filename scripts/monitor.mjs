@@ -35,6 +35,22 @@ function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
+// Describe a failed fetch in one line, keeping the cause undici attaches to it.
+// fetch() itself only ever reports "fetch failed"; the cause carries the code
+// (UND_ERR_CONNECT_TIMEOUT, ENOTFOUND, ECONNRESET, ...) and, for connect
+// failures, the addresses that were tried — the part that tells a network-level
+// block apart from a DNS or TLS problem.
+function describeFetchError(err) {
+  if (err.name === "AbortError") {
+    return "ETIMEDOUT — aborted by the monitor's own timeout";
+  }
+  const cause = err.cause;
+  if (!cause) return err.message;
+  const code = cause.code || cause.name || "unknown cause";
+  const detail = typeof cause.message === "string" ? cause.message.trim() : "";
+  return detail ? `${err.message}: ${code} — ${detail}` : `${err.message}: ${code}`;
+}
+
 // Check if response is from Cloudflare WAF (site is protected but reachable)
 function isCloudflareWAF(response) {
   const server = (response.headers.get("server") || "").toLowerCase();
@@ -146,10 +162,17 @@ function applyOverrides(rawUrl, overrides) {
 async function probeUrl(url, retries = MAX_RETRIES, overrides = null) {
   const logs = [];
   let hasNonCloudflare403 = false;
+  let lastError = null;
 
   // Apply overrides to get the effective URL and fetch options
   const { url: effectiveUrl, fetchOptions } = applyOverrides(url, overrides);
   const timeoutMs = overrides?.timeoutMs ?? REQUEST_TIMEOUT_MS;
+
+  // Overrides rewrite the URL and/or the method, so log the request that is
+  // actually sent; the site's own URL alone no longer describes the probe.
+  if (effectiveUrl !== url || fetchOptions.method !== "GET") {
+    logs.push(`    [info] request overrides applied → ${fetchOptions.method} ${effectiveUrl}`);
+  }
 
   for (let attempt = 1; attempt <= retries; attempt++) {
     const start = Date.now();
@@ -176,16 +199,19 @@ async function probeUrl(url, retries = MAX_RETRIES, overrides = null) {
       }
 
       // Track non-Cloudflare 403 for Playwright fallback
+      const httpStatus = `HTTP ${response.status}${response.statusText ? ` ${response.statusText}` : ""}`;
       if (isNonCloudflare403(response)) {
         hasNonCloudflare403 = true;
-        logs.push(`    [${attempt}/${retries}] HTTP ${response.status} non-Cloudflare 403 (${latency}ms)`);
+        lastError = `${httpStatus} (non-Cloudflare)`;
+        logs.push(`    [${attempt}/${retries}] ${httpStatus} non-Cloudflare 403 (${latency}ms)`);
       } else {
-        logs.push(`    [${attempt}/${retries}] HTTP ${response.status} (${latency}ms)`);
+        lastError = httpStatus;
+        logs.push(`    [${attempt}/${retries}] ${httpStatus} (${latency}ms)`);
       }
     } catch (err) {
       const latency = Date.now() - start;
-      const errorMsg = err.name === "AbortError" ? "ETIMEDOUT" : err.message;
-      logs.push(`    [${attempt}/${retries}] ${errorMsg} (${latency}ms)`);
+      lastError = describeFetchError(err);
+      logs.push(`    [${attempt}/${retries}] ${lastError} (${latency}ms)`);
     }
 
     if (attempt < retries) {
@@ -201,9 +227,10 @@ async function probeUrl(url, retries = MAX_RETRIES, overrides = null) {
     if (pwResult.status === "up") {
       return { status: "up", latency: pwResult.latency, logs };
     }
+    lastError = `Playwright fallback: ${pwResult.error || "failed"}`;
   }
 
-  return { status: "down", latency: null, error: "All retries exhausted", logs };
+  return { status: "down", latency: null, error: lastError ?? "All retries exhausted", logs };
 }
 
 // Get current datetime parts for file path
@@ -275,7 +302,7 @@ async function main() {
           lines.push(`  ✓ ${url} — ${urlResult.latency}ms`);
           break;
         } else {
-          lines.push(`  ✗ ${url} — FAILED`);
+          lines.push(`  ✗ ${url} — FAILED: ${urlResult.error}`);
         }
       }
 
