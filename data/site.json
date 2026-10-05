@@ -1,5 +1,16 @@
 [
   {
+    "id": "0dayfiles",
+    "name": "0DayFiles",
+    "urls": [
+      "https://0dayfiles.net/"
+    ],
+    "type": "private",
+    "description": "0DayFiles is a private torrent tracker for movies, TV, music, games, software, books and more.",
+    "favicon": "https://0dayfiles.net/favicon.ico",
+    "isDead": false
+  },
+  {
     "id": "0magnet",
     "name": "0Magnet",
     "urls": [
