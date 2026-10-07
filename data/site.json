@@ -472,7 +472,7 @@
     "type": "private",
     "description": "bitbr 是一个葡萄牙语综合类私有种子站点",
     "favicon": "",
-    "isDead": false
+    "isDead": true
   },
   {
     "id": "bitporn",
@@ -661,7 +661,7 @@
     ],
     "type": "private",
     "description": "CeskeForum 是一个捷克私有站点，提供电影/剧集/音乐/软件/游戏/书籍资源。",
-    "favicon": "",
+    "favicon": "./_default_nexusphp.png",
     "isDead": false
   },
   {
@@ -1463,7 +1463,7 @@
     ],
     "type": "private",
     "description": "与志同道合之人前行 分享更多值得珍藏的资源",
-    "favicon": "",
+    "favicon": "./_default_nexusphp.png",
     "isDead": false
   },
   {
@@ -1645,7 +1645,7 @@
     ],
     "type": "private",
     "description": "HELLENIC-HD 是一个希腊私有站点，提供电影/剧集/音乐/游戏/软件/书籍/体育资源。支持 Unit3D 官方 JSON API（api/torrents/filter）。",
-    "favicon": "",
+    "favicon": "./_default_unit3d.ico",
     "isDead": false
   },
   {
@@ -2044,7 +2044,7 @@
     ],
     "type": "private",
     "description": "LP-Bits 是专注于 Linkin Park 音乐发布的私有站点。",
-    "favicon": "",
+    "favicon": "./_default_nexusphp.png",
     "isDead": false
   },
   {
@@ -2482,7 +2482,7 @@
     ],
     "type": "private",
     "description": "我为人人，人人为我，只为分享不为盈利",
-    "favicon": "",
+    "favicon": "./_default_nexusphp.png",
     "isDead": false
   },
   {
@@ -3548,7 +3548,7 @@
     ],
     "type": "private",
     "description": "",
-    "favicon": "",
+    "favicon": "./_default_unit3d.ico",
     "isDead": false
   },
   {
