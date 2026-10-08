@@ -817,7 +817,7 @@
     ],
     "type": "private",
     "description": "大宝剑是一个中文私有站点，提供电影/剧集/综艺/动漫/纪录片/短剧资源。",
-    "favicon": "",
+    "favicon": "./_default_nexusphp.png",
     "isDead": false
   },
   {
@@ -1120,7 +1120,7 @@
     ],
     "type": "private",
     "description": "个人站，定位小体积压制、WEB-DL 电影资源，全站 Free",
-    "favicon": "",
+    "favicon": "./_default_nexusphp.png",
     "isDead": false
   },
   {
@@ -1922,7 +1922,7 @@
     ],
     "type": "private",
     "description": "库非资源下载分享",
-    "favicon": "",
+    "favicon": "./_default_nexusphp.png",
     "isDead": false
   },
   {
@@ -2336,7 +2336,7 @@
     ],
     "type": "private",
     "description": "",
-    "favicon": "",
+    "favicon": "./_default_nexusphp.png",
     "isDead": false
   },
   {
@@ -3537,7 +3537,7 @@
     ],
     "type": "private",
     "description": "僅分享圖片,適合手機平板PT客戶端直接下載",
-    "favicon": "",
+    "favicon": "./_default_nexusphp.png",
     "isDead": false
   },
   {
