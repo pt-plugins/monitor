@@ -24,9 +24,11 @@ function uptimeClass(pct: number): string {
 ---
 
 <a href={`/monitor/site/${site.id}`} class="site-card" data-status={site.currentStatus} data-filter={`${site.id} ${site.name} ${site.urls.map(decodeUrl).join(" ")} ${site.description || ""}`.toLowerCase()}>
+  {/* The type labels the whole card, so it rides the corner as a ribbon rather
+      than sharing the header row with the status it would compete with. */}
+  <span class={`card-ribbon card-ribbon--${site.type}`} title={site.type}>{site.type}</span>
   <div class="card-header">
     <StatusBadge status={site.currentStatus} />
-    <span class="card-type">{site.type}</span>
   </div>
   <h3 class="card-name">
     {site.faviconUrl && (
@@ -70,6 +72,11 @@ function uptimeClass(pct: number): string {
   .site-card {
     display: flex;
     flex-direction: column;
+    position: relative;
+    /* Clips the ribbon to the card's rounded corner; the clip edge is the
+       padding box, which is also the absolute containing block, so the ribbon's
+       top/right 0 lands on the card's visual corner, not 1rem inside it. */
+    overflow: hidden;
     background: var(--color-surface);
     border-radius: var(--radius);
     padding: 1rem;
@@ -108,11 +115,39 @@ function uptimeClass(pct: number): string {
     margin-bottom: 0.5rem;
   }
 
-  .card-type {
-    font-size: 0.7rem;
-    color: var(--color-text-secondary);
+  /* A 9rem band laid across the corner; the card's clip edge cuts it down to the
+     diagonal slice between the top and right edges. The offset drops the band so
+     its centre sits 2.875rem in from each of those edges — halfway along the
+     slice the card keeps — and the rotation turns that band into the diagonal.
+     The fills are light tints, so the label is a dark shade of the same hue
+     rather than white, which these fills would barely show. */
+  .card-ribbon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 9rem;
+    padding: 0.15rem 0;
+    transform: translate(3.0625rem, 0.875rem) rotate(45deg);
+    font-size: 0.6rem;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: 0.08em;
+    text-align: center;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    white-space: nowrap;
+    color: #343a40;
+    background: #dee2e6;
+    pointer-events: none;
+  }
+
+  .card-ribbon--public {
+    color: #1b2e12;
+    background: #8bc34a;
+  }
+
+  .card-ribbon--private {
+    color: #082f49;
+    background: #03a9f4;
   }
 
   .card-name {
