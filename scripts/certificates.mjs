@@ -33,6 +33,7 @@ const TLS_TIMEOUT_MS = 15_000;
 const RDAP_TIMEOUT_MS = 20_000;
 const WHOIS_TIMEOUT_MS = 20_000;
 const RDAP_RETRIES = 3;
+const RDAP_BOOTSTRAP_RETRIES = 3;
 const RETRY_DELAY_MS = 2_000;
 const CONCURRENCY = 5;
 const USER_AGENT = "PTD-Monitor/1.0";
@@ -237,16 +238,28 @@ let rdapBasesPromise;
 function loadRdapBases() {
   if (!rdapBasesPromise) {
     rdapBasesPromise = (async () => {
-      const response = await fetch(RDAP_BOOTSTRAP_URL, { headers: { "user-agent": USER_AGENT } });
-      if (!response.ok) throw new Error(`RDAP bootstrap HTTP ${response.status}`);
-      const data = await response.json();
-      const bases = new Map();
-      for (const [tlds, urls] of data.services ?? []) {
-        for (const tld of tlds) bases.set(String(tld).toLowerCase(), urls[0]);
+      // One blip here must not push every lookup of the run onto WHOIS, which
+      // is slower and cannot answer for some of the TLDs RDAP can, so the
+      // bootstrap is retried before the run degrades.
+      let lastError;
+      for (let attempt = 1; attempt <= RDAP_BOOTSTRAP_RETRIES; attempt++) {
+        try {
+          const response = await fetch(RDAP_BOOTSTRAP_URL, { headers: { "user-agent": USER_AGENT } });
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+          const data = await response.json();
+          const bases = new Map();
+          for (const [tlds, urls] of data.services ?? []) {
+            for (const tld of tlds) bases.set(String(tld).toLowerCase(), urls[0]);
+          }
+          return bases;
+        } catch (err) {
+          lastError = err;
+          if (attempt < RDAP_BOOTSTRAP_RETRIES) await sleep(RETRY_DELAY_MS);
+        }
       }
-      return bases;
+      throw lastError;
     })().catch((err) => {
-      console.warn(`[WARN] RDAP bootstrap unavailable: ${err.message}`);
+      console.warn(`[WARN] RDAP bootstrap unavailable: ${err.message} — every domain will go to WHOIS`);
       return null;
     });
   }
@@ -391,6 +404,9 @@ async function fetchWhoisExpiry(domain) {
  * RDAP first where the TLD publishes it, then WHOIS — a second chance for the
  * TLDs that publish neither (among them .cn, .me, .de) as well as for a
  * registry whose RDAP endpoint fails on the day.
+ *
+ * The domain itself is the caller's lookup key and is deliberately not part of
+ * the result: the snapshot is written per site id and carries no hostnames.
  */
 async function fetchDomainExpiry(domain) {
   const bases = await loadRdapBases();
@@ -399,17 +415,17 @@ async function fetchDomainExpiry(domain) {
   let rdapError = null;
   if (baseUrl) {
     const result = await fetchRdapExpiry(domain, baseUrl);
-    if (result.expiresAt) return { domain, ...result };
+    if (result.expiresAt) return result;
     rdapError = result.error;
   }
 
   const whois = await fetchWhoisExpiry(domain);
-  if (whois.expiresAt) return { domain, ...whois };
+  if (whois.expiresAt) return whois;
 
   // Both protocols were tried when there was an RDAP service to try; say so,
   // so a missing date reads as "we asked and got nothing" rather than silence.
   const error = rdapError ? `${rdapError} / ${whois.error}` : whois.error;
-  return { domain, expiresAt: null, registrar: whois.registrar, error };
+  return { expiresAt: null, registrar: whois.registrar, error };
 }
 
 async function main() {
@@ -448,21 +464,20 @@ async function main() {
       const lines = [`[TEST] ${site.id} (${site.name}) — ${urls.length} URL(s)`];
 
       // Certificate: walk the HTTPS URLs in order and take the first host that
-      // presents one, exactly as the monitor takes the first that answers.
+      // presents one, exactly as the monitor takes the first that answers. The
+      // host is named in the log line only; the snapshot records no hostnames.
       let ssl = {
         notAfter: null,
         issuer: null,
         trustError: null,
         error: httpsUrls.length === 0 ? (urls.length === 0 ? "no URL to check" : "no HTTPS URL") : null,
       };
-      let sslHost = null;
       for (const { host, port } of httpsUrls) {
         const check = await checkTls(host, port);
         lines.push(
           `  ${check.error ? "✗" : "✓"} ${host}:${port} — ${check.error ?? `${check.notAfter} (${check.issuer ?? "unknown issuer"})`}`
         );
         ssl = check;
-        sslHost = host;
         if (!check.error) break;
       }
 
@@ -479,11 +494,11 @@ async function main() {
         );
       } else {
         const error = domainUrl ? "host is an IP address" : "no URL to check";
-        domain = { domain: null, expiresAt: null, registrar: null, error };
+        domain = { expiresAt: null, registrar: null, error };
         lines.push(`  ✗ domain — ${error}`);
       }
 
-      results[index] = { id: site.id, host: sslHost, ssl, domain };
+      results[index] = { id: site.id, ssl, domain };
       // One console.log per site = atomic output, no interleaving.
       console.log(lines.join("\n") + "\n");
     })

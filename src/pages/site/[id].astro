@@ -60,8 +60,6 @@ type CertTone = "ok" | "warn" | "bad" | "unknown";
 
 interface CertRow {
   title: string;
-  subject: string | null;
-  subjectLabel: string;
   source: string | null;
   sourceLabel: string;
   status: string;
@@ -82,8 +80,6 @@ function fmtRemaining(days: number | null): string | null {
 
 function certRow(opts: {
   title: string;
-  subject: string | null;
-  subjectLabel: string;
   source: string | null;
   sourceLabel: string;
   expiresAt: string | null;
@@ -95,8 +91,6 @@ function certRow(opts: {
 }): CertRow {
   const base: CertRow = {
     title: opts.title,
-    subject: opts.subject,
-    subjectLabel: opts.subjectLabel,
     source: null,
     sourceLabel: opts.sourceLabel,
     tone: "unknown",
@@ -131,8 +125,6 @@ const certRows: CertRow[] | null = site.certificate
   ? [
       certRow({
         title: "SSL Certificate",
-        subject: site.certificate.ssl.host,
-        subjectLabel: "Host",
         source: site.certificate.ssl.issuer,
         sourceLabel: "Issuer",
         expiresAt: site.certificate.ssl.notAfter,
@@ -145,8 +137,6 @@ const certRows: CertRow[] | null = site.certificate
       }),
       certRow({
         title: "Domain Registration",
-        subject: site.certificate.domain.domain,
-        subjectLabel: "Domain",
         source: site.certificate.domain.registrar,
         sourceLabel: "Registrar",
         expiresAt: site.certificate.domain.expiresAt,
@@ -247,12 +237,6 @@ const certEmptyNote = isDead
                 <div class="cert-value">{row.expires}</div>
                 <div class="cert-remaining">{row.remaining}</div>
                 <dl class="cert-facts">
-                  {row.subject && (
-                    <div>
-                      <dt>{row.subjectLabel}</dt>
-                      <dd>{row.subject}</dd>
-                    </div>
-                  )}
                   {row.source && (
                     <div>
                       <dt>{row.sourceLabel}</dt>

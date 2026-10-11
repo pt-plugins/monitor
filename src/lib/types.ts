@@ -34,6 +34,10 @@ export interface DailyCheckCount {
  *
  * This file holds one snapshot and no history: the expiry dates it carries are
  * the only thing the pages read, and a new run overwrites them outright.
+ *
+ * Entries are keyed by site id and carry no hostnames — not the host whose
+ * certificate was read, nor the registrable domain looked up — so the snapshot
+ * adds nothing about which addresses a site answers on.
  */
 export interface CertificateReport {
   timestamp: string;
@@ -42,8 +46,6 @@ export interface CertificateReport {
 
 export interface CertificateSite {
   id: string;
-  /** Host of the URL whose certificate was read, or null when none was. */
-  host: string | null;
   ssl: {
     /** Certificate notAfter, ISO 8601; null when no certificate was read. */
     notAfter: string | null;
@@ -53,8 +55,6 @@ export interface CertificateSite {
     error: string | null;
   };
   domain: {
-    /** Registrable domain looked up, or null when there was none (IP host). */
-    domain: string | null;
     /** Registration expiry, ISO 8601; null when the registry did not give one. */
     expiresAt: string | null;
     registrar: string | null;
@@ -69,7 +69,6 @@ export interface CertificateSite {
 export interface SiteCertificate {
   checkedAt: string;
   ssl: {
-    host: string | null;
     notAfter: string | null;
     issuer: string | null;
     trustError: string | null;
@@ -78,7 +77,6 @@ export interface SiteCertificate {
     daysRemaining: number | null;
   };
   domain: {
-    domain: string | null;
     expiresAt: string | null;
     registrar: string | null;
     error: string | null;

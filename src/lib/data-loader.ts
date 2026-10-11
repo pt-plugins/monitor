@@ -340,7 +340,6 @@ function buildCertificate(entry: CertificateSite | undefined, checkedAt: string)
   return {
     checkedAt,
     ssl: {
-      host: entry.host ?? null,
       notAfter: entry.ssl?.notAfter ?? null,
       issuer: entry.ssl?.issuer ?? null,
       trustError: entry.ssl?.trustError ?? null,
@@ -348,7 +347,6 @@ function buildCertificate(entry: CertificateSite | undefined, checkedAt: string)
       daysRemaining: daysUntil(entry.ssl?.notAfter ?? null),
     },
     domain: {
-      domain: entry.domain?.domain ?? null,
       expiresAt: entry.domain?.expiresAt ?? null,
       registrar: entry.domain?.registrar ?? null,
       error: entry.domain?.error ?? null,
