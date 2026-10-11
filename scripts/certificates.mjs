@@ -212,12 +212,17 @@ function vcardName(entity) {
 
 /** Registrar name, looked for on nested entities because registries vary. */
 function findRegistrar(entities) {
-  for (const entity of entities ?? []) {
-    if ((entity.roles ?? []).some((r) => String(r).toLowerCase() === "registrar")) {
+  // Not every registry fills these fields as the RFC describes them — one
+  // returns `roles` as a bare string — so they are type-checked rather than
+  // trusted, or a single odd record would abort the whole lookup.
+  if (!Array.isArray(entities)) return null;
+  for (const entity of entities) {
+    const roles = Array.isArray(entity?.roles) ? entity.roles : [];
+    if (roles.some((r) => String(r).toLowerCase() === "registrar")) {
       const name = vcardName(entity);
       if (name) return name;
     }
-    const nested = findRegistrar(entity.entities);
+    const nested = findRegistrar(entity?.entities);
     if (nested) return nested;
   }
   return null;
@@ -286,7 +291,8 @@ async function fetchRdapExpiry(domain, baseUrl) {
         lastError = `RDAP HTTP ${response.status}`;
       } else {
         const data = await response.json();
-        const expiration = (data.events ?? []).find((e) => /expir/i.test(e.eventAction ?? ""));
+        const events = Array.isArray(data.events) ? data.events : [];
+        const expiration = events.find((e) => /expir/i.test(e.eventAction ?? ""));
         if (!expiration?.eventDate) {
           return { expiresAt: null, registrar: null, error: "no expiration date in RDAP record" };
         }
