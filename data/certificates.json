@@ -1,8 +1,7 @@
 {
   "timestamp": "2026-10-11T15:10:55.377Z",
-  "sites": [
-    {
-      "id": "0dayfiles",
+  "sites": {
+    "0dayfiles": {
       "ssl": {
         "notAfter": "2026-12-02T21:53:02.000Z",
         "issuer": "Google Trust Services",
@@ -15,8 +14,7 @@
         "error": null
       }
     },
-    {
-      "id": "0magnet",
+    "0magnet": {
       "ssl": {
         "notAfter": "2026-12-11T16:17:16.000Z",
         "issuer": "Google Trust Services",
@@ -29,8 +27,7 @@
         "error": null
       }
     },
-    {
-      "id": "1337x",
+    "1337x": {
       "ssl": {
         "notAfter": "2026-12-28T12:58:34.000Z",
         "issuer": "Google Trust Services",
@@ -43,8 +40,7 @@
         "error": null
       }
     },
-    {
-      "id": "13city",
+    "13city": {
       "ssl": {
         "notAfter": "2026-11-12T11:38:37.000Z",
         "issuer": "Google Trust Services",
@@ -57,8 +53,7 @@
         "error": null
       }
     },
-    {
-      "id": "1ptba",
+    "1ptba": {
       "ssl": {
         "notAfter": "2026-11-19T00:51:29.000Z",
         "issuer": "Google Trust Services",
@@ -71,8 +66,7 @@
         "error": null
       }
     },
-    {
-      "id": "52movie",
+    "52movie": {
       "ssl": {
         "notAfter": "2026-12-09T11:45:33.000Z",
         "issuer": "Google Trust Services",
@@ -85,8 +79,7 @@
         "error": null
       }
     },
-    {
-      "id": "52pt",
+    "52pt": {
       "ssl": {
         "notAfter": "2026-11-14T16:16:54.000Z",
         "issuer": "Let's Encrypt",
@@ -99,8 +92,7 @@
         "error": null
       }
     },
-    {
-      "id": "abtorrents",
+    "abtorrents": {
       "ssl": {
         "notAfter": "2026-11-15T02:43:14.000Z",
         "issuer": "Let's Encrypt",
@@ -113,8 +105,7 @@
         "error": null
       }
     },
-    {
-      "id": "acgrip",
+    "acgrip": {
       "ssl": {
         "notAfter": "2027-01-09T23:59:59.000Z",
         "issuer": "ZeroSSL GmbH",
@@ -127,8 +118,7 @@
         "error": null
       }
     },
-    {
-      "id": "agsvpt",
+    "agsvpt": {
       "ssl": {
         "notAfter": "2027-01-09T03:47:39.000Z",
         "issuer": "Google Trust Services",
@@ -141,8 +131,7 @@
         "error": null
       }
     },
-    {
-      "id": "aidoruonline",
+    "aidoruonline": {
       "ssl": {
         "notAfter": "2026-12-02T10:33:06.000Z",
         "issuer": "Google Trust Services",
@@ -155,8 +144,7 @@
         "error": null
       }
     },
-    {
-      "id": "aither",
+    "aither": {
       "ssl": {
         "notAfter": "2026-12-22T05:37:29.000Z",
         "issuer": "Let's Encrypt",
@@ -169,8 +157,7 @@
         "error": null
       }
     },
-    {
-      "id": "alingpt",
+    "alingpt": {
       "ssl": {
         "notAfter": "2026-11-28T01:45:55.000Z",
         "issuer": "Google Trust Services",
@@ -183,8 +170,7 @@
         "error": "no expiration date in WHOIS record"
       }
     },
-    {
-      "id": "alpharatio",
+    "alpharatio": {
       "ssl": {
         "notAfter": "2026-12-26T05:29:15.000Z",
         "issuer": "Google Trust Services",
@@ -197,8 +183,7 @@
         "error": null
       }
     },
-    {
-      "id": "animebytes",
+    "animebytes": {
       "ssl": {
         "notAfter": "2026-12-27T10:34:28.000Z",
         "issuer": "Google Trust Services",
@@ -211,8 +196,7 @@
         "error": null
       }
     },
-    {
-      "id": "animetosho",
+    "animetosho": {
       "ssl": {
         "notAfter": "2026-12-25T10:06:03.000Z",
         "issuer": "Let's Encrypt",
@@ -225,8 +209,7 @@
         "error": null
       }
     },
-    {
-      "id": "animez",
+    "animez": {
       "ssl": {
         "notAfter": "2026-11-15T17:59:17.000Z",
         "issuer": "Google Trust Services",
@@ -239,8 +222,7 @@
         "error": null
       }
     },
-    {
-      "id": "anirena",
+    "anirena": {
       "ssl": {
         "notAfter": "2026-12-08T08:34:21.000Z",
         "issuer": "Google Trust Services",
@@ -253,8 +235,7 @@
         "error": null
       }
     },
-    {
-      "id": "anisource",
+    "anisource": {
       "ssl": {
         "notAfter": "2026-11-06T18:38:49.000Z",
         "issuer": "Let's Encrypt",
@@ -267,8 +248,7 @@
         "error": null
       }
     },
-    {
-      "id": "anthelion",
+    "anthelion": {
       "ssl": {
         "notAfter": "2027-01-03T15:11:41.000Z",
         "issuer": "Let's Encrypt",
@@ -281,8 +261,7 @@
         "error": null
       }
     },
-    {
-      "id": "asiancinema",
+    "asiancinema": {
       "ssl": {
         "notAfter": "2027-01-02T01:13:11.000Z",
         "issuer": "Google Trust Services",
@@ -295,8 +274,7 @@
         "error": null
       }
     },
-    {
-      "id": "audiences",
+    "audiences": {
       "ssl": {
         "notAfter": "2027-01-02T20:52:14.000Z",
         "issuer": "Google Trust Services",
@@ -309,8 +287,7 @@
         "error": null
       }
     },
-    {
-      "id": "audiobookbay",
+    "audiobookbay": {
       "ssl": {
         "notAfter": "2027-01-13T23:59:59.000Z",
         "issuer": "Sectigo Limited",
@@ -323,8 +300,7 @@
         "error": "no expiration date in WHOIS record"
       }
     },
-    {
-      "id": "audionews",
+    "audionews": {
       "ssl": {
         "notAfter": "2026-12-05T22:31:08.000Z",
         "issuer": "Google Trust Services",
@@ -337,8 +313,7 @@
         "error": null
       }
     },
-    {
-      "id": "avistaz",
+    "avistaz": {
       "ssl": {
         "notAfter": "2026-12-21T14:24:44.000Z",
         "issuer": "Let's Encrypt",
@@ -351,8 +326,7 @@
         "error": null
       }
     },
-    {
-      "id": "azusa",
+    "azusa": {
       "ssl": {
         "notAfter": "2026-12-13T08:18:51.000Z",
         "issuer": "Google Trust Services",
@@ -365,8 +339,7 @@
         "error": null
       }
     },
-    {
-      "id": "bakabt",
+    "bakabt": {
       "ssl": {
         "notAfter": "2026-12-27T08:47:38.000Z",
         "issuer": "Google Trust Services",
@@ -379,8 +352,7 @@
         "error": null
       }
     },
-    {
-      "id": "baozi",
+    "baozi": {
       "ssl": {
         "notAfter": "2026-12-16T20:15:09.000Z",
         "issuer": "Google Trust Services",
@@ -393,8 +365,7 @@
         "error": null
       }
     },
-    {
-      "id": "bemaniso",
+    "bemaniso": {
       "ssl": {
         "notAfter": "2026-12-22T20:44:08.000Z",
         "issuer": "Google Trust Services",
@@ -407,8 +378,7 @@
         "error": "no expiration date in WHOIS record"
       }
     },
-    {
-      "id": "beyondhd",
+    "beyondhd": {
       "ssl": {
         "notAfter": "2027-01-06T08:32:00.000Z",
         "issuer": "Google Trust Services",
@@ -421,8 +391,7 @@
         "error": null
       }
     },
-    {
-      "id": "bibliotik",
+    "bibliotik": {
       "ssl": {
         "notAfter": "2027-01-03T09:11:43.000Z",
         "issuer": "Google Trust Services",
@@ -435,8 +404,7 @@
         "error": null
       }
     },
-    {
-      "id": "bitporn",
+    "bitporn": {
       "ssl": {
         "notAfter": "2026-11-15T19:46:00.000Z",
         "issuer": "Let's Encrypt",
@@ -449,8 +417,7 @@
         "error": "no expiration date in WHOIS record"
       }
     },
-    {
-      "id": "bitpt",
+    "bitpt": {
       "ssl": {
         "notAfter": "2026-12-27T02:51:55.000Z",
         "issuer": "Google Trust Services",
@@ -463,8 +430,7 @@
         "error": null
       }
     },
-    {
-      "id": "blutopia",
+    "blutopia": {
       "ssl": {
         "notAfter": "2026-11-25T09:10:51.000Z",
         "issuer": "Let's Encrypt",
@@ -477,8 +443,7 @@
         "error": null
       }
     },
-    {
-      "id": "broadcasthenet",
+    "broadcasthenet": {
       "ssl": {
         "notAfter": "2027-01-06T19:56:53.000Z",
         "issuer": "Google Trust Services",
@@ -491,8 +456,7 @@
         "error": null
       }
     },
-    {
-      "id": "brokenstones",
+    "brokenstones": {
       "ssl": {
         "notAfter": "2027-01-01T00:57:56.000Z",
         "issuer": "Google Trust Services",
@@ -505,8 +469,7 @@
         "error": null
       }
     },
-    {
-      "id": "btetree",
+    "btetree": {
       "ssl": {
         "notAfter": "2027-01-06T18:03:35.000Z",
         "issuer": "Google Trust Services",
@@ -519,8 +482,7 @@
         "error": null
       }
     },
-    {
-      "id": "btschool",
+    "btschool": {
       "ssl": {
         "notAfter": "2026-12-01T12:47:38.000Z",
         "issuer": "Google Trust Services",
@@ -533,8 +495,7 @@
         "error": null
       }
     },
-    {
-      "id": "bwtorrents",
+    "bwtorrents": {
       "ssl": {
         "notAfter": "2026-12-01T23:11:22.000Z",
         "issuer": "Google Trust Services",
@@ -547,8 +508,7 @@
         "error": null
       }
     },
-    {
-      "id": "byrbt",
+    "byrbt": {
       "ssl": {
         "notAfter": "2026-12-21T05:58:17.000Z",
         "issuer": "Let's Encrypt",
@@ -561,8 +521,7 @@
         "error": "no expiration date in WHOIS record"
       }
     },
-    {
-      "id": "capybarabr",
+    "capybarabr": {
       "ssl": {
         "notAfter": "2026-11-16T01:06:21.000Z",
         "issuer": "Google Trust Services",
@@ -575,8 +534,7 @@
         "error": null
       }
     },
-    {
-      "id": "carpt",
+    "carpt": {
       "ssl": {
         "notAfter": "2026-12-12T10:46:55.000Z",
         "issuer": "Google Trust Services",
@@ -589,8 +547,7 @@
         "error": null
       }
     },
-    {
-      "id": "cathoderaytube",
+    "cathoderaytube": {
       "ssl": {
         "notAfter": "2026-12-03T02:46:29.000Z",
         "issuer": "Let's Encrypt",
@@ -603,8 +560,7 @@
         "error": null
       }
     },
-    {
-      "id": "cbg",
+    "cbg": {
       "ssl": {
         "notAfter": "2026-12-31T14:15:55.000Z",
         "issuer": "Google Trust Services",
@@ -617,8 +573,7 @@
         "error": "no expiration date in WHOIS record"
       }
     },
-    {
-      "id": "ceskeforum",
+    "ceskeforum": {
       "ssl": {
         "notAfter": "2026-12-23T09:00:17.000Z",
         "issuer": "Let's Encrypt",
@@ -631,8 +586,7 @@
         "error": null
       }
     },
-    {
-      "id": "cgpeers",
+    "cgpeers": {
       "ssl": {
         "notAfter": "2026-12-19T08:05:48.000Z",
         "issuer": "Let's Encrypt",
@@ -645,8 +599,7 @@
         "error": null
       }
     },
-    {
-      "id": "chdbits",
+    "chdbits": {
       "ssl": {
         "notAfter": "2027-01-06T08:45:30.000Z",
         "issuer": "Google Trust Services",
@@ -659,8 +612,7 @@
         "error": null
       }
     },
-    {
-      "id": "cinemageddon",
+    "cinemageddon": {
       "ssl": {
         "notAfter": "2026-12-03T20:56:04.000Z",
         "issuer": "Google Trust Services",
@@ -673,8 +625,7 @@
         "error": null
       }
     },
-    {
-      "id": "cinematik",
+    "cinematik": {
       "ssl": {
         "notAfter": "2026-11-25T09:11:06.000Z",
         "issuer": "Let's Encrypt",
@@ -687,8 +638,7 @@
         "error": null
       }
     },
-    {
-      "id": "cinemaz",
+    "cinemaz": {
       "ssl": {
         "notAfter": "2026-11-16T03:32:53.000Z",
         "issuer": "Google Trust Services",
@@ -701,8 +651,7 @@
         "error": null
       }
     },
-    {
-      "id": "clearjav",
+    "clearjav": {
       "ssl": {
         "notAfter": "2026-11-27T10:58:34.000Z",
         "issuer": "Google Trust Services",
@@ -715,8 +664,7 @@
         "error": null
       }
     },
-    {
-      "id": "concertos",
+    "concertos": {
       "ssl": {
         "notAfter": "2026-11-22T06:02:50.000Z",
         "issuer": "Let's Encrypt",
@@ -729,8 +677,7 @@
         "error": null
       }
     },
-    {
-      "id": "crabpt",
+    "crabpt": {
       "ssl": {
         "notAfter": "2027-01-06T02:33:39.000Z",
         "issuer": "Google Trust Services",
@@ -743,8 +690,7 @@
         "error": null
       }
     },
-    {
-      "id": "cspt",
+    "cspt": {
       "ssl": {
         "notAfter": "2026-12-12T10:13:47.000Z",
         "issuer": "Google Trust Services",
@@ -757,8 +703,7 @@
         "error": null
       }
     },
-    {
-      "id": "cyanbug",
+    "cyanbug": {
       "ssl": {
         "notAfter": "2026-11-17T08:35:12.000Z",
         "issuer": "Google Trust Services",
@@ -771,8 +716,7 @@
         "error": null
       }
     },
-    {
-      "id": "dabaojian",
+    "dabaojian": {
       "ssl": {
         "notAfter": "2026-12-23T14:32:42.000Z",
         "issuer": "Let's Encrypt",
@@ -785,8 +729,7 @@
         "error": null
       }
     },
-    {
-      "id": "danishbytes",
+    "danishbytes": {
       "ssl": {
         "notAfter": "2026-12-10T16:40:10.000Z",
         "issuer": "Google Trust Services",
@@ -799,8 +742,7 @@
         "error": null
       }
     },
-    {
-      "id": "darkland",
+    "darkland": {
       "ssl": {
         "notAfter": "2026-12-17T01:09:34.000Z",
         "issuer": "Google Trust Services",
@@ -813,8 +755,7 @@
         "error": null
       }
     },
-    {
-      "id": "darkpeers",
+    "darkpeers": {
       "ssl": {
         "notAfter": "2026-12-12T18:30:06.000Z",
         "issuer": "Google Trust Services",
@@ -827,8 +768,7 @@
         "error": null
       }
     },
-    {
-      "id": "datascene",
+    "datascene": {
       "ssl": {
         "notAfter": "2026-12-17T17:08:16.000Z",
         "issuer": "Google Trust Services",
@@ -841,8 +781,7 @@
         "error": null
       }
     },
-    {
-      "id": "daxiangjiao",
+    "daxiangjiao": {
       "ssl": {
         "notAfter": "2026-12-03T07:34:37.000Z",
         "issuer": "Google Trust Services",
@@ -855,8 +794,7 @@
         "error": null
       }
     },
-    {
-      "id": "desigaane",
+    "desigaane": {
       "ssl": {
         "notAfter": "2026-10-17T20:09:26.000Z",
         "issuer": "Let's Encrypt",
@@ -869,8 +807,7 @@
         "error": null
       }
     },
-    {
-      "id": "desitorrents",
+    "desitorrents": {
       "ssl": {
         "notAfter": "2026-10-19T07:25:12.000Z",
         "issuer": "Let's Encrypt",
@@ -883,8 +820,7 @@
         "error": null
       }
     },
-    {
-      "id": "dicmusic",
+    "dicmusic": {
       "ssl": {
         "notAfter": "2026-11-15T19:18:37.000Z",
         "issuer": "Google Trust Services",
@@ -897,8 +833,7 @@
         "error": null
       }
     },
-    {
-      "id": "digitalcore",
+    "digitalcore": {
       "ssl": {
         "notAfter": "2027-03-07T14:05:40.000Z",
         "issuer": "SSL Corporation",
@@ -911,8 +846,7 @@
         "error": null
       }
     },
-    {
-      "id": "discfan",
+    "discfan": {
       "ssl": {
         "notAfter": "2026-11-27T00:39:38.000Z",
         "issuer": "Google Trust Services",
@@ -925,8 +859,7 @@
         "error": null
       }
     },
-    {
-      "id": "dmhy",
+    "dmhy": {
       "ssl": {
         "notAfter": "2026-11-19T16:31:42.000Z",
         "issuer": "Let's Encrypt",
@@ -939,8 +872,7 @@
         "error": null
       }
     },
-    {
-      "id": "dragonhd",
+    "dragonhd": {
       "ssl": {
         "notAfter": "2027-01-05T10:37:18.000Z",
         "issuer": "Google Trust Services",
@@ -953,8 +885,7 @@
         "error": null
       }
     },
-    {
-      "id": "dstudio",
+    "dstudio": {
       "ssl": {
         "notAfter": "2027-01-06T17:47:00.000Z",
         "issuer": "Let's Encrypt",
@@ -967,8 +898,7 @@
         "error": null
       }
     },
-    {
-      "id": "dubhe",
+    "dubhe": {
       "ssl": {
         "notAfter": "2026-12-07T17:47:12.000Z",
         "issuer": "Google Trust Services",
@@ -981,8 +911,7 @@
         "error": null
       }
     },
-    {
-      "id": "ehentai",
+    "ehentai": {
       "ssl": {
         "notAfter": "2026-12-18T22:10:50.000Z",
         "issuer": "Google Trust Services",
@@ -995,8 +924,7 @@
         "error": null
       }
     },
-    {
-      "id": "empornium",
+    "empornium": {
       "ssl": {
         "notAfter": "2026-12-11T09:49:39.000Z",
         "issuer": "Let's Encrypt",
@@ -1009,8 +937,7 @@
         "error": "no expiration date in WHOIS record"
       }
     },
-    {
-      "id": "emuwarez",
+    "emuwarez": {
       "ssl": {
         "notAfter": "2026-12-22T23:18:39.000Z",
         "issuer": "Google Trust Services",
@@ -1023,8 +950,7 @@
         "error": null
       }
     },
-    {
-      "id": "exoticaz",
+    "exoticaz": {
       "ssl": {
         "notAfter": "2026-11-16T19:47:15.000Z",
         "issuer": "Google Trust Services",
@@ -1037,8 +963,7 @@
         "error": null
       }
     },
-    {
-      "id": "exttorrents",
+    "exttorrents": {
       "ssl": {
         "notAfter": "2026-11-30T13:30:00.000Z",
         "issuer": "Google Trust Services",
@@ -1051,8 +976,7 @@
         "error": null
       }
     },
-    {
-      "id": "fappaizuri",
+    "fappaizuri": {
       "ssl": {
         "notAfter": "2026-12-11T18:57:27.000Z",
         "issuer": "Google Trust Services",
@@ -1065,8 +989,7 @@
         "error": null
       }
     },
-    {
-      "id": "femdomcult",
+    "femdomcult": {
       "ssl": {
         "notAfter": "2027-01-03T18:33:27.000Z",
         "issuer": "Let's Encrypt",
@@ -1079,8 +1002,7 @@
         "error": null
       }
     },
-    {
-      "id": "fhpt",
+    "fhpt": {
       "ssl": {
         "notAfter": "2026-12-17T15:05:11.000Z",
         "issuer": "Google Trust Services",
@@ -1093,8 +1015,7 @@
         "error": null
       }
     },
-    {
-      "id": "filelist",
+    "filelist": {
       "ssl": {
         "notAfter": "2027-01-03T16:55:17.000Z",
         "issuer": "Google Trust Services",
@@ -1107,8 +1028,7 @@
         "error": null
       }
     },
-    {
-      "id": "freefarm",
+    "freefarm": {
       "ssl": {
         "notAfter": "2026-11-16T08:05:17.000Z",
         "issuer": "Google Trust Services",
@@ -1121,8 +1041,7 @@
         "error": null
       }
     },
-    {
-      "id": "gazellegames",
+    "gazellegames": {
       "ssl": {
         "notAfter": "2026-12-05T08:20:33.000Z",
         "issuer": "Let's Encrypt",
@@ -1135,8 +1054,7 @@
         "error": null
       }
     },
-    {
-      "id": "geminitracker",
+    "geminitracker": {
       "ssl": {
         "notAfter": "2026-12-13T05:41:08.000Z",
         "issuer": "Google Trust Services",
@@ -1149,8 +1067,7 @@
         "error": null
       }
     },
-    {
-      "id": "generationfree",
+    "generationfree": {
       "ssl": {
         "notAfter": "2026-12-21T09:05:43.000Z",
         "issuer": "Let's Encrypt",
@@ -1163,8 +1080,7 @@
         "error": null
       }
     },
-    {
-      "id": "ggpt",
+    "ggpt": {
       "ssl": {
         "notAfter": "2027-01-01T01:01:07.000Z",
         "issuer": "Google Trust Services",
@@ -1177,8 +1093,7 @@
         "error": null
       }
     },
-    {
-      "id": "greatposterwall",
+    "greatposterwall": {
       "ssl": {
         "notAfter": "2026-12-28T20:05:11.000Z",
         "issuer": "Google Trust Services",
@@ -1191,8 +1106,7 @@
         "error": null
       }
     },
-    {
-      "id": "gtnet",
+    "gtnet": {
       "ssl": {
         "notAfter": "2027-01-25T23:59:59.000Z",
         "issuer": "Sectigo Limited",
@@ -1205,8 +1119,7 @@
         "error": null
       }
     },
-    {
-      "id": "gtru",
+    "gtru": {
       "ssl": {
         "notAfter": "2026-12-13T22:19:41.000Z",
         "issuer": "Google Trust Services",
@@ -1219,8 +1132,7 @@
         "error": null
       }
     },
-    {
-      "id": "haidan",
+    "haidan": {
       "ssl": {
         "notAfter": "2027-01-06T07:36:17.000Z",
         "issuer": "Let's Encrypt",
@@ -1233,8 +1145,7 @@
         "error": null
       }
     },
-    {
-      "id": "happyfappy",
+    "happyfappy": {
       "ssl": {
         "notAfter": "2026-11-18T08:15:02.000Z",
         "issuer": "Let's Encrypt",
@@ -1247,8 +1158,7 @@
         "error": null
       }
     },
-    {
-      "id": "hdarea",
+    "hdarea": {
       "ssl": {
         "notAfter": "2026-12-25T11:03:44.000Z",
         "issuer": "Google Trust Services",
@@ -1261,8 +1171,7 @@
         "error": null
       }
     },
-    {
-      "id": "hdbao",
+    "hdbao": {
       "ssl": {
         "notAfter": "2027-01-03T16:44:26.000Z",
         "issuer": "Google Trust Services",
@@ -1275,8 +1184,7 @@
         "error": null
       }
     },
-    {
-      "id": "hdbits",
+    "hdbits": {
       "ssl": {
         "notAfter": "2026-11-27T18:06:02.000Z",
         "issuer": "Google Trust Services",
@@ -1289,8 +1197,7 @@
         "error": null
       }
     },
-    {
-      "id": "hdcity",
+    "hdcity": {
       "ssl": {
         "notAfter": "2026-12-26T21:58:58.000Z",
         "issuer": "Google Trust Services",
@@ -1303,8 +1210,7 @@
         "error": null
       }
     },
-    {
-      "id": "hdclone",
+    "hdclone": {
       "ssl": {
         "notAfter": "2026-11-14T20:16:27.000Z",
         "issuer": "Google Trust Services",
@@ -1317,8 +1223,7 @@
         "error": null
       }
     },
-    {
-      "id": "hddolby",
+    "hddolby": {
       "ssl": {
         "notAfter": "2027-01-04T15:26:41.000Z",
         "issuer": "Google Trust Services",
@@ -1331,8 +1236,7 @@
         "error": null
       }
     },
-    {
-      "id": "hdf",
+    "hdf": {
       "ssl": {
         "notAfter": "2026-12-06T00:09:21.000Z",
         "issuer": "Let's Encrypt",
@@ -1345,8 +1249,7 @@
         "error": null
       }
     },
-    {
-      "id": "hdfans",
+    "hdfans": {
       "ssl": {
         "notAfter": "2026-12-06T11:18:53.000Z",
         "issuer": "Google Trust Services",
@@ -1359,8 +1262,7 @@
         "error": null
       }
     },
-    {
-      "id": "hdhome",
+    "hdhome": {
       "ssl": {
         "notAfter": "2027-01-08T05:13:51.000Z",
         "issuer": "Let's Encrypt",
@@ -1373,8 +1275,7 @@
         "error": null
       }
     },
-    {
-      "id": "hdkylin",
+    "hdkylin": {
       "ssl": {
         "notAfter": "2026-12-24T22:59:10.000Z",
         "issuer": "Google Trust Services",
@@ -1387,8 +1288,7 @@
         "error": null
       }
     },
-    {
-      "id": "hdroute",
+    "hdroute": {
       "ssl": {
         "notAfter": null,
         "issuer": null,
@@ -1401,8 +1301,7 @@
         "error": null
       }
     },
-    {
-      "id": "hdsky",
+    "hdsky": {
       "ssl": {
         "notAfter": "2026-11-14T17:01:58.000Z",
         "issuer": "Google Trust Services",
@@ -1415,8 +1314,7 @@
         "error": null
       }
     },
-    {
-      "id": "hdspace",
+    "hdspace": {
       "ssl": {
         "notAfter": "2026-11-15T13:54:27.000Z",
         "issuer": "Google Trust Services",
@@ -1429,8 +1327,7 @@
         "error": null
       }
     },
-    {
-      "id": "hdtime",
+    "hdtime": {
       "ssl": {
         "notAfter": "2027-01-07T09:10:35.000Z",
         "issuer": "Google Trust Services",
@@ -1443,8 +1340,7 @@
         "error": null
       }
     },
-    {
-      "id": "hdtorrents",
+    "hdtorrents": {
       "ssl": {
         "notAfter": "2026-11-15T21:09:31.000Z",
         "issuer": "Google Trust Services",
@@ -1457,8 +1353,7 @@
         "error": null
       }
     },
-    {
-      "id": "hdunited",
+    "hdunited": {
       "ssl": {
         "notAfter": "2026-12-08T18:56:38.000Z",
         "issuer": "Let's Encrypt",
@@ -1471,8 +1366,7 @@
         "error": "WHOIS ENOTFOUND"
       }
     },
-    {
-      "id": "hdupt",
+    "hdupt": {
       "ssl": {
         "notAfter": "2026-12-27T09:01:24.000Z",
         "issuer": "Google Trust Services",
@@ -1485,8 +1379,7 @@
         "error": null
       }
     },
-    {
-      "id": "hdvideo",
+    "hdvideo": {
       "ssl": {
         "notAfter": "2026-11-23T11:14:35.000Z",
         "issuer": "Google Trust Services",
@@ -1499,8 +1392,7 @@
         "error": null
       }
     },
-    {
-      "id": "hellenichd",
+    "hellenichd": {
       "ssl": {
         "notAfter": "2026-12-05T04:34:17.000Z",
         "issuer": "Google Trust Services",
@@ -1513,8 +1405,7 @@
         "error": null
       }
     },
-    {
-      "id": "hhanclub",
+    "hhanclub": {
       "ssl": {
         "notAfter": "2026-12-31T06:20:26.000Z",
         "issuer": "Google Trust Services",
@@ -1527,8 +1418,7 @@
         "error": null
       }
     },
-    {
-      "id": "hitpt",
+    "hitpt": {
       "ssl": {
         "notAfter": "2026-11-15T11:35:44.000Z",
         "issuer": "Google Trust Services",
@@ -1541,8 +1431,7 @@
         "error": null
       }
     },
-    {
-      "id": "homiehelpdesk",
+    "homiehelpdesk": {
       "ssl": {
         "notAfter": "2026-12-01T12:43:46.000Z",
         "issuer": "Google Trust Services",
@@ -1555,8 +1444,7 @@
         "error": null
       }
     },
-    {
-      "id": "hqmusic",
+    "hqmusic": {
       "ssl": {
         "notAfter": "2026-12-29T00:11:32.000Z",
         "issuer": "Let's Encrypt",
@@ -1569,8 +1457,7 @@
         "error": null
       }
     },
-    {
-      "id": "htpt",
+    "htpt": {
       "ssl": {
         "notAfter": "2026-11-11T13:43:41.000Z",
         "issuer": "Google Trust Services",
@@ -1583,8 +1470,7 @@
         "error": null
       }
     },
-    {
-      "id": "hudbt",
+    "hudbt": {
       "ssl": {
         "notAfter": "2027-01-10T23:59:59.000Z",
         "issuer": "WoTrus CA Limited",
@@ -1597,8 +1483,7 @@
         "error": "no expiration date in WHOIS record"
       }
     },
-    {
-      "id": "huno",
+    "huno": {
       "ssl": {
         "notAfter": "2026-11-23T16:56:46.000Z",
         "issuer": "Google Trust Services",
@@ -1611,8 +1496,7 @@
         "error": null
       }
     },
-    {
-      "id": "hxpt",
+    "hxpt": {
       "ssl": {
         "notAfter": "2026-11-30T22:26:34.000Z",
         "issuer": "Google Trust Services",
@@ -1625,8 +1509,7 @@
         "error": null
       }
     },
-    {
-      "id": "ilolicon",
+    "ilolicon": {
       "ssl": {
         "notAfter": "2027-01-09T04:29:33.000Z",
         "issuer": "Google Trust Services",
@@ -1639,8 +1522,7 @@
         "error": null
       }
     },
-    {
-      "id": "iptorrents",
+    "iptorrents": {
       "ssl": {
         "notAfter": "2026-12-07T05:11:15.000Z",
         "issuer": "Let's Encrypt",
@@ -1653,8 +1535,7 @@
         "error": null
       }
     },
-    {
-      "id": "itzmx",
+    "itzmx": {
       "ssl": {
         "notAfter": "2026-12-24T13:22:52.000Z",
         "issuer": "Let's Encrypt",
@@ -1667,8 +1548,7 @@
         "error": null
       }
     },
-    {
-      "id": "jpopsuki",
+    "jpopsuki": {
       "ssl": {
         "notAfter": "2027-04-14T23:59:59.000Z",
         "issuer": "DigiCert Inc",
@@ -1681,8 +1561,7 @@
         "error": "no expiration date in WHOIS record"
       }
     },
-    {
-      "id": "jptv4us",
+    "jptv4us": {
       "ssl": {
         "notAfter": "2027-01-05T10:02:09.000Z",
         "issuer": "Let's Encrypt",
@@ -1695,8 +1574,7 @@
         "error": null
       }
     },
-    {
-      "id": "kamept",
+    "kamept": {
       "ssl": {
         "notAfter": "2026-12-14T08:32:00.000Z",
         "issuer": "Let's Encrypt",
@@ -1709,8 +1587,7 @@
         "error": null
       }
     },
-    {
-      "id": "karagarga",
+    "karagarga": {
       "ssl": {
         "notAfter": "2026-12-27T13:50:32.000Z",
         "issuer": "Google Trust Services",
@@ -1723,8 +1600,7 @@
         "error": null
       }
     },
-    {
-      "id": "keepfrds",
+    "keepfrds": {
       "ssl": {
         "notAfter": "2026-11-30T21:43:50.000Z",
         "issuer": "Google Trust Services",
@@ -1737,8 +1613,7 @@
         "error": null
       }
     },
-    {
-      "id": "kelu",
+    "kelu": {
       "ssl": {
         "notAfter": "2026-12-09T17:56:43.000Z",
         "issuer": "Google Trust Services",
@@ -1751,8 +1626,7 @@
         "error": null
       }
     },
-    {
-      "id": "kufei",
+    "kufei": {
       "ssl": {
         "notAfter": "2027-01-01T12:32:17.000Z",
         "issuer": "Let's Encrypt",
@@ -1765,8 +1639,7 @@
         "error": null
       }
     },
-    {
-      "id": "kufirc",
+    "kufirc": {
       "ssl": {
         "notAfter": "2026-12-25T16:36:18.000Z",
         "issuer": "Let's Encrypt",
@@ -1779,8 +1652,7 @@
         "error": null
       }
     },
-    {
-      "id": "lajidui",
+    "lajidui": {
       "ssl": {
         "notAfter": "2026-12-02T07:59:12.000Z",
         "issuer": "Google Trust Services",
@@ -1793,8 +1665,7 @@
         "error": null
       }
     },
-    {
-      "id": "latteam",
+    "latteam": {
       "ssl": {
         "notAfter": "2026-11-15T01:59:42.000Z",
         "issuer": "Google Trust Services",
@@ -1807,8 +1678,7 @@
         "error": null
       }
     },
-    {
-      "id": "learnflakes",
+    "learnflakes": {
       "ssl": {
         "notAfter": "2026-12-03T15:01:08.000Z",
         "issuer": "Google Trust Services",
@@ -1821,8 +1691,7 @@
         "error": null
       }
     },
-    {
-      "id": "lemonhdnet",
+    "lemonhdnet": {
       "ssl": {
         "notAfter": "2026-12-01T17:30:22.000Z",
         "issuer": "Google Trust Services",
@@ -1835,8 +1704,7 @@
         "error": null
       }
     },
-    {
-      "id": "longpt",
+    "longpt": {
       "ssl": {
         "notAfter": "2026-12-15T09:13:34.000Z",
         "issuer": "Google Trust Services",
@@ -1849,8 +1717,7 @@
         "error": null
       }
     },
-    {
-      "id": "losslessclub",
+    "losslessclub": {
       "ssl": {
         "notAfter": "2026-12-09T19:41:14.000Z",
         "issuer": "Let's Encrypt",
@@ -1863,8 +1730,7 @@
         "error": null
       }
     },
-    {
-      "id": "lpbits",
+    "lpbits": {
       "ssl": {
         "notAfter": "2026-12-07T20:47:12.000Z",
         "issuer": "Let's Encrypt",
@@ -1877,8 +1743,7 @@
         "error": null
       }
     },
-    {
-      "id": "lst",
+    "lst": {
       "ssl": {
         "notAfter": "2027-01-09T01:52:25.000Z",
         "issuer": "Google Trust Services",
@@ -1891,8 +1756,7 @@
         "error": "no expiration date in WHOIS record"
       }
     },
-    {
-      "id": "luckpt",
+    "luckpt": {
       "ssl": {
         "notAfter": "2026-12-26T16:18:23.000Z",
         "issuer": "Google Trust Services",
@@ -1905,8 +1769,7 @@
         "error": "no expiration date in WHOIS record"
       }
     },
-    {
-      "id": "luminarr",
+    "luminarr": {
       "ssl": {
         "notAfter": "2026-12-01T01:29:56.000Z",
         "issuer": "Google Trust Services",
@@ -1919,8 +1782,7 @@
         "error": null
       }
     },
-    {
-      "id": "lztr",
+    "lztr": {
       "ssl": {
         "notAfter": "2026-12-27T11:51:49.000Z",
         "issuer": "Google Trust Services",
@@ -1933,8 +1795,7 @@
         "error": null
       }
     },
-    {
-      "id": "march",
+    "march": {
       "ssl": {
         "notAfter": "2026-12-14T14:43:45.000Z",
         "issuer": "Google Trust Services",
@@ -1947,8 +1808,7 @@
         "error": null
       }
     },
-    {
-      "id": "midnightscene",
+    "midnightscene": {
       "ssl": {
         "notAfter": "2027-01-06T11:02:38.000Z",
         "issuer": "Let's Encrypt",
@@ -1961,8 +1821,7 @@
         "error": null
       }
     },
-    {
-      "id": "milkie",
+    "milkie": {
       "ssl": {
         "notAfter": "2026-12-25T23:52:29.000Z",
         "issuer": "Let's Encrypt",
@@ -1975,8 +1834,7 @@
         "error": null
       }
     },
-    {
-      "id": "momentpt",
+    "momentpt": {
       "ssl": {
         "notAfter": "2026-12-19T11:29:05.000Z",
         "issuer": "Google Trust Services",
@@ -1989,8 +1847,7 @@
         "error": null
       }
     },
-    {
-      "id": "monikadesign",
+    "monikadesign": {
       "ssl": {
         "notAfter": "2026-12-18T19:31:05.000Z",
         "issuer": "Google Trust Services",
@@ -2003,8 +1860,7 @@
         "error": null
       }
     },
-    {
-      "id": "mteam",
+    "mteam": {
       "ssl": {
         "notAfter": "2026-12-25T23:59:59.000Z",
         "issuer": "Sectigo Limited",
@@ -2017,8 +1873,7 @@
         "error": null
       }
     },
-    {
-      "id": "musopia",
+    "musopia": {
       "ssl": {
         "notAfter": "2026-12-11T16:13:51.000Z",
         "issuer": "Let's Encrypt",
@@ -2031,8 +1886,7 @@
         "error": null
       }
     },
-    {
-      "id": "muxuege",
+    "muxuege": {
       "ssl": {
         "notAfter": "2026-12-29T14:49:48.000Z",
         "issuer": "Google Trust Services",
@@ -2045,8 +1899,7 @@
         "error": null
       }
     },
-    {
-      "id": "myanonamouse",
+    "myanonamouse": {
       "ssl": {
         "notAfter": "2026-12-28T23:06:19.000Z",
         "issuer": "Let's Encrypt",
@@ -2059,8 +1912,7 @@
         "error": null
       }
     },
-    {
-      "id": "mypt",
+    "mypt": {
       "ssl": {
         "notAfter": "2027-01-08T00:56:22.000Z",
         "issuer": "Google Trust Services",
@@ -2073,8 +1925,7 @@
         "error": null
       }
     },
-    {
-      "id": "nanyangpt",
+    "nanyangpt": {
       "ssl": {
         "notAfter": "2026-12-01T21:50:36.000Z",
         "issuer": "Google Trust Services",
@@ -2087,8 +1938,7 @@
         "error": null
       }
     },
-    {
-      "id": "ncore",
+    "ncore": {
       "ssl": {
         "notAfter": "2027-04-06T23:59:59.000Z",
         "issuer": "SSL2BUY EMEA LLC",
@@ -2101,8 +1951,7 @@
         "error": null
       }
     },
-    {
-      "id": "nebulance",
+    "nebulance": {
       "ssl": {
         "notAfter": "2027-01-03T15:25:40.000Z",
         "issuer": "Let's Encrypt",
@@ -2115,8 +1964,7 @@
         "error": null
       }
     },
-    {
-      "id": "nekobt",
+    "nekobt": {
       "ssl": {
         "notAfter": "2026-12-02T20:59:33.000Z",
         "issuer": "Google Trust Services",
@@ -2129,8 +1977,7 @@
         "error": null
       }
     },
-    {
-      "id": "nexushd",
+    "nexushd": {
       "ssl": {
         "notAfter": "2026-11-14T16:45:21.000Z",
         "issuer": "Let's Encrypt",
@@ -2143,8 +1990,7 @@
         "error": null
       }
     },
-    {
-      "id": "nicept",
+    "nicept": {
       "ssl": {
         "notAfter": "2026-12-18T19:45:04.000Z",
         "issuer": "Google Trust Services",
@@ -2157,8 +2003,7 @@
         "error": null
       }
     },
-    {
-      "id": "njtupt",
+    "njtupt": {
       "ssl": {
         "notAfter": "2026-12-08T17:20:40.000Z",
         "issuer": "Google Trust Services",
@@ -2171,8 +2016,7 @@
         "error": null
       }
     },
-    {
-      "id": "nordicbytes",
+    "nordicbytes": {
       "ssl": {
         "notAfter": "2026-11-13T12:26:54.000Z",
         "issuer": "Google Trust Services",
@@ -2185,8 +2029,7 @@
         "error": null
       }
     },
-    {
-      "id": "nordicquality",
+    "nordicquality": {
       "ssl": {
         "notAfter": "2026-12-04T21:41:58.000Z",
         "issuer": "Google Trust Services",
@@ -2199,8 +2042,7 @@
         "error": null
       }
     },
-    {
-      "id": "novahd",
+    "novahd": {
       "ssl": {
         "notAfter": "2026-11-18T02:00:49.000Z",
         "issuer": "Google Trust Services",
@@ -2213,8 +2055,7 @@
         "error": null
       }
     },
-    {
-      "id": "nyaa",
+    "nyaa": {
       "ssl": {
         "notAfter": "2026-11-17T11:45:12.000Z",
         "issuer": "Let's Encrypt",
@@ -2227,8 +2068,7 @@
         "error": null
       }
     },
-    {
-      "id": "okpt",
+    "okpt": {
       "ssl": {
         "notAfter": "2026-11-15T20:42:22.000Z",
         "issuer": "Google Trust Services",
@@ -2241,8 +2081,7 @@
         "error": null
       }
     },
-    {
-      "id": "oldtoonsworld",
+    "oldtoonsworld": {
       "ssl": {
         "notAfter": "2026-12-15T19:17:36.000Z",
         "issuer": "Let's Encrypt",
@@ -2255,8 +2094,7 @@
         "error": null
       }
     },
-    {
-      "id": "onlyencodes",
+    "onlyencodes": {
       "ssl": {
         "notAfter": "2026-11-27T20:14:57.000Z",
         "issuer": "Let's Encrypt",
@@ -2269,8 +2107,7 @@
         "error": null
       }
     },
-    {
-      "id": "opencd",
+    "opencd": {
       "ssl": {
         "notAfter": "2026-12-15T01:52:39.000Z",
         "issuer": "Google Trust Services",
@@ -2283,8 +2120,7 @@
         "error": "WHOIS ENOTFOUND"
       }
     },
-    {
-      "id": "orpheus",
+    "orpheus": {
       "ssl": {
         "notAfter": "2026-12-10T23:41:52.000Z",
         "issuer": "Let's Encrypt",
@@ -2297,8 +2133,7 @@
         "error": null
       }
     },
-    {
-      "id": "oshenpt",
+    "oshenpt": {
       "ssl": {
         "notAfter": "2027-01-07T13:31:06.000Z",
         "issuer": "Google Trust Services",
@@ -2311,8 +2146,7 @@
         "error": null
       }
     },
-    {
-      "id": "ourbits",
+    "ourbits": {
       "ssl": {
         "notAfter": "2026-12-28T15:19:30.000Z",
         "issuer": "Let's Encrypt",
@@ -2325,8 +2159,7 @@
         "error": null
       }
     },
-    {
-      "id": "pandapt",
+    "pandapt": {
       "ssl": {
         "notAfter": "2026-12-27T20:11:13.000Z",
         "issuer": "Google Trust Services",
@@ -2339,8 +2172,7 @@
         "error": null
       }
     },
-    {
-      "id": "passthepopcorn",
+    "passthepopcorn": {
       "ssl": {
         "notAfter": "2027-01-02T16:31:15.000Z",
         "issuer": "Let's Encrypt",
@@ -2353,8 +2185,7 @@
         "error": null
       }
     },
-    {
-      "id": "piggo",
+    "piggo": {
       "ssl": {
         "notAfter": "2026-12-15T18:30:41.000Z",
         "issuer": "Google Trust Services",
@@ -2367,8 +2198,7 @@
         "error": null
       }
     },
-    {
-      "id": "pixelcove",
+    "pixelcove": {
       "ssl": {
         "notAfter": "2027-01-03T06:51:30.000Z",
         "issuer": "Let's Encrypt",
@@ -2381,8 +2211,7 @@
         "error": null
       }
     },
-    {
-      "id": "playletpt",
+    "playletpt": {
       "ssl": {
         "notAfter": "2026-12-02T20:33:03.000Z",
         "issuer": "Let's Encrypt",
@@ -2395,8 +2224,7 @@
         "error": null
       }
     },
-    {
-      "id": "polishtorrent",
+    "polishtorrent": {
       "ssl": {
         "notAfter": "2027-01-07T23:08:56.000Z",
         "issuer": "Let's Encrypt",
@@ -2409,8 +2237,7 @@
         "error": null
       }
     },
-    {
-      "id": "pornolab",
+    "pornolab": {
       "ssl": {
         "notAfter": "2027-01-03T07:34:34.000Z",
         "issuer": "Let's Encrypt",
@@ -2423,8 +2250,7 @@
         "error": null
       }
     },
-    {
-      "id": "portugas",
+    "portugas": {
       "ssl": {
         "notAfter": "2026-11-24T15:54:28.000Z",
         "issuer": "Google Trust Services",
@@ -2437,8 +2263,7 @@
         "error": null
       }
     },
-    {
-      "id": "privatehd",
+    "privatehd": {
       "ssl": {
         "notAfter": "2026-11-15T11:49:01.000Z",
         "issuer": "Google Trust Services",
@@ -2451,8 +2276,7 @@
         "error": null
       }
     },
-    {
-      "id": "ptcafe",
+    "ptcafe": {
       "ssl": {
         "notAfter": "2027-01-02T14:00:09.000Z",
         "issuer": "Google Trust Services",
@@ -2465,8 +2289,7 @@
         "error": null
       }
     },
-    {
-      "id": "pter",
+    "pter": {
       "ssl": {
         "notAfter": "2026-11-14T15:01:41.000Z",
         "issuer": "Google Trust Services",
@@ -2479,8 +2302,7 @@
         "error": null
       }
     },
-    {
-      "id": "ptfans",
+    "ptfans": {
       "ssl": {
         "notAfter": "2026-12-01T16:34:05.000Z",
         "issuer": "Google Trust Services",
@@ -2493,8 +2315,7 @@
         "error": null
       }
     },
-    {
-      "id": "ptgtk",
+    "ptgtk": {
       "ssl": {
         "notAfter": "2026-11-21T18:18:24.000Z",
         "issuer": "Google Trust Services",
@@ -2507,8 +2328,7 @@
         "error": null
       }
     },
-    {
-      "id": "pthome",
+    "pthome": {
       "ssl": {
         "notAfter": "2026-12-28T09:44:23.000Z",
         "issuer": "Google Trust Services",
@@ -2521,8 +2341,7 @@
         "error": null
       }
     },
-    {
-      "id": "ptlao",
+    "ptlao": {
       "ssl": {
         "notAfter": "2026-12-27T14:10:50.000Z",
         "issuer": "Let's Encrypt",
@@ -2535,8 +2354,7 @@
         "error": null
       }
     },
-    {
-      "id": "ptlgs",
+    "ptlgs": {
       "ssl": {
         "notAfter": "2026-11-13T10:23:23.000Z",
         "issuer": "Google Trust Services",
@@ -2549,8 +2367,7 @@
         "error": null
       }
     },
-    {
-      "id": "ptneko",
+    "ptneko": {
       "ssl": {
         "notAfter": "2026-12-22T19:48:50.000Z",
         "issuer": "Let's Encrypt",
@@ -2563,8 +2380,7 @@
         "error": null
       }
     },
-    {
-      "id": "ptsbao",
+    "ptsbao": {
       "ssl": {
         "notAfter": "2026-12-31T15:25:33.000Z",
         "issuer": "Google Trust Services",
@@ -2577,8 +2393,7 @@
         "error": null
       }
     },
-    {
-      "id": "ptskit",
+    "ptskit": {
       "ssl": {
         "notAfter": "2026-11-22T17:03:17.000Z",
         "issuer": "Let's Encrypt",
@@ -2591,8 +2406,7 @@
         "error": null
       }
     },
-    {
-      "id": "pttime",
+    "pttime": {
       "ssl": {
         "notAfter": "2027-01-08T12:30:09.000Z",
         "issuer": "SSL Corporation",
@@ -2605,8 +2419,7 @@
         "error": null
       }
     },
-    {
-      "id": "ptzone",
+    "ptzone": {
       "ssl": {
         "notAfter": "2026-11-23T01:44:23.000Z",
         "issuer": "Google Trust Services",
@@ -2619,8 +2432,7 @@
         "error": null
       }
     },
-    {
-      "id": "pussytorrents",
+    "pussytorrents": {
       "ssl": {
         "notAfter": "2026-12-18T20:45:54.000Z",
         "issuer": "Google Trust Services",
@@ -2633,8 +2445,7 @@
         "error": null
       }
     },
-    {
-      "id": "qingwa",
+    "qingwa": {
       "ssl": {
         "notAfter": "2026-12-14T07:15:34.000Z",
         "issuer": "Google Trust Services",
@@ -2647,8 +2458,7 @@
         "error": null
       }
     },
-    {
-      "id": "racing4everyone",
+    "racing4everyone": {
       "ssl": {
         "notAfter": "2026-12-17T16:54:50.000Z",
         "issuer": "Let's Encrypt",
@@ -2661,8 +2471,7 @@
         "error": "no expiration date in WHOIS record"
       }
     },
-    {
-      "id": "railgunpt",
+    "railgunpt": {
       "ssl": {
         "notAfter": "2026-12-26T21:35:33.000Z",
         "issuer": "Google Trust Services",
@@ -2675,8 +2484,7 @@
         "error": null
       }
     },
-    {
-      "id": "rastastugan",
+    "rastastugan": {
       "ssl": {
         "notAfter": "2027-01-01T03:01:51.000Z",
         "issuer": "Google Trust Services",
@@ -2689,8 +2497,7 @@
         "error": null
       }
     },
-    {
-      "id": "redacted",
+    "redacted": {
       "ssl": {
         "notAfter": "2026-11-13T08:53:18.000Z",
         "issuer": "Let's Encrypt",
@@ -2703,8 +2510,7 @@
         "error": null
       }
     },
-    {
-      "id": "reelflix",
+    "reelflix": {
       "ssl": {
         "notAfter": "2026-11-17T19:59:44.000Z",
         "issuer": "Let's Encrypt",
@@ -2717,8 +2523,7 @@
         "error": null
       }
     },
-    {
-      "id": "retroflix",
+    "retroflix": {
       "ssl": {
         "notAfter": "2026-12-16T06:11:51.000Z",
         "issuer": "Google Trust Services",
@@ -2731,8 +2536,7 @@
         "error": null
       }
     },
-    {
-      "id": "retrotoon",
+    "retrotoon": {
       "ssl": {
         "notAfter": "2026-12-04T01:55:48.000Z",
         "issuer": "Let's Encrypt",
@@ -2745,8 +2549,7 @@
         "error": null
       }
     },
-    {
-      "id": "rockethd",
+    "rockethd": {
       "ssl": {
         "notAfter": "2026-12-20T16:02:49.000Z",
         "issuer": "Let's Encrypt",
@@ -2759,8 +2562,7 @@
         "error": null
       }
     },
-    {
-      "id": "rousipro",
+    "rousipro": {
       "ssl": {
         "notAfter": "2026-11-24T08:29:42.000Z",
         "issuer": "Google Trust Services",
@@ -2773,8 +2575,7 @@
         "error": null
       }
     },
-    {
-      "id": "rs",
+    "rs": {
       "ssl": {
         "notAfter": null,
         "issuer": null,
@@ -2787,8 +2588,7 @@
         "error": "no expiration date in WHOIS record"
       }
     },
-    {
-      "id": "rutracker",
+    "rutracker": {
       "ssl": {
         "notAfter": "2026-11-25T17:42:21.000Z",
         "issuer": "Google Trust Services",
@@ -2801,8 +2601,7 @@
         "error": null
       }
     },
-    {
-      "id": "sbpt",
+    "sbpt": {
       "ssl": {
         "notAfter": "2026-11-12T03:28:14.000Z",
         "issuer": "Google Trust Services",
@@ -2815,8 +2614,7 @@
         "error": null
       }
     },
-    {
-      "id": "secretcinema",
+    "secretcinema": {
       "ssl": {
         "notAfter": "2026-12-26T15:08:09.000Z",
         "issuer": "Let's Encrypt",
@@ -2829,8 +2627,7 @@
         "error": null
       }
     },
-    {
-      "id": "seedpool",
+    "seedpool": {
       "ssl": {
         "notAfter": "2026-11-18T10:48:30.000Z",
         "issuer": "Google Trust Services",
@@ -2843,8 +2640,7 @@
         "error": null
       }
     },
-    {
-      "id": "sewerpt",
+    "sewerpt": {
       "ssl": {
         "notAfter": "2027-01-08T02:41:21.000Z",
         "issuer": "Google Trust Services",
@@ -2857,8 +2653,7 @@
         "error": null
       }
     },
-    {
-      "id": "shareisland",
+    "shareisland": {
       "ssl": {
         "notAfter": "2026-11-24T22:14:21.000Z",
         "issuer": "Google Trust Services",
@@ -2871,8 +2666,7 @@
         "error": null
       }
     },
-    {
-      "id": "simurg",
+    "simurg": {
       "ssl": {
         "notAfter": "2026-12-07T01:01:46.000Z",
         "issuer": "Let's Encrypt",
@@ -2885,8 +2679,7 @@
         "error": null
       }
     },
-    {
-      "id": "siqi",
+    "siqi": {
       "ssl": {
         "notAfter": "2027-01-01T05:42:09.000Z",
         "issuer": "Google Trust Services",
@@ -2899,8 +2692,7 @@
         "error": null
       }
     },
-    {
-      "id": "sjtu",
+    "sjtu": {
       "ssl": {
         "notAfter": "2026-11-26T20:04:57.000Z",
         "issuer": "Let's Encrypt",
@@ -2913,8 +2705,7 @@
         "error": "no expiration date in WHOIS record"
       }
     },
-    {
-      "id": "skipthecommercials",
+    "skipthecommercials": {
       "ssl": {
         "notAfter": "2026-12-05T02:02:23.000Z",
         "issuer": "Let's Encrypt",
@@ -2927,8 +2718,7 @@
         "error": null
       }
     },
-    {
-      "id": "skyeysnow",
+    "skyeysnow": {
       "ssl": {
         "notAfter": "2026-12-05T12:56:38.000Z",
         "issuer": "Google Trust Services",
@@ -2941,8 +2731,7 @@
         "error": null
       }
     },
-    {
-      "id": "soulvoice",
+    "soulvoice": {
       "ssl": {
         "notAfter": "2026-11-12T20:36:34.000Z",
         "issuer": "Google Trust Services",
@@ -2955,8 +2744,7 @@
         "error": null
       }
     },
-    {
-      "id": "speedapp",
+    "speedapp": {
       "ssl": {
         "notAfter": "2026-11-18T03:17:56.000Z",
         "issuer": "Google Trust Services",
@@ -2969,8 +2757,7 @@
         "error": null
       }
     },
-    {
-      "id": "sportscult",
+    "sportscult": {
       "ssl": {
         "notAfter": "2026-11-15T19:15:25.000Z",
         "issuer": "Google Trust Services",
@@ -2983,8 +2770,7 @@
         "error": null
       }
     },
-    {
-      "id": "springsunday",
+    "springsunday": {
       "ssl": {
         "notAfter": "2026-12-02T13:25:56.000Z",
         "issuer": "Google Trust Services",
@@ -2997,8 +2783,7 @@
         "error": null
       }
     },
-    {
-      "id": "starspace",
+    "starspace": {
       "ssl": {
         "notAfter": "2027-01-05T21:40:49.000Z",
         "issuer": "Google Trust Services",
@@ -3011,8 +2796,7 @@
         "error": null
       }
     },
-    {
-      "id": "sunnypt",
+    "sunnypt": {
       "ssl": {
         "notAfter": "2026-12-20T12:05:12.000Z",
         "issuer": "Google Trust Services",
@@ -3025,8 +2809,7 @@
         "error": null
       }
     },
-    {
-      "id": "superbits",
+    "superbits": {
       "ssl": {
         "notAfter": "2027-04-15T23:59:59.000Z",
         "issuer": "Sectigo Limited",
@@ -3039,8 +2822,7 @@
         "error": null
       }
     },
-    {
-      "id": "tangpt",
+    "tangpt": {
       "ssl": {
         "notAfter": "2026-11-22T07:46:05.000Z",
         "issuer": "Google Trust Services",
@@ -3053,8 +2835,7 @@
         "error": null
       }
     },
-    {
-      "id": "tccf",
+    "tccf": {
       "ssl": {
         "notAfter": "2026-12-19T16:25:55.000Z",
         "issuer": "Google Trust Services",
@@ -3067,8 +2848,7 @@
         "error": null
       }
     },
-    {
-      "id": "teamhd",
+    "teamhd": {
       "ssl": {
         "notAfter": "2026-12-10T15:07:42.000Z",
         "issuer": "Let's Encrypt",
@@ -3081,8 +2861,7 @@
         "error": null
       }
     },
-    {
-      "id": "tey",
+    "tey": {
       "ssl": {
         "notAfter": "2026-12-18T23:52:22.000Z",
         "issuer": "Google Trust Services",
@@ -3095,8 +2874,7 @@
         "error": null
       }
     },
-    {
-      "id": "thegeeks",
+    "thegeeks": {
       "ssl": {
         "notAfter": null,
         "issuer": null,
@@ -3109,8 +2887,7 @@
         "error": null
       }
     },
-    {
-      "id": "thevault",
+    "thevault": {
       "ssl": {
         "notAfter": null,
         "issuer": null,
@@ -3123,8 +2900,7 @@
         "error": null
       }
     },
-    {
-      "id": "tjupt",
+    "tjupt": {
       "ssl": {
         "notAfter": "2027-01-04T22:59:37.000Z",
         "issuer": "Google Trust Services",
@@ -3137,8 +2913,7 @@
         "error": null
       }
     },
-    {
-      "id": "tlfbits",
+    "tlfbits": {
       "ssl": {
         "notAfter": "2026-12-05T15:03:51.000Z",
         "issuer": "Google Trust Services",
@@ -3151,8 +2926,7 @@
         "error": null
       }
     },
-    {
-      "id": "tlzdigital",
+    "tlzdigital": {
       "ssl": {
         "notAfter": "2027-01-03T16:01:44.000Z",
         "issuer": "Let's Encrypt",
@@ -3165,8 +2939,7 @@
         "error": null
       }
     },
-    {
-      "id": "tokyopt",
+    "tokyopt": {
       "ssl": {
         "notAfter": "2026-11-15T19:40:15.000Z",
         "issuer": "Let's Encrypt",
@@ -3179,8 +2952,7 @@
         "error": null
       }
     },
-    {
-      "id": "tokyotosho",
+    "tokyotosho": {
       "ssl": {
         "notAfter": "2027-01-01T03:21:19.000Z",
         "issuer": "Google Trust Services",
@@ -3193,8 +2965,7 @@
         "error": null
       }
     },
-    {
-      "id": "torrentday",
+    "torrentday": {
       "ssl": {
         "notAfter": "2026-12-11T03:51:14.000Z",
         "issuer": "Let's Encrypt",
@@ -3207,8 +2978,7 @@
         "error": null
       }
     },
-    {
-      "id": "torrenting",
+    "torrenting": {
       "ssl": {
         "notAfter": "2026-12-05T11:10:33.000Z",
         "issuer": "Let's Encrypt",
@@ -3221,8 +2991,7 @@
         "error": null
       }
     },
-    {
-      "id": "torrentleech",
+    "torrentleech": {
       "ssl": {
         "notAfter": "2027-01-03T21:44:55.000Z",
         "issuer": "Google Trust Services",
@@ -3235,8 +3004,7 @@
         "error": null
       }
     },
-    {
-      "id": "torrentscsv",
+    "torrentscsv": {
       "ssl": {
         "notAfter": "2026-11-15T18:30:23.000Z",
         "issuer": "Let's Encrypt",
@@ -3249,8 +3017,7 @@
         "error": null
       }
     },
-    {
-      "id": "totheglory",
+    "totheglory": {
       "ssl": {
         "notAfter": "2026-11-28T05:02:22.000Z",
         "issuer": "Google Trust Services",
@@ -3263,8 +3030,7 @@
         "error": "no expiration date in WHOIS record"
       }
     },
-    {
-      "id": "trancetraffic",
+    "trancetraffic": {
       "ssl": {
         "notAfter": null,
         "issuer": null,
@@ -3277,8 +3043,7 @@
         "error": null
       }
     },
-    {
-      "id": "tu88",
+    "tu88": {
       "ssl": {
         "notAfter": "2027-04-14T23:59:59.000Z",
         "issuer": "GoGetSSL",
@@ -3291,8 +3056,7 @@
         "error": null
       }
     },
-    {
-      "id": "turkseed",
+    "turkseed": {
       "ssl": {
         "notAfter": "2026-12-26T10:06:34.000Z",
         "issuer": "Let's Encrypt",
@@ -3305,8 +3069,7 @@
         "error": null
       }
     },
-    {
-      "id": "u2",
+    "u2": {
       "ssl": {
         "notAfter": "2026-11-19T16:31:42.000Z",
         "issuer": "Let's Encrypt",
@@ -3319,8 +3082,7 @@
         "error": null
       }
     },
-    {
-      "id": "ubits",
+    "ubits": {
       "ssl": {
         "notAfter": "2026-11-22T01:14:18.000Z",
         "issuer": "Google Trust Services",
@@ -3333,8 +3095,7 @@
         "error": null
       }
     },
-    {
-      "id": "ultrahd",
+    "ultrahd": {
       "ssl": {
         "notAfter": "2026-12-09T05:27:55.000Z",
         "issuer": "Google Trust Services",
@@ -3347,8 +3108,7 @@
         "error": null
       }
     },
-    {
-      "id": "uploadcx",
+    "uploadcx": {
       "ssl": {
         "notAfter": "2026-12-01T05:44:21.000Z",
         "issuer": "Google Trust Services",
@@ -3361,8 +3121,7 @@
         "error": null
       }
     },
-    {
-      "id": "vclib",
+    "vclib": {
       "ssl": {
         "notAfter": "2026-12-07T12:19:59.000Z",
         "issuer": "Google Trust Services",
@@ -3375,8 +3134,7 @@
         "error": null
       }
     },
-    {
-      "id": "wihd",
+    "wihd": {
       "ssl": {
         "notAfter": "2026-11-27T22:35:56.000Z",
         "issuer": "Google Trust Services",
@@ -3389,8 +3147,7 @@
         "error": null
       }
     },
-    {
-      "id": "wintersakura",
+    "wintersakura": {
       "ssl": {
         "notAfter": "2026-12-09T17:18:39.000Z",
         "issuer": "Google Trust Services",
@@ -3403,8 +3160,7 @@
         "error": null
       }
     },
-    {
-      "id": "xdypt",
+    "xdypt": {
       "ssl": {
         "notAfter": "2026-11-16T10:18:21.000Z",
         "issuer": "Google Trust Services",
@@ -3417,8 +3173,7 @@
         "error": null
       }
     },
-    {
-      "id": "xingtan",
+    "xingtan": {
       "ssl": {
         "notAfter": "2026-12-13T06:07:51.000Z",
         "issuer": "Google Trust Services",
@@ -3431,8 +3186,7 @@
         "error": null
       }
     },
-    {
-      "id": "xingwan",
+    "xingwan": {
       "ssl": {
         "notAfter": "2026-12-16T04:40:35.000Z",
         "issuer": "Google Trust Services",
@@ -3445,8 +3199,7 @@
         "error": null
       }
     },
-    {
-      "id": "xingyunge",
+    "xingyunge": {
       "ssl": {
         "notAfter": "2026-12-22T03:20:50.000Z",
         "issuer": "Google Trust Services",
@@ -3459,8 +3212,7 @@
         "error": null
       }
     },
-    {
-      "id": "xtr",
+    "xtr": {
       "ssl": {
         "notAfter": "2026-12-13T09:03:17.000Z",
         "issuer": "Google Trust Services",
@@ -3473,8 +3225,7 @@
         "error": "WHOIS ETIMEDOUT"
       }
     },
-    {
-      "id": "yemapt",
+    "yemapt": {
       "ssl": {
         "notAfter": "2026-12-28T15:15:02.000Z",
         "issuer": "Google Trust Services",
@@ -3487,8 +3238,7 @@
         "error": null
       }
     },
-    {
-      "id": "yinguskg",
+    "yinguskg": {
       "ssl": {
         "notAfter": null,
         "issuer": null,
@@ -3501,8 +3251,7 @@
         "error": null
       }
     },
-    {
-      "id": "yuscene",
+    "yuscene": {
       "ssl": {
         "notAfter": "2026-11-25T03:28:44.000Z",
         "issuer": "Let's Encrypt",
@@ -3515,8 +3264,7 @@
         "error": null
       }
     },
-    {
-      "id": "yzyy",
+    "yzyy": {
       "ssl": {
         "notAfter": "2026-12-05T22:59:18.000Z",
         "issuer": "Google Trust Services",
@@ -3529,8 +3277,7 @@
         "error": null
       }
     },
-    {
-      "id": "zhixing",
+    "zhixing": {
       "ssl": {
         "notAfter": null,
         "issuer": null,
@@ -3543,8 +3290,7 @@
         "error": "no expiration date in WHOIS record"
       }
     },
-    {
-      "id": "zhuque",
+    "zhuque": {
       "ssl": {
         "notAfter": "2026-12-16T20:02:15.000Z",
         "issuer": "Google Trust Services",
@@ -3557,8 +3303,7 @@
         "error": null
       }
     },
-    {
-      "id": "zmpt",
+    "zmpt": {
       "ssl": {
         "notAfter": "2026-11-29T11:32:38.000Z",
         "issuer": "Google Trust Services",
@@ -3571,8 +3316,7 @@
         "error": null
       }
     },
-    {
-      "id": "zrpt",
+    "zrpt": {
       "ssl": {
         "notAfter": "2026-11-14T22:48:14.000Z",
         "issuer": "Google Trust Services",
@@ -3585,5 +3329,5 @@
         "error": null
       }
     }
-  ]
+  }
 }

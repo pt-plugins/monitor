@@ -314,7 +314,10 @@ export function loadCertificateReport(): CertificateReport | null {
   if (cachedCertificateReport !== undefined) return cachedCertificateReport;
   try {
     const parsed = JSON.parse(readFileSync(CERTIFICATES_FILE, "utf-8")) as CertificateReport;
-    cachedCertificateReport = Array.isArray(parsed?.sites) ? parsed : null;
+    const sites = parsed?.sites;
+    // Keyed by site id, so anything that is not an object — an array included —
+    // reads as "never collected" rather than as a report with no sites in it.
+    cachedCertificateReport = sites && typeof sites === "object" && !Array.isArray(sites) ? parsed : null;
   } catch {
     cachedCertificateReport = null;
   }
@@ -362,9 +365,6 @@ export function computeSiteSummaries(): SiteSummary[] {
   const allRuns = loadAllMonitorRuns();
   const iconSet = getLocalIconSet();
   const certificateReport = loadCertificateReport();
-  // A site added since the last collection simply has no entry, which reads as
-  // "not checked yet" rather than as a failure.
-  const certificateById = new Map((certificateReport?.sites ?? []).map((c) => [c.id, c]));
 
   // The current status comes from the newest run that actually contains the
   // site, so look that up per site rather than assuming it is the last run.
@@ -407,8 +407,10 @@ export function computeSiteSummaries(): SiteSummary[] {
       avgLatency24h: avgLat,
       dailyStatus,
       history,
+      // A site added since the last collection has no entry of its own, which
+      // reads as "not checked yet" rather than as a failure.
       certificate: certificateReport
-        ? buildCertificate(certificateById.get(site.id), certificateReport.timestamp)
+        ? buildCertificate(certificateReport.sites[site.id], certificateReport.timestamp)
         : null,
     };
   });

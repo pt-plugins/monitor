@@ -35,17 +35,18 @@ export interface DailyCheckCount {
  * This file holds one snapshot and no history: the expiry dates it carries are
  * the only thing the pages read, and a new run overwrites them outright.
  *
- * Entries are keyed by site id and carry no hostnames — not the host whose
- * certificate was read, nor the registrable domain looked up — so the snapshot
- * adds nothing about which addresses a site answers on.
+ * `sites` is keyed by site id, the way request-overrides.json keys its own
+ * overrides — the id is written once, as the key, rather than repeated in every
+ * record — and an entry carries no hostnames: not the host whose certificate
+ * was read, nor the registrable domain looked up, so the snapshot adds nothing
+ * about which addresses a site answers on.
  */
 export interface CertificateReport {
   timestamp: string;
-  sites: CertificateSite[];
+  sites: Record<string, CertificateSite>;
 }
 
 export interface CertificateSite {
-  id: string;
   ssl: {
     /** Certificate notAfter, ISO 8601; null when no certificate was read. */
     notAfter: string | null;
@@ -64,7 +65,7 @@ export interface CertificateSite {
 
 /**
  * A site's certificate and domain expiry with the time left computed at build
- * time, so a snapshot collected up to three days ago still reads as current.
+ * time, so a snapshot a few days old still reads as current.
  */
 export interface SiteCertificate {
   checkedAt: string;

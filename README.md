@@ -91,10 +91,11 @@ index or clean up, and the site detail page reads that one file.
   registry. TLDs with no RDAP — among them `.cn`, `.me` and `.de` — are queried over WHOIS instead, serially and just
   over a second apart, because those servers throttle bulk querying. A registry that discloses no expiry date at all
   (`.de`) is reported as unavailable rather than guessed at.
-- **The snapshot carries no hostnames.** An entry is keyed by the site id and holds only the dates, the issuer or
-  registrar, and any error — not the host whose certificate was read, nor the registrable domain that was looked up.
-  Like the uptime records, `data/certificates.json` names sites by id alone; the URLs are used for the lookups, never
-  written down. The command's own log still names the host it queried, which is what makes a failure diagnosable.
+- **The snapshot carries no hostnames.** `sites` is an object keyed by site id — the same shape as
+  `data/request-overrides.json`, so an id is written once, as its key, rather than repeated in every entry — and an entry
+  holds only the dates, the issuer or registrar, and any error: not the host whose certificate was read, nor the
+  registrable domain that was looked up. The URLs are used for the lookups, never written down. The command's own log
+  still names the host it queried, which is what makes a failure diagnosable.
 - **Only the absolute dates are stored.** The days remaining are computed at *build* time, so a snapshot a few days
   old still renders a current countdown, refreshed with the rest of the site every two hours.
 - Sites marked `isDead` are skipped; a site added since the last collection reads *Not checked yet* rather than as a

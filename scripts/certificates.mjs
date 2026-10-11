@@ -455,10 +455,13 @@ async function main() {
   }
 
   const queue = new PQueue({ concurrency: CONCURRENCY });
-  const results = new Array(activeSites.length);
+  // Keyed by site id, like request-overrides.json, rather than a list of
+  // entries: the id is then written once, in the key, instead of in every
+  // record, and a reader looks a site up instead of scanning for it.
+  const results = {};
 
   await queue.addAll(
-    activeSites.map((site, index) => async () => {
+    activeSites.map((site) => async () => {
       const urls = parseSiteUrls(site);
       const httpsUrls = urls.filter((u) => u.secure);
       const lines = [`[TEST] ${site.id} (${site.name}) — ${urls.length} URL(s)`];
@@ -498,7 +501,7 @@ async function main() {
         lines.push(`  ✗ domain — ${error}`);
       }
 
-      results[index] = { id: site.id, ssl, domain };
+      results[site.id] = { ssl, domain };
       // One console.log per site = atomic output, no interleaving.
       console.log(lines.join("\n") + "\n");
     })
@@ -507,10 +510,11 @@ async function main() {
   const output = { timestamp: new Date().toISOString(), sites: results };
   writeFileSync(OUTPUT_FILE, JSON.stringify(output, null, 2), "utf-8");
 
-  const sslOk = results.filter((r) => r.ssl?.notAfter).length;
-  const domainOk = results.filter((r) => r.domain?.expiresAt).length;
+  const checked = Object.values(results);
+  const sslOk = checked.filter((r) => r.ssl?.notAfter).length;
+  const domainOk = checked.filter((r) => r.domain?.expiresAt).length;
   console.log(
-    `[DONE] SSL: ${sslOk}/${results.length}, Domain: ${domainOk}/${results.length} — Saved to ${OUTPUT_FILE}`
+    `[DONE] SSL: ${sslOk}/${checked.length}, Domain: ${domainOk}/${checked.length} — Saved to ${OUTPUT_FILE}`
   );
 }
 
