@@ -2,6 +2,9 @@ name: Monitor
 
 on:
   schedule:
+    # A request, not a promise: GitHub queues scheduled runs behind other work
+    # and drops some when the queue is loaded, so this has been landing a few
+    # times a day rather than 96 — see README, "Scheduled Runs Are Best-Effort".
     - cron: "*/15 * * * *"
   workflow_dispatch: {}
 

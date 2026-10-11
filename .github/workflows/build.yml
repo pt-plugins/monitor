@@ -5,6 +5,9 @@ on:
     branches:
       - main
   schedule:
+    # Best-effort like every schedule here: GitHub delays and drops scheduled
+    # runs under load, so the deployed page can be staler than two hours — see
+    # README, "Scheduled Runs Are Best-Effort".
     - cron: "25 */2 * * *"
   workflow_dispatch: {}
 

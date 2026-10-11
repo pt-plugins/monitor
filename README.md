@@ -4,12 +4,45 @@ Uptime monitoring for PT sites, driven by **GitHub Actions** and **Astro**.
 
 ## How It Works
 
-| Workflow | Schedule | Action |
+| Workflow | Requested schedule | Action |
 |---|---|---|
 | `monitor.yml` | Every 15 min | HTTP probes all sites, writes results to `data/uptime/` |
 | `build.yml` | Every 2 hours | Builds Astro static site, deploys to GitHub Pages |
 | `update-source.yml` | Every day | Fetches site definitions from PT-depiler, runs data cleanup |
 | `certificates.yml` | Every 3 days | Reads TLS certificate and domain expiry dates into one snapshot |
+
+### Scheduled Runs Are Best-Effort
+
+**Those crons are a request, not a promise.** GitHub runs scheduled workflows on a best-effort basis: a `schedule`
+event queues behind whatever else is running in the repository and is delayed — sometimes by hours, most often around
+the top of the hour — and when the queue is loaded, queued runs are dropped outright rather than run late. None of this
+is reported as an error; the run simply does not happen.
+
+Measured against this repository's own history, the monitor's `*/15` cron has produced — a perfect 15-minute cadence
+would be 96 runs a day:
+
+| Month | Runs/day |
+|---|---|
+| 2026-06 (from the 24th, the first days with data) | 9.3 |
+| 2026-07 | 12.4 |
+| 2026-08 | 17.2 |
+| 2026-09 | 6.2 |
+| 2026-10 | 4.5 |
+
+The median gap between two runs is **89 minutes**, and only 9% of gaps are half an hour or less. So the real cadence
+sits somewhere between a fifth and a twentieth of what the cron asks for, and it drifts with whatever else GitHub is
+running that day.
+
+Nothing in the data model assumes the nominal interval, which is why this degrades gracefully:
+
+- every run stamps itself with its own timestamp, and uptime is computed from the runs that actually exist;
+- the dashboard heatmap counts runs per UTC day, so a slow period shows up as a sparse calendar instead of being
+  averaged away;
+- the site is rebuilt on `build.yml`'s own schedule (and on push), not per check.
+
+One consequence is worth knowing when reading the numbers: uptime is the share of *checks* that succeeded, not time
+weighted. With five runs a day, one failed check reads as 80% for that window, where the same outage sampled every 15
+minutes would read as about 1%. The percentages are a daily sample, not a stopwatch.
 
 ### Data Source
 
@@ -43,9 +76,9 @@ Site definitions are pulled from [`pt-plugins/PT-depiler`](https://github.com/pt
 ### Certificate & Domain Expiry
 
 Two dates that move on the scale of weeks, not minutes: when a site's TLS certificate expires, and when its domain
-registration does. They are collected by `scripts/certificates.mjs` (run by `certificates.yml`, **every third day**) into
-a **single snapshot** at `data/certificates.json`, which each run overwrites. There is no history to merge, index or
-clean up, and the site detail page reads that one file.
+registration does. They are collected by `scripts/certificates.mjs` (run by `certificates.yml`, **nominally every third
+day**) into a **single snapshot** at `data/certificates.json`, which each run overwrites. There is no history to merge,
+index or clean up, and the site detail page reads that one file.
 
 - **Certificate.** The first HTTPS URL that completes a TLS handshake is used, walking a site's URLs in the same order
   the monitor probes them. The connection is made with verification switched off (`rejectUnauthorized: false`)
@@ -62,8 +95,8 @@ clean up, and the site detail page reads that one file.
   registrar, and any error — not the host whose certificate was read, nor the registrable domain that was looked up.
   Like the uptime records, `data/certificates.json` names sites by id alone; the URLs are used for the lookups, never
   written down. The command's own log still names the host it queried, which is what makes a failure diagnosable.
-- **Only the absolute dates are stored.** The days remaining are computed at *build* time, so a snapshot taken up to
-  three days ago still renders a current countdown, refreshed with the rest of the site every two hours.
+- **Only the absolute dates are stored.** The days remaining are computed at *build* time, so a snapshot a few days
+  old still renders a current countdown, refreshed with the rest of the site every two hours.
 - Sites marked `isDead` are skipped; a site added since the last collection reads *Not checked yet* rather than as a
   failure, as does a domain the registry would not answer for.
 - The workflow joins the shared `uptime-pipeline` concurrency group, so its commit cannot race the monitor's, and sets
@@ -83,7 +116,9 @@ build machine happens to be in. Below it sit the five counters (Sites / Up / Dow
 (`src/components/CheckHeatmap.astro`). Both blocks keep their natural size and are centred as a pair — the spare width
 is left on either side rather than stretched into wide, empty tiles or a gap between them — and they stack below 55rem.
 The counters say how the sites are doing right now, the heatmap whether monitoring is actually running — a
-contribution-graph style calendar with one cell per day, darkening with the number of monitor runs that day.
+contribution-graph style calendar with one cell per day, darkening with the number of monitor runs that day. The
+heatmap is the honest answer to "how often does this actually check?", which is a different number from the cron (see
+*Scheduled Runs Are Best-Effort* above).
 
 - The counts come from `computeDailyCheckCounts()` in `src/lib/data-loader.ts`, at build time. Days are bucketed on the
   date part of the run timestamp — the same UTC boundary the rest of the page uses — and the grid is labelled
