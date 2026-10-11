@@ -1,4 +1,4 @@
-# PT Site Monitor
+# Tracker Site Status
 
 Uptime monitoring for PT sites, driven by **GitHub Actions** and **Astro**.
 

@@ -17,16 +17,16 @@ const { title, showFilter = true } = Astro.props;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{title} — PT Site Status</title>
+    <title>{title} — Tracker Site Status</title>
     <link rel="icon" type="image/svg+xml" href="/monitor/favicon.png" />
-    <meta name="description" content="PT site uptime monitor status page" />
+    <meta name="description" content="Tracker site uptime monitor status page" />
   </head>
   <body>
     <header class="site-header">
       <div class="container header-inner">
         <a href="/monitor" class="logo">
           <img src="/monitor/icons/logo.svg" alt="" width="24" height="24" class="logo-icon" />
-          <span class="logo-text">PT Site Status</span>
+          <span class="logo-text">Tracker Site Status</span>
         </a>
         <button class="search-toggle" id="search-toggle" aria-label="Toggle search" type="button" hidden={!showFilter}>
           <img src="/monitor/icons/search.svg" alt="Search" width="20" height="20" class="search-icon" />
