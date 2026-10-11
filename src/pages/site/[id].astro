@@ -47,6 +47,121 @@ function fmtUptime(pct: number): string {
 
 // Built-in history shown in the table (last 50 entries, reversed for the table)
 const recentHistory = [...site.history].reverse().slice(0, 50);
+
+/*
+ * Certificate and domain expiry.
+ *
+ * The snapshot is written every few days (scripts/certificates.mjs) while the
+ * page is rebuilt every two hours, so nothing that can be derived is stored:
+ * the days remaining are worked out at build time from the stored expiry date,
+ * and re-rendered at every build from then on.
+ */
+type CertTone = "ok" | "warn" | "bad" | "unknown";
+
+interface CertRow {
+  title: string;
+  subject: string | null;
+  subjectLabel: string;
+  source: string | null;
+  sourceLabel: string;
+  status: string;
+  tone: CertTone;
+  /** Expiry date, YYYY-MM-DD; null when there is nothing to show. */
+  expires: string | null;
+  remaining: string | null;
+  /** A caveat that does not change the expiry itself, such as an untrusted chain. */
+  note: string | null;
+}
+
+function fmtRemaining(days: number | null): string | null {
+  if (days === null) return null;
+  if (days < 0) return `expired ${Math.abs(days)} day${days === -1 ? "" : "s"} ago`;
+  if (days === 0) return "expires today";
+  return `${days} day${days === 1 ? "" : "s"} left`;
+}
+
+function certRow(opts: {
+  title: string;
+  subject: string | null;
+  subjectLabel: string;
+  source: string | null;
+  sourceLabel: string;
+  expiresAt: string | null;
+  daysRemaining: number | null;
+  /** Days left at which the row starts warning. */
+  warnDays: number;
+  error: string | null;
+  trustError?: string | null;
+}): CertRow {
+  const base: CertRow = {
+    title: opts.title,
+    subject: opts.subject,
+    subjectLabel: opts.subjectLabel,
+    source: null,
+    sourceLabel: opts.sourceLabel,
+    tone: "unknown",
+    status: "Unavailable",
+    expires: null,
+    remaining: null,
+    note: opts.error,
+  };
+
+  // Nothing was read: the row states why rather than showing a date it does not
+  // have, which is what "Unavailable" next to an empty value would imply.
+  if (opts.error || !opts.expiresAt) return base;
+
+  const days = opts.daysRemaining;
+  const tone: CertTone = days === null ? "unknown" : days < 0 ? "bad" : days <= opts.warnDays ? "warn" : "ok";
+  const status = tone === "ok" ? "Valid" : tone === "warn" ? "Expiring soon" : tone === "bad" ? "Expired" : "Unknown";
+
+  return {
+    ...base,
+    source: opts.source,
+    tone,
+    status,
+    // ISO instant, and the page renders every timestamp in UTC, so the date
+    // part of it is the date to show.
+    expires: opts.expiresAt.slice(0, 10),
+    remaining: fmtRemaining(days),
+    note: opts.trustError ? `Chain not trusted: ${opts.trustError}` : null,
+  };
+}
+
+const certRows: CertRow[] | null = site.certificate
+  ? [
+      certRow({
+        title: "SSL Certificate",
+        subject: site.certificate.ssl.host,
+        subjectLabel: "Host",
+        source: site.certificate.ssl.issuer,
+        sourceLabel: "Issuer",
+        expiresAt: site.certificate.ssl.notAfter,
+        daysRemaining: site.certificate.ssl.daysRemaining,
+        // A certificate is usually renewed well before it lapses, so only the
+        // last fortnight is worth flagging.
+        warnDays: 14,
+        error: site.certificate.ssl.error,
+        trustError: site.certificate.ssl.trustError,
+      }),
+      certRow({
+        title: "Domain Registration",
+        subject: site.certificate.domain.domain,
+        subjectLabel: "Domain",
+        source: site.certificate.domain.registrar,
+        sourceLabel: "Registrar",
+        expiresAt: site.certificate.domain.expiresAt,
+        daysRemaining: site.certificate.domain.daysRemaining,
+        // A lapsed registration is not renewed automatically and takes the site
+        // with it, so a month's notice is the useful warning.
+        warnDays: 30,
+        error: site.certificate.domain.error,
+      }),
+    ]
+  : null;
+
+const certEmptyNote = isDead
+  ? "Not checked — this site is marked dead and is no longer monitored."
+  : "Not checked yet — certificates and domain registrations are checked every few days.";
 ---
 
 <Layout title={site.name} showFilter={false}>
@@ -109,6 +224,53 @@ const recentHistory = [...site.history].reverse().slice(0, 50);
         <div class="uptime-label">Avg Latency (24h)</div>
       </div>
     </div>
+  </section>
+
+  <!-- Certificate & Domain -->
+  <section class="section">
+    <div class="section-head">
+      <h2>Certificate &amp; Domain</h2>
+      {site.certificate && (
+        <span class="section-stamp">Checked {fmtTime(site.certificate.checkedAt)} ({DISPLAY_TIME_ZONE_LABEL})</span>
+      )}
+    </div>
+    {certRows ? (
+      <div class="cert-grid">
+        {certRows.map((row) => (
+          <div class="cert-card" data-tone={row.tone}>
+            <div class="cert-head">
+              <span class="cert-title">{row.title}</span>
+              <span class="cert-pill">{row.status}</span>
+            </div>
+            {row.expires ? (
+              <>
+                <div class="cert-value">{row.expires}</div>
+                <div class="cert-remaining">{row.remaining}</div>
+                <dl class="cert-facts">
+                  {row.subject && (
+                    <div>
+                      <dt>{row.subjectLabel}</dt>
+                      <dd>{row.subject}</dd>
+                    </div>
+                  )}
+                  {row.source && (
+                    <div>
+                      <dt>{row.sourceLabel}</dt>
+                      <dd>{row.source}</dd>
+                    </div>
+                  )}
+                </dl>
+              </>
+            ) : (
+              <p class="cert-error">{row.note}</p>
+            )}
+            {row.expires && row.note && <p class="cert-note">{row.note}</p>}
+          </div>
+        ))}
+      </div>
+    ) : (
+      <p class="empty">{certEmptyNote}</p>
+    )}
   </section>
 
   <!-- Latency Chart -->
@@ -229,6 +391,99 @@ const recentHistory = [...site.history].reverse().slice(0, 50);
     font-size: 0.7rem; color: var(--color-text-secondary);
     text-transform: uppercase; letter-spacing: 0.04em; margin-top: 0.2rem;
   }
+
+  /*
+   * Certificate & Domain. Two cards stating one expiry date each. The state is
+   * written into the pill as well as tinted, so a certificate that is about to
+   * lapse is legible without relying on the colour.
+   */
+  .section-stamp {
+    font-size: 0.7rem;
+    color: var(--color-text-secondary);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .cert-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: 1rem;
+  }
+
+  .cert-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 1rem 1.25rem;
+  }
+
+  .cert-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .cert-title {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--color-text-secondary);
+  }
+
+  .cert-pill {
+    flex-shrink: 0;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 0.15em 0.6em;
+    border-radius: 999px;
+  }
+
+  .cert-card[data-tone="ok"] .cert-pill {
+    color: var(--color-up);
+    background: color-mix(in srgb, var(--color-up) 15%, transparent);
+  }
+
+  .cert-card[data-tone="warn"] .cert-pill {
+    color: var(--color-warn);
+    background: color-mix(in srgb, var(--color-warn) 18%, transparent);
+  }
+
+  .cert-card[data-tone="bad"] .cert-pill {
+    color: var(--color-down);
+    background: color-mix(in srgb, var(--color-down) 15%, transparent);
+  }
+
+  .cert-card[data-tone="unknown"] .cert-pill {
+    color: var(--color-text-secondary);
+    background: var(--color-bg);
+  }
+
+  .cert-value {
+    font-size: 1.35rem; font-weight: 700;
+    font-variant-numeric: tabular-nums; line-height: 1.2;
+  }
+
+  .cert-remaining { font-size: 0.75rem; color: var(--color-text-secondary); }
+
+  .cert-facts {
+    display: grid;
+    gap: 0.2rem;
+    margin: 0.6rem 0 0;
+    font-size: 0.75rem;
+  }
+
+  /* A fixed label column so the value starts at the same place in both rows. */
+  .cert-facts div { display: flex; gap: 0.5rem; }
+  .cert-facts dt { flex: 0 0 4.5rem; color: var(--color-text-secondary); }
+  .cert-facts dd { margin: 0; overflow-wrap: anywhere; }
+
+  .cert-note { margin: 0.5rem 0 0; font-size: 0.72rem; color: var(--color-warn); }
+  .cert-error { margin: 0; font-size: 0.78rem; color: var(--color-text-secondary); }
 
   .table-wrap {
     background: var(--color-surface);

@@ -1,0 +1,53 @@
+name: Certificates
+
+on:
+  schedule:
+    # Every third day of the month (1st, 4th, 7th, ...): certificates and domain
+    # registrations change on the scale of weeks, so this runs far less often
+    # than the uptime monitor and keeps only the latest snapshot.
+    - cron: "0 3 */3 * *"
+  workflow_dispatch: {}
+
+# Shares the "uptime-pipeline" group with the monitor and the build, so its
+# commit cannot race theirs.
+concurrency:
+  group: "uptime-pipeline"
+  cancel-in-progress: false
+
+jobs:
+  certificates:
+    runs-on: ubuntu-latest
+    # A stuck TCP/TLS connect must not hold the shared pipeline group for hours.
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: pnpm/action-setup@v6
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "26"
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      # Same reason as the monitor: GitHub runners have no native IPv6, so the
+      # IPv6-only trackers need the tunnel to be reachable at all — and a site
+      # that cannot be reached cannot have its certificate read.
+      - name: Set up WARP
+        uses: fscarmen/warp-on-actions@v1.4
+        timeout-minutes: 6
+        with:
+          stack: ipv6
+          mode: wireguard
+
+      - name: Check certificates and domain expiry
+        run: pnpm certificates
+
+      - name: Commit results
+        uses: stefanzweifel/git-auto-commit-action@v7
+        with:
+          commit_message: "certs: [auto] certificate and domain expiry check"
+          file_pattern: "data/certificates.json"
+          commit_author: "github-actions[bot] <github-actions[bot]@users.noreply.github.com>"

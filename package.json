@@ -13,6 +13,7 @@
     "dev": "astro dev",
     "preview": "astro preview",
     "monitor": "node scripts/monitor.mjs",
+    "certificates": "node scripts/certificates.mjs",
     "update-source": "node scripts/update-source.mjs",
     "cleanup": "node scripts/cleanup.mjs"
   },

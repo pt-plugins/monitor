@@ -3,7 +3,16 @@
 
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
-import type { DailyCheckCount, MonitorRun, SiteDefinition, SiteResult, SiteSummary } from "./types";
+import type {
+  CertificateReport,
+  CertificateSite,
+  DailyCheckCount,
+  MonitorRun,
+  SiteCertificate,
+  SiteDefinition,
+  SiteResult,
+  SiteSummary,
+} from "./types";
 // Plain ESM rather than a sibling .ts module: scripts/monitor.mjs decodes the
 // same URLs and cannot import TypeScript on the Node version this package
 // declares support for.
@@ -12,6 +21,7 @@ import { decodeUrl } from "./site-url.mjs";
 const DATA_DIR = join(process.cwd(), "data");
 const UPTIME_DIR = join(DATA_DIR, "uptime");
 const SOURCE_FILE = join(DATA_DIR, "site.json");
+const CERTIFICATES_FILE = join(DATA_DIR, "certificates.json");
 const ICONS_DIR = join(process.cwd(), "public", "siteIcons");
 
 /** Per-site history entries kept in the built pages. */
@@ -64,10 +74,10 @@ export function loadSiteDefinitions(): SiteDefinition[] {
  *
  * Astro renders every page in one Node process, so this module is evaluated
  * once but its helpers run once per page — 341 times for the site pages alone.
- * Both the parsed data and the site-level summaries are derived purely from
- * files that do not change during a build, so they are computed once and
- * reused. Nothing here mutates the cached values, but callers must not either;
- * treat what these functions return as read-only.
+ * The parsed data, the site-level summaries and the certificate snapshot are
+ * all derived purely from files that do not change during a build, so they are
+ * computed once and reused. Nothing here mutates the cached values, but callers
+ * must not either; treat what these functions return as read-only.
  *
  * `undefined` means "not computed yet" so a genuine empty result still caches.
  */
@@ -77,6 +87,7 @@ let cachedSummaries: SiteSummary[] | undefined;
 let cachedLatestTimestamp: string | null | undefined;
 let cachedDailyCheckCounts: DailyCheckCount[] | undefined;
 let cachedIconSet: Map<string, string> | undefined;
+let cachedCertificateReport: CertificateReport | null | undefined;
 
 function parseJsonLines(content: string): MonitorRun[] {
   const runs: MonitorRun[] = [];
@@ -292,12 +303,70 @@ export function computeDailyCheckCounts(): DailyCheckCount[] {
   return series;
 }
 
+/**
+ * The certificate and domain-expiry snapshot, or null when it has never been
+ * collected.
+ *
+ * Unlike the uptime history this is a single file holding a single run, so
+ * there is nothing to merge and no index to walk — see scripts/certificates.mjs.
+ */
+export function loadCertificateReport(): CertificateReport | null {
+  if (cachedCertificateReport !== undefined) return cachedCertificateReport;
+  try {
+    const parsed = JSON.parse(readFileSync(CERTIFICATES_FILE, "utf-8")) as CertificateReport;
+    cachedCertificateReport = Array.isArray(parsed?.sites) ? parsed : null;
+  } catch {
+    cachedCertificateReport = null;
+  }
+  return cachedCertificateReport;
+}
+
+/**
+ * Whole days from now until an ISO instant; negative once it has passed.
+ *
+ * Computed at build time rather than stored, so the count stays honest for the
+ * days between two collection runs.
+ */
+function daysUntil(iso: string | null): number | null {
+  if (!iso) return null;
+  const time = new Date(iso).getTime();
+  if (Number.isNaN(time)) return null;
+  return Math.floor((time - Date.now()) / 86_400_000);
+}
+
+/** One snapshot entry reshaped for the page, with the days left worked out. */
+function buildCertificate(entry: CertificateSite | undefined, checkedAt: string): SiteCertificate | null {
+  if (!entry) return null;
+  return {
+    checkedAt,
+    ssl: {
+      host: entry.host ?? null,
+      notAfter: entry.ssl?.notAfter ?? null,
+      issuer: entry.ssl?.issuer ?? null,
+      trustError: entry.ssl?.trustError ?? null,
+      error: entry.ssl?.error ?? null,
+      daysRemaining: daysUntil(entry.ssl?.notAfter ?? null),
+    },
+    domain: {
+      domain: entry.domain?.domain ?? null,
+      expiresAt: entry.domain?.expiresAt ?? null,
+      registrar: entry.domain?.registrar ?? null,
+      error: entry.domain?.error ?? null,
+      daysRemaining: daysUntil(entry.domain?.expiresAt ?? null),
+    },
+  };
+}
+
 export function computeSiteSummaries(): SiteSummary[] {
   if (cachedSummaries) return cachedSummaries;
 
   const sites = loadSiteDefinitions();
   const allRuns = loadAllMonitorRuns();
   const iconSet = getLocalIconSet();
+  const certificateReport = loadCertificateReport();
+  // A site added since the last collection simply has no entry, which reads as
+  // "not checked yet" rather than as a failure.
+  const certificateById = new Map((certificateReport?.sites ?? []).map((c) => [c.id, c]));
 
   // The current status comes from the newest run that actually contains the
   // site, so look that up per site rather than assuming it is the last run.
@@ -340,6 +409,9 @@ export function computeSiteSummaries(): SiteSummary[] {
       avgLatency24h: avgLat,
       dailyStatus,
       history,
+      certificate: certificateReport
+        ? buildCertificate(certificateById.get(site.id), certificateReport.timestamp)
+        : null,
     };
   });
 

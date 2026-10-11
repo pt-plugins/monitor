@@ -9,6 +9,7 @@ Uptime monitoring for PT sites, driven by **GitHub Actions** and **Astro**.
 | `monitor.yml` | Every 15 min | HTTP probes all sites, writes results to `data/uptime/` |
 | `build.yml` | Every 2 hours | Builds Astro static site, deploys to GitHub Pages |
 | `update-source.yml` | Every day | Fetches site definitions from PT-depiler, runs data cleanup |
+| `certificates.yml` | Every 3 days | Reads TLS certificate and domain expiry dates into one snapshot |
 
 ### Data Source
 
@@ -38,6 +39,37 @@ Site definitions are pulled from [`pt-plugins/PT-depiler`](https://github.com/pt
 - **Monthly**: merges daily files into `data/uptime/YYYY/MM.json`
 - Skips today's data and current month's data (monitoring in progress)
 - Generates `data/uptime.json` index of all merged files
+
+### Certificate & Domain Expiry
+
+Two dates that move on the scale of weeks, not minutes: when a site's TLS certificate expires, and when its domain
+registration does. They are collected by `scripts/certificates.mjs` (run by `certificates.yml`, **every third day**) into
+a **single snapshot** at `data/certificates.json`, which each run overwrites. There is no history to merge, index or
+clean up, and the site detail page reads that one file.
+
+- **Certificate.** The first HTTPS URL that completes a TLS handshake is used, walking a site's URLs in the same order
+  the monitor probes them. The connection is made with verification switched off (`rejectUnauthorized: false`)
+  precisely so that an *expired* or otherwise untrusted certificate still reports its expiry date instead of the
+  connection simply being refused. Whether the chain actually verifies is recorded separately and shown as
+  `Chain not trusted: …` beside the date.
+- **Domain.** RDAP where the TLD publishes it, WHOIS otherwise. The RDAP endpoint is resolved per TLD from IANA's
+  bootstrap (`data.iana.org/rdap/dns.json`) rather than through a single redirector, which rate-limits a run of this
+  size; one lookup is made per *registrable* domain, shared by a site's mirror URLs and by every site on the same
+  registry. TLDs with no RDAP — among them `.cn`, `.me` and `.de` — are queried over WHOIS instead, serially and just
+  over a second apart, because those servers throttle bulk querying. A registry that discloses no expiry date at all
+  (`.de`) is reported as unavailable rather than guessed at.
+- **Only the absolute dates are stored.** The days remaining are computed at *build* time, so a snapshot taken up to
+  three days ago still renders a current countdown, refreshed with the rest of the site every two hours.
+- Sites marked `isDead` are skipped; a site added since the last collection reads *Not checked yet* rather than as a
+  failure, as does a domain the registry would not answer for.
+- The workflow joins the shared `uptime-pipeline` concurrency group, so its commit cannot race the monitor's, and sets
+  up WARP for the same reason the monitor does — an IPv6-only site that cannot be reached has no certificate to read.
+
+On the site page the block sits under *Uptime*, as two cards (SSL Certificate, Domain Registration). Each carries its
+state as a word — `Valid`, `Expiring soon`, `Expired`, `Unavailable` — as well as a colour, plus the expiry date, the
+days left, and the issuer or registrar. *Expiring soon* means 14 days or fewer for a certificate, which is normally
+renewed well before it lapses, but 30 for a domain registration, which is not renewed automatically — so it gets the
+longer notice. The section heading carries the timestamp of the snapshot being read.
 
 ### Checks Status (dashboard)
 
@@ -148,6 +180,7 @@ pnpm dev
 | `pnpm dev` | Start Astro dev server |
 | `pnpm build` | Build static site to `dist/` |
 | `pnpm monitor` | Run uptime checks |
+| `pnpm certificates` | Check TLS certificate and domain expiry |
 | `pnpm update-source` | Fetch site definitions from PT-depiler |
 | `pnpm cleanup` | Merge data files + regenerate index |
 
@@ -158,10 +191,12 @@ pnpm dev
 ├── .github/workflows/
 │   ├── monitor.yml
 │   ├── build.yml
-│   └── update-source.yml
+│   ├── update-source.yml
+│   └── certificates.yml
 ├── scripts/
 │   ├── update-source.mjs
 │   ├── monitor.mjs
+│   ├── certificates.mjs
 │   └── cleanup.mjs
 ├── src/                    # Astro pages & components
 │   ├── pages/
@@ -183,6 +218,7 @@ pnpm dev
 ├── data/
 │   ├── site.json           # Site definitions
 │   ├── uptime.json         # Monitoring data index
+│   ├── certificates.json   # Latest certificate / domain expiry snapshot
 │   └── uptime/             # Monitoring results
 ├── astro.config.mjs
 ├── package.json

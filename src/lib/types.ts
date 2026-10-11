@@ -29,6 +29,64 @@ export interface DailyCheckCount {
   count: number;
 }
 
+/*
+ * Certificate and domain expiry, as written by scripts/certificates.mjs.
+ *
+ * This file holds one snapshot and no history: the expiry dates it carries are
+ * the only thing the pages read, and a new run overwrites them outright.
+ */
+export interface CertificateReport {
+  timestamp: string;
+  sites: CertificateSite[];
+}
+
+export interface CertificateSite {
+  id: string;
+  /** Host of the URL whose certificate was read, or null when none was. */
+  host: string | null;
+  ssl: {
+    /** Certificate notAfter, ISO 8601; null when no certificate was read. */
+    notAfter: string | null;
+    issuer: string | null;
+    /** Set when the chain or the name did not verify, though it was readable. */
+    trustError: string | null;
+    error: string | null;
+  };
+  domain: {
+    /** Registrable domain looked up, or null when there was none (IP host). */
+    domain: string | null;
+    /** Registration expiry, ISO 8601; null when the registry did not give one. */
+    expiresAt: string | null;
+    registrar: string | null;
+    error: string | null;
+  };
+}
+
+/**
+ * A site's certificate and domain expiry with the time left computed at build
+ * time, so a snapshot collected up to three days ago still reads as current.
+ */
+export interface SiteCertificate {
+  checkedAt: string;
+  ssl: {
+    host: string | null;
+    notAfter: string | null;
+    issuer: string | null;
+    trustError: string | null;
+    error: string | null;
+    /** Whole days until notAfter; negative once expired. */
+    daysRemaining: number | null;
+  };
+  domain: {
+    domain: string | null;
+    expiresAt: string | null;
+    registrar: string | null;
+    error: string | null;
+    /** Whole days until expiresAt; negative once expired. */
+    daysRemaining: number | null;
+  };
+}
+
 export interface SiteSummary {
   id: string;
   name: string;
@@ -56,4 +114,6 @@ export interface SiteSummary {
     status: "up" | "down";
     latency: number | null;
   }>;
+  /** Null when the certificate snapshot has never been collected. */
+  certificate: SiteCertificate | null;
 }
