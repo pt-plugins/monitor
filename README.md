@@ -106,7 +106,14 @@ index or clean up, and the site detail page reads that one file.
 - The two thresholds do different jobs. The window decides when a date starts to matter; the age cap decides how long
   any single reading may stand for, so nothing is carried indefinitely. The cap is what eventually notices a
   certificate renewed ahead of schedule, or a site that has changed address — neither of which a reading that only
-  follows the expiry could ever have seen earlier. Anything that failed is retried on every run.
+  follows the expiry could ever have seen earlier. Anything that failed is measured again next time.
+- **A 429 stops the run.** A registry answering `429` is asking for a pause, not reporting a hiccup on one domain, so
+  the lookup is not retried and does not fall through to WHOIS either — that is the same operator being asked the same
+  question. Everything still to come keeps the reading it already had, and a site the snapshot never knew about is left
+  out rather than written down as a failure. The run still writes its file and exits successfully: the sites measured
+  before the limit are kept, and the ones skipped are simply picked up next time. `503` is treated differently — as a
+  service that is momentarily unavailable, it is waited out in place (honouring `Retry-After`) rather than taking the
+  whole run down with it.
 - Sites marked `isDead` are skipped; a site added since the last collection reads *Not checked yet* rather than as a
   failure, as does a domain the registry would not answer for.
 - The workflow joins the shared `uptime-pipeline` concurrency group, so its commit cannot race the monitor's, and sets

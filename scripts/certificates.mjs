@@ -21,6 +21,9 @@
 // keeps the registries from throttling us. Anything that failed last time,
 // anything close enough to expiry to matter, and anything that has gone
 // RECHECK_AFTER_DAYS without being read, is measured again.
+//
+// And when a registry does throttle anyway, that answer ends the run rather
+// than the lookup: see stoppedForThrottle below.
 
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
@@ -295,6 +298,18 @@ function loadRdapBases() {
   return rdapBasesPromise;
 }
 
+/*
+ * Circuit breaker for the whole run, set to the domain whose registry answered
+ * HTTP 429 and read before every site is measured.
+ *
+ * A rate limit is a request to stop, not a per-domain hiccup, and carrying on
+ * through the remaining sites would only deepen it — and turn one throttled
+ * registry into a run where every later lookup fails too. Everything after the
+ * first 429 keeps the reading it already had, so a throttled run still produces
+ * a usable snapshot.
+ */
+let stoppedForThrottle = null;
+
 /**
  * Expiry date and registrar for one registrable domain, via that TLD's RDAP
  * service.
@@ -321,8 +336,17 @@ async function fetchRdapExpiry(domain, baseUrl) {
       if (response.status === 404) {
         return { expiresAt: null, registrar: null, error: "not found in RDAP" };
       }
-      if (response.status === 429 || response.status === 503) {
-        // Throttled. Wait as long as the registry asks, this side of a cap.
+      // 429 is the registry saying it has had enough. Backing off this one
+      // lookup is pointless when the run is only a few lookups from over, so it
+      // stops there and stops the run — see stoppedForThrottle. No retry, and
+      // no WHOIS fallback either, which would be the same operator again.
+      if (response.status === 429) {
+        stoppedForThrottle = domain;
+        return { expiresAt: null, registrar: null, error: "RDAP HTTP 429", throttled: true };
+      }
+      if (response.status === 503) {
+        // Unavailable rather than rate-limited: wait as long as the registry
+        // asks, this side of a cap, and try again.
         const retryAfter = Number(response.headers.get("retry-after"));
         const waitMs = Number.isFinite(retryAfter) && retryAfter > 0 ? Math.min(retryAfter * 1000, 30_000) : RETRY_DELAY_MS;
         lastError = `RDAP HTTP ${response.status}`;
@@ -445,6 +469,9 @@ async function fetchDomainExpiry(domain) {
   if (baseUrl) {
     const result = await fetchRdapExpiry(domain, baseUrl);
     if (result.expiresAt) return result;
+    // A registry that answered 429 is not asked again over WHOIS: it is the
+    // same operator being asked the same question, and the run is stopping.
+    if (result.throttled) return { expiresAt: null, registrar: null, error: result.error };
     rdapError = result.error;
   }
 
@@ -542,6 +569,8 @@ async function main() {
   // record, and a reader looks a site up instead of scanning for it.
   const results = {};
   const counters = { sslChecked: 0, sslCarried: 0, domainChecked: 0, domainCarried: 0 };
+  // Sites the breaker stopped before they were looked at.
+  let skipped = 0;
 
   await queue.addAll(
     activeSites.map((site) => async () => {
@@ -550,6 +579,16 @@ async function main() {
       const previous = previousSites[site.id];
       const now = Date.now();
       const lines = [`[TEST] ${site.id} (${site.name}) — ${urls.length} URL(s)`];
+
+      // The registries are throttling: everything still to come keeps what the
+      // previous snapshot knew, and a site it never knew about is left out
+      // rather than written as a failure. Checked here rather than mid-task, so
+      // a lookup that started just before the breaker stays a whole answer.
+      if (stoppedForThrottle) {
+        skipped++;
+        if (previous) results[site.id] = previous;
+        return;
+      }
 
       // Certificate: walk the HTTPS URLs in order and take the first host that
       // presents one, exactly as the monitor takes the first that answers. The
@@ -620,6 +659,15 @@ async function main() {
       `Domain: ${domainOk}/${checked.length} dated (${counters.domainChecked} checked, ${counters.domainCarried} carried) ` +
       `— Saved to ${OUTPUT_FILE}`
   );
+
+  if (stoppedForThrottle) {
+    // Worth a line rather than a silent short run: the entries left out keep an
+    // older `checkedAt`, and the next run is what catches them up.
+    console.warn(
+      `[THROTTLED] ${stoppedForThrottle} answered HTTP 429 — stopped there, ` +
+        `${skipped} site(s) after it kept their previous reading`
+    );
+  }
 }
 
 main().catch((err) => {
