@@ -99,13 +99,14 @@ index or clean up, and the site detail page reads that one file.
 - **Only the absolute dates are stored.** The days remaining are computed at *build* time, so a snapshot a few days
   old still renders a current countdown, refreshed with the rest of the site every two hours.
 - **A run measures only what it has to.** A date the previous snapshot already placed more than **30 days** out is
-  carried over untouched, `checkedAt` and all; one inside that window, or one whose last attempt failed or did not
-  verify, is measured again. A steady state therefore costs a handful of lookups instead of a few hundred — which is
-  also what keeps the registries from throttling a run — and because each field dates itself, the cards show a
-  `Checked` date that can lag well behind the snapshot's `Updated` one.
-- The flip side of that trade is deliberate: a carried value is never re-read early, so a certificate renewed ahead of
-  schedule is not noticed until it comes within the window, and a site that changes address keeps its previous answer
-  until then too. Anything that failed is retried on every run, which is the case retries exist for.
+  carried over untouched, `checkedAt` and all; one inside that window, one whose last attempt failed or did not verify,
+  and one that has now gone **30 days** without being read are measured again. A steady state therefore costs a handful
+  of lookups instead of a few hundred — which is also what keeps the registries from throttling a run — and because each
+  field dates itself, the cards show a `Checked` date that can lag well behind the snapshot's `Updated` one.
+- The two thresholds do different jobs. The window decides when a date starts to matter; the age cap decides how long
+  any single reading may stand for, so nothing is carried indefinitely. The cap is what eventually notices a
+  certificate renewed ahead of schedule, or a site that has changed address — neither of which a reading that only
+  follows the expiry could ever have seen earlier. Anything that failed is retried on every run.
 - Sites marked `isDead` are skipped; a site added since the last collection reads *Not checked yet* rather than as a
   failure, as does a domain the registry would not answer for.
 - The workflow joins the shared `uptime-pipeline` concurrency group, so its commit cannot race the monitor's, and sets

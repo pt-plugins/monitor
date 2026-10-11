@@ -18,8 +18,9 @@
 // The run is incremental: an expiry the previous snapshot already placed more
 // than RECHECK_WITHIN_DAYS away is carried over untouched, so a steady state
 // costs a handful of lookups instead of a few hundred — which is also what
-// keeps the registries from throttling us. Anything that failed last time, and
-// anything close enough to expiry to matter, is measured again.
+// keeps the registries from throttling us. Anything that failed last time,
+// anything close enough to expiry to matter, and anything that has gone
+// RECHECK_AFTER_DAYS without being read, is measured again.
 
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
@@ -54,6 +55,17 @@ const USER_AGENT = "PTD-Monitor/1.0";
  * that reading it again would tell us nothing?
  */
 const RECHECK_WITHIN_DAYS = 30;
+
+/*
+ * How long a stored date may stand without being read again, in whole days.
+ *
+ * Independent of the window above, and it bounds it: however far off an expiry
+ * is, no reading older than this is kept, so a value cannot be carried
+ * indefinitely. That is what eventually notices a renewal made before the
+ * window opened, or a site that changed address, neither of which the window
+ * rule can see. Both happen to be 30 today; nothing requires them to match.
+ */
+const RECHECK_AFTER_DAYS = 30;
 
 const RDAP_BOOTSTRAP_URL = "https://data.iana.org/rdap/dns.json";
 const WHOIS_REFERRAL_HOST = "whois.iana.org";
@@ -472,12 +484,19 @@ function loadPreviousSnapshot() {
  * Re-measured when there is nothing stored, when the last attempt failed or the
  * certificate did not verify (retrying is what a later run is for, and an
  * anomaly should be seen to clear), when the stored value came from a run that
- * did not date itself and so cannot be judged for age, or when the expiry is
- * now within RECHECK_WITHIN_DAYS.
+ * did not date itself and so cannot be judged for age, when the reading is
+ * older than RECHECK_AFTER_DAYS, or when the expiry is now within
+ * RECHECK_WITHIN_DAYS.
  */
 function needsCheck(previous, dateKey, now) {
   if (!previous?.checkedAt) return true;
   if (previous.error || previous.trustError) return true;
+
+  // Age is judged in milliseconds rather than by counting whole days, which
+  // rounds the wrong way for a timestamp in the past.
+  const checked = new Date(previous.checkedAt).getTime();
+  if (Number.isNaN(checked) || now - checked >= RECHECK_AFTER_DAYS * 86_400_000) return true;
+
   const date = previous[dateKey];
   if (!date) return true;
   const left = daysLeft(date, now);
