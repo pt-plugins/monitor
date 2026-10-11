@@ -14,6 +14,12 @@
 // bursts. Registries that publish no RDAP (among them .cn, .me, .de, .eu) are
 // asked over WHOIS instead, serially and slowly, because those servers throttle
 // bulk querying.
+//
+// The run is incremental: an expiry the previous snapshot already placed more
+// than RECHECK_WITHIN_DAYS away is carried over untouched, so a steady state
+// costs a handful of lookups instead of a few hundred — which is also what
+// keeps the registries from throttling us. Anything that failed last time, and
+// anything close enough to expiry to matter, is measured again.
 
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
@@ -37,6 +43,17 @@ const RDAP_BOOTSTRAP_RETRIES = 3;
 const RETRY_DELAY_MS = 2_000;
 const CONCURRENCY = 5;
 const USER_AGENT = "PTD-Monitor/1.0";
+
+/*
+ * A stored date is reused while it is further out than this, in whole days.
+ *
+ * The threshold sits at or above the points where the page starts warning (14
+ * days for a certificate, 30 for a domain), so a value is always re-read no
+ * later than the moment it could begin to matter. One number covers both,
+ * because the question is the same either way: is this date far enough away
+ * that reading it again would tell us nothing?
+ */
+const RECHECK_WITHIN_DAYS = 30;
 
 const RDAP_BOOTSTRAP_URL = "https://data.iana.org/rdap/dns.json";
 const WHOIS_REFERRAL_HOST = "whois.iana.org";
@@ -428,6 +445,45 @@ async function fetchDomainExpiry(domain) {
   return { expiresAt: null, registrar: whois.registrar, error };
 }
 
+/** Whole days from now until an ISO date; null when it cannot be read. */
+function daysLeft(date, now) {
+  const time = new Date(date).getTime();
+  return Number.isNaN(time) ? null : Math.floor((time - now) / 86_400_000);
+}
+
+/**
+ * The previous snapshot keyed by site id, or an empty object when there is none
+ * or it cannot be read — in which case everything is simply measured again.
+ */
+function loadPreviousSnapshot() {
+  if (!existsSync(OUTPUT_FILE)) return {};
+  try {
+    const previous = JSON.parse(readFileSync(OUTPUT_FILE, "utf-8"));
+    const sites = previous?.sites;
+    return sites && typeof sites === "object" && !Array.isArray(sites) ? sites : {};
+  } catch {
+    return {};
+  }
+}
+
+/**
+ * Whether a stored field still stands, or has to be measured again.
+ *
+ * Re-measured when there is nothing stored, when the last attempt failed or the
+ * certificate did not verify (retrying is what a later run is for, and an
+ * anomaly should be seen to clear), when the stored value came from a run that
+ * did not date itself and so cannot be judged for age, or when the expiry is
+ * now within RECHECK_WITHIN_DAYS.
+ */
+function needsCheck(previous, dateKey, now) {
+  if (!previous?.checkedAt) return true;
+  if (previous.error || previous.trustError) return true;
+  const date = previous[dateKey];
+  if (!date) return true;
+  const left = daysLeft(date, now);
+  return left === null || left <= RECHECK_WITHIN_DAYS;
+}
+
 async function main() {
   console.log("[INFO] Starting certificate & domain expiry check...");
 
@@ -440,6 +496,13 @@ async function main() {
   const sites = JSON.parse(readFileSync(SOURCE_FILE, "utf-8"));
   const activeSites = sites.filter((s) => !s.isDead);
   console.log(`[INFO] Loaded ${sites.length} sites, checking ${activeSites.length} active site(s)`);
+
+  // The snapshot being replaced, which decides what this run actually has to
+  // measure. Read before the run starts, since the run overwrites the file.
+  const previousSites = loadPreviousSnapshot();
+  // One instant for the whole run: a value measured now is stamped with it, so
+  // "checked at" and the snapshot's own timestamp are the same clock.
+  const timestamp = new Date().toISOString();
 
   // One lookup per registrable domain: a site's mirror URLs and the many sites
   // sharing a registry each ask the same question.
@@ -459,29 +522,41 @@ async function main() {
   // entries: the id is then written once, in the key, instead of in every
   // record, and a reader looks a site up instead of scanning for it.
   const results = {};
+  const counters = { sslChecked: 0, sslCarried: 0, domainChecked: 0, domainCarried: 0 };
 
   await queue.addAll(
     activeSites.map((site) => async () => {
       const urls = parseSiteUrls(site);
       const httpsUrls = urls.filter((u) => u.secure);
+      const previous = previousSites[site.id];
+      const now = Date.now();
       const lines = [`[TEST] ${site.id} (${site.name}) — ${urls.length} URL(s)`];
 
       // Certificate: walk the HTTPS URLs in order and take the first host that
       // presents one, exactly as the monitor takes the first that answers. The
       // host is named in the log line only; the snapshot records no hostnames.
-      let ssl = {
-        notAfter: null,
-        issuer: null,
-        trustError: null,
-        error: httpsUrls.length === 0 ? (urls.length === 0 ? "no URL to check" : "no HTTPS URL") : null,
-      };
-      for (const { host, port } of httpsUrls) {
-        const check = await checkTls(host, port);
-        lines.push(
-          `  ${check.error ? "✗" : "✓"} ${host}:${port} — ${check.error ?? `${check.notAfter} (${check.issuer ?? "unknown issuer"})`}`
-        );
-        ssl = check;
-        if (!check.error) break;
+      let ssl;
+      if (!needsCheck(previous?.ssl, "notAfter", now)) {
+        ssl = previous.ssl;
+        counters.sslCarried++;
+        lines.push(`  = certificate carried — ${daysLeft(ssl.notAfter, now)} days left, read ${ssl.checkedAt.slice(0, 10)}`);
+      } else {
+        counters.sslChecked++;
+        ssl = {
+          notAfter: null,
+          issuer: null,
+          trustError: null,
+          error: httpsUrls.length === 0 ? (urls.length === 0 ? "no URL to check" : "no HTTPS URL") : null,
+        };
+        for (const { host, port } of httpsUrls) {
+          const check = await checkTls(host, port);
+          lines.push(
+            `  ${check.error ? "✗" : "✓"} ${host}:${port} — ${check.error ?? `${check.notAfter} (${check.issuer ?? "unknown issuer"})`}`
+          );
+          ssl = check;
+          if (!check.error) break;
+        }
+        ssl.checkedAt = timestamp;
       }
 
       // Domain: the site's own address, so the first HTTPS URL if there is one
@@ -489,16 +564,24 @@ async function main() {
       // question — a domain can expire while its host is unreachable.
       const domainUrl = httpsUrls[0] ?? urls[0] ?? null;
       let domain;
-      if (domainUrl && !isIpAddress(domainUrl.host)) {
-        const registrable = registrableDomain(domainUrl.host);
-        domain = await domainExpiryFor(registrable);
-        lines.push(
-          `  ${domain.error ? "✗" : "✓"} ${registrable} — ${domain.error ?? `${domain.expiresAt}${domain.registrar ? ` (${domain.registrar})` : ""}`}`
-        );
+      if (!needsCheck(previous?.domain, "expiresAt", now)) {
+        domain = previous.domain;
+        counters.domainCarried++;
+        lines.push(`  = domain carried — ${daysLeft(domain.expiresAt, now)} days left, read ${domain.checkedAt.slice(0, 10)}`);
       } else {
-        const error = domainUrl ? "host is an IP address" : "no URL to check";
-        domain = { expiresAt: null, registrar: null, error };
-        lines.push(`  ✗ domain — ${error}`);
+        counters.domainChecked++;
+        if (domainUrl && !isIpAddress(domainUrl.host)) {
+          const registrable = registrableDomain(domainUrl.host);
+          domain = await domainExpiryFor(registrable);
+          lines.push(
+            `  ${domain.error ? "✗" : "✓"} ${registrable} — ${domain.error ?? `${domain.expiresAt}${domain.registrar ? ` (${domain.registrar})` : ""}`}`
+          );
+        } else {
+          const error = domainUrl ? "host is an IP address" : "no URL to check";
+          domain = { expiresAt: null, registrar: null, error };
+          lines.push(`  ✗ domain — ${error}`);
+        }
+        domain.checkedAt = timestamp;
       }
 
       results[site.id] = { ssl, domain };
@@ -507,14 +590,16 @@ async function main() {
     })
   );
 
-  const output = { timestamp: new Date().toISOString(), sites: results };
+  const output = { timestamp, sites: results };
   writeFileSync(OUTPUT_FILE, JSON.stringify(output, null, 2), "utf-8");
 
   const checked = Object.values(results);
   const sslOk = checked.filter((r) => r.ssl?.notAfter).length;
   const domainOk = checked.filter((r) => r.domain?.expiresAt).length;
   console.log(
-    `[DONE] SSL: ${sslOk}/${checked.length}, Domain: ${domainOk}/${checked.length} — Saved to ${OUTPUT_FILE}`
+    `[DONE] SSL: ${sslOk}/${checked.length} dated (${counters.sslChecked} checked, ${counters.sslCarried} carried) | ` +
+      `Domain: ${domainOk}/${checked.length} dated (${counters.domainChecked} checked, ${counters.domainCarried} carried) ` +
+      `— Saved to ${OUTPUT_FILE}`
   );
 }
 

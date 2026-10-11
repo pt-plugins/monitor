@@ -40,6 +40,10 @@ export interface DailyCheckCount {
  * record — and an entry carries no hostnames: not the host whose certificate
  * was read, nor the registrable domain looked up, so the snapshot adds nothing
  * about which addresses a site answers on.
+ *
+ * A run only measures what the previous snapshot cannot still answer for, so
+ * each of the two fields dates itself: `checkedAt` is when *that* date was
+ * read, which may be well before the snapshot's own timestamp.
  */
 export interface CertificateReport {
   timestamp: string;
@@ -54,26 +58,35 @@ export interface CertificateSite {
     /** Set when the chain or the name did not verify, though it was readable. */
     trustError: string | null;
     error: string | null;
+    /** When this date was read — not when the snapshot was written. */
+    checkedAt: string;
   };
   domain: {
     /** Registration expiry, ISO 8601; null when the registry did not give one. */
     expiresAt: string | null;
     registrar: string | null;
     error: string | null;
+    /** When this date was read — not when the snapshot was written. */
+    checkedAt: string;
   };
 }
 
 /**
  * A site's certificate and domain expiry with the time left computed at build
  * time, so a snapshot a few days old still reads as current.
+ *
+ * `updatedAt` is when the snapshot was written; each field's own `checkedAt` is
+ * when that date was read, which the incremental run may let lag behind it.
  */
 export interface SiteCertificate {
-  checkedAt: string;
+  updatedAt: string;
   ssl: {
     notAfter: string | null;
     issuer: string | null;
     trustError: string | null;
     error: string | null;
+    /** When this date was read; null when the snapshot predates the field. */
+    checkedAt: string | null;
     /** Whole days until notAfter; negative once expired. */
     daysRemaining: number | null;
   };
@@ -81,6 +94,8 @@ export interface SiteCertificate {
     expiresAt: string | null;
     registrar: string | null;
     error: string | null;
+    /** When this date was read; null when the snapshot predates the field. */
+    checkedAt: string | null;
     /** Whole days until expiresAt; negative once expired. */
     daysRemaining: number | null;
   };

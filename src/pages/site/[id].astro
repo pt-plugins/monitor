@@ -67,6 +67,12 @@ interface CertRow {
   /** Expiry date, YYYY-MM-DD; null when there is nothing to show. */
   expires: string | null;
   remaining: string | null;
+  /**
+   * When this date was read, YYYY-MM-DD. The run is incremental, so a value far
+   * from expiry is carried over rather than measured again, and this can be
+   * much older than the snapshot it sits in.
+   */
+  checked: string | null;
   /** A caveat that does not change the expiry itself, such as an untrusted chain. */
   note: string | null;
 }
@@ -84,6 +90,7 @@ function certRow(opts: {
   sourceLabel: string;
   expiresAt: string | null;
   daysRemaining: number | null;
+  checkedAt: string | null;
   /** Days left at which the row starts warning. */
   warnDays: number;
   error: string | null;
@@ -97,6 +104,9 @@ function certRow(opts: {
     status: "Unavailable",
     expires: null,
     remaining: null,
+    // ISO instant, and the page renders every timestamp in UTC, so the date
+    // part of it is the date to show.
+    checked: opts.checkedAt ? opts.checkedAt.slice(0, 10) : null,
     note: opts.error,
   };
 
@@ -113,8 +123,6 @@ function certRow(opts: {
     source: opts.source,
     tone,
     status,
-    // ISO instant, and the page renders every timestamp in UTC, so the date
-    // part of it is the date to show.
     expires: opts.expiresAt.slice(0, 10),
     remaining: fmtRemaining(days),
     note: opts.trustError ? `Chain not trusted: ${opts.trustError}` : null,
@@ -129,6 +137,7 @@ const certRows: CertRow[] | null = site.certificate
         sourceLabel: "Issuer",
         expiresAt: site.certificate.ssl.notAfter,
         daysRemaining: site.certificate.ssl.daysRemaining,
+        checkedAt: site.certificate.ssl.checkedAt,
         // A certificate is usually renewed well before it lapses, so only the
         // last fortnight is worth flagging.
         warnDays: 14,
@@ -141,6 +150,7 @@ const certRows: CertRow[] | null = site.certificate
         sourceLabel: "Registrar",
         expiresAt: site.certificate.domain.expiresAt,
         daysRemaining: site.certificate.domain.daysRemaining,
+        checkedAt: site.certificate.domain.checkedAt,
         // A lapsed registration is not renewed automatically and takes the site
         // with it, so a month's notice is the useful warning.
         warnDays: 30,
@@ -221,7 +231,7 @@ const certEmptyNote = isDead
     <div class="section-head">
       <h2>Certificate &amp; Domain</h2>
       {site.certificate && (
-        <span class="section-stamp">Checked {fmtTime(site.certificate.checkedAt)} ({DISPLAY_TIME_ZONE_LABEL})</span>
+        <span class="section-stamp">Updated {fmtTime(site.certificate.updatedAt)} ({DISPLAY_TIME_ZONE_LABEL})</span>
       )}
     </div>
     {certRows ? (
@@ -236,17 +246,27 @@ const certEmptyNote = isDead
               <>
                 <div class="cert-value">{row.expires}</div>
                 <div class="cert-remaining">{row.remaining}</div>
-                <dl class="cert-facts">
-                  {row.source && (
-                    <div>
-                      <dt>{row.sourceLabel}</dt>
-                      <dd>{row.source}</dd>
-                    </div>
-                  )}
-                </dl>
               </>
             ) : (
               <p class="cert-error">{row.note}</p>
+            )}
+            {(row.source || row.checked) && (
+              <dl class="cert-facts">
+                {row.source && (
+                  <div>
+                    <dt>{row.sourceLabel}</dt>
+                    <dd>{row.source}</dd>
+                  </div>
+                )}
+                {/* The run carries a value over while it is far from expiry, so
+                    the date it was read is part of reading this card. */}
+                {row.checked && (
+                  <div>
+                    <dt>Checked</dt>
+                    <dd>{row.checked}</dd>
+                  </div>
+                )}
+              </dl>
             )}
             {row.expires && row.note && <p class="cert-note">{row.note}</p>}
           </div>

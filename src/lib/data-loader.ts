@@ -338,21 +338,23 @@ function daysUntil(iso: string | null): number | null {
 }
 
 /** One snapshot entry reshaped for the page, with the days left worked out. */
-function buildCertificate(entry: CertificateSite | undefined, checkedAt: string): SiteCertificate | null {
+function buildCertificate(entry: CertificateSite | undefined, updatedAt: string): SiteCertificate | null {
   if (!entry) return null;
   return {
-    checkedAt,
+    updatedAt,
     ssl: {
       notAfter: entry.ssl?.notAfter ?? null,
       issuer: entry.ssl?.issuer ?? null,
       trustError: entry.ssl?.trustError ?? null,
       error: entry.ssl?.error ?? null,
+      checkedAt: entry.ssl?.checkedAt ?? null,
       daysRemaining: daysUntil(entry.ssl?.notAfter ?? null),
     },
     domain: {
       expiresAt: entry.domain?.expiresAt ?? null,
       registrar: entry.domain?.registrar ?? null,
       error: entry.domain?.error ?? null,
+      checkedAt: entry.domain?.checkedAt ?? null,
       daysRemaining: daysUntil(entry.domain?.expiresAt ?? null),
     },
   };
