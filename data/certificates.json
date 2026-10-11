@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-11T14:55:48.122Z",
+  "timestamp": "2026-10-11T15:01:40.881Z",
   "sites": [
     {
       "id": "0dayfiles",
@@ -1813,10 +1813,10 @@
       "id": "hudbt",
       "host": "hudbt.hust.edu.cn",
       "ssl": {
-        "notAfter": "2027-01-10T23:59:59.000Z",
-        "issuer": "WoTrus CA Limited",
+        "notAfter": null,
+        "issuer": null,
         "trustError": null,
-        "error": null
+        "error": "ETIMEDOUT"
       },
       "domain": {
         "domain": "hust.edu.cn",
@@ -2748,9 +2748,9 @@
       },
       "domain": {
         "domain": "polishtorrent.top",
-        "expiresAt": "2027-01-10T18:09:03.000Z",
-        "registrar": "NameSilo,LLC",
-        "error": null
+        "expiresAt": null,
+        "registrar": null,
+        "error": "RDAP HTTP 429 / WHOIS ECONNRESET"
       }
     },
     {
@@ -3452,9 +3452,9 @@
       },
       "domain": {
         "domain": "sunnypt.top",
-        "expiresAt": null,
-        "registrar": null,
-        "error": "RDAP HTTP 429 / WHOIS ECONNRESET"
+        "expiresAt": "2027-10-17T04:54:19.000Z",
+        "registrar": "NameSilo,LLC",
+        "error": null
       }
     },
     {
@@ -3484,9 +3484,9 @@
       },
       "domain": {
         "domain": "tangpt.top",
-        "expiresAt": null,
-        "registrar": null,
-        "error": "RDAP HTTP 429 / WHOIS ECONNRESET"
+        "expiresAt": "2026-11-01T07:51:59.000Z",
+        "registrar": "NameSilo,LLC",
+        "error": null
       }
     },
     {
@@ -3630,7 +3630,7 @@
         "domain": "tokyo-manga.top",
         "expiresAt": null,
         "registrar": null,
-        "error": "RDAP HTTP 429 / WHOIS ECONNRESET"
+        "error": "RDAP HTTP 429 / no expiration date in WHOIS record"
       }
     },
     {
@@ -3996,9 +3996,9 @@
       },
       "domain": {
         "domain": "us.kg",
-        "expiresAt": null,
+        "expiresAt": "2029-05-08T21:12:06.000Z",
         "registrar": null,
-        "error": "TypeError: (entity.roles ?? []).some is not a function / no expiration date in WHOIS record"
+        "error": null
       }
     },
     {
@@ -4092,9 +4092,9 @@
       },
       "domain": {
         "domain": "naturept.top",
-        "expiresAt": "2027-10-25T12:06:23.000Z",
-        "registrar": "NameSilo,LLC",
-        "error": null
+        "expiresAt": null,
+        "registrar": null,
+        "error": "RDAP HTTP 429 / WHOIS ECONNRESET"
       }
     }
   ]
