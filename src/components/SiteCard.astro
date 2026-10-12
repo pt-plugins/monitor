@@ -25,8 +25,16 @@ function uptimeClass(pct: number): string {
 
 <a href={`/monitor/site/${site.id}`} class="site-card" data-status={site.currentStatus} data-filter={`${site.id} ${site.name} ${site.urls.map(decodeUrl).join(" ")} ${site.description || ""}`.toLowerCase()}>
   {/* The type labels the whole card, so it rides the corner as a ribbon rather
-      than sharing the header row with the status it would compete with. */}
-  <span class={`card-ribbon card-ribbon--${site.type}`} title={site.type}>{site.type}</span>
+      than sharing the header row with the status it would compete with. A dead
+      site keeps the label — it is still what the site was — but takes the down
+      colour, so a card that is not being monitored cannot be read at a glance
+      as a live listing of its type. */}
+  <span
+    class={`card-ribbon card-ribbon--${site.type}${site.currentStatus === "dead" ? " card-ribbon--dead" : ""}`}
+    title={site.type}
+  >
+    {site.type}
+  </span>
   <div class="card-header">
     <StatusBadge status={site.currentStatus} />
   </div>
@@ -148,6 +156,16 @@ function uptimeClass(pct: number): string {
   .card-ribbon--private {
     color: #082f49;
     background: #03a9f4;
+  }
+
+  /* Set after the two above, and equally specific, so it wins on a dead card:
+     the ribbon keeps saying which kind of site it was, in the colour the rest of
+     the page already uses for a site that is not being monitored. White text
+     rather than a dark shade of the grey — on this fill, dark is the unreadable
+     combination. */
+  .card-ribbon--dead {
+    color: #ffffff;
+    background: var(--color-dead);
   }
 
   .card-name {
