@@ -2,8 +2,9 @@
 import Layout from "../../components/Layout.astro";
 import StatusBadge from "../../components/StatusBadge.astro";
 import LatencyChart from "../../components/LatencyChart.astro";
+import SiteUptimeHeatmap from "../../components/SiteUptimeHeatmap.astro";
 import ExtendedHistory from "../../components/ExtendedHistory.astro";
-import { computeSiteSummaries } from "../../lib/data-loader";
+import { computeSiteDailyUptime, computeSiteSummaries } from "../../lib/data-loader";
 import { DISPLAY_TIME_ZONE_LABEL, formatCheckTime } from "../../lib/history-fetch";
 
 export function getStaticPaths() {
@@ -20,6 +21,13 @@ if (!site) {
 }
 
 const isDead = site.currentStatus === "dead";
+
+/*
+ * The heatmap's series comes from the whole record, not from `site.history`:
+ * the page embeds only the newest 336 checks — with the monitor's real cadence
+ * that is well under three months — while the grid draws whole weeks back.
+ */
+const siteDailyUptime = computeSiteDailyUptime(site.id);
 
 function fmtLatency(ms: number | null): string {
   if (ms === null) return "—";
@@ -226,6 +234,20 @@ const certEmptyNote = isDead
     </div>
   </section>
 
+  <!-- Latency Chart -->
+  <section class="section">
+    <h2>Response Time (7 days)</h2>
+    <LatencyChart data={site.history} />
+  </section>
+
+  <!-- Daily Uptime -->
+  {siteDailyUptime.length > 0 && (
+    <section class="section">
+      <h2>Daily Uptime</h2>
+      <SiteUptimeHeatmap days={siteDailyUptime} />
+    </section>
+  )}
+
   <!-- Certificate & Domain -->
   <section class="section">
     <div class="section-head">
@@ -275,12 +297,6 @@ const certEmptyNote = isDead
     ) : (
       <p class="empty">{certEmptyNote}</p>
     )}
-  </section>
-
-  <!-- Latency Chart -->
-  <section class="section">
-    <h2>Response Time (7 days)</h2>
-    <LatencyChart data={site.history} />
   </section>
 
   <!-- Checks History -->

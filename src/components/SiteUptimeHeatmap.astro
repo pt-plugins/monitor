@@ -1,0 +1,409 @@
+---
+// src/components/SiteUptimeHeatmap.astro
+// Contribution-graph style calendar of one site's own uptime: one cell per UTC
+// day, red where the day went badly and green where it held.
+//
+// A sibling of CheckHeatmap.astro rather than a mode of it. That one counts
+// monitor runs, which is a fact about the monitor and reads identically on
+// every site page; this one measures the site, so the two answer different
+// questions, ramp differently (relative to the busiest day there, absolute
+// percentage bands here) and report different totals. The grid, the month
+// labels, the blank placeholder and the responsive sizes are deliberately the
+// same widget, so the dashboard and a site page read alike.
+import type { SiteDailyUptime } from "../lib/types";
+
+interface Props {
+  /**
+   * One site's days, oldest first and contiguous through today — the shape
+   * computeSiteDailyUptime returns. Must not be empty.
+   */
+  days: SiteDailyUptime[];
+  /** Weeks of history to show; anything older falls out of the window. */
+  weeks?: number;
+}
+
+const { days, weeks = 26 } = Astro.props;
+
+const MS_PER_DAY = 86_400_000;
+const MONTH_NAMES = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+/** Labels sit on Mon/Wed/Fri; the empty strings keep all seven rows aligned. */
+const WEEKDAY_LABELS = ["Mon", "", "Wed", "", "Fri", "", ""];
+/** The ramp, coldest to warmest. */
+const LEGEND_LEVELS = [1, 2, 3, 4, 5];
+
+/** Monday-first weekday index: 0 = Monday … 6 = Sunday. */
+function weekdayIndex(ms: number): number {
+  return (new Date(ms).getUTCDay() + 6) % 7;
+}
+
+function utcMs(date: string): number {
+  return Date.parse(`${date}T00:00:00Z`);
+}
+
+function isoDay(ms: number): string {
+  return new Date(ms).toISOString().slice(0, 10);
+}
+
+/**
+ * Percentage bands, unlike the dashboard's ramp, which is relative to the
+ * busiest day. There is nothing to be relative to here: a site's day is either
+ * whole or it is not, and "80% is the best this site ever managed" would read
+ * as good when it is not.
+ */
+function levelOf(uptime: number): number {
+  if (uptime >= 100) return 5;
+  if (uptime >= 75) return 4;
+  if (uptime >= 50) return 3;
+  if (uptime > 0) return 2;
+  return 1;
+}
+
+interface Cell {
+  date: string;
+  /** The day's own value, or null where the record does not reach. */
+  day: SiteDailyUptime | null;
+  level: number;
+}
+
+// Window: the newest `weeks` weeks, widened to whole weeks so every column is a
+// Monday-to-Sunday block.
+const visible = days.slice(Math.max(0, days.length - weeks * 7));
+const firstMs = utcMs(visible[0].date);
+const lastMs = utcMs(visible[visible.length - 1].date);
+const gridStartMs = firstMs - weekdayIndex(firstMs) * MS_PER_DAY;
+const gridEndMs = lastMs + (6 - weekdayIndex(lastMs)) * MS_PER_DAY;
+// Both ends are week-aligned, so the day count is always a whole number of weeks.
+const weekCount = (Math.round((gridEndMs - gridStartMs) / MS_PER_DAY) + 1) / 7;
+
+const dayByDate = new Map(visible.map((d) => [d.date, d]));
+
+const cells: Cell[] = [];
+for (let ms = gridStartMs; ms <= gridEndMs; ms += MS_PER_DAY) {
+  const date = isoDay(ms);
+  const day = dayByDate.get(date) ?? null;
+  cells.push({ date, day, level: day?.uptime === null || day === null ? 0 : levelOf(day.uptime) });
+}
+
+/**
+ * One label per month, on the column where that month starts. The first column
+ * has no month start to find when the data begins mid-month, so it takes the
+ * month of its first recorded day. Two labels a single column apart would touch
+ * at this size, and the later month is the one worth naming, so it takes the
+ * place of the label it collides with — dropping the later one instead would
+ * leave a five-week stretch reading as the month before it.
+ */
+const monthLabels: Array<{ week: number; label: string }> = [];
+for (let week = 0; week < weekCount; week++) {
+  const weekStartMs = gridStartMs + week * 7 * MS_PER_DAY;
+  let month = -1;
+  for (let d = 0; d < 7; d++) {
+    const day = new Date(weekStartMs + d * MS_PER_DAY);
+    if (day.getUTCDate() === 1) month = day.getUTCMonth();
+  }
+  if (month === -1 && week === 0) month = new Date(firstMs).getUTCMonth();
+  if (month === -1) continue;
+
+  const previous = monthLabels[monthLabels.length - 1];
+  if (previous && week - previous.week < 2) monthLabels.pop();
+  monthLabels.push({ week, label: MONTH_NAMES[month] });
+}
+
+/*
+ * Only days the record actually reaches can be a best or a worst, and ties go
+ * to the later day: a site is usually perfect, so "best day" meaning the oldest
+ * unbroken day would be a constant, while the most recent one says something —
+ * when it last held.
+ *
+ * Both can come back null, when the site's last check is older than the window
+ * (it is still listed, but the monitor no longer reaches it); the counters are
+ * then left out rather than filled with a zero that would read as a measurement.
+ */
+type MeasuredDay = SiteDailyUptime & { uptime: number };
+const measured = visible.filter((d): d is MeasuredDay => d.uptime !== null);
+let best: MeasuredDay | null = null;
+let worst: MeasuredDay | null = null;
+for (const day of measured) {
+  if (!best || day.uptime >= best.uptime) best = day;
+  if (!worst || day.uptime <= worst.uptime) worst = day;
+}
+
+const downDays = measured.filter((d) => d.uptime < 100).length;
+const totalChecks = measured.reduce((sum, d) => sum + d.checks, 0);
+const totalUp = measured.reduce((sum, d) => sum + d.up, 0);
+const periodUptime = totalChecks > 0 ? Math.round((totalUp / totalChecks) * 100) : 100;
+
+/**
+ * Only the ramp's two ends are usable as text: the middle bands are tints and
+ * an amber figure on a white card is barely legible. A figure in between is
+ * left in the body colour, where it reads perfectly well.
+ */
+function factTone(uptime: number | null): string {
+  if (uptime === null) return "";
+  if (uptime >= 100) return "hm-good";
+  if (uptime <= 0) return "hm-bad";
+  return "";
+}
+
+const firstDate = visible[0].date;
+const lastDate = visible[visible.length - 1].date;
+const gridLabel =
+  `Daily uptime, ${firstDate} to ${lastDate}: ${measured.length} days measured, ` +
+  `${downDays} with downtime, ${periodUptime}% of ${totalChecks} checks up.`;
+---
+
+<div class="heatmap">
+  <div class="hm-main">
+    <div class="hm-scroll">
+      <div class="hm-months" style={`--hm-weeks:${weekCount}`}>
+        {
+          monthLabels.map(({ week, label }) => (
+            <span class="hm-month" style={`grid-column: ${week + 1} / span 2`}>
+              {label}
+            </span>
+          ))
+        }
+      </div>
+      <div class="hm-weeks">
+        <div class="hm-weekdays" aria-hidden="true">
+          {WEEKDAY_LABELS.map((label) => <span class="hm-weekday">{label}</span>)}
+        </div>
+        <div class="hm-grid" role="img" aria-label={gridLabel}>
+          {
+            cells.map((cell) =>
+              cell.day && cell.day.uptime !== null ? (
+                <span
+                  class={`hm-cell hm-cell--l${cell.level}`}
+                  title={`${cell.date} · ${cell.day.uptime}% · ${cell.day.up}/${cell.day.checks} checks`}
+                ></span>
+              ) : (
+                <span class="hm-cell hm-cell--blank"></span>
+              ),
+            )
+          }
+        </div>
+      </div>
+    </div>
+    {best && worst && (
+      <dl class="hm-facts">
+        <div class="hm-fact">
+          <dt>Best day</dt>
+          <dd>
+            <span class={factTone(best.uptime)}>{best.uptime}%</span>
+            <span class="hm-fact-date">{best.date}</span>
+          </dd>
+        </div>
+        <div class="hm-fact">
+          <dt>Worst day</dt>
+          <dd>
+            <span class={factTone(worst.uptime)}>{worst.uptime}%</span>
+            <span class="hm-fact-date">{worst.date}</span>
+          </dd>
+        </div>
+        <div class="hm-fact">
+          <dt>Days with downtime</dt>
+          <dd><span class={downDays > 0 ? "hm-bad" : ""}>{downDays}</span></dd>
+        </div>
+      </dl>
+    )}
+  </div>
+  <div class="hm-footer">
+    {/* The card carries its own unit and range, as the dashboard's does, so a
+        reader who lands on the grid alone still knows what a cell means. */}
+    <span class="hm-meta">Uptime per day (UTC) · {firstDate} → {lastDate}</span>
+    <span class="hm-legend" aria-hidden="true">
+      <span class="hm-legend-label">0%</span>
+      {LEGEND_LEVELS.map((level) => <span class={`hm-cell ${level === null ? "hm-cell--blank" : `hm-cell--l${level}`}`}></span>)}
+      <span class="hm-legend-label">100%</span>
+    </span>
+  </div>
+</div>
+
+<style>
+  .heatmap {
+    --hm-size: 16px;
+    --hm-gap: 3px;
+    --hm-gutter: 1.8rem;
+    /* Height of the month-label row, reused below to line the counters up with
+       the top of the grid rather than with its labels. */
+    --hm-months-h: 1.05rem;
+
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 0.875rem 1rem;
+    /* Full width, unlike the dashboard's card: that one shares its row with the
+       counters, while this one is alone in its section — so it takes the width
+       its neighbours have and puts the figures at the far edge. */
+    width: 100%;
+  }
+
+  .hm-main {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    /* The counters sit at the card's right edge when there is room and drop
+       under the grid when there is not, so the grid is never left with a block
+       of dead space beside it. */
+    justify-content: space-between;
+    gap: 1rem 1.5rem;
+  }
+
+  /* min-width lets the grid actually scroll on a narrow screen: a flex item
+     defaults to its content width and would otherwise push the page wide. */
+  .hm-scroll {
+    overflow-x: auto;
+    min-width: 0;
+  }
+
+  .hm-months {
+    display: grid;
+    grid-template-columns: repeat(var(--hm-weeks), var(--hm-size));
+    gap: var(--hm-gap);
+    /* Line the label row up with the grid, past the weekday gutter. */
+    margin-left: calc(var(--hm-gutter) + 0.4rem);
+    height: var(--hm-months-h);
+  }
+
+  .hm-month {
+    font-size: 0.65rem;
+    line-height: 1;
+    color: var(--color-text-secondary);
+    white-space: nowrap;
+  }
+
+  .hm-weeks { display: flex; gap: 0.4rem; }
+
+  .hm-weekdays {
+    display: grid;
+    grid-template-rows: repeat(7, var(--hm-size));
+    gap: var(--hm-gap);
+    width: var(--hm-gutter);
+    flex-shrink: 0;
+  }
+
+  .hm-weekday {
+    font-size: 0.6rem;
+    line-height: var(--hm-size);
+    text-align: right;
+    white-space: nowrap;
+    color: var(--color-text-secondary);
+  }
+
+  .hm-grid {
+    display: grid;
+    /* Column flow: seven rows (Mon…Sun) filled top to bottom, then the next
+       week — which is exactly the order the cells are emitted in. */
+    grid-auto-flow: column;
+    grid-template-rows: repeat(7, var(--hm-size));
+    grid-auto-columns: var(--hm-size);
+    gap: var(--hm-gap);
+  }
+
+  .hm-cell {
+    width: var(--hm-size);
+    height: var(--hm-size);
+    border-radius: 2px;
+  }
+
+  /*
+   * A day's colour is its uptime, so the ramp runs from the failure colour to
+   * the success one rather than darkening a single hue: a red square and a pale
+   * green one have to be told apart at a glance, not by comparing tints.
+   */
+  .hm-cell--l1 { background: var(--color-down); }
+  .hm-cell--l2 { background: color-mix(in srgb, var(--color-down) 45%, transparent); }
+  .hm-cell--l3 { background: color-mix(in srgb, var(--color-warn) 60%, transparent); }
+  .hm-cell--l4 { background: color-mix(in srgb, var(--color-up) 45%, transparent); }
+  .hm-cell--l5 { background: var(--color-up); }
+
+  /* Days the record does not reach — before the site's first check, after the
+     last run, or a day monitoring did not run at all: an outline, so they read
+     as "not measured" rather than "measured, and down". */
+  .hm-cell--blank {
+    background: transparent;
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-border) 70%, transparent);
+  }
+
+  .hm-facts {
+    display: flex;
+    gap: 1.5rem;
+    /* Clears the month row so the counters start level with the grid's first
+       week, the block they describe. */
+    margin-top: var(--hm-months-h);
+  }
+
+  .hm-fact dt {
+    font-size: 0.65rem;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+  }
+
+  .hm-fact dd {
+    font-size: 1.15rem;
+    font-weight: 700;
+    line-height: 1.2;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* The day a figure belongs to is part of it, not a second line of the label. */
+  .hm-fact-date {
+    display: block;
+    font-size: 0.65rem;
+    font-weight: 400;
+    color: var(--color-text-secondary);
+  }
+
+  .hm-good { color: var(--color-up); }
+  .hm-bad { color: var(--color-down); }
+
+  .hm-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+    margin-top: 0.75rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--color-border);
+    font-size: 0.7rem;
+    color: var(--color-text-secondary);
+  }
+
+  .hm-meta { font-variant-numeric: tabular-nums; }
+
+  .hm-legend {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .hm-legend-label { margin: 0 0.15rem; }
+
+  /* Narrow: tighter cells, and the counters stack into a column so they sit
+     beside the grid rather than dropping below it and leaving the right half of
+     the grid's rows empty. */
+  @media (max-width: 40rem) {
+    .heatmap { --hm-size: 0.625rem; --hm-gutter: 1.45rem; }
+
+    .hm-main { gap: 0.75rem; }
+  }
+
+  @media (max-width: 32rem) {
+    .hm-facts { flex-direction: column; gap: 0.5rem; }
+  }
+
+  /* Too narrow even for that column: the counters spread across the line under
+     the grid instead. */
+  @media (max-width: 25rem) {
+    .heatmap { --hm-size: 0.875rem; }
+
+    .hm-facts {
+      flex-direction: row;
+      justify-content: space-between;
+      width: 100%;
+    }
+  }
+</style>

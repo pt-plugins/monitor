@@ -9,6 +9,7 @@ import type {
   DailyCheckCount,
   MonitorRun,
   SiteCertificate,
+  SiteDailyUptime,
   SiteDefinition,
   SiteResult,
   SiteSummary,
@@ -300,6 +301,47 @@ export function computeDailyCheckCounts(): DailyCheckCount[] {
   }
 
   cachedDailyCheckCounts = series;
+  return series;
+}
+
+/**
+ * One site's checks per UTC calendar day, oldest first and contiguous through
+ * today, for the heatmap on its page.
+ *
+ * Contiguous for the same reason computeDailyCheckCounts is: a day with no
+ * check is a fact about the record, and dropping it would close the gap rather
+ * than show it. Such a day carries `uptime: null`, which the page draws as an
+ * outline — "not measured" and "measured, and down" are different answers.
+ *
+ * The window starts at the site's own first check rather than the monitor's, so
+ * a site added later does not open with a run of empty weeks.
+ */
+export function computeSiteDailyUptime(siteId: string): SiteDailyUptime[] {
+  const byDay = new Map<string, { up: number; checks: number }>();
+  for (const entry of entriesForSite(siteId)) {
+    const day = entry.timestamp.slice(0, 10);
+    const bucket = byDay.get(day) ?? { up: 0, checks: 0 };
+    bucket.checks++;
+    if (entry.status === "up") bucket.up++;
+    byDay.set(day, bucket);
+  }
+
+  const recorded = [...byDay.keys()].sort();
+  if (recorded.length === 0) return [];
+
+  const series: SiteDailyUptime[] = [];
+  const today = new Date().toISOString().slice(0, 10);
+  const newest = recorded[recorded.length - 1];
+  const end = newest > today ? newest : today;
+  for (let day = recorded[0]; day <= end; day = nextDay(day)) {
+    const bucket = byDay.get(day);
+    series.push({
+      date: day,
+      uptime: bucket ? Math.round((bucket.up / bucket.checks) * 100) : null,
+      checks: bucket?.checks ?? 0,
+      up: bucket?.up ?? 0,
+    });
+  }
   return series;
 }
 

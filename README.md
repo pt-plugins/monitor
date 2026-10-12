@@ -157,6 +157,36 @@ heatmap is the honest answer to "how often does this actually check?", which is 
   labelled image. The card prints its own unit and range (`Runs per day (UTC) · … → …`), since the section heading
   covers several measures and cannot name just one.
 
+### Daily Uptime (site page)
+
+A site page runs, top to bottom: *Uptime*, *Response Time (7 days)*, *Daily Uptime*, *Certificate & Domain*, then
+*Checks History*. The third of those is the dashboard heatmap's sibling on one site
+(`src/components/SiteUptimeHeatmap.astro`, `computeSiteDailyUptime()` in `src/lib/data-loader.ts`): the same
+contribution-graph calendar — whole Monday-to-Sunday weeks, month labels on the column where each month starts,
+Mon/Wed/Fri down the left, newest 26 weeks — with one square per UTC day.
+
+It is a separate component from `CheckHeatmap.astro` rather than a mode of it, because the two answer different
+questions. That one counts **monitor runs**, which is a fact about the monitor and reads identically on all 250-odd site
+pages; this one measures **the site**, so every page gets its own grid.
+
+- A day's value is the share of that day's checks which succeeded, so the ramp runs from the failure colour at 0% to
+  the success colour at 100% rather than darkening one hue: red and pale green have to be told apart at a glance, not
+  by comparing tints. The reference points are absolute here, where the dashboard's are relative to the busiest day —
+  there is nothing to be relative to for a single site, and "80% is the best this site ever managed" would read as
+  good when it is not.
+- A day the record does not reach — before the site's first check, or after the last run — is an outline, not a 0%:
+  "not measured" and "measured, and down" are different answers. The series is contiguous from the site's own first
+  check through today, so a lapse in monitoring shows as a run of outlines instead of the window shrinking.
+- The counters are **Best day**, **Worst day** (each with its date) and **Days with downtime**. Only days the record
+  reaches can be either, and ties go to the later day: a site is usually perfect, so a "best day" meaning the oldest
+  unbroken one would be a constant, while the most recent one says when it last held.
+- A figure takes a colour only where the ramp has one that works as text — green for a perfect day, red for a total
+  outage. The middle bands are tints, and an amber number on a white card is barely legible, so those stay in the body
+  colour.
+- The page needs the site's whole history to fill the grid, which the 336 checks embedded in the page cannot cover, so
+  the series is computed at build time from the same runs the dashboard reads. There is no client-side fetching here,
+  unlike *Extended History*.
+
 ### Extended History (client-side)
 
 Each site detail page (`src/pages/site/[id].astro`) renders the **Extended History** component
@@ -263,6 +293,7 @@ pnpm dev
 │   │   ├── Layout.astro
 │   │   ├── SiteCard.astro
 │   │   ├── CheckHeatmap.astro
+│   │   ├── SiteUptimeHeatmap.astro
 │   │   ├── StatusBadge.astro
 │   │   ├── LatencyChart.astro
 │   │   └── ExtendedHistory.astro

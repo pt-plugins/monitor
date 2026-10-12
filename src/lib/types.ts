@@ -29,6 +29,22 @@ export interface DailyCheckCount {
   count: number;
 }
 
+/** One UTC calendar day of one site's checks, for the heatmap on its page. */
+export interface SiteDailyUptime {
+  /** UTC calendar day, YYYY-MM-DD. */
+  date: string;
+  /**
+   * Share of that day's checks which were up, 0-100. Null for a day with no
+   * checks at all, which is not the same statement as 0: an unmeasured day
+   * cannot be a day the site was down.
+   */
+  uptime: number | null;
+  /** Checks recorded that day; 0 for a day that has none. */
+  checks: number;
+  /** How many of those checks were up. */
+  up: number;
+}
+
 /*
  * Certificate and domain expiry, as written by scripts/certificates.mjs.
  *
