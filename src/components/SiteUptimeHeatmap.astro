@@ -411,10 +411,18 @@ const gridLabel =
 
   .hm-facts {
     display: flex;
-    gap: 1.5rem;
+    /* The counters wrap among themselves rather than running off the card.
+       A viewport breakpoint cannot be trusted to prevent that: the card is
+       narrower than the viewport by the container's padding, so the row can
+       be wider than the card at a width no media query would single out. */
+    flex-wrap: wrap;
+    gap: 0.75rem 1.5rem;
     /* Clears the month row so the counters start level with the grid's first
        week, the block they describe. */
     margin-top: var(--hm-months-h);
+    /* Allowed to shrink to its widest single counter, so wrapping them is what
+       happens instead of the row pushing the card wider. */
+    min-width: 0;
   }
 
   .hm-fact dt {
@@ -466,28 +474,19 @@ const gridLabel =
 
   .hm-legend-label { margin: 0 0.15rem; }
 
-  /* Narrow: tighter cells, and the counters stack into a column so they sit
-     beside the grid rather than dropping below it and leaving the right half of
-     the grid's rows empty. */
+  /* Narrow: tighter cells, so the grid takes less of a line that the counters
+     may now be sharing. */
   @media (max-width: 40rem) {
     .heatmap { --hm-size: 0.625rem; --hm-gutter: 1.45rem; }
 
     .hm-main { gap: 0.75rem; }
   }
 
-  @media (max-width: 32rem) {
-    .hm-facts { flex-direction: column; gap: 0.5rem; }
-  }
-
-  /* Too narrow even for that column: the counters spread across the line under
-     the grid instead. */
+  /* Too narrow for the smaller cells to fit the week: back up a step, and let
+     the counter labels wrap rather than hold their width. */
   @media (max-width: 25rem) {
     .heatmap { --hm-size: 0.875rem; }
 
-    .hm-facts {
-      flex-direction: row;
-      justify-content: space-between;
-      width: 100%;
-    }
+    .hm-fact dt { white-space: normal; }
   }
 </style>
