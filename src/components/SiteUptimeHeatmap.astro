@@ -109,25 +109,85 @@ for (let week = 0; week < weekCount; week++) {
 }
 
 /*
- * Only days the record actually reaches can be a best or a worst, and ties go
- * to the later day: a site is usually perfect, so "best day" meaning the oldest
- * unbroken day would be a constant, while the most recent one says something —
- * when it last held.
+ * Only days the record actually reaches can be a worst day, and ties go to the
+ * later one: two days at the same low figure are better told apart by the more
+ * recent of them.
  *
- * Both can come back null, when the site's last check is older than the window
+ * It can come back null, when the site's last check is older than the window
  * (it is still listed, but the monitor no longer reaches it); the counters are
  * then left out rather than filled with a zero that would read as a measurement.
  */
 type MeasuredDay = SiteDailyUptime & { uptime: number };
 const measured = visible.filter((d): d is MeasuredDay => d.uptime !== null);
-let best: MeasuredDay | null = null;
 let worst: MeasuredDay | null = null;
 for (const day of measured) {
-  if (!best || day.uptime >= best.uptime) best = day;
   if (!worst || day.uptime <= worst.uptime) worst = day;
 }
 
+/**
+ * The longest run of whole days on which every check failed, with the days it
+ * spans.
+ *
+ * A day with any uptime at all ends it, so a run of 80% days — one failed check
+ * out of five — is never reported as an outage, and a day the monitor did not
+ * reach ends it too: an unmeasured day cannot be counted as one the site was
+ * down, nor as proof that it was up.
+ */
+function longestOutage(days: SiteDailyUptime[]): { days: number; from: string; to: string } | null {
+  let longest: { days: number; from: string; to: string } | null = null;
+  let run = 0;
+  let start = "";
+  for (const day of days) {
+    if (day.uptime !== 0) {
+      run = 0;
+      continue;
+    }
+    if (run === 0) start = day.date;
+    run++;
+    if (!longest || run > longest.days) longest = { days: run, from: start, to: day.date };
+  }
+  return longest;
+}
+
+/**
+ * Whole days the site has gone without a single failed check, ending at the
+ * last day that was measured.
+ *
+ * Trailing days with no check are skipped — an early-morning build sees no run
+ * for today yet — but a gap in the middle ends the run, since those days cannot
+ * be claimed as up.
+ */
+function currentStreak(days: SiteDailyUptime[]): number {
+  let i = days.length - 1;
+  while (i >= 0 && days[i].uptime === null) i--;
+  let streak = 0;
+  for (; i >= 0; i--) {
+    const uptime = days[i].uptime;
+    if (uptime === null || uptime < 100) break;
+    streak++;
+  }
+  return streak;
+}
+
+/** A date range in the width the fact row has; the year is stated once. */
+function shortRange(from: string, to: string): string {
+  if (from === to) return from;
+  return from.slice(0, 4) === to.slice(0, 4) ? `${from.slice(5)} → ${to.slice(5)}` : `${from} → ${to}`;
+}
+
+/** A count with its unit, so a one-day figure does not read as "1 days". */
+function dayCount(n: number): string {
+  return `${n} ${n === 1 ? "day" : "days"}`;
+}
+
 const downDays = measured.filter((d) => d.uptime < 100).length;
+// Split because the two are different events: a day lost outright and a day
+// that only dropped a check or two are the same number otherwise.
+const wholeDownDays = measured.filter((d) => d.uptime === 0).length;
+const partialDays = downDays - wholeDownDays;
+const outage = longestOutage(visible);
+const streak = currentStreak(visible);
+
 const totalChecks = measured.reduce((sum, d) => sum + d.checks, 0);
 const totalUp = measured.reduce((sum, d) => sum + d.up, 0);
 const periodUptime = totalChecks > 0 ? Math.round((totalUp / totalChecks) * 100) : 100;
@@ -147,8 +207,9 @@ function factTone(uptime: number | null): string {
 const firstDate = visible[0].date;
 const lastDate = visible[visible.length - 1].date;
 const gridLabel =
-  `Daily uptime, ${firstDate} to ${lastDate}: ${measured.length} days measured, ` +
-  `${downDays} with downtime, ${periodUptime}% of ${totalChecks} checks up.`;
+  `Daily uptime, ${firstDate} to ${lastDate}: ${measured.length} of ${visible.length} days measured, ` +
+  `${downDays} with downtime, longest outage ${outage ? dayCount(outage.days) : "none"}, ` +
+  `${periodUptime}% of ${totalChecks} checks up.`;
 ---
 
 <div class="heatmap">
@@ -183,15 +244,8 @@ const gridLabel =
         </div>
       </div>
     </div>
-    {best && worst && (
+    {worst && (
       <dl class="hm-facts">
-        <div class="hm-fact">
-          <dt>Best day</dt>
-          <dd>
-            <span class={factTone(best.uptime)}>{best.uptime}%</span>
-            <span class="hm-fact-date">{best.date}</span>
-          </dd>
-        </div>
         <div class="hm-fact">
           <dt>Worst day</dt>
           <dd>
@@ -200,19 +254,49 @@ const gridLabel =
           </dd>
         </div>
         <div class="hm-fact">
+          <dt>Longest outage</dt>
+          <dd>
+            {outage ? (
+              <>
+                <span class="hm-bad">{dayCount(outage.days)}</span>
+                <span class="hm-fact-date">{shortRange(outage.from, outage.to)}</span>
+              </>
+            ) : (
+              <>
+                <span>—</span>
+                <span class="hm-fact-date">no full day lost</span>
+              </>
+            )}
+          </dd>
+        </div>
+        <div class="hm-fact">
           <dt>Days with downtime</dt>
-          <dd><span class={downDays > 0 ? "hm-bad" : ""}>{downDays}</span></dd>
+          <dd>
+            <span class={downDays > 0 ? "hm-bad" : ""}>{downDays}</span>
+            {/* A day lost outright and a day that dropped one check are the same
+                number otherwise, and they are not the same event. */}
+            <span class="hm-fact-date">{wholeDownDays} whole · {partialDays} partial</span>
+          </dd>
+        </div>
+        <div class="hm-fact">
+          <dt>Current streak</dt>
+          <dd>
+            <span class={streak > 0 ? "hm-good" : ""}>{dayCount(streak)}</span>
+          </dd>
         </div>
       </dl>
     )}
   </div>
   <div class="hm-footer">
-    {/* The card carries its own unit and range, as the dashboard's does, so a
-        reader who lands on the grid alone still knows what a cell means. */}
-    <span class="hm-meta">Uptime per day (UTC) · {firstDate} → {lastDate}</span>
+    {/* The card carries its own unit, range and coverage, as the dashboard's
+        carries its unit: a grid of empty cells has to say how much of it was
+        actually measured, or "not measured" reads as "nothing happened". */}
+    <span class="hm-meta">
+      Uptime per day (UTC) · {measured.length}/{visible.length} days measured · {firstDate} → {lastDate}
+    </span>
     <span class="hm-legend" aria-hidden="true">
       <span class="hm-legend-label">0%</span>
-      {LEGEND_LEVELS.map((level) => <span class={`hm-cell ${level === null ? "hm-cell--blank" : `hm-cell--l${level}`}`}></span>)}
+      {LEGEND_LEVELS.map((level) => <span class={`hm-cell hm-cell--l${level}`}></span>)}
       <span class="hm-legend-label">100%</span>
     </span>
   </div>

@@ -177,12 +177,25 @@ pages; this one measures **the site**, so every page gets its own grid.
 - A day the record does not reach — before the site's first check, or after the last run — is an outline, not a 0%:
   "not measured" and "measured, and down" are different answers. The series is contiguous from the site's own first
   check through today, so a lapse in monitoring shows as a run of outlines instead of the window shrinking.
-- The counters are **Best day**, **Worst day** (each with its date) and **Days with downtime**. Only days the record
-  reaches can be either, and ties go to the later day: a site is usually perfect, so a "best day" meaning the oldest
-  unbroken one would be a constant, while the most recent one says when it last held.
+- The counters are **Worst day**, **Longest outage**, **Days with downtime** and **Current streak**. There is
+  deliberately no "best day": a site is usually perfect, so the best day is 100% on whichever date the tie-break lands
+  on and says nothing. These four answer how bad it got, how long it stayed bad, how much of the window was spoiled,
+  and whether it is holding now.
+- **Longest outage** counts whole days on which every check failed. A day with any uptime at all ends the run, so a
+  stretch of one-failed-check-in-five days is never reported as an outage, and a day the monitor did not reach ends it
+  too — an unmeasured day is evidence of neither. Only days the record reaches can be the worst day, and a tie goes to
+  the later one.
+- **Days with downtime** carries the split beneath it (`57 whole · 13 partial`). Those are not the same event — a day
+  lost outright and a day that dropped one check — and they used to be the same number, which is what made one 98-day
+  blackout indistinguishable from a site that flaps for weeks.
+- **Current streak** counts whole days up, back from the last measured day. Trailing days with no check are skipped, so
+  an early-morning build is not read as an outage, but a gap in the middle ends it: those days cannot be claimed.
 - A figure takes a colour only where the ramp has one that works as text — green for a perfect day, red for a total
   outage. The middle bands are tints, and an amber number on a white card is barely legible, so those stay in the body
   colour.
+- The footer carries the coverage (`111/111 days measured`, out of the days the window spans). With a best-effort
+  schedule an empty cell has to be distinguishable from a quiet day, and someone who reads the grid alone should be
+  able to tell how much of it is evidence.
 - The page needs the site's whole history to fill the grid, which the 336 checks embedded in the page cannot cover, so
   the series is computed at build time from the same runs the dashboard reads. There is no client-side fetching here,
   unlike *Extended History*.
