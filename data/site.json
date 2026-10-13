@@ -3,11 +3,11 @@
     "id": "0dayfiles",
     "name": "0DayFiles",
     "urls": [
-      "https://0dayfiles.net/"
+      "uggcf://0qnlsvyrf.arg/"
     ],
     "type": "private",
     "description": "0DayFiles is a private torrent tracker for movies, TV, music, games, software, books and more.",
-    "favicon": "https://0dayfiles.net/favicon.ico",
+    "favicon": "",
     "isDead": false
   },
   {
@@ -405,6 +405,17 @@
     ],
     "type": "private",
     "description": "BakaBT is a Private site for the Anime Community",
+    "favicon": "",
+    "isDead": false
+  },
+  {
+    "id": "bangumimoe",
+    "name": "Bangumi Moe",
+    "urls": [
+      "https://bangumi.moe/"
+    ],
+    "type": "public",
+    "description": "Bangumi Moe 是一个中文动漫 BT 资源站，提供动画 / 音乐 / 漫画 / 游戏等资源的聚合（公开站点，无需登录）",
     "favicon": "",
     "isDead": false
   },
@@ -1076,6 +1087,21 @@
     ],
     "type": "public",
     "description": "EXT Torrents is a Public torrent site for MOVIES / TV / GENERAL",
+    "favicon": "",
+    "isDead": false
+  },
+  {
+    "id": "eztv",
+    "name": "EZTV",
+    "urls": [
+      "https://eztvx.to/",
+      "https://eztv.wf/",
+      "https://eztv.tf/",
+      "https://eztv.yt/",
+      "https://eztv1.xyz/"
+    ],
+    "type": "public",
+    "description": "EZTV 是一个专注于美剧的公共 BT 站点",
     "favicon": "",
     "isDead": false
   },
@@ -1794,6 +1820,17 @@
     "isDead": false
   },
   {
+    "id": "internetarchive",
+    "name": "Internet Archive",
+    "urls": [
+      "https://archive.org/"
+    ],
+    "type": "public",
+    "description": "Internet Archive is a non-profit digital library offering free universal access to books, movies & music（含 Archive BitTorrent 种子）",
+    "favicon": "",
+    "isDead": false
+  },
+  {
     "id": "iptorrents",
     "name": "IPTorrents",
     "urls": [
@@ -2014,6 +2051,19 @@
     "isDead": true
   },
   {
+    "id": "limetorrents",
+    "name": "LimeTorrents",
+    "urls": [
+      "https://www.limetorrents.fun/",
+      "https://limetorrents.torrentbay.st/",
+      "https://limetorrents.torrentsbay.org/"
+    ],
+    "type": "public",
+    "description": "LimeTorrents 是一个公共 BT 索引站，以「已验证种子」为主提供全站搜索",
+    "favicon": "",
+    "isDead": false
+  },
+  {
     "id": "longpt",
     "name": "LongPT",
     "urls": [
@@ -2104,6 +2154,17 @@
     "isDead": false
   },
   {
+    "id": "megapeer",
+    "name": "MegaPeer",
+    "urls": [
+      "https://megapeer.vip/"
+    ],
+    "type": "public",
+    "description": "MegaPeer 是一个俄罗斯公开 BT 站，主要提供俄语电影 / 剧集 / 音乐等资源（公开站点，无需登录）",
+    "favicon": "",
+    "isDead": false
+  },
+  {
     "id": "midnightscene",
     "name": "MidnightScene",
     "urls": [
@@ -2112,6 +2173,17 @@
     "type": "private",
     "description": "",
     "favicon": "https://midnightscene.cc/favicon.ico",
+    "isDead": false
+  },
+  {
+    "id": "mikan",
+    "name": "Mikan Project",
+    "urls": [
+      "https://mikanani.me/"
+    ],
+    "type": "public",
+    "description": "蜜柑计划是一个中文动漫 BT 资源站，提供新番字幕组的种子聚合（公开站点，无需登录）",
+    "favicon": "",
     "isDead": false
   },
   {
@@ -2306,6 +2378,17 @@
     "isDead": true
   },
   {
+    "id": "newstudio",
+    "name": "NewStudio",
+    "urls": [
+      "https://newstudio.tv/"
+    ],
+    "type": "public",
+    "description": "NewStudio 是俄语公开影视站，主要提供俄语配音的剧集资源，无需注册",
+    "favicon": "",
+    "isDead": false
+  },
+  {
     "id": "nexushd",
     "name": "NexusHD",
     "urls": [
@@ -2329,6 +2412,17 @@
     "isDead": false
   },
   {
+    "id": "nipponsei",
+    "name": "Nipponsei",
+    "urls": [
+      "https://nipponsei.minglong.org/"
+    ],
+    "type": "public",
+    "description": "Nipponsei 是一个公开的日本动漫音乐 BT 站，提供 OST / OP / ED Single 等资源",
+    "favicon": "",
+    "isDead": false
+  },
+  {
     "id": "njtupt",
     "name": "浦园",
     "urls": [
@@ -2337,6 +2431,17 @@
     "type": "private",
     "description": "",
     "favicon": "./_default_nexusphp.png",
+    "isDead": false
+  },
+  {
+    "id": "nonameclub",
+    "name": "NoNaMe Club",
+    "urls": [
+      "https://nnmclub.to/"
+    ],
+    "type": "public",
+    "description": "NoNaMe Club (NNM-Club) 是俄语公开 BT 站点，提供电影 / 剧集 / 音乐等综合资源，无需注册",
+    "favicon": "",
     "isDead": false
   },
   {
@@ -2400,7 +2505,10 @@
     "name": "Nyaa",
     "urls": [
       "uggcf://alnn.fv/",
-      "uggcf://fhxrorv.alnn.fv/"
+      "uggcf://fhxrorv.alnn.fv/",
+      "uggcf://alnn.zbz/",
+      "uggcf://alnn.zrqvn/",
+      "uggcf://fhxrorv.alnn.zbz/"
     ],
     "type": "public",
     "description": "",
@@ -2426,6 +2534,17 @@
     ],
     "type": "private",
     "description": "Old Toons World (OTW) is a Private Torrent Tracker for ANIMATED MOVIES / TV",
+    "favicon": "",
+    "isDead": false
+  },
+  {
+    "id": "onejav",
+    "name": "OneJAV",
+    "urls": [
+      "uggcf://barwni.pbz/"
+    ],
+    "type": "public",
+    "description": "OneJAV 是一个公开的日本成人影片（JAV）BT 站（公开站点，无需登录）",
     "favicon": "",
     "isDead": false
   },
@@ -3003,6 +3122,18 @@
     "isDead": false
   },
   {
+    "id": "rutor",
+    "name": "RuTor",
+    "urls": [
+      "https://rutor.info/",
+      "https://rutor.is/"
+    ],
+    "type": "public",
+    "description": "RuTor 是俄语公开 BT 站点，提供电影 / 剧集 / 综合资源，免费下载无需注册",
+    "favicon": "",
+    "isDead": false
+  },
+  {
     "id": "rutracker",
     "name": "RuTracker.org",
     "urls": [
@@ -3011,6 +3142,17 @@
     ],
     "type": "private",
     "description": "RuTracker.org is a RUSSIAN Semi-Private site with a thriving file-sharing community",
+    "favicon": "",
+    "isDead": false
+  },
+  {
+    "id": "rutrackerru",
+    "name": "RuTracker.RU",
+    "urls": [
+      "http://rutracker.ru/"
+    ],
+    "type": "public",
+    "description": "RuTracker.RU 是俄语公开 BT 站点（TorrentPier II 引擎），提供电影 / 剧集 / 综合资源，无需注册",
     "favicon": "",
     "isDead": false
   },
@@ -3077,6 +3219,17 @@
     ],
     "type": "private",
     "description": "再小众的热爱，也值得被世界看见",
+    "favicon": "",
+    "isDead": false
+  },
+  {
+    "id": "shanaproject",
+    "name": "Shana Project",
+    "urls": [
+      "https://www.shanaproject.com/"
+    ],
+    "type": "public",
+    "description": "Shana Project 是一个公开的动漫资源聚合站，收录各字幕组发布的新番剧集与合集",
     "favicon": "",
     "isDead": false
   },
@@ -3335,6 +3488,35 @@
     "isDead": false
   },
   {
+    "id": "thepiratebay",
+    "name": "The Pirate Bay",
+    "urls": [
+      "https://thepiratebay.org/",
+      "https://thepiratebay.ninjaproxy1.com/",
+      "https://tpb.proxyninja.org/",
+      "https://thepiratebay.torrentbay.st/",
+      "https://thehiddenbay.com/",
+      "https://tpb.party/",
+      "https://thepiratebay10.xyz/"
+    ],
+    "type": "public",
+    "description": "The Pirate Bay (TPB) 是最具韧性的公共 BT 索引站，通过 apibay JSON 接口提供搜索",
+    "favicon": "",
+    "isDead": false
+  },
+  {
+    "id": "therarbg",
+    "name": "TheRARBG",
+    "urls": [
+      "https://therarbg.to/",
+      "https://therarbg.com/"
+    ],
+    "type": "public",
+    "description": "TheRARBG 是继承 RARBG.to 风格的公开 BT 站点，覆盖电影、剧集、游戏、音乐等",
+    "favicon": "",
+    "isDead": false
+  },
+  {
     "id": "thevault",
     "name": "TheVault",
     "urls": [
@@ -3437,6 +3619,18 @@
     "isDead": false
   },
   {
+    "id": "torrentgalaxyclone",
+    "name": "TorrentGalaxyClone",
+    "urls": [
+      "https://torrentgalaxy.info/",
+      "https://torrentgalaxy.one/"
+    ],
+    "type": "public",
+    "description": "TorrentGalaxyClone（TGx）是一个公共 BT 站点，主要提供 MOVIES / TV / GENERAL 资源",
+    "favicon": "",
+    "isDead": false
+  },
+  {
     "id": "torrenthub",
     "name": "TorrentHub",
     "urls": [
@@ -3457,6 +3651,26 @@
     "type": "private",
     "description": "Torrenting (TT) is a Private Torrent Tracker for MOVIES / TV / GENERAL",
     "favicon": "https://torrenting.com/favicon.ico",
+    "isDead": false
+  },
+  {
+    "id": "torrentkitty",
+    "name": "TorrentKitty",
+    "urls": [
+      "https://www.torrentkitty.ink/",
+      "https://www.torrentkitty.cam/",
+      "https://www.torrentkitty.io/",
+      "https://www.torrentkitty.vip/",
+      "https://www.torrentkitty.app/",
+      "https://www.torrentkitty.red/",
+      "https://www.torrentkitty.lol/",
+      "https://www.torrentkitty.best/",
+      "https://www.torrentkitty.tv/",
+      "https://torkitty.com/"
+    ],
+    "type": "public",
+    "description": "TorrentKitty is a Public torrent indexer（公开 BT 索引站，站点使用 Cloudflare，必要时需配置 FlareSolverr）",
+    "favicon": "",
     "isDead": false
   },
   {
@@ -3651,6 +3865,24 @@
     "isDead": false
   },
   {
+    "id": "worldtorrent",
+    "name": "World-torrent",
+    "urls": [
+      "https://ww1.darkfox.run/",
+      "https://ww1.vidlox.run/",
+      "https://ww1.worldivx.run/",
+      "https://ww1.wikibox.run/",
+      "https://ww1.sharkibox.run/",
+      "https://ww1.workino.run/",
+      "https://ww1.oxtorrent.run/",
+      "https://ww1.torrent911.run/"
+    ],
+    "type": "public",
+    "description": "World-torrent is a FRENCH Public site for MOVIES / TV / GENERAL（法语公开站，同一套代码的多个镜像域名）",
+    "favicon": "",
+    "isDead": false
+  },
+  {
     "id": "wukongwendao",
     "name": "悟空问道",
     "urls": [
@@ -3742,6 +3974,30 @@
     "isDead": false
   },
   {
+    "id": "xxxclub",
+    "name": "XXXClub",
+    "urls": [
+      "uggcf://kkkpyho.gb/",
+      "uggcf://kkkpyho.pp/",
+      "uggcf://kkkpyho.zr/"
+    ],
+    "type": "public",
+    "description": "XXXClub is a Public torrent site for 3X（成人向公开站，站点使用 Cloudflare，必要时需配置 FlareSolverr）",
+    "favicon": "",
+    "isDead": false
+  },
+  {
+    "id": "xxxtor",
+    "name": "xxxtor",
+    "urls": [
+      "uggcf://kkkgbe.pbz/"
+    ],
+    "type": "public",
+    "description": "xxxtor is a RUSSIAN Public Torrent Tracker for 3X（俄语成人向公开站）",
+    "favicon": "",
+    "isDead": false
+  },
+  {
     "id": "ydypt",
     "name": "伊甸园",
     "urls": [
@@ -3783,6 +4039,17 @@
     "type": "private",
     "description": "YingUSKG PT站点",
     "favicon": "./_default_nexusphp.png",
+    "isDead": false
+  },
+  {
+    "id": "yts",
+    "name": "YTS",
+    "urls": [
+      "https://yts.gg/"
+    ],
+    "type": "public",
+    "description": "YTS 是一个专注于小体积高清电影（YIFY 压片组）的公共 BT 站点，提供 JSON API",
+    "favicon": "",
     "isDead": false
   },
   {
