@@ -195,6 +195,17 @@
     "isDead": false
   },
   {
+    "id": "anibt",
+    "name": "Anibt",
+    "urls": [
+      "https://anibt.net/"
+    ],
+    "type": "public",
+    "description": "Anibt is a CHINESE Public aggregate indexer for ANIME",
+    "favicon": "",
+    "isDead": false
+  },
+  {
     "id": "animebytes",
     "name": "AnimeBytes",
     "urls": [
@@ -508,6 +519,17 @@
     "isDead": false
   },
   {
+    "id": "blueroms",
+    "name": "BlueRoms",
+    "urls": [
+      "https://www.blueroms.ws/"
+    ],
+    "type": "public",
+    "description": "BlueRoms is a Public Torrent Tracker for ROMS",
+    "favicon": "",
+    "isDead": false
+  },
+  {
     "id": "blutopia",
     "name": "Blutopia",
     "urls": [
@@ -584,6 +606,17 @@
     ],
     "type": "private",
     "description": "著名教育网PT站点（仅支持ipv6访问与下载），有10大类资源，资源更新快，保种好。",
+    "favicon": "",
+    "isDead": false
+  },
+  {
+    "id": "byrutor",
+    "name": "Byrutor",
+    "urls": [
+      "https://byrutgame.org/"
+    ],
+    "type": "public",
+    "description": "Byrutor 是一个俄语公共游戏 Tracker。",
     "favicon": "",
     "isDead": false
   },
@@ -793,6 +826,17 @@
     ],
     "type": "private",
     "description": "",
+    "favicon": "",
+    "isDead": false
+  },
+  {
+    "id": "crackingpatching",
+    "name": "CrackingPatching",
+    "urls": [
+      "https://crackingpatching.com/"
+    ],
+    "type": "public",
+    "description": "CrackingPatching is a Public tracker for Software and Apps",
     "favicon": "",
     "isDead": false
   },
@@ -1941,6 +1985,38 @@
     "isDead": false
   },
   {
+    "id": "kickasstorrentsto",
+    "name": "kickasstorrents.to",
+    "urls": [
+      "https://kickass.torrentbay.st/",
+      "https://kickass.torrentsbay.org/",
+      "https://kickasstorrents.proxyninja.org/",
+      "https://kickasstorrents.ninjaproxy1.com/"
+    ],
+    "type": "public",
+    "description": "kickasstorrents.to 是 KickassTorrents 的公共镜像，提供 MOVIES / TV / GENERAL 资源。",
+    "favicon": "",
+    "isDead": false
+  },
+  {
+    "id": "kickasstorrentsws",
+    "name": "kickasstorrents.ws",
+    "urls": [
+      "https://kickasstorrents.bz/",
+      "https://kkickass.com/",
+      "https://kkat.net/",
+      "https://kick4ss.com/",
+      "https://kickasst.net/",
+      "https://kickasstorrents.id/",
+      "https://thekat.cc/",
+      "https://kattracker.com/"
+    ],
+    "type": "public",
+    "description": "kickasstorrents.ws 是 KickassTorrents 的公共镜像，提供 MOVIES / TV / GENERAL 资源。",
+    "favicon": "",
+    "isDead": false
+  },
+  {
     "id": "kimoji",
     "name": "KIMOJI",
     "urls": [
@@ -2060,6 +2136,17 @@
     ],
     "type": "public",
     "description": "LimeTorrents 是一个公共 BT 索引站，以「已验证种子」为主提供全站搜索",
+    "favicon": "",
+    "isDead": false
+  },
+  {
+    "id": "linuxtracker",
+    "name": "LinuxTracker",
+    "urls": [
+      "https://linuxtracker.org/"
+    ],
+    "type": "public",
+    "description": "LinuxTracker is a Public Linux ISO Torrent Repository",
     "favicon": "",
     "isDead": false
   },
@@ -2207,6 +2294,17 @@
     "description": "国内首个使用meanTorrent架构站点",
     "favicon": "",
     "isDead": true
+  },
+  {
+    "id": "mixtapetorrent",
+    "name": "MixtapeTorrent",
+    "urls": [
+      "http://www.mixtapetorrent.com/"
+    ],
+    "type": "public",
+    "description": "MixtapeTorrent is a Public Music site for MixTapes",
+    "favicon": "",
+    "isDead": false
   },
   {
     "id": "moecat",
@@ -2618,6 +2716,17 @@
     "isDead": false
   },
   {
+    "id": "pandacd",
+    "name": "PandaCD",
+    "urls": [
+      "https://pandacd.io/"
+    ],
+    "type": "public",
+    "description": "PandaCD is a Public Tracker for MUSIC (Creative Commons and artist-permitted content)",
+    "favicon": "",
+    "isDead": false
+  },
+  {
     "id": "pandapt",
     "name": "PandaPT",
     "urls": [
@@ -2669,6 +2778,17 @@
     ],
     "type": "private",
     "description": "微而精，短而美",
+    "favicon": "",
+    "isDead": false
+  },
+  {
+    "id": "plugintorrent",
+    "name": "PluginTorrent",
+    "urls": [
+      "https://plugintorrent.com/"
+    ],
+    "type": "public",
+    "description": "plugintorrent is a Public site for AUDIO apps, plugins and samples",
     "favicon": "",
     "isDead": false
   },
@@ -3078,6 +3198,18 @@
     "isDead": false
   },
   {
+    "id": "rintornet",
+    "name": "RinTor.NeT",
+    "urls": [
+      "uggcf://jjj.evagbe.arg/",
+      "uggcf://evagbe.arg/"
+    ],
+    "type": "public",
+    "description": "RinTor.NeT 是一个俄语成人（XXX）公共 Tracker。",
+    "favicon": "",
+    "isDead": false
+  },
+  {
     "id": "rockethd",
     "name": "RocketHD",
     "urls": [
@@ -3256,6 +3388,17 @@
     "isDead": true
   },
   {
+    "id": "showrss",
+    "name": "showRSS",
+    "urls": [
+      "https://showrss.info/"
+    ],
+    "type": "public",
+    "description": "showRSS is a service that allows you to keep track of your favorite TV shows",
+    "favicon": "",
+    "isDead": false
+  },
+  {
     "id": "simurg",
     "name": "Simurg",
     "urls": [
@@ -3285,6 +3428,17 @@
     ],
     "type": "private",
     "description": "Free Share, Join us",
+    "favicon": "",
+    "isDead": false
+  },
+  {
+    "id": "skidrowrepack",
+    "name": "SkidrowRepack",
+    "urls": [
+      "https://skidrowrepack.com/"
+    ],
+    "type": "public",
+    "description": "SkidrowRepack is a Public Torrent Tracker for GAMES",
     "favicon": "",
     "isDead": false
   },
@@ -3321,6 +3475,17 @@
     "description": "",
     "favicon": "",
     "isDead": true
+  },
+  {
+    "id": "sosulki",
+    "name": "sosulki",
+    "urls": [
+      "uggcf://fbfhyxv.obfx.pp/"
+    ],
+    "type": "public",
+    "description": "sosulki 是一个俄语成人（XXX）公共 Tracker。",
+    "favicon": "",
+    "isDead": false
   },
   {
     "id": "soulvoice",
@@ -3596,6 +3761,17 @@
     "isDead": false
   },
   {
+    "id": "torrent9",
+    "name": "Torrent9",
+    "urls": [
+      "https://www7.torrent9.to/"
+    ],
+    "type": "public",
+    "description": "Torrent9 is a FRENCH Public site for MOVIES / TV / GENERAL",
+    "favicon": "",
+    "isDead": false
+  },
+  {
     "id": "torrentday",
     "name": "TorrentsTD",
     "urls": [
@@ -3777,6 +3953,21 @@
     "isDead": false
   },
   {
+    "id": "u3c3",
+    "name": "U3C3",
+    "urls": [
+      "uggcf://h3p3.pbz/",
+      "uggcf://h001.25vzt.pbz/",
+      "uggcf://h002.25vzt.pbz/",
+      "uggcf://h003.25vzt.pbz/",
+      "uggcf://h3p3h3p3.h3p3h3p3h3p3.pbz/"
+    ],
+    "type": "public",
+    "description": "U3C3 is a CHINESE Public tracker focused on 3X Eastern Asian media",
+    "favicon": "",
+    "isDead": false
+  },
+  {
     "id": "ubits",
     "name": "UBits",
     "urls": [
@@ -3797,6 +3988,17 @@
     "description": "",
     "favicon": "",
     "isDead": true
+  },
+  {
+    "id": "uindex",
+    "name": "UIndex",
+    "urls": [
+      "https://uindex.org/"
+    ],
+    "type": "public",
+    "description": "UIndex is a Public Torrent Tracker for MOVIES / TV / MUSIC / GENERAL",
+    "favicon": "",
+    "isDead": false
   },
   {
     "id": "ultrahd",
@@ -3828,6 +4030,28 @@
     ],
     "type": "private",
     "description": "专注于虚拟歌姬 （非虚拟偶像）相关内容的站点，禁R18",
+    "favicon": "",
+    "isDead": false
+  },
+  {
+    "id": "vstorrent",
+    "name": "VSTorrent",
+    "urls": [
+      "https://vstorrent.org/"
+    ],
+    "type": "public",
+    "description": "VSTorrent is a Public site for AUDIO apps, plugins and samples",
+    "favicon": "",
+    "isDead": false
+  },
+  {
+    "id": "vsttorrents",
+    "name": "VST Torrentz",
+    "urls": [
+      "https://vsttorrentz.net/"
+    ],
+    "type": "public",
+    "description": "VST Torrentz is a Public site for AUDIO apps, plugins and samples",
     "favicon": "",
     "isDead": false
   },
@@ -4072,6 +4296,17 @@
     ],
     "type": "private",
     "description": "综合影视音乐资源站，基于 Discuz 论坛架构 + 自定义种子聚合模块",
+    "favicon": "",
+    "isDead": false
+  },
+  {
+    "id": "zamundalife",
+    "name": "Zamunda LIFE",
+    "urls": [
+      "https://zamunda.life/"
+    ],
+    "type": "public",
+    "description": "Zamunda LIFE is a BULGARIAN Public Torrent Archive for MOVIES / TV / GENERAL",
     "favicon": "",
     "isDead": false
   },
