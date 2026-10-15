@@ -227,9 +227,27 @@ const certEmptyNote = isDead
         <div class="uptime-value">{fmtLatency(site.currentLatency)}</div>
         <div class="uptime-label">Current Latency</div>
       </div>
+      {/*
+        Every latency figure covers the same 7 days the chart below draws — the
+        mean alone hid the slow tail, which is what a percentile is for. All of
+        them describe the checks that answered: a failed check has no latency to
+        average, so the outage side of the window is the uptime cards above.
+      */}
       <div class="uptime-card">
-        <div class="uptime-value">{fmtLatency(site.avgLatency24h)}</div>
-        <div class="uptime-label">Avg Latency (24h)</div>
+        <div class="uptime-value">{fmtLatency(site.latency7d.avg)}</div>
+        <div class="uptime-label">Avg Latency (7d)</div>
+      </div>
+      <div class="uptime-card">
+        <div class="uptime-value">{fmtLatency(site.latency7d.p90)}</div>
+        <div class="uptime-label">P90 Latency (7d)</div>
+      </div>
+      <div class="uptime-card">
+        <div class="uptime-value">{fmtLatency(site.latency7d.p95)}</div>
+        <div class="uptime-label">P95 Latency (7d)</div>
+      </div>
+      <div class="uptime-card">
+        <div class="uptime-value">{fmtLatency(site.latency7d.p99)}</div>
+        <div class="uptime-label">P99 Latency (7d)</div>
       </div>
     </div>
   </section>

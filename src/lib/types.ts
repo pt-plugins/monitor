@@ -117,6 +117,26 @@ export interface SiteCertificate {
   };
 }
 
+/**
+ * How fast one site answered over one window.
+ *
+ * A failed check has no latency — the monitor records none — so every figure
+ * here is about the checks that answered. How much of the window failed is the
+ * uptime share and `dailyStatus`, not this.
+ */
+export interface LatencyStats {
+  /** Mean of the window's latencies, in whole milliseconds. */
+  avg: number | null;
+  /**
+   * Nearest-rank percentiles, in whole milliseconds: P90 is the slowest of the
+   * fastest 90% of the window's checks — a latency that was measured, rather
+   * than one interpolated between two readings.
+   */
+  p90: number | null;
+  p95: number | null;
+  p99: number | null;
+}
+
 export interface SiteSummary {
   id: string;
   name: string;
@@ -137,7 +157,8 @@ export interface SiteSummary {
   uptime24h: number; // 0-100
   uptime7d: number;
   uptime30d: number;
-  avgLatency24h: number | null;
+  /** The last 7 days, so it covers the same window as the response-time chart. */
+  latency7d: LatencyStats;
   dailyStatus: Array<"up" | "down" | "mixed" | "nodata">; // last 7 days, oldest first
   history: Array<{
     timestamp: string;

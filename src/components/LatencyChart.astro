@@ -1,6 +1,12 @@
 ---
+import { DISPLAY_TIME_ZONE_LABEL, formatCheckTime } from "../lib/history-fetch";
+
 export interface Props {
-  data: Array<{ timestamp: string; latency: number | null }>;
+  /**
+   * The site's checks, oldest first. Both fields matter: the curve is drawn
+   * from the checks that answered, the marks from the ones that did not.
+   */
+  data: Array<{ timestamp: string; status: "up" | "down"; latency: number | null }>;
   height?: number;
 }
 
@@ -14,16 +20,31 @@ const bucketMs = windowMs / bucketCount;
 
 const buckets: number[] = new Array(bucketCount).fill(0);
 const counts: number[] = new Array(bucketCount).fill(0);
+/** Failed checks per bucket, and the newest of them, for the marks below. */
+const failures: number[] = new Array(bucketCount).fill(0);
+const newestFailure: (string | null)[] = new Array(bucketCount).fill(null);
 
 for (const d of data) {
   const ts = new Date(d.timestamp).getTime();
   const elapsed = now - ts;
   if (elapsed < 0 || elapsed > windowMs) continue;
   const idx = Math.floor(elapsed / bucketMs);
-  if (idx >= 0 && idx < bucketCount && d.latency !== null) {
+  if (idx < 0 || idx >= bucketCount) continue;
+  if (d.status === "down") {
+    failures[idx]++;
+    // History is oldest-first, so the last write for a bucket is its newest check.
+    newestFailure[idx] = d.timestamp;
+  }
+  if (d.latency !== null) {
     buckets[idx] += d.latency;
     counts[idx]++;
   }
+}
+
+/** Where a bucket sits on the x axis. The line and the marks share it, so a
+    mark for an hour that answered lands exactly on that hour's point. */
+function bucketX(index: number): number {
+  return (bucketCount - index - 1) / bucketCount;
 }
 
 // Build points: skip buckets with no data (don't force to 0)
@@ -32,7 +53,7 @@ const pts: { x: number; y: number }[] = [];
 for (let i = bucketCount - 1; i >= 0; i--) {
   if (counts[i] > 0) {
     const avg = Math.round(buckets[i] / counts[i]);
-    pts.push({ x: (bucketCount - i - 1) / bucketCount, y: avg });
+    pts.push({ x: bucketX(i), y: avg });
   }
 }
 
@@ -64,6 +85,110 @@ const firstX = pts.length > 0 ? pts[0].x : 0;
 const lastX = pts.length > 0 ? pts[pts.length - 1].x : 1;
 const area = pts.length > 0 ? `${line} L${sx(lastX)},${sy(0)} L${sx(firstX)},${sy(0)} Z` : "";
 
+/*
+ * The height of the curve at an arbitrary x, in the curve's own units.
+ *
+ * Each segment is drawn as one cubic whose control points sit a third and two
+ * thirds of the way along x, so x is linear in the curve's parameter and y at a
+ * given x works out as the cubic ease of the segment's two ends. Evaluating
+ * that here is what puts a mark *on* the drawn line rather than near it: a
+ * linear interpolation between the same two points would sit visibly off the
+ * curve, which is what the smoothing is there to be.
+ *
+ * A failed check has no latency to plot, so this is the only height a failure
+ * can borrow. Outside the drawn span — a stretch of downtime before the first
+ * answer or after the last — the curve has no opinion, and the nearest end of
+ * the line is what it gets.
+ */
+function curveYAt(x: number): number {
+  if (x <= pts[0].x) return pts[0].y;
+  const last = pts[pts.length - 1];
+  if (x >= last.x) return last.y;
+
+  let i = 0;
+  while (i < pts.length - 2 && pts[i + 1].x <= x) i++;
+  const a = pts[i];
+  const b = pts[i + 1];
+  const t = (x - a.x) / (b.x - a.x);
+  return a.y + (b.y - a.y) * t * t * (3 - 2 * t);
+}
+
+interface ChartMark {
+  /** Centre of the mark: a percentage of the chart's width, pixels from its top. */
+  left: number;
+  top: number;
+  /** Which kind of hour this is; the styles give each kind its size and colour. */
+  kind: "up" | "down";
+  title: string;
+}
+
+/** Two decimals, which is finer than a pixel on any screen this is read on. */
+function fixed2(v: number): number {
+  return Math.round(v * 100) / 100;
+}
+
+/*
+ * One mark per hour the chart can speak for.
+ *
+ * The measured hours come first: a small dot on every hour with an answer. The
+ * curve alone hides where its own points are — it is stroked as one smooth line
+ * through them and does not break across an hour nothing answered, so a quiet
+ * stretch reads as measured. The dots are the hours that are evidence, the gaps
+ * between them are the hours that are not, and each dot's tooltip carries the
+ * mean that the curve's shape only gestures at.
+ *
+ * The failed hours come second, larger and in the failure colour, because an
+ * hour that failed is the thing to find here. Emitting those last is what puts
+ * the failure on top of the measurement in an hour that both answered and
+ * failed. One mark covers the hour rather than the check: an hour is a single x
+ * on this chart, and checks that share one would stack into a single visible
+ * mark anyway. Its tooltip names the hour's newest failure, so a dozen failures
+ * in one hour is still one mark with one time.
+ *
+ * With no answered check in the window there is no curve, and so nothing to put
+ * a mark on: the chart is empty rather than a field of dots.
+ */
+const upMarks: ChartMark[] = [];
+for (let i = bucketCount - 1; i >= 0; i--) {
+  if (counts[i] === 0) continue;
+  const avg = Math.round(buckets[i] / counts[i]);
+  upMarks.push({
+    left: fixed2((sx(bucketX(i)) / tw) * 100),
+    top: fixed2(sy(avg)),
+    kind: "up",
+    title: counts[i] > 1 ? `${fmtLat(avg)} avg of ${counts[i]} checks` : fmtLat(avg),
+  });
+}
+
+const downMarks: ChartMark[] = [];
+if (pts.length > 0) {
+  for (let i = bucketCount - 1; i >= 0; i--) {
+    if (failures[i] === 0) continue;
+    const at = newestFailure[i];
+    const when = at ? `${formatCheckTime(at)} ${DISPLAY_TIME_ZONE_LABEL}` : "";
+    downMarks.push({
+      left: fixed2((sx(bucketX(i)) / tw) * 100),
+      top: fixed2(sy(curveYAt(bucketX(i)))),
+      kind: "down",
+      title: failures[i] > 1 ? `${failures[i]} checks down, latest ${when}` : `Down ${when}`,
+    });
+  }
+}
+
+const marks = [...upMarks, ...downMarks];
+
+// The marks are drawn outside the SVG (see the styles below), where assistive
+// tech cannot pair them with the curve, so the chart's own label carries them.
+// The two counts are stated side by side rather than as a subset: an hour that
+// failed need not be one the chart drew — that is the whole point of the marks
+// beyond the ends of the line.
+const chartLabel =
+  downMarks.length > 0
+    ? `7-day latency chart; ${upMarks.length} measured and ${downMarks.length} failed hours marked`
+    : upMarks.length > 0
+      ? `7-day latency chart; ${upMarks.length} measured hours marked`
+      : "7-day latency chart";
+
 // Calculate midnight markers for each day in the window
 function getMidnights(): { x: number; label: string }[] {
   const result = [];
@@ -87,40 +212,54 @@ function fmtLat(ms: number): string {
 ---
 
 <div class="chart-wrap">
-  <svg
-    viewBox={`0 0 ${tw} ${th}`}
-    width="100%"
-    height={th}
-    role="img"
-    aria-label="7-day latency chart"
-    preserveAspectRatio="none"
-  >
-    <defs>
-      <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="var(--color-up)" stop-opacity="0.25" />
-        <stop offset="100%" stop-color="var(--color-up)" stop-opacity="0" />
-      </linearGradient>
-    </defs>
+  <div class="chart-box">
+    <svg
+      viewBox={`0 0 ${tw} ${th}`}
+      width="100%"
+      height={th}
+      role="img"
+      aria-label={chartLabel}
+      preserveAspectRatio="none"
+    >
+      <defs>
+        <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="var(--color-up)" stop-opacity="0.25" />
+          <stop offset="100%" stop-color="var(--color-up)" stop-opacity="0" />
+        </linearGradient>
+      </defs>
 
-    <!-- Horizontal grid -->
-    <line x1={pad.l} y1={sy(0)} x2={sx(1)} y2={sy(0)} stroke="var(--color-border)" stroke-width="0.5" />
-    <line x1={pad.l} y1={sy(validMax / 2)} x2={sx(1)} y2={sy(validMax / 2)} stroke="var(--color-border)" stroke-width="0.5" stroke-dasharray="2,2" />
-    <line x1={pad.l} y1={sy(validMax)} x2={sx(1)} y2={sy(validMax)} stroke="var(--color-border)" stroke-width="0.5" stroke-dasharray="2,2" />
+      <!-- Horizontal grid -->
+      <line x1={pad.l} y1={sy(0)} x2={sx(1)} y2={sy(0)} stroke="var(--color-border)" stroke-width="0.5" />
+      <line x1={pad.l} y1={sy(validMax / 2)} x2={sx(1)} y2={sy(validMax / 2)} stroke="var(--color-border)" stroke-width="0.5" stroke-dasharray="2,2" />
+      <line x1={pad.l} y1={sy(validMax)} x2={sx(1)} y2={sy(validMax)} stroke="var(--color-border)" stroke-width="0.5" stroke-dasharray="2,2" />
 
-    <!-- Midnight vertical markers -->
-    {midnights.map((m) => (
-      <>
-        <line x1={sx(m.x)} y1={sy(0)} x2={sx(m.x)} y2={sy(validMax)} stroke="var(--color-border)" stroke-width="0.5" stroke-dasharray="2,2" opacity="0.6" />
-        <text x={sx(m.x)} y={th - 2} fill="var(--color-text-secondary)" font-size="9" text-anchor="middle">{m.label}</text>
-      </>
-    ))}
+      <!-- Midnight vertical markers -->
+      {midnights.map((m) => (
+        <>
+          <line x1={sx(m.x)} y1={sy(0)} x2={sx(m.x)} y2={sy(validMax)} stroke="var(--color-border)" stroke-width="0.5" stroke-dasharray="2,2" opacity="0.6" />
+          <text x={sx(m.x)} y={th - 2} fill="var(--color-text-secondary)" font-size="9" text-anchor="middle">{m.label}</text>
+        </>
+      ))}
 
-    {validMax > 0 && <path d={area} fill="url(#areaGrad)" />}
-    <path d={line} fill="none" stroke="var(--color-up)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+      {validMax > 0 && <path d={area} fill="url(#areaGrad)" />}
+      <path d={line} fill="none" stroke="var(--color-up)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
 
-    <text x={pad.l} y={pad.t - 4} fill="var(--color-text-secondary)" font-size="10">{fmtLat(validMax)}</text>
-    <text x={pad.l} y={sy(0) - 2} fill="var(--color-text-secondary)" font-size="10">0ms</text>
-  </svg>
+      <text x={pad.l} y={pad.t - 4} fill="var(--color-text-secondary)" font-size="10">{fmtLat(validMax)}</text>
+      <text x={pad.l} y={sy(0) - 2} fill="var(--color-text-secondary)" font-size="10">0ms</text>
+    </svg>
+
+    {marks.length > 0 && (
+      <div class="chart-marks" aria-hidden="true">
+        {marks.map((m) => (
+          <span
+            class={`chart-mark chart-mark--${m.kind}`}
+            style={`left:${m.left}%;top:${m.top}px`}
+            title={m.title}
+          ></span>
+        ))}
+      </div>
+    )}
+  </div>
 </div>
 
 <style>
@@ -135,5 +274,58 @@ function fmtLat(ms: number): string {
   .chart-wrap svg {
     display: block;
     width: 100%;
+  }
+
+  /*
+   * The marks are HTML rather than <circle>s inside the chart.
+   *
+   * The chart's viewBox is stretched to the container (preserveAspectRatio is
+   * "none"), by a factor that runs from about 0.4 to about 1.4 depending on
+   * the window, so a circle drawn in there comes out as an ellipse — narrow on
+   * a phone, wide on a desktop. A mark sized in CSS pixels is round at any
+   * width.
+   *
+   * Being an overlay, it has to line up with the drawing it annotates: the box
+   * wraps the SVG and carries no padding or border of its own, the SVG's
+   * rendered height is its viewBox height (so one user unit is one pixel
+   * vertically), and each mark is placed with the same sx/sy mapping the curve
+   * is drawn with — see the marks above.
+   */
+  .chart-box { position: relative; }
+
+  /* The layer is not what the reader aims at: only the marks take the mouse,
+     so the rest of the chart keeps its own hover and text selection. */
+  .chart-marks {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .chart-mark {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: auto;
+    /* Placed by its centre, which is the point on the curve it marks. */
+    transform: translate(-50%, -50%);
+  }
+
+  /*
+   * An hour that answered: a bead on the line, small enough that consecutive
+   * hours stay apart where the chart is wide, and no wider than the line where
+   * it is narrow. The curve carries the reading, so the dot only has to say
+   * "this hour is one of the measurements".
+   */
+  .chart-mark--up {
+    width: 4px;
+    height: 4px;
+    background: var(--color-up);
+  }
+
+  /* An hour that failed: the rarer mark, and the one worth finding, so it is
+     drawn larger than the measurements and in the failure colour. */
+  .chart-mark--down {
+    width: 7px;
+    height: 7px;
+    background: var(--color-down);
   }
 </style>

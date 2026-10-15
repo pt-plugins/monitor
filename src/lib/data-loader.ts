@@ -7,6 +7,7 @@ import type {
   CertificateReport,
   CertificateSite,
   DailyCheckCount,
+  LatencyStats,
   MonitorRun,
   SiteCertificate,
   SiteDailyUptime,
@@ -209,14 +210,36 @@ function computeUptime(entries: RunSiteEntry[]): { uptime: number; total: number
   return { uptime: total > 0 ? Math.round((up / total) * 10000) / 100 : 100, total, up };
 }
 
-function computeAvgLatency(entries: RunSiteEntry[]): number | null {
-  let t = 0, c = 0;
+/**
+ * The latency figures for one window, from the checks in it that answered.
+ *
+ * Percentiles are nearest-rank: the value at `ceil(p/100 * n)` of the sorted
+ * samples, so P90 is a latency the monitor actually recorded rather than one
+ * interpolated between two readings — with whole-millisecond readings and a
+ * few dozen samples per site, being able to point at the check that produced
+ * the number is worth more than the smoothing an interpolating definition buys.
+ *
+ * The sort is a copy: the entries belong to the cached index and must not be
+ * reordered.
+ */
+function computeLatencyStats(entries: RunSiteEntry[]): LatencyStats {
+  const values: number[] = [];
   for (const e of entries) {
-    if (e.latency !== null) {
-      t += e.latency; c++;
-    }
+    if (e.latency !== null) values.push(e.latency);
   }
-  return c > 0 ? Math.round(t / c) : null;
+  if (values.length === 0) return { avg: null, p90: null, p95: null, p99: null };
+
+  let total = 0;
+  for (const v of values) total += v;
+  const sorted = [...values].sort((a, b) => a - b);
+
+  const rank = (p: number) => sorted[Math.min(Math.ceil((p / 100) * sorted.length), sorted.length) - 1];
+  return {
+    avg: Math.round(total / sorted.length),
+    p90: rank(90),
+    p95: rank(95),
+    p99: rank(99),
+  };
 }
 
 function buildHistory(entries: RunSiteEntry[], limit: number): SiteSummary["history"] {
@@ -421,9 +444,12 @@ export function computeSiteSummaries(): SiteSummary[] {
     const newest = entries.length > 0 ? entries[entries.length - 1] : undefined;
     const csr = newest && newest.index === latestRunIndex && latestRun ? { latency: newest.latency } : undefined;
     const u24 = computeUptime(recentEntries(site.id, 24));
-    const u7d = computeUptime(recentEntries(site.id, 7 * 24));
+    // One window, read once: the uptime share and the latency figures on the
+    // page are both the last 7 days, and the chart below them draws the same
+    // window.
+    const e7d = recentEntries(site.id, 7 * 24);
+    const u7d = computeUptime(e7d);
     const u30d = computeUptime(recentEntries(site.id, 30 * 24));
-    const avgLat = computeAvgLatency(recentEntries(site.id, 24));
     const history = buildHistory(entries, HISTORY_LIMIT);
     const dailyStatus = computeDailyStatus(entries);
 
@@ -448,7 +474,7 @@ export function computeSiteSummaries(): SiteSummary[] {
       // Decoded here, once per site: the definition stores these ROT13-encoded.
       primaryUrl: site.urls.length > 0 ? decodeUrl(site.urls[0]) : null,
       uptime24h: u24.uptime, uptime7d: u7d.uptime, uptime30d: u30d.uptime,
-      avgLatency24h: avgLat,
+      latency7d: computeLatencyStats(e7d),
       dailyStatus,
       history,
       // A site added since the last collection has no entry of its own, which

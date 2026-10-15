@@ -157,6 +157,47 @@ heatmap is the honest answer to "how often does this actually check?", which is 
   labelled image. The card prints its own unit and range (`Runs per day (UTC) · … → …`), since the section heading
   covers several measures and cannot name just one.
 
+### Uptime & Response Time (site page)
+
+The first two blocks of a site page answer *is it up, and how slow is it?*: **Uptime** holds three success rates
+followed by four latency figures, and **Response Time (7 days)** (`src/components/LatencyChart.astro`) draws the curve
+those figures come from.
+
+- The success rates are the share of **checks** that succeeded over the last 24 hours, 7 days and 30 days — a daily
+  sample rather than a stopwatch, as *Scheduled Runs Are Best-Effort* above explains.
+- The latency figures are the **mean, P90, P95 and P99 over the same 7 days** the chart below draws, so the block and
+  the curve cannot disagree about their window. The 24-hour mean they replaced said less about a slow site than the
+  percentiles do, and two windows sitting in one row invited reading them as one.
+- They describe the checks that **answered**: a failed check has no latency — the monitor records none — so these are
+  how fast the site was when it was up, while how much of the window it was not is the cards above and *Daily Uptime*
+  below.
+- The percentiles are **nearest-rank**: P90 is the slowest of the fastest 90% of the window's checks, a latency that
+  was actually recorded rather than one interpolated between two readings. At this cadence a week holds tens of checks
+  per site, not hundreds, so the tail figures are coarse by nature — on a thin window P95 and P99 land on the same
+  reading, which is what the record supports rather than a rounding artefact.
+- The chart buckets the window into **168 hours**, one point per hour holding the mean of the checks that answered in
+  it. An hour with no answer is skipped rather than plotted as 0 — a gap in the record is a gap in the line — and each
+  day's midnight is drawn down the plot. It is drawn from the 336 checks embedded in the page, so how much of the
+  window it covers follows the monitor's real cadence.
+- **Every hour that answered is marked** with a small dot on the curve, because the curve alone hides where its own
+  points are: it is stroked as one smooth line through them and does not break across an hour nothing answered, so a
+  quiet stretch would read as measured. The dots are the hours with evidence behind them and the gaps between them are
+  the hours without, and each carries its mean in a tooltip (`483ms avg of 3 checks`) — the reading the curve's shape
+  only gestures at.
+- **An hour that failed is marked as well**, larger and in the failure colour, since that is the thing to find here. One
+  mark covers the hour rather than the check — an hour is a single x on this chart — and it is drawn last, so in an hour
+  that both answered and failed the failure is the mark left on top. A failure has no latency to plot, so it borrows the
+  curve's height at that hour: it is placed by evaluating the same cubic the line is stroked with, which puts it on the
+  line rather than near it. Its tooltip names the hour's newest failure (`3 checks down, latest 2026-10-14 03:12:45
+  UTC`).
+- A stretch of downtime **before the first answer or after the last** has no curve to sit on. Those marks keep their own
+  hour's x and take the height of the nearest end of the line, so an outage that is still running trails off the end of
+  the curve at the site's last known latency instead of vanishing. With no answered check anywhere in the window there
+  is no curve, and so no marks.
+- The marks are positioned HTML rather than SVG circles: the viewBox is stretched to the container, so a circle drawn
+  inside it comes out as an ellipse — narrow on a phone, wide on a desktop. They are hidden from assistive tech, and the
+  chart's own label carries them instead (`7-day latency chart; 36 measured and 3 failed hours marked`).
+
 ### Daily Uptime (site page)
 
 A site page runs, top to bottom: *Uptime*, *Response Time (7 days)*, *Daily Uptime*, *Certificate & Domain*, then
