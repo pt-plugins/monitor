@@ -486,6 +486,18 @@
     "isDead": false
   },
   {
+    "id": "bigfangroup",
+    "name": "BigFANGroup",
+    "urls": [
+      "https://bigfangroup.org/",
+      "https://www.freebfg.org/"
+    ],
+    "type": "public",
+    "description": "BigFANGroup 是一个俄语公开 BT 站（Kinokpk 引擎），以电影 / 剧集为主，无需登录即可浏览",
+    "favicon": "",
+    "isDead": false
+  },
+  {
     "id": "bitbr",
     "name": "bitbr",
     "urls": [
@@ -650,6 +662,17 @@
     ],
     "type": "private",
     "description": "Cathode-Ray.Tube (CRT) is a Private Torrent Tracker for CLASSIC MOVIES / TV",
+    "favicon": "",
+    "isDead": false
+  },
+  {
+    "id": "catorrent",
+    "name": "Catorrent",
+    "urls": [
+      "https://catorrent.net/"
+    ],
+    "type": "public",
+    "description": "Catorrent 是一个俄语公开游戏 BT 站（DataLife Engine），提供 PC 与主机游戏资源，无需登录",
     "favicon": "",
     "isDead": false
   },
@@ -885,6 +908,17 @@
     "description": "打胶",
     "favicon": "",
     "isDead": true
+  },
+  {
+    "id": "damagnet",
+    "name": "DaMagNet",
+    "urls": [
+      "https://damag.net/"
+    ],
+    "type": "public",
+    "description": "DaMagNet is a Public DHT Crawler",
+    "favicon": "",
+    "isDead": false
   },
   {
     "id": "danishbytes",
@@ -1205,6 +1239,17 @@
     "isDead": false
   },
   {
+    "id": "filemood",
+    "name": "FileMood",
+    "urls": [
+      "https://filemood.com/"
+    ],
+    "type": "public",
+    "description": "FileMood is a Public BitTorrent DHT search engine.",
+    "favicon": "",
+    "isDead": false
+  },
+  {
     "id": "filept",
     "name": "Filept",
     "urls": [
@@ -1223,6 +1268,17 @@
     ],
     "type": "private",
     "description": "自由农场",
+    "favicon": "",
+    "isDead": false
+  },
+  {
+    "id": "freejavtorrent",
+    "name": "Free JAV Torrent",
+    "urls": [
+      "uggcf://jjj.serrwnigbeerag.pbz/"
+    ],
+    "type": "public",
+    "description": "Free JAV Torrent is a Public tracker for Asian 3X (JAV)（公开日本成人影片 BT 站）",
     "favicon": "",
     "isDead": false
   },
@@ -2229,6 +2285,39 @@
     "isDead": false
   },
   {
+    "id": "mactorrentsdownload",
+    "name": "Mac Torrents Download",
+    "urls": [
+      "https://www.torrentmac.net/"
+    ],
+    "type": "public",
+    "description": "Mac Torrents Download（torrentmac.net）是公开的 macOS 软件/游戏资源站，种子文件在文章页给出",
+    "favicon": "",
+    "isDead": false
+  },
+  {
+    "id": "magnetdownload",
+    "name": "MagnetDownload",
+    "urls": [
+      "https://www.magnetdownload.com/"
+    ],
+    "type": "public",
+    "description": "MagnetDownload 是基于 DHT 抓取的公开磁力索引站，按文件名检索磁力链接",
+    "favicon": "",
+    "isDead": false
+  },
+  {
+    "id": "magnetz",
+    "name": "Magnetz",
+    "urls": [
+      "https://magnetz.eu/"
+    ],
+    "type": "public",
+    "description": "Magnetz 是一个公开的 BT 元搜索引擎，聚合影视、音乐、游戏、软件、电子书等资源（无需登录）",
+    "favicon": "",
+    "isDead": false
+  },
+  {
     "id": "march",
     "name": "March-Media",
     "urls": [
@@ -2406,6 +2495,17 @@
     ],
     "type": "private",
     "description": "Friendliness, Warmth and Sharing",
+    "favicon": "",
+    "isDead": false
+  },
+  {
+    "id": "mypornclub",
+    "name": "MyPornClub",
+    "urls": [
+      "uggcf://zlcbea.pyho/"
+    ],
+    "type": "public",
+    "description": "MyPornClub is a Public Torrent Tracker for 3X（公开成人向 BT 站）",
     "favicon": "",
     "isDead": false
   },
@@ -2670,6 +2770,17 @@
     "isDead": false
   },
   {
+    "id": "opensharing",
+    "name": "OpenSharing",
+    "urls": [
+      "uggcf://bcrafunevat.bet/"
+    ],
+    "type": "public",
+    "description": "OpenSharing is a RUSSIAN Public Torrent Tracker for 3X",
+    "favicon": "",
+    "isDead": false
+  },
+  {
     "id": "oppaiti",
     "name": "Oppaitime",
     "urls": [
@@ -2745,6 +2856,17 @@
     ],
     "type": "private",
     "description": "PassThePopcorn (PTP) is a Private site for MOVIES",
+    "favicon": "",
+    "isDead": false
+  },
+  {
+    "id": "pctorrent",
+    "name": "PC-torrent",
+    "urls": [
+      "https://pc-torrents.games/"
+    ],
+    "type": "public",
+    "description": "PC-torrent 是一个俄语公开 PC 游戏 BT 站（DataLife Engine），无需登录",
     "favicon": "",
     "isDead": false
   },
@@ -2834,6 +2956,39 @@
     ],
     "type": "private",
     "description": "PornoLab is a Semi-Private Russian site for 3X",
+    "favicon": "",
+    "isDead": false
+  },
+  {
+    "id": "pornotorrent",
+    "name": "PornoTorrent",
+    "urls": [
+      "uggcf://cbeabgbeerag.pbz.oe/"
+    ],
+    "type": "public",
+    "description": "PornoTorrent is a BRAZILIAN Public Torrent Tracker for 3X",
+    "favicon": "",
+    "isDead": false
+  },
+  {
+    "id": "pornrips",
+    "name": "PornRips",
+    "urls": [
+      "uggcf://cbeaevcf.gb/"
+    ],
+    "type": "public",
+    "description": "PornRips is a Public site for 3X（WordPress 架构的公开成人向 BT 站）",
+    "favicon": "",
+    "isDead": false
+  },
+  {
+    "id": "pornxlab",
+    "name": "PornXLab",
+    "urls": [
+      "uggcf://jjj.cbeakyno.pbz/"
+    ],
+    "type": "public",
+    "description": "PornXLab is a Public tracker for 3X（公开成人向 BT 站，前身为 ptorrents，老域名见 legacyUrls）",
     "favicon": "",
     "isDead": false
   },
@@ -3351,6 +3506,17 @@
     ],
     "type": "private",
     "description": "再小众的热爱，也值得被世界看见",
+    "favicon": "",
+    "isDead": false
+  },
+  {
+    "id": "sexypics",
+    "name": "Sexy-Pics",
+    "urls": [
+      "uggcf://jjj.frkl-cvpf.hf/"
+    ],
+    "type": "public",
+    "description": "Sexy-Pics is a Public Magnet Links site for 3X MP4",
     "favicon": "",
     "isDead": false
   },
@@ -3887,6 +4053,28 @@
     "isDead": true
   },
   {
+    "id": "torrentsome",
+    "name": "Torrentsome",
+    "urls": [
+      "https://torrentsome267.com/"
+    ],
+    "type": "public",
+    "description": "Torrentsome（토렌트썸）是韩国公共 BT 索引站，收录韩国影视、综艺、音乐、动画等资源",
+    "favicon": "",
+    "isDead": false
+  },
+  {
+    "id": "torrenttip",
+    "name": "Torrenttip",
+    "urls": [
+      "https://torrenttip247.top/"
+    ],
+    "type": "public",
+    "description": "Torrenttip（토렌트팁）是韩国公共 BT 索引站，收录韩国影视、综艺、音乐等资源",
+    "favicon": "",
+    "isDead": false
+  },
+  {
     "id": "tosky",
     "name": "ToSky",
     "urls": [
@@ -4030,6 +4218,17 @@
     ],
     "type": "private",
     "description": "专注于虚拟歌姬 （非虚拟偶像）相关内容的站点，禁R18",
+    "favicon": "",
+    "isDead": false
+  },
+  {
+    "id": "vsthouse",
+    "name": "VSTHouse",
+    "urls": [
+      "https://vsthouse.ru/"
+    ],
+    "type": "public",
+    "description": "VSTHouse 是俄语公开站，分享音乐制作相关的 VST 插件、音源、采样与软件（uCoz 文件目录）",
     "favicon": "",
     "isDead": false
   },
