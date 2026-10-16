@@ -1033,6 +1033,17 @@
     "isDead": false
   },
   {
+    "id": "dirtybytes",
+    "name": "DirtyBytes",
+    "urls": [
+      "uggcf://qveglolgrf.arg/"
+    ],
+    "type": "private",
+    "description": "Your after dark community.",
+    "favicon": "",
+    "isDead": false
+  },
+  {
     "id": "discfan",
     "name": "DiscFan",
     "urls": [
