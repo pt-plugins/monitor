@@ -950,7 +950,7 @@
     ],
     "type": "private",
     "description": "",
-    "favicon": "https://darkpeers.org/favicon.ico",
+    "favicon": "",
     "isDead": false
   },
   {
@@ -2026,7 +2026,7 @@
     ],
     "type": "private",
     "description": "KaraGarga is a private tracker for non-mainstream movies, music and literature.",
-    "favicon": "https://karagarga.in/favicon.ico",
+    "favicon": "",
     "isDead": false
   },
   {
@@ -2359,7 +2359,7 @@
     ],
     "type": "private",
     "description": "",
-    "favicon": "https://midnightscene.cc/favicon.ico",
+    "favicon": "",
     "isDead": false
   },
   {
@@ -3360,7 +3360,7 @@
     ],
     "type": "private",
     "description": "RetroToon World is a Private Torrent Tracker for ANIMATED MOVIES / TV",
-    "favicon": "https://retrotoon.world/favicon.ico",
+    "favicon": "",
     "isDead": false
   },
   {
