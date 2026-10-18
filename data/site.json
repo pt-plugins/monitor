@@ -820,6 +820,17 @@
     "isDead": true
   },
   {
+    "id": "colapt",
+    "name": "可乐",
+    "urls": [
+      "https://www.colapt.com/"
+    ],
+    "type": "private",
+    "description": "使用 ReelCore 的影视站点；积分表示瓶盖，“发布帖子数”表示核子可乐余额。晋级需达标并消耗两种积分。",
+    "favicon": "https://www.colapt.com/brand/cola/favicon-black-red.ico",
+    "isDead": false
+  },
+  {
     "id": "concen",
     "name": "ConCen",
     "urls": [
@@ -4067,7 +4078,7 @@
     "id": "torrentsome",
     "name": "Torrentsome",
     "urls": [
-      "https://torrentsome267.com/"
+      "https://torrentsome268.com/"
     ],
     "type": "public",
     "description": "Torrentsome（토렌트썸）是韩国公共 BT 索引站，收录韩国影视、综艺、音乐、动画等资源",
@@ -4078,7 +4089,7 @@
     "id": "torrenttip",
     "name": "Torrenttip",
     "urls": [
-      "https://torrenttip247.top/"
+      "https://torrenttip248.top/"
     ],
     "type": "public",
     "description": "Torrenttip（토렌트팁）是韩国公共 BT 索引站，收录韩国影视、综艺、音乐等资源",
@@ -4302,13 +4313,13 @@
     "id": "worldtorrent",
     "name": "World-torrent",
     "urls": [
-      "https://ww1.darkfox.run/",
-      "https://ww1.vidlox.run/",
+      "https://ww1-darkfox.officiel.cc/",
+      "https://ww1-vidlox.officiel.cc/",
       "https://ww1.worldivx.run/",
-      "https://ww1.wikibox.run/",
-      "https://ww1.sharkibox.run/",
+      "https://ww1-wikibox.officiel.cc/",
+      "https://ww1-sharkibox.officiel.cc/",
       "https://ww1.workino.run/",
-      "https://ww1.oxtorrent.run/",
+      "https://ww1-oxtorrent.officiel.cc/",
       "https://ww1.torrent911.run/"
     ],
     "type": "public",
