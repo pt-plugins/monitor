@@ -389,13 +389,26 @@ async function main() {
   await queue.addAll(
     activeSites.map((site) => async () => {
       const lines = [`[TEST] ${site.id} (${site.name}) — ${site.urls.length} URL(s)`];
+      const siteOverride = requestOverrides[site.id] || null;
+
+      // An override may skip the probe outright for sites this runner cannot
+      // reach (regional restrictions, campus-only networks). The run still
+      // records the site — as blocked, which counts as available — rather than
+      // reporting an outage the monitor is unable to observe.
+      if (siteOverride?.skip) {
+        const reason = typeof siteOverride.skip === "string" ? siteOverride.skip : "skip override";
+        lines.push(`  ~ not probed: ${reason} — recorded BLOCKED`);
+        const result = { id: site.id, status: "blocked", latency: null };
+        console.log(lines.join("\n") + "\n");
+        siteResults.push(result);
+        return result;
+      }
 
       let siteLatency = null;
       let siteStatus = "down";
       let sawBlockedUrl = false;
       for (const rawUrl of site.urls) {
         const url = decodeUrl(rawUrl);
-        const siteOverride = requestOverrides[site.id] || null;
         const { logs: attemptLogs, ...urlResult } = await probeUrl(url, MAX_RETRIES, siteOverride);
         lines.push(...attemptLogs);
         if (urlResult.status === "up") {

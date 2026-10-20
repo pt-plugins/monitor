@@ -57,22 +57,34 @@ Site definitions are pulled from [`pt-plugins/PT-depiler`](https://github.com/pt
 - `descriptions` — optional description
 - `isDead` — optional flag to skip monitoring (default: `false`)
 
+### Request Overrides
+
+`data/request-overrides.json` holds per-site adjustments, keyed by site id:
+
+- `method`, `path`, `headers`, `body`, `timeoutMs` — rewrite the probe request, e.g. point it at a login page or a
+  static asset the site serves without a challenge.
+- `skip` — do not probe the site at all. The run records a **BLOCKED** check instead (which counts as available), so
+  the site is not reported down for something this runner cannot observe. Use it for sites a GitHub Actions runner
+  cannot reach: region-locked sites (`newstudio` accepts Russian IPs only — Jackett/Jackett#12602) or campus-only
+  networks (`sjtu`, `rs` are CERNET-only). The value is printed in the monitor log, so put the reason there.
+
 ### Monitoring Logic
 
 1. Skip sites with `isDead: true`
-2. For each site, test each URL with a 15s timeout; stop early if any URL succeeds
-3. If a URL fails, retry up to 3 times (2s delay between attempts)
-4. Site is **UP** if _any_ URL responds; **DOWN** only if _all_ URLs fail
-5. A **Cloudflare WAF** response (403/503 with `cf-ray`) is not an answer from the site, so it is never recorded as
+2. A site whose override sets `skip` is not probed: the run records a **BLOCKED** check (see Request Overrides)
+3. For each site, test each URL with a 15s timeout; stop early if any URL succeeds
+4. If a URL fails, retry up to 3 times (2s delay between attempts)
+5. Site is **UP** if _any_ URL responds; **DOWN** only if _all_ URLs fail
+6. A **Cloudflare WAF** response (403/503 with `cf-ray`) is not an answer from the site, so it is never recorded as
    up on its own: the probe re-checks the URL in Playwright. If the challenge clears and the page behind it loads,
    the check is **UP**; if it does not, the check is **BLOCKED** — the origin was never observed.
    Non-Cloudflare 403s take the same browser fallback but stay **DOWN** when it fails, since the origin did answer.
-6. A **BLOCKED** check is not an outage. It counts as available everywhere a percentage or a day's status is
+7. A **BLOCKED** check is not an outage. It counts as available everywhere a percentage or a day's status is
    computed (so the dashboard reads the site as up), while the per-check history keeps the `blocked` badge so the
    reason a probe was not the site's own answer stays visible. A site is only **DOWN** when every URL failed without
    a WAF answering for it.
-7. Concurrency limited to 5 sites at a time via `p-queue`
-8. Results saved to `data/uptime/YYYY/MM/DD/HH_MM.json`
+8. Concurrency limited to 5 sites at a time via `p-queue`
+9. Results saved to `data/uptime/YYYY/MM/DD/HH_MM.json`
 
 ### Data Cleanup
 

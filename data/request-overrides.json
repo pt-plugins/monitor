@@ -21,6 +21,15 @@
 	},
 	"passthepopcorn": {
 	  "path": "/login.php"
+	},
+	"newstudio": {
+	  "skip": "Russian IPs only — Jackett/Jackett#12602"
+	},
+	"sjtu": {
+	  "skip": "CERNET-only; unreachable from GitHub Actions runners"
+	},
+	"rs": {
+	  "skip": "CERNET-only; unreachable from GitHub Actions runners"
 	}
   }
 }
