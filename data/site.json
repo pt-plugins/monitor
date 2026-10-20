@@ -1539,12 +1539,12 @@
     "id": "hdchina",
     "name": "HDChina",
     "urls": [
-      "https://hdchina.org/"
+      "uggcf://uqjvat.bet/"
     ],
     "type": "private",
     "description": "高清影音人士分享乐园",
     "favicon": "./hdchina.jpg",
-    "isDead": true
+    "isDead": false
   },
   {
     "id": "hdcity",
