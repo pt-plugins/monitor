@@ -1298,7 +1298,7 @@
     },
     {
       "id": "sjtu",
-      "status": "down",
+      "status": "blocked",
       "latency": null
     },
     {
@@ -1493,7 +1493,7 @@
     },
     {
       "id": "newstudio",
-      "status": "down",
+      "status": "blocked",
       "latency": null
     },
     {
@@ -1583,7 +1583,7 @@
     },
     {
       "id": "rs",
-      "status": "down",
+      "status": "blocked",
       "latency": null
     },
     {
