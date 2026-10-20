@@ -252,31 +252,43 @@ function buildHistory(entries: RunSiteEntry[], limit: number): SiteSummary["hist
   return entries.slice(start).map((e) => ({ timestamp: e.timestamp, status: e.status, latency: e.latency }));
 }
 
-// Compute per-day status for last 7 days (oldest first)
-function computeDailyStatus(entries: RunSiteEntry[]): Array<"up" | "down" | "mixed" | "nodata"> {
-  const result: Array<"up" | "down" | "mixed" | "nodata"> = [];
+// Per-day status for the last 7 days (oldest first), plus whether any of those
+// checks was the site's own answer. A blocked check counts as up — the same way
+// it does in the uptime share — but a week built only from blocked checks is
+// not a week the site was seen working, and the card has to be able to say so.
+function computeWeekStatus(entries: RunSiteEntry[]): {
+  dailyStatus: SiteSummary["dailyStatus"];
+  hasRealUp: boolean;
+} {
+  const result: SiteSummary["dailyStatus"] = [];
   // Bucket this site's entries by UTC date once, instead of rescanning the
-  // whole run list for each of the 7 days. A blocked check counts as up, the
-  // same way it does in the uptime share.
-  const byDay = new Map<string, { up: number; down: number }>();
+  // whole run list for each of the 7 days.
+  const byDay = new Map<string, { up: number; blocked: number; down: number }>();
   for (const e of entries) {
     const ds = e.timestamp.slice(0, 10);
     let b = byDay.get(ds);
-    if (!b) { b = { up: 0, down: 0 }; byDay.set(ds, b); }
-    if (e.status === "up" || e.status === "blocked") b.up++; else b.down++;
+    if (!b) { b = { up: 0, blocked: 0, down: 0 }; byDay.set(ds, b); }
+    if (e.status === "up") b.up++;
+    else if (e.status === "blocked") b.blocked++;
+    else b.down++;
   }
+  let hasRealUp = false;
   for (let d = 6; d >= 0; d--) {
     const date = new Date();
     date.setDate(date.getDate() - d);
     const ds = date.toISOString().slice(0, 10);
     const b = byDay.get(ds);
-    const up = b?.up ?? 0, down = b?.down ?? 0;
-    if (up === 0 && down === 0) result.push("nodata");
+    const up = b?.up ?? 0, blocked = b?.blocked ?? 0, down = b?.down ?? 0;
+    const answered = up + blocked;
+    if (answered === 0 && down === 0) result.push("nodata");
     else if (down === 0) result.push("up");
-    else if (up === 0) result.push("down");
+    else if (answered === 0) result.push("down");
     else result.push("mixed");
+    // Only days inside the window count; a real up older than that says
+    // nothing about the strip the card draws.
+    if (up > 0) hasRealUp = true;
   }
-  return result;
+  return { dailyStatus: result, hasRealUp };
 }
 
 export function getLatestTimestamp(): string | null {
@@ -455,7 +467,12 @@ export function computeSiteSummaries(): SiteSummary[] {
     const u7d = computeUptime(e7d);
     const u30d = computeUptime(recentEntries(site.id, 30 * 24));
     const history = buildHistory(entries, HISTORY_LIMIT);
-    const dailyStatus = computeDailyStatus(entries);
+    const { dailyStatus, hasRealUp } = computeWeekStatus(entries);
+    // The card's green left edge is a claim about the week, so it is only made
+    // when every drawn day is up and at least one of those checks was the
+    // site's own answer. Unmeasured days fail the first part: a week with no
+    // checks is not a week the site was seen working either.
+    const weekHealthy = hasRealUp && dailyStatus.every((s) => s === "up");
 
     let currentStatus: SiteSummary["currentStatus"];
     let currentLatency: number | null = null;
@@ -480,6 +497,7 @@ export function computeSiteSummaries(): SiteSummary[] {
       uptime24h: u24.uptime, uptime7d: u7d.uptime, uptime30d: u30d.uptime,
       latency7d: computeLatencyStats(e7d),
       dailyStatus,
+      weekHealthy,
       history,
       // A site added since the last collection has no entry of its own, which
       // reads as "not checked yet" rather than as a failure.

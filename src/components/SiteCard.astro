@@ -23,7 +23,7 @@ function uptimeClass(pct: number): string {
 }
 ---
 
-<a href={`/monitor/site/${site.id}`} class="site-card" data-status={site.currentStatus} data-filter={`${site.id} ${site.name} ${site.urls.map(decodeUrl).join(" ")} ${site.description || ""}`.toLowerCase()}>
+<a href={`/monitor/site/${site.id}`} class="site-card" data-status={site.currentStatus} data-week={site.weekHealthy ? "healthy" : "warn"} data-filter={`${site.id} ${site.name} ${site.urls.map(decodeUrl).join(" ")} ${site.description || ""}`.toLowerCase()}>
   {/* The type labels the whole card, so it rides the corner as a ribbon rather
       than sharing the header row with the status it would compete with. A dead
       site keeps the label — it is still what the site was — but takes the down
@@ -110,6 +110,18 @@ function uptimeClass(pct: number): string {
   .site-card[data-status="dead"] {
     border-left-color: var(--color-dead);
     opacity: 0.7;
+  }
+
+  /* The strip under the card is the week's record, so it, not the badge, has
+     the last word on the edge: green is only claimed by a week whose every day
+     is up and whose checks include the site's own answer. A mixed, down or
+     unmeasured day — or a week that is green only because every probe was
+     blocked by a WAF — turns the edge amber. Down keeps its red: that is the
+     stronger statement about the same week, and amber would weaken it. Only
+     the up rule is overridden, hence the data-status qualifier rather than a
+     bare data-week selector. */
+  .site-card[data-status="up"][data-week="warn"] {
+    border-left-color: var(--color-warn);
   }
 
   .site-card.hidden {
