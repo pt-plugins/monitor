@@ -113,13 +113,14 @@ function uptimeClass(pct: number): string {
   }
 
   /* The strip under the card is the week's record, so it, not the badge, has
-     the last word on the edge: green is only claimed by a week whose every day
-     is up and whose checks include the site's own answer. A mixed, down or
-     unmeasured day — or a week that is green only because every probe was
-     blocked by a WAF — turns the edge amber. Down keeps its red: that is the
-     stronger statement about the same week, and amber would weaken it. Only
-     the up rule is overridden, hence the data-status qualifier rather than a
-     bare data-week selector. */
+     the last word on the edge: green is only claimed by a week whose every
+     measured day is up and whose checks include the site's own answer. A mixed
+     or down day — or a week that is green only because every probe was blocked
+     by a WAF — turns the edge amber; an unmeasured day does not, because
+     silence is not an outage. Down keeps its red: that is the stronger
+     statement about the same week, and amber would weaken it. Only the up rule
+     is overridden, hence the data-status qualifier rather than a bare data-week
+     selector. */
   .site-card[data-status="up"][data-week="warn"] {
     border-left-color: var(--color-warn);
   }

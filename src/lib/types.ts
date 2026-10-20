@@ -167,9 +167,10 @@ export interface SiteSummary {
   latency7d: LatencyStats;
   dailyStatus: Array<"up" | "down" | "mixed" | "nodata">; // last 7 days, oldest first
   /**
-   * Whether those 7 days are a genuinely clean run: every day up, and at least
-   * one check in the window the site's own answer rather than a WAF challenge.
-   * The strip alone cannot say this — a blocked check is counted as up, so an
+   * Whether those 7 days are a genuinely clean run: every measured day up, and
+   * at least one check in the window the site's own answer rather than a WAF
+   * challenge. Unmeasured days are skipped, not counted against the week. The
+   * strip alone cannot say this — a blocked check is counted as up, so an
    * all-green row may only mean the probe was turned away every time.
    */
   weekHealthy: boolean;

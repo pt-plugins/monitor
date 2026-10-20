@@ -469,10 +469,12 @@ export function computeSiteSummaries(): SiteSummary[] {
     const history = buildHistory(entries, HISTORY_LIMIT);
     const { dailyStatus, hasRealUp } = computeWeekStatus(entries);
     // The card's green left edge is a claim about the week, so it is only made
-    // when every drawn day is up and at least one of those checks was the
-    // site's own answer. Unmeasured days fail the first part: a week with no
-    // checks is not a week the site was seen working either.
-    const weekHealthy = hasRealUp && dailyStatus.every((s) => s === "up");
+    // when every measured day is up and at least one of those checks was the
+    // site's own answer. An unmeasured day — the strip reaching back past the
+    // site's own record, or a run the site was skipped in — is skipped rather
+    // than counted against it: silence is not an outage. A week with no real up
+    // at all still fails, because then nothing was seen working.
+    const weekHealthy = hasRealUp && dailyStatus.every((s) => s === "up" || s === "nodata");
 
     let currentStatus: SiteSummary["currentStatus"];
     let currentLatency: number | null = null;
