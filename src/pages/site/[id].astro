@@ -205,6 +205,7 @@ const certEmptyNote = isDead
         </a>
       </div>
     </div>
+    {site.description && <p class="detail-description">{site.description}</p>}
   </div>
 
   <!-- Uptime Summary -->
@@ -360,6 +361,16 @@ const certEmptyNote = isDead
   }
 
   .detail-title h1 { margin-bottom: 0; }
+
+  /* The description sits between the name row and the Uptime section: muted so
+     it reads as context for the numbers below rather than a heading of its
+     own. */
+  .detail-description {
+    margin: 0.5rem 0 0;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    max-width: 80ch;
+  }
 
   /* The icon and the name are two inline boxes in the same heading, and Astro
      trims the whitespace between them, so the gap has to come from the image.
