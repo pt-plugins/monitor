@@ -124,7 +124,7 @@ function pad2(n: number): string {
 
 export interface HistoryEntry {
   timestamp: string;
-  status: "up" | "down";
+  status: "up" | "down" | "blocked";
   latency: number | null;
 }
 
@@ -161,7 +161,8 @@ export function parseJsonlForSite(text: string, siteId: string): HistoryEntry[] 
     const result = (run.sites as RawSiteResult[]).find((s) => s && s.id === siteId);
     if (!result) continue;
 
-    const status = result.status === "up" ? "up" : result.status === "down" ? "down" : null;
+    const status =
+      result.status === "up" ? "up" : result.status === "down" ? "down" : result.status === "blocked" ? "blocked" : null;
     if (!status) continue;
 
     const latency =

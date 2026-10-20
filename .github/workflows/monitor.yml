@@ -31,6 +31,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      # The monitor re-checks an answer it could not attribute to the site —
+      # a Cloudflare WAF challenge, or a non-Cloudflare 403 — in a real browser.
+      # Without this browser a WAF-blocked check is recorded BLOCKED (which
+      # counts as up) instead of ever being seen as a real page, so the install
+      # is part of the monitoring semantics, not a nicety.
       - name: Install Playwright browser (Chromium)
         run: npx playwright install chromium --with-deps
 

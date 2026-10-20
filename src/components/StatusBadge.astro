@@ -1,7 +1,7 @@
 ---
 // site/src/components/StatusBadge.astro
 export interface Props {
-  status: "up" | "down" | "dead";
+  status: "up" | "down" | "blocked" | "dead";
   size?: "sm" | "md";
 }
 
@@ -10,6 +10,7 @@ const { status, size = "md" } = Astro.props;
 const labels: Record<string, string> = {
   up: "UP",
   down: "DOWN",
+  blocked: "BLOCKED",
   dead: "DEAD",
 };
 ---
@@ -69,5 +70,14 @@ const labels: Record<string, string> = {
   }
   .badge--dead .badge-dot {
     background: var(--color-dead);
+  }
+
+  /* A WAF answered for the site: not an outage, not an observed success. */
+  .badge--blocked {
+    background: color-mix(in srgb, var(--color-text-secondary) 15%, transparent);
+    color: var(--color-text-secondary);
+  }
+  .badge--blocked .badge-dot {
+    background: var(--color-text-secondary);
   }
 </style>

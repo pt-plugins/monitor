@@ -205,7 +205,10 @@ function computeUptime(entries: RunSiteEntry[]): { uptime: number; total: number
   let up = 0, total = 0;
   for (const e of entries) {
     total++;
-    if (e.status === "up") up++;
+    // A blocked check is a check the site's WAF answered instead of the site;
+    // the dashboard counts it as available, so a challenge on the monitor's own
+    // probe does not read as an outage.
+    if (e.status === "up" || e.status === "blocked") up++;
   }
   return { uptime: total > 0 ? Math.round((up / total) * 10000) / 100 : 100, total, up };
 }
@@ -253,13 +256,14 @@ function buildHistory(entries: RunSiteEntry[], limit: number): SiteSummary["hist
 function computeDailyStatus(entries: RunSiteEntry[]): Array<"up" | "down" | "mixed" | "nodata"> {
   const result: Array<"up" | "down" | "mixed" | "nodata"> = [];
   // Bucket this site's entries by UTC date once, instead of rescanning the
-  // whole run list for each of the 7 days.
+  // whole run list for each of the 7 days. A blocked check counts as up, the
+  // same way it does in the uptime share.
   const byDay = new Map<string, { up: number; down: number }>();
   for (const e of entries) {
     const ds = e.timestamp.slice(0, 10);
     let b = byDay.get(ds);
     if (!b) { b = { up: 0, down: 0 }; byDay.set(ds, b); }
-    if (e.status === "up") b.up++; else b.down++;
+    if (e.status === "up" || e.status === "blocked") b.up++; else b.down++;
   }
   for (let d = 6; d >= 0; d--) {
     const date = new Date();
@@ -345,7 +349,7 @@ export function computeSiteDailyUptime(siteId: string): SiteDailyUptime[] {
     const day = entry.timestamp.slice(0, 10);
     const bucket = byDay.get(day) ?? { up: 0, checks: 0 };
     bucket.checks++;
-    if (entry.status === "up") bucket.up++;
+    if (entry.status === "up" || entry.status === "blocked") bucket.up++;
     byDay.set(day, bucket);
   }
 

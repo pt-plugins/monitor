@@ -12,7 +12,13 @@ export interface SiteDefinition {
 
 export interface SiteResult {
   id: string;
-  status: "up" | "down";
+  /**
+   * `up` and `down` are the site's own answers. `blocked` is the third case: a
+   * WAF answered for the site and the probe never saw the page behind it, so
+   * the check is neither an outage nor an observed success. It is counted as
+   * up wherever an availability figure is computed.
+   */
+  status: "up" | "down" | "blocked";
   latency: number | null;
 }
 
@@ -162,7 +168,7 @@ export interface SiteSummary {
   dailyStatus: Array<"up" | "down" | "mixed" | "nodata">; // last 7 days, oldest first
   history: Array<{
     timestamp: string;
-    status: "up" | "down";
+    status: "up" | "down" | "blocked";
     latency: number | null;
   }>;
   /** Null when the certificate snapshot has never been collected. */

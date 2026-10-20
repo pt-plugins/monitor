@@ -63,8 +63,16 @@ Site definitions are pulled from [`pt-plugins/PT-depiler`](https://github.com/pt
 2. For each site, test each URL with a 15s timeout; stop early if any URL succeeds
 3. If a URL fails, retry up to 3 times (2s delay between attempts)
 4. Site is **UP** if _any_ URL responds; **DOWN** only if _all_ URLs fail
-5. Concurrency limited to 5 sites at a time via `p-queue`
-6. Results saved to `data/uptime/YYYY/MM/DD/HH_MM.json`
+5. A **Cloudflare WAF** response (403/503 with `cf-ray`) is not an answer from the site, so it is never recorded as
+   up on its own: the probe re-checks the URL in Playwright. If the challenge clears and the page behind it loads,
+   the check is **UP**; if it does not, the check is **BLOCKED** — the origin was never observed.
+   Non-Cloudflare 403s take the same browser fallback but stay **DOWN** when it fails, since the origin did answer.
+6. A **BLOCKED** check is not an outage. It counts as available everywhere a percentage or a day's status is
+   computed (so the dashboard reads the site as up), while the per-check history keeps the `blocked` badge so the
+   reason a probe was not the site's own answer stays visible. A site is only **DOWN** when every URL failed without
+   a WAF answering for it.
+7. Concurrency limited to 5 sites at a time via `p-queue`
+8. Results saved to `data/uptime/YYYY/MM/DD/HH_MM.json`
 
 ### Data Cleanup
 

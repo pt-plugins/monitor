@@ -6,7 +6,7 @@ export interface Props {
    * The site's checks, oldest first. Both fields matter: the curve is drawn
    * from the checks that answered, the marks from the ones that did not.
    */
-  data: Array<{ timestamp: string; status: "up" | "down"; latency: number | null }>;
+  data: Array<{ timestamp: string; status: "up" | "down" | "blocked"; latency: number | null }>;
   height?: number;
 }
 
