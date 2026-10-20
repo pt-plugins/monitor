@@ -53,14 +53,15 @@ const { title, showFilter = true } = Astro.props;
         <p>
           <span class="friend-label">Links: </span>
           <a href="https://savept.icu/" target="_blank" rel="noopener">PT监护室</a>
-          &middot;
+          <span class="footer-sep" aria-hidden="true">&middot;</span>
           <a href="https://hdvinnie.github.io/TrackerHub/" target="_blank" rel="noopener">TrackerHub</a>
-          &middot;
+          <span class="footer-sep" aria-hidden="true">&middot;</span>
           <a href="https://github.com/pt-plugins/monitor" target="_blank" rel="noopener">pt-plugins/monitor</a>
         </p>
         <p>
           Powered by <a href="https://github.com/pt-plugins/PT-depiler" target="_blank" rel="noopener">PT-depiler</a> &middot;
-          Auto-updated every 15 minutes
+          Checks requested every 15 minutes &mdash;{" "}
+          <a href="https://github.com/pt-plugins/monitor#scheduled-runs-are-best-effort" target="_blank" rel="noopener">GitHub Action runs them best-effort</a>
         </p>
       </div>
     </footer>
@@ -293,6 +294,12 @@ const { title, showFilter = true } = Astro.props;
   .site-footer a {
     color: var(--color-link);
     text-decoration: none;
+  }
+
+  /* Astro drops the whitespace text nodes between the links, so the dot needs
+     its own spacing rather than relying on a literal space in the template. */
+  .footer-sep {
+    margin: 0 0.45em;
   }
 
   h1 {
