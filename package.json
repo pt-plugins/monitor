@@ -6,7 +6,7 @@
   "type": "module",
   "packageManager": "pnpm@10.14.0",
   "engines": {
-    "node": ">=22.12.0"
+    "node": ">=22.22.0"
   },
   "scripts": {
     "build": "astro build",
@@ -18,11 +18,16 @@
     "cleanup": "node scripts/cleanup.mjs"
   },
   "dependencies": {
-    "astro": "^7.3.5",
+    "astro": "^7.4.1",
     "p-queue": "^9.3.0",
     "playwright": "^1.52.0"
   },
   "devDependencies": {
     "@types/node": "^22.0.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "source-map-js": "^1.2.2"
+    }
   }
 }
