@@ -91,7 +91,7 @@
     "type": "private",
     "description": "The Ultimate File Sharing Experience",
     "favicon": "./_default_nexusphp.png",
-    "isDead": false
+    "isDead": true
   },
   {
     "id": "52pt",
@@ -1085,6 +1085,17 @@
     "type": "private",
     "description": "龍之傳人皆兄弟",
     "favicon": "",
+    "isDead": false
+  },
+  {
+    "id": "dreadvault",
+    "name": "DreadVault",
+    "urls": [
+      "https://dreadvault.org/"
+    ],
+    "type": "private",
+    "description": "DreadVault 是一个专注恐怖题材的私有 PT 站，资源涵盖恐怖电影、剧集、电子书与原声带",
+    "favicon": "./_default_unit3d.ico",
     "isDead": false
   },
   {
@@ -4484,7 +4495,7 @@
     "type": "private",
     "description": "YingUSKG PT站点",
     "favicon": "./_default_nexusphp.png",
-    "isDead": false
+    "isDead": true
   },
   {
     "id": "yts",
