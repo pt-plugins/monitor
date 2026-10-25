@@ -648,7 +648,18 @@ async function main() {
     })
   );
 
-  const output = { timestamp, sites: results };
+  // Written in id order, not completion order. Lookups finish in whatever order
+  // the network answers them, so a snapshot keyed as tasks settle reorders
+  // itself on every run — a whole-file diff between two runs that changed
+  // nothing. Site ids are plain ASCII, so the default code-unit sort is stable
+  // and locale-independent; a locale-aware comparison could differ between
+  // runners. Nothing depends on the order — entries are looked up by id, never
+  // walked — but the committed file is easier to trust when it only moves for a
+  // real change.
+  const orderedSites = {};
+  for (const id of Object.keys(results).sort()) orderedSites[id] = results[id];
+
+  const output = { timestamp, sites: orderedSites };
   writeFileSync(OUTPUT_FILE, JSON.stringify(output, null, 2), "utf-8");
 
   const checked = Object.values(results);

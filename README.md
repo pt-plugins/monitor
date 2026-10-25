@@ -116,6 +116,10 @@ index or clean up, and the site detail page reads that one file.
   holds only the dates, the issuer or registrar, and any error: not the host whose certificate was read, nor the
   registrable domain that was looked up. The URLs are used for the lookups, never written down. The command's own log
   still names the host it queried, which is what makes a failure diagnosable.
+- **The snapshot is written in site-id order**, not in the order the lookups finish. The queue settles in whatever
+  order the network answers, so a completion-ordered file would reorder itself on every run and show a whole-file diff
+  even when no date changed. Site ids are plain ASCII, so the default code-unit sort is stable and locale-independent —
+  the order a reader should expect of a file that is only committed to keep its diffs quiet.
 - **Only the absolute dates are stored.** The days remaining are computed at *build* time, so a snapshot a few days
   old still renders a current countdown, refreshed with the rest of the site every two hours.
 - **A run measures only what it has to.** A date the previous snapshot already placed more than **30 days** out is
