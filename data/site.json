@@ -1594,9 +1594,9 @@
   },
   {
     "id": "hddolby",
-    "name": "HD Dolby",
+    "name": "UHDDolby",
     "urls": [
-      "https://www.hddolby.com/"
+      "https://www.uhddolby.com/"
     ],
     "type": "private",
     "description": "高清杜比",
@@ -3147,7 +3147,7 @@
     "type": "private",
     "description": "",
     "favicon": "",
-    "isDead": false
+    "isDead": true
   },
   {
     "id": "ptlgs",
