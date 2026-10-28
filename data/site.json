@@ -1953,6 +1953,17 @@
     "isDead": false
   },
   {
+    "id": "infinityhd",
+    "name": "InfinityHD",
+    "urls": [
+      "https://infinityhd.net/"
+    ],
+    "type": "private",
+    "description": "InfinityHD 是一个 UNIT3D 架构的影视站（电影 / 剧集 / 动画 / 音乐），搜索走官方 JSON API。",
+    "favicon": "",
+    "isDead": false
+  },
+  {
     "id": "internetarchive",
     "name": "Internet Archive",
     "urls": [
@@ -2900,6 +2911,17 @@
     ],
     "type": "public",
     "description": "PC-torrent 是一个俄语公开 PC 游戏 BT 站（DataLife Engine），无需登录",
+    "favicon": "",
+    "isDead": false
+  },
+  {
+    "id": "peergarden",
+    "name": "PeerGarden",
+    "urls": [
+      "https://peergarden.org/"
+    ],
+    "type": "private",
+    "description": "PeerGarden 是 traxary 平台（UNIT3D fork）的私有 PT 站（适配待验证）",
     "favicon": "",
     "isDead": false
   },
@@ -4141,6 +4163,17 @@
     "isDead": false
   },
   {
+    "id": "traxary",
+    "name": "Traxary",
+    "urls": [
+      "https://beta.traxary.com/"
+    ],
+    "type": "private",
+    "description": "Traxary 是一个 UNIT3D fork（traxary 平台）的私有 PT 站，目前为 Beta 阶段（适配待验证）",
+    "favicon": "",
+    "isDead": false
+  },
+  {
     "id": "tu88",
     "name": "TU88",
     "urls": [
@@ -4229,6 +4262,17 @@
     ],
     "type": "private",
     "description": "专注韩语语种内容，包含韩影、韩剧、韩综、动漫以及纪录片",
+    "favicon": "",
+    "isDead": false
+  },
+  {
+    "id": "unwalled",
+    "name": "Unwalled",
+    "urls": [
+      "https://unwalled.cc/"
+    ],
+    "type": "private",
+    "description": "Unwalled 是一个 UNIT3D 架构的私有 PT 站（适配待验证：搜索为通用 Unit3D 列表页规则）",
     "favicon": "",
     "isDead": false
   },
@@ -4539,6 +4583,17 @@
     ],
     "type": "public",
     "description": "Zamunda LIFE is a BULGARIAN Public Torrent Archive for MOVIES / TV / GENERAL",
+    "favicon": "",
+    "isDead": false
+  },
+  {
+    "id": "zenith",
+    "name": "Zenith",
+    "urls": [
+      "https://znth.cx/"
+    ],
+    "type": "private",
+    "description": "Zenith 是一个 UNIT3D 架构的 Ratioless 影视站（影视 / 音乐 / 图书 / 游戏 / 软件等），搜索走官方 JSON API。",
     "favicon": "",
     "isDead": false
   },
