@@ -1170,7 +1170,7 @@
     "id": "emuwarez",
     "name": "eMuwarez",
     "urls": [
-      "https://emuwarez.com/"
+      "https://emu-warez.com/"
     ],
     "type": "private",
     "description": "eMuwarez（eMz）是一个西班牙私有站点，提供电影/剧集/音乐/游戏/软件资源。支持 Unit3D 官方 JSON API（api/torrents/filter）。",
@@ -4111,7 +4111,7 @@
     "id": "torrentsome",
     "name": "Torrentsome",
     "urls": [
-      "https://torrentsome269.com/"
+      "https://torrentsome270.com/"
     ],
     "type": "public",
     "description": "Torrentsome（토렌트썸）是韩国公共 BT 索引站，收录韩国影视、综艺、音乐、动画等资源",
@@ -4122,7 +4122,7 @@
     "id": "torrenttip",
     "name": "Torrenttip",
     "urls": [
-      "https://torrenttip249.top/"
+      "https://torrenttip250.top/"
     ],
     "type": "public",
     "description": "Torrenttip（토렌트팁）是韩国公共 BT 索引站，收录韩国影视、综艺、音乐等资源",
@@ -4368,14 +4368,14 @@
     "id": "worldtorrent",
     "name": "World-torrent",
     "urls": [
-      "https://ww2-darkfox.officiel.cc/",
-      "https://ww2-vidlox.officiel.cc/",
-      "https://ww2-worldivx.officiel.cc/",
-      "https://ww2-wikibox.officiel.cc/",
-      "https://ww2-sharkibox.officiel.cc/",
-      "https://ww2-workino.officiel.cc/",
-      "https://ww1-oxtorrent.officiel.cc/",
-      "https://ww2-torrent911.officiel.cc/"
+      "https://ww3-darkfox.officiel.cc/",
+      "https://ww3-vidlox.officiel.cc/",
+      "https://ww3-worldivx.officiel.cc/",
+      "https://ww3-wikibox.officiel.cc/",
+      "https://ww3-sharkibox.officiel.cc/",
+      "https://ww3-workino.officiel.cc/",
+      "https://ww3-oxtorrent.officiel.cc/",
+      "https://ww3-torrent911.officiel.cc/"
     ],
     "type": "public",
     "description": "World-torrent is a FRENCH Public site for MOVIES / TV / GENERAL（法语公开站，同一套代码的多个镜像域名）",
