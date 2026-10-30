@@ -2459,7 +2459,7 @@
     "type": "private",
     "description": "Moment 是摄影爱好者的净土。只有影像与心灵的对话，故本站禁止发布影视资源，望谅解",
     "favicon": "",
-    "isDead": false
+    "isDead": true
   },
   {
     "id": "monikadesign",
@@ -3230,6 +3230,7 @@
     "id": "ptskit",
     "name": "PTSkit",
     "urls": [
+      "uggcf://jjj.cgfxvg.pbz/",
       "uggcf://jjj.cgfxvg.bet/"
     ],
     "type": "private",
@@ -3393,6 +3394,17 @@
     ],
     "type": "private",
     "description": "RetroFlix is a Private site for Classic Movies / TV / General Releases",
+    "favicon": "",
+    "isDead": false
+  },
+  {
+    "id": "retromoviesclub",
+    "name": "RetroMoviesClub",
+    "urls": [
+      "https://retro-movies.club/"
+    ],
+    "type": "private",
+    "description": "RetroMoviesClub（RMC）是一个专注 2000 年及以前经典电影的私有 PT 站，仅接受 2000 年前上映的电影资源",
     "favicon": "",
     "isDead": false
   },
