@@ -16,10 +16,75 @@ jobs:
   monitor:
     runs-on: ubuntu-latest
     # Guard the shared "uptime-pipeline" concurrency group: a stuck step would
-    # otherwise queue every following scheduled run behind it for hours.
-    timeout-minutes: 20
+    # otherwise queue every following scheduled run behind it for hours. The
+    # cold cfsolve build adds up to ~8 minutes, hence 30 rather than 20.
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v7
+
+      # Cache first: on the steady path nothing else runs. The key is the
+      # upstream HEAD commit, resolved with git ls-remote (one tiny request
+      # instead of a clone), so a cache hit never pays for a checkout.
+      - name: Resolve cfsolve HEAD
+        id: head
+        run: |
+          sha=$(git ls-remote https://github.com/chris124567/cfsolve.git HEAD 2>/dev/null | cut -f1) || true
+          echo "sha=${sha:-unknown}" >> "$GITHUB_OUTPUT"
+
+      # Only the built artifact and its fingerprint profile are cached (~20 MB);
+      # the full target/ is 1.5-2.5 GB and would cost more to restore than it
+      # saves on a job that runs every 15 minutes. The profile has to travel
+      # with the binary: a cache hit never checks cfsolve out, yet the CLI
+      # cannot solve without profiles/safari-26-ios.json next to its answers.
+      - name: Restore cfsolve binary + profile
+        id: cfsolve
+        uses: actions/cache@v6
+        with:
+          path: |
+            cfsolve/target/release/challenge
+            cfsolve/profiles
+          key: cfsolve-${{ runner.os }}-${{ steps.head.outputs.sha }}
+
+      # Checkout runs only on a miss. cfsolve rides on actions/checkout's
+      # default branch — no submodule, no pinned SHA — and a third-party repo
+      # must not be able to take monitoring down with it, so a failed checkout
+      # just means no solver this run.
+      - name: Checkout cfsolve (cache miss only)
+        if: steps.cfsolve.outputs.cache-hit != 'true'
+        uses: actions/checkout@v7
+        continue-on-error: true
+        with:
+          repository: chris124567/cfsolve
+          path: cfsolve
+
+      # The solve has to happen in this job: cf_clearance is bound to the egress
+      # IP and user agent, and a second job would run behind another address.
+      # A failed build must not take monitoring down with it either; the export
+      # below then leaves CFSOLVE_BIN unset and the monitor keeps its
+      # fetch -> Playwright path.
+      - name: Build cfsolve (cache miss only)
+        if: steps.cfsolve.outputs.cache-hit != 'true' && hashFiles('cfsolve/Cargo.toml') != ''
+        continue-on-error: true
+        timeout-minutes: 12
+        working-directory: cfsolve
+        # rustup only reads cfsolve/rust-toolchain.toml when the working
+        # directory is inside cfsolve/, which is what pins Rust 1.98.0.
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends cmake clang libclang-dev
+          cargo build --release --bin challenge
+
+      # Both paths are exported only when the artifacts actually exist, so a
+      # failed build or a broken checkout leaves the monitor on its
+      # fetch -> Playwright path instead of pointing it at a missing binary.
+      - name: Export cfsolve paths
+        run: |
+          if [ -x "$PWD/cfsolve/target/release/challenge" ]; then
+            echo "CFSOLVE_BIN=$PWD/cfsolve/target/release/challenge" >> "$GITHUB_ENV"
+          fi
+          if [ -f "$PWD/cfsolve/profiles/safari-26-ios.json" ]; then
+            echo "CFSOLVE_PROFILE=$PWD/cfsolve/profiles/safari-26-ios.json" >> "$GITHUB_ENV"
+          fi
 
       - uses: pnpm/action-setup@v6
 

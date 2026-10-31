@@ -1,7 +1,9 @@
 // scripts/monitor.mjs
 // Reads data/site.json, tests each site's URLs, writes results to data/uptime/YYYY/MM/DD/HH_MM.json
 
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { spawn } from "node:child_process";
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { tmpdir } from "node:os";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import PQueue from "p-queue";
@@ -79,6 +81,166 @@ const CHALLENGE_GRACE_MS = 5_000;
 
 const BROWSER_USER_AGENT =
   "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36";
+
+// ---------------------------------------------------------------------------
+// cfsolve — Cloudflare clearance solver (https://github.com/chris124567/cfsolve)
+//
+// The workflow builds the CLI on a cache miss and exports CFSOLVE_BIN plus the
+// fingerprint profile path; when either is missing the probe keeps its
+// Playwright fallback and nothing here runs. cfsolve answers Cloudflare's
+// challenge from request side only, so it is both much faster than a browser
+// and limited to exactly that job: a 403 block page (error 1020) is not a
+// challenge and no solver can talk its way past it.
+// ---------------------------------------------------------------------------
+const CFSOLVE_BIN = process.env.CFSOLVE_BIN || "";
+const CFSOLVE_PROFILE = process.env.CFSOLVE_PROFILE || "";
+// A solve is normally a few seconds; the ceiling only has to be generous
+// enough not to cut a slow one short, since the fallback is always available.
+const CFSOLVE_TIMEOUT_MS = 45_000;
+
+const CFSOLVE_INSTALLED =
+  CFSOLVE_BIN !== "" &&
+  CFSOLVE_PROFILE !== "" &&
+  existsSync(CFSOLVE_BIN) &&
+  existsSync(CFSOLVE_PROFILE);
+
+// The profile carries the browser identity the clearance is issued against.
+// Only the User-Agent is read here, but it is the one field that matters: a
+// cf_clearance cookie is bound to the address *and* the UA that solved the
+// challenge, so the re-read below has to send the same one.
+let cfsolveProfileCache;
+function cfsolveProfile() {
+  if (cfsolveProfileCache !== undefined) return cfsolveProfileCache;
+  cfsolveProfileCache = null;
+  try {
+    const raw = JSON.parse(readFileSync(CFSOLVE_PROFILE, "utf-8"));
+    const headers = raw?.transport?.headers ?? {};
+    const entry = Object.entries(headers).find(([name]) => name.toLowerCase() === "user-agent");
+    const userAgent = typeof entry?.[1] === "string" ? entry[1].trim() : "";
+    if (!userAgent) {
+      console.warn(`[WARN] ${CFSOLVE_PROFILE} has no transport User-Agent — cfsolve disabled`);
+      return cfsolveProfileCache;
+    }
+    cfsolveProfileCache = { userAgent };
+  } catch (err) {
+    console.warn(`[WARN] Cannot use cfsolve profile ${CFSOLVE_PROFILE}: ${err.message} — cfsolve disabled`);
+  }
+  return cfsolveProfileCache;
+}
+
+function cfsolveEnabled() {
+  return CFSOLVE_INSTALLED && cfsolveProfile() !== null;
+}
+
+// Last non-empty line of stderr, which is where cfsolve puts its progress and
+// its error: the CLI exits non-zero with an anyhow message rather than a code.
+function lastLine(text) {
+  const lines = String(text)
+    .split("\n")
+    .map((line) => line.trim())
+    .filter(Boolean);
+  return lines.length > 0 ? lines[lines.length - 1] : "";
+}
+
+function runCfsolve(args, timeoutMs) {
+  return new Promise((resolvePromise) => {
+    const child = spawn(CFSOLVE_BIN, args, { stdio: ["ignore", "pipe", "pipe"] });
+    let stdout = "";
+    let stderr = "";
+    child.stdout.setEncoding("utf-8");
+    child.stderr.setEncoding("utf-8");
+    child.stdout.on("data", (chunk) => {
+      stdout += chunk;
+    });
+    child.stderr.on("data", (chunk) => {
+      stderr += chunk;
+    });
+    const timer = setTimeout(() => child.kill("SIGKILL"), timeoutMs);
+    child.on("error", (err) => {
+      clearTimeout(timer);
+      resolvePromise({ code: -1, stdout, stderr: `${stderr}\n${err.message}` });
+    });
+    child.on("close", (code) => {
+      clearTimeout(timer);
+      resolvePromise({ code, stdout, stderr });
+    });
+  });
+}
+
+// Re-read a page once cfsolve holds a clearance for it. The cookie alone is not
+// enough to call the site up: Cloudflare can still challenge the request (the
+// TLS fingerprint here is Node's, not the profile's), so the response is judged
+// exactly like a normal probe — a challenge page is still "not observed".
+async function fetchWithClearance(url, userAgent, clearance) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
+  try {
+    return await fetch(url, {
+      redirect: "follow",
+      signal: controller.signal,
+      headers: {
+        "User-Agent": userAgent,
+        Cookie: `cf_clearance=${clearance}`,
+        Accept: "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "Accept-Language": "en-US,en;q=0.9",
+        "Sec-Fetch-Dest": "document",
+        "Sec-Fetch-Mode": "navigate",
+        "Sec-Fetch-Site": "none",
+        "Upgrade-Insecure-Requests": "1",
+      },
+    });
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+// Solve Cloudflare's challenge for one URL, then load the page behind it.
+// `up` means the origin page itself was read — the same standard Playwright is
+// held to — and anything short of that returns `down` so the caller can fall
+// back to the browser.
+async function probeUrlWithCfsolve(url) {
+  const logs = [];
+  const start = Date.now();
+  const profile = cfsolveProfile();
+  if (!profile) {
+    return { status: "down", latency: null, error: "cfsolve profile unusable", logs };
+  }
+
+  // cfsolve requires an empty artifact directory: it writes the challenge
+  // interchange there on success.
+  const workDir = mkdtempSync(join(tmpdir(), "cfsolve-"));
+  try {
+    const { code, stdout, stderr } = await runCfsolve(
+      ["--page", url, workDir, "--solve", "--fingerprint", CFSOLVE_PROFILE],
+      CFSOLVE_TIMEOUT_MS
+    );
+    const solvedMs = Date.now() - start;
+    const clearance = /^cf_clearance=(.+)$/m.exec(stdout)?.[1]?.trim();
+
+    if (code !== 0 || !clearance) {
+      const reason = lastLine(stderr) || `cfsolve exited with code ${code}`;
+      logs.push(`    [cfsolve] failed after ${solvedMs}ms — ${reason}`);
+      return { status: "down", latency: null, error: reason, logs };
+    }
+
+    logs.push(`    [cfsolve] cf_clearance issued in ${solvedMs}ms — re-reading the page`);
+    const response = await fetchWithClearance(url, profile.userAgent, clearance);
+    const latency = Date.now() - start;
+
+    if (response.ok || (response.status >= 300 && response.status < 400)) {
+      logs.push(`    [cfsolve] HTTP ${response.status} — page behind the challenge loaded (${latency}ms)`);
+      return { status: "up", latency, logs };
+    }
+    logs.push(`    [cfsolve] HTTP ${response.status} — clearance did not unlock the page (${latency}ms)`);
+    return { status: "down", latency: null, error: `HTTP ${response.status} after clearance`, logs };
+  } catch (err) {
+    const errorMsg = err.name === "AbortError" ? "ETIMEDOUT" : err.message;
+    logs.push(`    [cfsolve] ${errorMsg} (${Date.now() - start}ms)`);
+    return { status: "down", latency: null, error: errorMsg, logs };
+  } finally {
+    rmSync(workDir, { recursive: true, force: true });
+  }
+}
 
 // Same origin and path, ignoring the query: a challenge reload carries a
 // `__cf_chl_tk` token the probe URL does not have.
@@ -310,11 +472,25 @@ async function probeUrl(url, retries = MAX_RETRIES, overrides = null) {
   // was never observed, which is recorded as its own status rather than as an
   // outage — see the note on "blocked" in README.
   if (needsBrowser) {
-    logs.push(
-      sawWaf
-        ? `  → Cloudflare WAF in the way, re-checking with Playwright...`
-        : `  → Fetch retries exhausted with non-Cloudflare 403, retrying with Playwright...`
-    );
+    // cfsolve answers Cloudflare's challenge and nothing else, so it is only
+    // tried on the WAF path; a non-Cloudflare 403 goes straight to Playwright.
+    // When it cannot clear the challenge the browser still gets its turn —
+    // cfsolve is the cheap first attempt, not a replacement.
+    if (sawWaf && cfsolveEnabled()) {
+      logs.push(`  → Cloudflare WAF in the way, solving the challenge with cfsolve...`);
+      const csResult = await probeUrlWithCfsolve(effectiveUrl);
+      logs.push(...csResult.logs);
+      if (csResult.status === "up") {
+        return { status: "up", latency: csResult.latency, logs };
+      }
+      logs.push(`  → cfsolve did not clear it, re-checking with Playwright...`);
+    } else {
+      logs.push(
+        sawWaf
+          ? `  → Cloudflare WAF in the way, re-checking with Playwright...`
+          : `  → Fetch retries exhausted with non-Cloudflare 403, retrying with Playwright...`
+      );
+    }
     const pwResult = await probeUrlWithPlaywright(effectiveUrl);
     logs.push(...pwResult.logs);
     if (pwResult.status === "up") {
