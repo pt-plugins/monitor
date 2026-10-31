@@ -827,7 +827,7 @@
     ],
     "type": "private",
     "description": "使用 ReelCore 的影视站点；积分表示瓶盖，“发布帖子数”表示核子可乐余额。晋级需达标并消耗两种积分。",
-    "favicon": "https://www.colapt.com/brand/cola/favicon-black-red.ico",
+    "favicon": "",
     "isDead": false
   },
   {
@@ -1095,7 +1095,7 @@
     ],
     "type": "private",
     "description": "DreadVault 是一个专注恐怖题材的私有 PT 站，资源涵盖恐怖电影、剧集、电子书与原声带",
-    "favicon": "./_default_unit3d.ico",
+    "favicon": "",
     "isDead": false
   },
   {
@@ -1367,7 +1367,7 @@
     ],
     "type": "private",
     "description": "Generation-Free (GF-Free) 是一个法语综合类私有 PT 站点，资源涵盖影视、音乐、书籍、游戏与软件",
-    "favicon": "./_default_unit3d.ico",
+    "favicon": "",
     "isDead": false
   },
   {
@@ -1646,7 +1646,7 @@
     ],
     "type": "private",
     "description": "与志同道合之人前行 分享更多值得珍藏的资源",
-    "favicon": "https://www.hdkyl.in/favicon.ico",
+    "favicon": "",
     "isDead": false
   },
   {
@@ -2070,7 +2070,7 @@
     ],
     "type": "private",
     "description": "KEEP FRIENDS 专注于小而美的分享，给大家带来更多更优的视听体验。 Let us keep friends forever!",
-    "favicon": "https://pt.keepfrds.com/static/favicon-64x64.png",
+    "favicon": "",
     "isDead": false
   },
   {
@@ -2528,7 +2528,7 @@
     ],
     "type": "private",
     "description": "慕雪阁 - 有一峰名清静峰，峰内有一阁，名为慕雪阁，阁主慕雪，阁内有大量高阶功法！",
-    "favicon": "./_default_nexusphp.png",
+    "favicon": "",
     "isDead": false
   },
   {
@@ -2562,6 +2562,17 @@
     "type": "private",
     "description": "我的PT(CC) | 人類資源庫",
     "favicon": "./mypt.ico",
+    "isDead": false
+  },
+  {
+    "id": "myspleen",
+    "name": "MySpleen",
+    "urls": [
+      "https://www.myspleen.org/"
+    ],
+    "type": "private",
+    "description": "MySpleen is a Private Torrent Tracker for TV / COMEDY / ANIMATION / 80-90’S VHS NOSTALGIA",
+    "favicon": "",
     "isDead": false
   },
   {
@@ -4059,7 +4070,7 @@
     ],
     "type": "private",
     "description": "Torrenting (TT) is a Private Torrent Tracker for MOVIES / TV / GENERAL",
-    "favicon": "https://torrenting.com/favicon.ico",
+    "favicon": "",
     "isDead": false
   },
   {
@@ -4204,7 +4215,7 @@
     ],
     "type": "private",
     "description": "",
-    "favicon": "./_default_unit3d.ico",
+    "favicon": "",
     "isDead": false
   },
   {
@@ -4572,7 +4583,7 @@
     ],
     "type": "private",
     "description": "",
-    "favicon": "https://yu-scene.net/favicon.ico",
+    "favicon": "",
     "isDead": false
   },
   {
