@@ -76,13 +76,9 @@ Site definitions are pulled from [`pt-plugins/PT-depiler`](https://github.com/pt
 4. If a URL fails, retry up to 3 times (2s delay between attempts)
 5. Site is **UP** if _any_ URL responds; **DOWN** only if _all_ URLs fail
 6. A **Cloudflare WAF** response (403/503 with `cf-ray`) is not an answer from the site, so it is never recorded as
-   up on its own. The probe first tries **cfsolve** (when the workflow built it): it solves the challenge request-side
-   and hands back a `cf_clearance` cookie, which the probe then re-sends — same address, same User-Agent as the
-   profile, because that cookie is bound to both. If the page behind the challenge loads, the check is **UP**.
-   Anything less, including cfsolve failing to solve, falls through to the browser:
-   a challenge that clears in Playwright and loads the page is **UP**; a challenge that does not clear leaves the
-   check **BLOCKED** — the origin was never observed.
-   Non-Cloudflare 403s take the browser fallback directly but stay **DOWN** when it fails, since the origin did answer.
+   up on its own: the probe re-checks the URL in Playwright. If the challenge clears and the page behind it loads,
+   the check is **UP**; if it does not, the check is **BLOCKED** — the origin was never observed.
+   Non-Cloudflare 403s take the same browser fallback but stay **DOWN** when it fails, since the origin did answer.
 7. A **BLOCKED** check is not an outage. It counts as available everywhere a percentage or a day's status is
    computed (so the dashboard reads the site as up), while the per-check history keeps the `blocked` badge so the
    reason a probe was not the site's own answer stays visible. A site is only **DOWN** when every URL failed without
