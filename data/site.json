@@ -217,6 +217,17 @@
     "isDead": false
   },
   {
+    "id": "animeclipse",
+    "name": "AnimeClipse",
+    "urls": [
+      "https://www.animeclipse.com/"
+    ],
+    "type": "public",
+    "description": "AnimeClipse（Hellenic Fansubs United）是一个希腊的公开动漫 BT 站，基于 BTITracker 模块，无需登录即可检索与下载 .torrent",
+    "favicon": "",
+    "isDead": false
+  },
+  {
     "id": "animelovers",
     "name": "ANIMELOVERS",
     "urls": [
@@ -4005,6 +4016,17 @@
     "isDead": false
   },
   {
+    "id": "torlock",
+    "name": "Torlock",
+    "urls": [
+      "https://www.torlock.com/"
+    ],
+    "type": "public",
+    "description": "Torlock 是一个以「只收录已验证种子」为卖点的公开 BT 索引站，覆盖影视、音乐、游戏、软件与电子书",
+    "favicon": "",
+    "isDead": false
+  },
+  {
     "id": "torrent9",
     "name": "Torrent9",
     "urls": [
@@ -4042,8 +4064,8 @@
     "id": "torrentgalaxyclone",
     "name": "TorrentGalaxyClone",
     "urls": [
-      "https://torrentgalaxy.info/",
-      "https://torrentgalaxy.one/"
+      "https://torrentgalaxy.online/",
+      "https://torrentgalaxy.info/"
     ],
     "type": "public",
     "description": "TorrentGalaxyClone（TGx）是一个公共 BT 站点，主要提供 MOVIES / TV / GENERAL 资源",
@@ -4105,6 +4127,17 @@
     ],
     "type": "private",
     "description": "TorrentLeech (TL) is a Private Torrent Tracker for 0DAY / GENERAL. not here _ not scene",
+    "favicon": "",
+    "isDead": false
+  },
+  {
+    "id": "torrentparadise",
+    "name": "Torrent Paradise",
+    "urls": [
+      "https://torrentparadise.cl/"
+    ],
+    "type": "public",
+    "description": "Torrent Paradise 是一个公开的 BT 元搜索引擎，索引 DHT 网络中的种子，无需登录；列表页不直接给出 magnet，需要进详情页取",
     "favicon": "",
     "isDead": false
   },
