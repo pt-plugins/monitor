@@ -644,6 +644,17 @@
     "isDead": false
   },
   {
+    "id": "c411",
+    "name": "C411",
+    "urls": [
+      "https://c411.org/"
+    ],
+    "type": "private",
+    "description": "C411 (Community 411) is a FRENCH Private Torrent Tracker for MOVIES / TV / GENERAL",
+    "favicon": "",
+    "isDead": false
+  },
+  {
     "id": "capybarabr",
     "name": "CapybaraBR",
     "urls": [
@@ -4167,7 +4178,7 @@
     "id": "torrentsome",
     "name": "Torrentsome",
     "urls": [
-      "https://torrentsome270.com/"
+      "https://torrentsome271.com/"
     ],
     "type": "public",
     "description": "Torrentsome（토렌트썸）是韩国公共 BT 索引站，收录韩国影视、综艺、音乐、动画等资源",
@@ -4178,7 +4189,7 @@
     "id": "torrenttip",
     "name": "Torrenttip",
     "urls": [
-      "https://torrenttip250.top/"
+      "https://torrenttip251.top/"
     ],
     "type": "public",
     "description": "Torrenttip（토렌트팁）是韩国公共 BT 索引站，收录韩国影视、综艺、音乐等资源",
@@ -4424,14 +4435,14 @@
     "id": "worldtorrent",
     "name": "World-torrent",
     "urls": [
-      "https://ww3-darkfox.officiel.cc/",
-      "https://ww3-vidlox.officiel.cc/",
-      "https://ww3-worldivx.officiel.cc/",
-      "https://ww3-wikibox.officiel.cc/",
-      "https://ww3-sharkibox.officiel.cc/",
-      "https://ww3-workino.officiel.cc/",
-      "https://ww3-oxtorrent.officiel.cc/",
-      "https://ww3-torrent911.officiel.cc/"
+      "https://www.darkfox.ws/",
+      "https://www.wikibox.ws/",
+      "https://ww4-sharkibox.officiel.cc/",
+      "https://ww4-worldivx.officiel.cc/",
+      "https://ww4-workino.officiel.cc/",
+      "https://ww4-torrent911.officiel.cc/",
+      "https://ww4-vidlox.officiel.cc/",
+      "https://ww4-oxtorrent.officiel.cc/"
     ],
     "type": "public",
     "description": "World-torrent is a FRENCH Public site for MOVIES / TV / GENERAL（法语公开站，同一套代码的多个镜像域名）",
