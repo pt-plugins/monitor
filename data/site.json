@@ -2379,7 +2379,7 @@
       "https://magnetz.eu/"
     ],
     "type": "public",
-    "description": "Magnetz 是一个公开的 BT 元搜索引擎，聚合影视、音乐、游戏、软件、电子书等资源（无需登录）",
+    "description": "Magnetz 是一个公开的 BT 元搜索引擎，聚合影视、音乐、游戏、软件、电子书等资源（API 搜索需会员 Key）",
     "favicon": "",
     "isDead": false
   },
@@ -4437,6 +4437,12 @@
     "urls": [
       "https://www.darkfox.ws/",
       "https://www.wikibox.ws/",
+      "https://www.vidlox.ws/",
+      "https://www.oxtorrent.ws/",
+      "https://www.sharkibox.ws/",
+      "https://www.worldivx.ws/",
+      "https://www.workino.ws/",
+      "https://www.torrent911.pw/",
       "https://ww4-sharkibox.officiel.cc/",
       "https://ww4-worldivx.officiel.cc/",
       "https://ww4-workino.officiel.cc/",
