@@ -30,6 +30,24 @@
 	},
 	"rs": {
 	  "skip": "CERNET-only; unreachable from GitHub Actions runners"
+	},
+	"hudbt": {
+	  "skip": "CERNET-only; unreachable from GitHub Actions runners"
+	},
+	"piggo": {
+	  "path": "/v1/web/auth/guest-config"
+	},
+	"thevault": {
+	  "timeoutMs": 30000
+	},
+	"nexushd": {
+	  "timeoutMs": 30000
+	},
+	"magnetdownload": {
+	  "timeoutMs": 30000
+	},
+	"xxxtor": {
+	  "timeoutMs": 30000
 	}
   }
 }
