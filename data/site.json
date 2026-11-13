@@ -2959,6 +2959,17 @@
     "isDead": false
   },
   {
+    "id": "phoenixproject",
+    "name": "Phoenix Project",
+    "urls": [
+      "https://phoenixproject.app/"
+    ],
+    "type": "private",
+    "description": "Phoenix Project is a Private MacOS software tracker",
+    "favicon": "",
+    "isDead": false
+  },
+  {
     "id": "piggo",
     "name": "Piggo",
     "urls": [
@@ -3584,6 +3595,17 @@
     ],
     "type": "private",
     "description": "Secret Cinema is a Private ratioless site for rare MOVIES.",
+    "favicon": "",
+    "isDead": false
+  },
+  {
+    "id": "seedcore",
+    "name": "SeedCore",
+    "urls": [
+      "https://seedcore.net/"
+    ],
+    "type": "private",
+    "description": "SeedCore (ROT) is a ROMANIAN Private Torrent Tracker for MOVIES / TV / GENERAL",
     "favicon": "",
     "isDead": false
   },
@@ -4215,6 +4237,17 @@
     ],
     "type": "private",
     "description": "ToTheGlory（TTG）是一个综合性PT站点，以高清电影、电视剧、音乐、动漫资源为主。",
+    "favicon": "",
+    "isDead": false
+  },
+  {
+    "id": "tr4ker",
+    "name": "TR4KER",
+    "urls": [
+      "https://tr4ker.net/"
+    ],
+    "type": "public",
+    "description": "TR4KER is a FRENCH Semi-Private Torrent Tracker for MOVIES / TV / GENERAL",
     "favicon": "",
     "isDead": false
   },
