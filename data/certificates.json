@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-11-10T10:35:51.029Z",
+  "timestamp": "2026-11-13T10:18:07.904Z",
   "sites": {
     "0dayfiles": {
       "ssl": {
@@ -13,16 +13,16 @@
         "expiresAt": "2027-08-28T14:30:01.000Z",
         "registrar": "Key-Systems GmbH",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "0magnet": {
       "ssl": {
-        "notAfter": "2026-12-11T16:17:16.000Z",
+        "notAfter": "2027-02-08T18:26:41.000Z",
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-10-30T07:24:29.000Z",
@@ -37,13 +37,13 @@
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2030-04-05T23:56:08.000Z",
         "registrar": "Tonic",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "13city": {
@@ -52,13 +52,13 @@
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-13T09:51:36.741Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-06-26T17:09:58.928Z",
         "registrar": "NameSilo, LLC",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "1ptba": {
@@ -73,7 +73,7 @@
         "expiresAt": "2027-09-27T09:19:26.000Z",
         "registrar": "Cloudflare, Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "52pt": {
@@ -88,7 +88,7 @@
         "expiresAt": "2027-05-05T23:59:59.000Z",
         "registrar": "Chengdu West Dimension Digital Technology Co., Ltd.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "abtorrents": {
@@ -103,7 +103,7 @@
         "expiresAt": "2027-10-02T18:32:30.000Z",
         "registrar": "NameCheap, Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "acgrip": {
@@ -112,13 +112,13 @@
         "issuer": "ZeroSSL GmbH",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2026-12-27T07:54:29.053Z",
         "registrar": "Name.com, Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "agsvpt": {
@@ -127,13 +127,13 @@
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-06-06T02:13:51.000Z",
         "registrar": "腾讯云计算（北京）有限责任公司",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "aidoruonline": {
@@ -148,7 +148,7 @@
         "expiresAt": "2029-05-03T15:54:55.000Z",
         "registrar": "Immaterialism Limited",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "aither": {
@@ -157,13 +157,13 @@
         "issuer": "Let's Encrypt",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
-        "expiresAt": "2027-04-02T10:53:19.000Z",
-        "registrar": "NameCheap, Inc.",
+        "expiresAt": "2028-04-02T10:53:19.000Z",
+        "registrar": "Internet Domain Service BS Corp",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "alingpt": {
@@ -178,7 +178,7 @@
         "expiresAt": null,
         "registrar": null,
         "error": "no expiration date in WHOIS record",
-        "checkedAt": "2026-11-10T10:35:51.029Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "alpharatio": {
@@ -187,13 +187,13 @@
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-08-17T06:45:07.000Z",
         "registrar": "NameCheap, Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "anibt": {
@@ -217,13 +217,13 @@
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-12-23T23:06:39.000Z",
         "registrar": "Tucows Domains Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "animeclipse": {
@@ -247,13 +247,13 @@
         "issuer": "Let's Encrypt",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2029-07-09T09:37:12.111Z",
         "registrar": "Tucows Domains Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "animez": {
@@ -268,7 +268,7 @@
         "expiresAt": "2028-02-04T06:50:49.000Z",
         "registrar": "Tonic",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "anirena": {
@@ -283,7 +283,7 @@
         "expiresAt": "2027-05-14T20:05:34.000Z",
         "registrar": "INWX GmbH",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "anisource": {
@@ -298,7 +298,7 @@
         "expiresAt": "2027-06-04T23:59:59.000Z",
         "registrar": "Registrar of Domain Names REG.RU LLC",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "anthelion": {
@@ -307,13 +307,13 @@
         "issuer": "Let's Encrypt",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-09-23T00:15:21.000Z",
         "registrar": "Immaterialism Limited",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "asiancinema": {
@@ -322,28 +322,28 @@
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-03-27T18:25:36.841Z",
         "registrar": "Tucows Domains Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "audiences": {
       "ssl": {
-        "notAfter": "2027-01-02T20:52:14.000Z",
+        "notAfter": "2027-02-02T10:50:23.000Z",
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-11-28T09:13:26.000Z",
         "registrar": "NameSilo, LLC",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "audiobookbay": {
@@ -352,13 +352,13 @@
         "issuer": "Sectigo Limited",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": null,
         "registrar": null,
         "error": "no expiration date in WHOIS record",
-        "checkedAt": "2026-11-10T10:35:51.029Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "audionews": {
@@ -373,7 +373,7 @@
         "expiresAt": "2027-05-25T18:17:40.000Z",
         "registrar": "Register.com - Network Solutions, LLC",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "avistaz": {
@@ -382,28 +382,28 @@
         "issuer": "Let's Encrypt",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-04-13T02:45:49.000Z",
         "registrar": "Tonic",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "azusa": {
       "ssl": {
-        "notAfter": "2026-12-13T08:18:51.000Z",
+        "notAfter": "2027-02-10T09:15:22.000Z",
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-11-26T08:14:00.000Z",
         "registrar": "NameSilo, LLC",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "bakabt": {
@@ -412,13 +412,13 @@
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-01-21T19:06:28.000Z",
         "registrar": "ME-NET",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "bangumimoe": {
@@ -427,13 +427,13 @@
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-13T09:51:36.741Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-07-21T23:59:59.000Z",
         "registrar": "xTom GmbH",
         "error": null,
-        "checkedAt": "2026-10-13T09:51:36.741Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "baozi": {
@@ -442,13 +442,13 @@
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2028-11-26T05:00:36.000Z",
         "registrar": "Cloudflare, Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "bemaniso": {
@@ -457,13 +457,13 @@
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": null,
         "registrar": "Tucows",
         "error": "no expiration date in WHOIS record",
-        "checkedAt": "2026-11-10T10:35:51.029Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "beyondhd": {
@@ -472,13 +472,13 @@
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-07-03T04:06:35.000Z",
         "registrar": "Immaterialism Limited",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "bibliotik": {
@@ -487,13 +487,13 @@
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2029-01-02T14:51:54.000Z",
         "registrar": "NameCheap, Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "bigfangroup": {
@@ -523,7 +523,7 @@
         "expiresAt": null,
         "registrar": "Name: GoDaddy.com, LLC",
         "error": "no expiration date in WHOIS record",
-        "checkedAt": "2026-11-10T10:35:51.029Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "bitpt": {
@@ -532,7 +532,7 @@
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-11-02T21:06:10.000Z",
@@ -553,7 +553,7 @@
         "expiresAt": null,
         "registrar": "Tucows",
         "error": "no expiration date in WHOIS record",
-        "checkedAt": "2026-11-10T10:35:51.029Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "blutopia": {
@@ -568,7 +568,7 @@
         "expiresAt": "2035-12-13T22:07:59.000Z",
         "registrar": "Immaterialism Limited",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "broadcasthenet": {
@@ -577,13 +577,13 @@
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2026-11-29T09:11:07.000Z",
         "registrar": "NameCheap, Inc.",
         "error": null,
-        "checkedAt": "2026-11-10T10:35:51.029Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "brokenstones": {
@@ -592,13 +592,13 @@
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-03-08T00:00:00.000Z",
         "registrar": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "btetree": {
@@ -607,13 +607,13 @@
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-09-15T04:00:00.000Z",
         "registrar": "NameCheap, Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "btschool": {
@@ -628,7 +628,7 @@
         "expiresAt": "2028-05-21T01:20:51.000Z",
         "registrar": "Alibaba Cloud Computing Ltd. d/b/a HiChina (www.net.cn)",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "bwtorrents": {
@@ -643,7 +643,7 @@
         "expiresAt": "2027-03-31T17:20:03.000Z",
         "registrar": "TLD Registrar Solutions Ltd.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "byrbt": {
@@ -652,22 +652,22 @@
         "issuer": "Let's Encrypt",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": null,
         "registrar": null,
         "error": "no expiration date in WHOIS record",
-        "checkedAt": "2026-11-10T10:35:51.029Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "byrutor": {
       "ssl": {
-        "notAfter": "2026-12-12T23:41:38.000Z",
+        "notAfter": "2027-02-10T23:41:38.000Z",
         "issuer": "Let's Encrypt",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-16T07:39:13.800Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-10-12T07:55:12.400Z",
@@ -703,22 +703,22 @@
         "expiresAt": "2027-03-23T01:19:02.000Z",
         "registrar": "Tucows Domains Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "carpt": {
       "ssl": {
-        "notAfter": "2026-12-12T10:46:55.000Z",
+        "notAfter": "2027-02-09T19:10:31.000Z",
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-04-30T16:07:56.000Z",
         "registrar": "Alibaba Cloud Computing Ltd. d/b/a HiChina (www.net.cn)",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "cathoderaytube": {
@@ -733,7 +733,7 @@
         "expiresAt": "2027-01-18T03:03:41.950Z",
         "registrar": "Tucows Domains Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "catorrent": {
@@ -753,17 +753,17 @@
     },
     "cbg": {
       "ssl": {
-        "notAfter": "2026-12-31T14:15:55.000Z",
+        "notAfter": "2027-01-22T06:55:41.000Z",
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": null,
         "registrar": null,
         "error": "no expiration date in WHOIS record",
-        "checkedAt": "2026-11-10T10:35:51.029Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "ceskeforum": {
@@ -772,13 +772,13 @@
         "issuer": "Let's Encrypt",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-10-06T18:27:47.000Z",
         "registrar": "NameSilo, LLC",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "cgpeers": {
@@ -787,13 +787,13 @@
         "issuer": "Let's Encrypt",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-09-03T18:02:15.000Z",
-        "registrar": "Tonic",
+        "registrar": "NAMECHEAP",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "chdbits": {
@@ -802,13 +802,13 @@
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-07-14T23:59:59.000Z",
         "registrar": "GoDaddy.com, LLC",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "cinemageddon": {
@@ -823,7 +823,7 @@
         "expiresAt": "2027-08-07T23:02:30.000Z",
         "registrar": "NameCheap, Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "cinematik": {
@@ -832,13 +832,13 @@
         "issuer": "Let's Encrypt",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-11-10T10:35:51.029Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2031-11-14T04:22:12.000Z",
         "registrar": "Tucows Domains Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "cinemaz": {
@@ -853,7 +853,7 @@
         "expiresAt": "2027-07-26T14:04:31.000Z",
         "registrar": "Tonic",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "clearjav": {
@@ -868,7 +868,7 @@
         "expiresAt": "2027-01-15T09:37:48.000Z",
         "registrar": "Tucows Domains Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "colapt": {
@@ -898,7 +898,7 @@
         "expiresAt": "2027-02-19T17:24:44.320Z",
         "registrar": "NameCheap, Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "crabpt": {
@@ -907,13 +907,13 @@
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2028-03-06T08:44:54.000Z",
         "registrar": "Dynadot Inc",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "crackingpatching": {
@@ -933,17 +933,17 @@
     },
     "cspt": {
       "ssl": {
-        "notAfter": "2026-12-12T10:13:47.000Z",
+        "notAfter": "2027-02-09T10:33:34.000Z",
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-02-20T03:48:55.000Z",
         "registrar": "NameSilo,LLC",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "cyanbug": {
@@ -955,10 +955,10 @@
         "checkedAt": "2026-10-19T08:15:28.769Z"
       },
       "domain": {
-        "expiresAt": "2026-12-13T16:36:00.000Z",
+        "expiresAt": "2027-12-13T16:36:00.000Z",
         "registrar": "Cloudflare, Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "dabaojian": {
@@ -967,13 +967,13 @@
         "issuer": "Let's Encrypt",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2035-03-19T23:59:59.000Z",
         "registrar": "NameCheap, Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "damagnet": {
@@ -1003,7 +1003,7 @@
         "expiresAt": "2027-04-22T10:50:01.000Z",
         "registrar": "NameSilo, LLC",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "darkland": {
@@ -1012,28 +1012,28 @@
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2030-02-16T03:48:33.000Z",
         "registrar": "Spaceship, Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "darkpeers": {
       "ssl": {
-        "notAfter": "2026-12-12T18:30:06.000Z",
+        "notAfter": "2027-02-09T22:19:32.000Z",
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-01-30T18:22:54.541Z",
         "registrar": "Tucows Domains Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "datascene": {
@@ -1042,13 +1042,13 @@
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2028-01-31T23:59:59.000Z",
         "registrar": "OpusDNS GmbH",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "daxiangjiao": {
@@ -1063,7 +1063,7 @@
         "expiresAt": "2027-07-07T04:32:03.721Z",
         "registrar": "Spaceship, Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "desigaane": {
@@ -1078,7 +1078,7 @@
         "expiresAt": "2027-06-03T12:39:04.700Z",
         "registrar": "Tucows Domains Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "desitorrents": {
@@ -1093,7 +1093,7 @@
         "expiresAt": "2024-08-03T23:59:59.000Z",
         "registrar": "Tucows.com Co.",
         "error": null,
-        "checkedAt": "2026-11-10T10:35:51.029Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "dicmusic": {
@@ -1108,7 +1108,7 @@
         "expiresAt": "2027-06-22T04:11:15.000Z",
         "registrar": "NameCheap, Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "digitalcore": {
@@ -1117,13 +1117,13 @@
         "issuer": "SSL Corporation",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-02-15T20:05:03.000Z",
         "registrar": "Tucows Domains Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "dirtybytes": {
@@ -1153,7 +1153,7 @@
         "expiresAt": "2027-04-09T13:31:06.000Z",
         "registrar": "GoDaddy.com, LLC",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "dmhy": {
@@ -1168,7 +1168,7 @@
         "expiresAt": "2027-08-22T15:19:12.175Z",
         "registrar": "DreamHost, LLC",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "dragonhd": {
@@ -1177,13 +1177,13 @@
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-06-14T23:59:59.000Z",
         "registrar": "Alibaba Cloud Computing Ltd. d/b/a HiChina (www.net.cn)",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "dreadvault": {
@@ -1207,13 +1207,13 @@
         "issuer": "Let's Encrypt",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-04-14T12:12:59.000Z",
         "registrar": "GoDaddy.com, LLC",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "dubhe": {
@@ -1228,7 +1228,7 @@
         "expiresAt": "2027-09-14T23:59:59.000Z",
         "registrar": "NameCheap, Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "ehentai": {
@@ -1237,37 +1237,37 @@
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2029-04-09T02:21:28.966Z",
         "registrar": "GoDaddy.com, LLC",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "empornium": {
       "ssl": {
-        "notAfter": "2026-12-11T09:49:39.000Z",
+        "notAfter": "2027-02-09T13:01:30.000Z",
         "issuer": "Let's Encrypt",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-11-10T10:35:51.029Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": null,
         "registrar": "Stanco d.o.o.",
         "error": "no expiration date in WHOIS record",
-        "checkedAt": "2026-11-10T10:35:51.029Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "emuwarez": {
       "ssl": {
-        "notAfter": "2026-12-22T23:18:39.000Z",
-        "issuer": "Google Trust Services",
+        "notAfter": "2027-01-22T12:25:03.000Z",
+        "issuer": "Let's Encrypt",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-10-18T14:07:15.000Z",
@@ -1288,7 +1288,7 @@
         "expiresAt": "2027-04-15T01:41:40.000Z",
         "registrar": "Tonic",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "exttorrents": {
@@ -1303,7 +1303,7 @@
         "expiresAt": "2029-11-03T06:35:12.000Z",
         "registrar": "Tonic",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "eztv": {
@@ -1318,22 +1318,22 @@
         "expiresAt": "2028-11-28T07:52:16.000Z",
         "registrar": "Ascio Technologies, Inc. - Denmark",
         "error": null,
-        "checkedAt": "2026-10-13T09:51:36.741Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "fappaizuri": {
       "ssl": {
-        "notAfter": "2026-12-11T18:57:27.000Z",
+        "notAfter": "2027-02-09T00:38:23.000Z",
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
-        "expiresAt": "2027-04-27T10:31:27.000Z",
+        "expiresAt": "2028-04-27T10:31:27.000Z",
         "registrar": "NameCheap, Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "femdomcult": {
@@ -1342,13 +1342,13 @@
         "issuer": "Let's Encrypt",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-07-08T18:31:14.717Z",
         "registrar": "Enartia Single Member S.A.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "fhpt": {
@@ -1357,13 +1357,13 @@
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-04-14T23:59:59.000Z",
         "registrar": "Spaceship, Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "filelist": {
@@ -1372,13 +1372,13 @@
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2028-04-06T20:11:19.000Z",
         "registrar": "NameCheap, Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "filemood": {
@@ -1408,7 +1408,7 @@
         "expiresAt": "2027-07-14T08:00:19.000Z",
         "registrar": "Spaceship, Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "freejavtorrent": {
@@ -1438,22 +1438,22 @@
         "expiresAt": "2027-02-02T02:08:39.000Z",
         "registrar": "NameCheap, Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "geminitracker": {
       "ssl": {
-        "notAfter": "2026-12-13T05:41:08.000Z",
-        "issuer": "Google Trust Services",
+        "notAfter": "2027-01-30T00:32:14.000Z",
+        "issuer": "Let's Encrypt",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2028-01-05T20:25:03.749Z",
         "registrar": "Tucows Domains Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "generationfree": {
@@ -1462,13 +1462,13 @@
         "issuer": "Let's Encrypt",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-02-05T08:11:14.761Z",
         "registrar": "OVH sas",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "ggpt": {
@@ -1477,13 +1477,13 @@
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-04-04T07:38:28.000Z",
         "registrar": "NameSilo, LLC",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "greatposterwall": {
@@ -1492,13 +1492,13 @@
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-03-10T06:53:06.000Z",
         "registrar": "DNSPod, Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "gtnet": {
@@ -1507,28 +1507,28 @@
         "issuer": "Sectigo Limited",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-10-15T21:41:46.000Z",
         "registrar": "OpusDNS GmbH",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "gtru": {
       "ssl": {
-        "notAfter": "2026-12-13T22:19:41.000Z",
+        "notAfter": "2027-02-11T00:09:08.000Z",
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-03-02T23:59:59.000Z",
         "registrar": "InterNetX GmbH",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "haidan": {
@@ -1537,13 +1537,13 @@
         "issuer": "Let's Encrypt",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2036-04-14T03:03:03.000Z",
         "registrar": "Alibaba Cloud Computing Ltd. d/b/a HiChina (www.net.cn)",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "happyfappy": {
@@ -1558,7 +1558,7 @@
         "expiresAt": "2027-02-24T10:30:43.000Z",
         "registrar": "Tucows Domains Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "hdarea": {
@@ -1567,13 +1567,13 @@
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2028-07-13T10:07:19.000Z",
         "registrar": "Porkbun",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "hdbao": {
@@ -1582,13 +1582,13 @@
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2034-01-31T03:44:45.000Z",
         "registrar": "Cloudflare, Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "hdbits": {
@@ -1603,7 +1603,7 @@
         "expiresAt": "2033-03-20T14:18:59.161Z",
         "registrar": "GoDaddy.com, LLC",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "hdchina": {
@@ -1627,13 +1627,13 @@
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-11-07T00:36:25.093Z",
         "registrar": "Cloudflare, Inc",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "hdclone": {
@@ -1648,22 +1648,22 @@
         "expiresAt": "2026-12-23T13:26:01.000Z",
         "registrar": "Spaceship, Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "hddolby": {
       "ssl": {
-        "notAfter": "2027-01-04T15:26:41.000Z",
-        "issuer": "Google Trust Services",
+        "notAfter": "2027-01-20T07:34:20.000Z",
+        "issuer": "Let's Encrypt",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
-        "expiresAt": "2027-09-16T13:02:31.000Z",
-        "registrar": "NameSilo, LLC",
+        "expiresAt": "2027-10-22T08:24:20.000Z",
+        "registrar": "Spaceship, Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "hdf": {
@@ -1672,13 +1672,13 @@
         "issuer": "Let's Encrypt",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-11-10T10:35:51.029Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-05-16T19:45:17.220Z",
         "registrar": "NameCheap, Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "hdfans": {
@@ -1693,7 +1693,7 @@
         "expiresAt": "2027-03-11T01:03:39.099Z",
         "registrar": "GoDaddy.com, LLC",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "hdhome": {
@@ -1702,7 +1702,7 @@
         "issuer": "Let's Encrypt",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-11-06T04:13:54.160Z",
@@ -1717,13 +1717,13 @@
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-10-27T14:06:19.405Z",
         "registrar": "NameSilo, LLC",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "hdroute": {
@@ -1732,13 +1732,13 @@
         "issuer": null,
         "trustError": null,
         "error": "no HTTPS URL",
-        "checkedAt": "2026-11-10T10:35:51.029Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-05-04T03:45:48.915Z",
         "registrar": "Name.com, Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "hdsky": {
@@ -1753,7 +1753,7 @@
         "expiresAt": "2028-05-13T13:34:45.000Z",
         "registrar": "GoDaddy.com, LLC",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "hdspace": {
@@ -1768,7 +1768,7 @@
         "expiresAt": "2028-05-15T16:59:43.730Z",
         "registrar": "Tucows Domains Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "hdtime": {
@@ -1777,13 +1777,13 @@
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-07-21T08:58:15.493Z",
         "registrar": "NameSilo, LLC",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "hdtorrents": {
@@ -1798,7 +1798,7 @@
         "expiresAt": "2028-03-15T12:27:58.362Z",
         "registrar": "Tucows Domains Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "hdunited": {
@@ -1813,7 +1813,7 @@
         "expiresAt": null,
         "registrar": null,
         "error": "WHOIS ENOTFOUND",
-        "checkedAt": "2026-11-10T10:35:51.029Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "hdupt": {
@@ -1822,13 +1822,13 @@
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-02-03T11:20:21.000Z",
         "registrar": "Cloudflare, Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "hdvideo": {
@@ -1858,7 +1858,7 @@
         "expiresAt": "2027-09-16T17:48:03.000Z",
         "registrar": "Cloudflare, Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "hhanclub": {
@@ -1867,13 +1867,13 @@
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-02-07T15:18:20.000Z",
         "registrar": "Spaceship, Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "hitpt": {
@@ -1888,7 +1888,7 @@
         "expiresAt": "2027-09-23T11:54:19.000Z",
         "registrar": "Cloudflare, Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "homiehelpdesk": {
@@ -1903,7 +1903,7 @@
         "expiresAt": "2027-09-22T22:25:48.000Z",
         "registrar": "Cloudflare, Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "hqmusic": {
@@ -1912,13 +1912,13 @@
         "issuer": "Let's Encrypt",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-09-12T16:11:21.936Z",
         "registrar": "NameSilo, LLC",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "htpt": {
@@ -1927,28 +1927,28 @@
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-13T09:51:36.741Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2026-12-16T08:53:49.000Z",
         "registrar": "Alibaba Cloud Computing (Beijing) Co., Ltd.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "hudbt": {
       "ssl": {
-        "notAfter": "2027-01-10T23:59:59.000Z",
-        "issuer": "WoTrus CA Limited",
+        "notAfter": null,
+        "issuer": null,
         "trustError": null,
-        "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "error": "ETIMEDOUT",
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": null,
         "registrar": null,
         "error": "no expiration date in WHOIS record",
-        "checkedAt": "2026-11-10T10:35:51.029Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "huno": {
@@ -1963,7 +1963,7 @@
         "expiresAt": "2027-06-25T23:59:59.000Z",
         "registrar": "1API GmbH",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "hxpt": {
@@ -1978,7 +1978,7 @@
         "expiresAt": "2027-07-15T10:12:23.982Z",
         "registrar": "NameSilo, LLC",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "ilolicon": {
@@ -1987,13 +1987,13 @@
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
-        "expiresAt": "2026-12-19T11:57:07.000Z",
+        "expiresAt": "2027-12-19T11:57:07.000Z",
         "registrar": "Porkbun LLC",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "infinityhd": {
@@ -2017,13 +2017,13 @@
         "issuer": "GoDaddy.com, Inc.",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-13T09:51:36.741Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2030-12-13T05:00:00.000Z",
         "registrar": "easyDNS Technologies Inc.",
         "error": null,
-        "checkedAt": "2026-10-13T09:51:36.741Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "iptorrents": {
@@ -2038,7 +2038,7 @@
         "expiresAt": "2028-04-18T13:45:44.000Z",
         "registrar": "easyDNS Technologies Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "itzmx": {
@@ -2047,13 +2047,13 @@
         "issuer": "Let's Encrypt",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-02-04T14:47:06.000Z",
         "registrar": "NameSilo, LLC",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "jpopsuki": {
@@ -2062,43 +2062,43 @@
         "issuer": "DigiCert Inc",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": null,
         "registrar": "Name: InterNetX GmbH",
         "error": "no expiration date in WHOIS record",
-        "checkedAt": "2026-11-10T10:35:51.029Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "jptv4us": {
       "ssl": {
-        "notAfter": "2027-01-05T10:02:09.000Z",
+        "notAfter": "2027-01-27T23:28:13.000Z",
         "issuer": "Let's Encrypt",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-03-15T01:43:18.000Z",
         "registrar": "NameCheap, Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "kamept": {
       "ssl": {
-        "notAfter": "2026-12-14T08:32:00.000Z",
+        "notAfter": "2027-02-11T08:47:54.000Z",
         "issuer": "Let's Encrypt",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2033-06-15T21:21:01.000Z",
         "registrar": "Automattic Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "karagarga": {
@@ -2107,13 +2107,13 @@
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2031-06-15T15:48:45.055Z",
         "registrar": "Hosting Concepts B.V. dba Openprovider",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "keepfrds": {
@@ -2128,7 +2128,7 @@
         "expiresAt": "2027-10-10T16:55:34.000Z",
         "registrar": "Cloudflare, Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "kelu": {
@@ -2143,7 +2143,7 @@
         "expiresAt": "2026-12-13T13:25:42.000Z",
         "registrar": "Dynadot Inc",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "kickasstorrentsto": {
@@ -2173,22 +2173,22 @@
         "expiresAt": null,
         "registrar": null,
         "error": "WHOIS ENOTFOUND",
-        "checkedAt": "2026-11-10T10:35:51.029Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "kufei": {
       "ssl": {
-        "notAfter": "2027-01-01T12:32:17.000Z",
+        "notAfter": "2027-02-03T04:42:02.000Z",
         "issuer": "Let's Encrypt",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2036-01-07T02:53:33.866Z",
         "registrar": "Squarespace Domains II LLC",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "kufirc": {
@@ -2197,13 +2197,13 @@
         "issuer": "Let's Encrypt",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2028-08-13T20:38:07.000Z",
         "registrar": "CSL Computer Service Langenbach GmbH d/b/a joker.com",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "lajidui": {
@@ -2218,7 +2218,7 @@
         "expiresAt": "2027-05-17T09:38:03.000Z",
         "registrar": "GoDaddy.com",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "latteam": {
@@ -2233,7 +2233,7 @@
         "expiresAt": "2028-02-02T05:19:05.000Z",
         "registrar": "NameCheap, Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "learnflakes": {
@@ -2248,7 +2248,7 @@
         "expiresAt": "2027-05-13T03:01:52.000Z",
         "registrar": "NameSilo, LLC",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "lemonhdnet": {
@@ -2263,7 +2263,7 @@
         "expiresAt": "2029-03-19T23:36:54.000Z",
         "registrar": "Gname.com Pte. Ltd.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "limetorrents": {
@@ -2278,7 +2278,7 @@
         "expiresAt": "2027-09-01T23:59:59.000Z",
         "registrar": "Tucows Domains Inc.",
         "error": null,
-        "checkedAt": "2026-10-13T09:51:36.741Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "linuxtracker": {
@@ -2298,32 +2298,32 @@
     },
     "longpt": {
       "ssl": {
-        "notAfter": "2026-12-15T09:13:34.000Z",
+        "notAfter": "2027-02-06T08:47:33.000Z",
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2028-07-07T07:53:42.545Z",
         "registrar": "Cloudflare, Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "losslessclub": {
       "ssl": {
-        "notAfter": "2026-12-09T19:41:14.000Z",
+        "notAfter": "2027-02-07T18:49:53.000Z",
         "issuer": "Let's Encrypt",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-11-10T10:35:51.029Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2030-02-23T10:50:55.000Z",
         "registrar": "TLD Registrar Solutions Ltd.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "lpbits": {
@@ -2338,7 +2338,7 @@
         "expiresAt": "2026-12-06T09:30:05.000Z",
         "registrar": "PDR Ltd. d/b/a PublicDomainRegistry.com",
         "error": null,
-        "checkedAt": "2026-11-10T10:35:51.029Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "lst": {
@@ -2347,13 +2347,13 @@
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": null,
         "registrar": "NameCheap, Inc (https://www.namecheap.com)",
         "error": "no expiration date in WHOIS record",
-        "checkedAt": "2026-11-10T10:35:51.029Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "luckpt": {
@@ -2362,13 +2362,13 @@
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": null,
         "registrar": null,
         "error": "no expiration date in WHOIS record",
-        "checkedAt": "2026-11-10T10:35:51.029Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "luminarr": {
@@ -2383,7 +2383,7 @@
         "expiresAt": "2030-01-08T12:52:44.000Z",
         "registrar": "Porkbun LLC",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "lztr": {
@@ -2392,13 +2392,13 @@
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-08-30T21:13:30.000Z",
         "registrar": "Spaceship, Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "mactorrentsdownload": {
@@ -2443,7 +2443,7 @@
         "expiresAt": null,
         "registrar": "Name: IMMATERIALISM LIMITED",
         "error": "no expiration date in WHOIS record",
-        "checkedAt": "2026-11-10T10:35:51.029Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "march": {
@@ -2452,13 +2452,13 @@
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-05-30T13:58:53.067Z",
         "registrar": "Cloudflare, Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "megapeer": {
@@ -2467,13 +2467,13 @@
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-13T09:51:36.741Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-04-24T08:02:17.000Z",
         "registrar": "Dynadot Inc",
         "error": null,
-        "checkedAt": "2026-10-13T09:51:36.741Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "midnightscene": {
@@ -2482,13 +2482,13 @@
         "issuer": "Let's Encrypt",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-04-10T17:04:03.000Z",
         "registrar": "NameCheap, Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "mikan": {
@@ -2503,7 +2503,7 @@
         "expiresAt": "2026-12-21T06:20:02.000Z",
         "registrar": "NameCheap, Inc.",
         "error": null,
-        "checkedAt": "2026-10-13T09:51:36.741Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "milkie": {
@@ -2512,13 +2512,13 @@
         "issuer": "Let's Encrypt",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-01-04T13:15:45.000Z",
         "registrar": "NameCheap, Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "mixtapetorrent": {
@@ -2527,7 +2527,7 @@
         "issuer": null,
         "trustError": null,
         "error": "no HTTPS URL",
-        "checkedAt": "2026-11-10T10:35:51.029Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-07-14T21:42:03.000Z",
@@ -2542,13 +2542,13 @@
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-09-03T06:18:52.000Z",
         "registrar": "Cloudflare, Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "mteam": {
@@ -2557,28 +2557,28 @@
         "issuer": "Sectigo Limited",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2030-12-10T08:04:10.000Z",
         "registrar": "NameCheap, Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "musopia": {
       "ssl": {
-        "notAfter": "2026-12-11T16:13:51.000Z",
+        "notAfter": "2027-01-28T02:31:53.000Z",
         "issuer": "Let's Encrypt",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-05-17T10:15:49.000Z",
         "registrar": "Cloudflare, Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "muxuege": {
@@ -2587,13 +2587,13 @@
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-08-12T16:05:27.818Z",
         "registrar": "Dynadot Inc",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "myanonamouse": {
@@ -2602,13 +2602,13 @@
         "issuer": "Let's Encrypt",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-02-23T16:04:04.000Z",
         "registrar": "eNom, LLC",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "mypornclub": {
@@ -2632,13 +2632,13 @@
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-04-26T13:47:59.000Z",
         "registrar": "Cloudflare, Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "myspleen": {
@@ -2668,7 +2668,7 @@
         "expiresAt": "2027-09-27T03:17:08.000Z",
         "registrar": "Cloudflare, Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "ncore": {
@@ -2677,13 +2677,13 @@
         "issuer": "SSL2BUY EMEA LLC",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2030-10-11T23:08:06.009Z",
         "registrar": "Porkbun LLC",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "nebulance": {
@@ -2692,13 +2692,13 @@
         "issuer": "Let's Encrypt",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-04-01T02:10:53.000Z",
         "registrar": "Immaterialism Limited",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "nekobt": {
@@ -2713,7 +2713,7 @@
         "expiresAt": "2027-07-17T10:03:05.000Z",
         "registrar": "Tonic",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "newstudio": {
@@ -2722,13 +2722,13 @@
         "issuer": null,
         "trustError": null,
         "error": "ETIMEDOUT",
-        "checkedAt": "2026-11-10T10:35:51.029Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-04-09T13:29:29.000Z",
         "registrar": "Center of Ukrainian Internet Names (UKRNAMES)",
         "error": null,
-        "checkedAt": "2026-10-13T09:51:36.741Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "nexushd": {
@@ -2743,7 +2743,7 @@
         "expiresAt": "2027-05-02T15:02:01.419Z",
         "registrar": "NameCheap, Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "nicept": {
@@ -2752,13 +2752,13 @@
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-03-16T12:46:53.000Z",
         "registrar": "NameSilo, LLC",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "nipponsei": {
@@ -2767,13 +2767,13 @@
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-13T09:51:36.741Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2030-01-18T20:27:16.443Z",
         "registrar": "GoDaddy.com, LLC",
         "error": null,
-        "checkedAt": "2026-10-13T09:51:36.741Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "njtupt": {
@@ -2788,7 +2788,7 @@
         "expiresAt": "2027-10-01T11:09:17.000Z",
         "registrar": "NameSilo,LLC",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "nonameclub": {
@@ -2797,13 +2797,13 @@
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-13T09:51:36.741Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2029-03-25T01:23:22.000Z",
         "registrar": "Tonic",
         "error": null,
-        "checkedAt": "2026-10-13T09:51:36.741Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "nordicbytes": {
@@ -2818,7 +2818,7 @@
         "expiresAt": "2028-12-27T16:00:34.897Z",
         "registrar": "Tucows Domains Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "nordicquality": {
@@ -2833,7 +2833,7 @@
         "expiresAt": "2027-01-22T19:07:52.583Z",
         "registrar": "PDR Ltd. d/b/a PublicDomainRegistry.com",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "novahd": {
@@ -2848,22 +2848,22 @@
         "expiresAt": "2027-07-01T09:35:53.000Z",
         "registrar": "NameSilo,LLC",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "nyaa": {
       "ssl": {
-        "notAfter": "2026-11-17T11:45:12.000Z",
+        "notAfter": "2027-02-08T10:49:29.000Z",
         "issuer": "Let's Encrypt",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-11-10T10:35:51.029Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2028-05-09T00:00:00.000Z",
         "registrar": "SAAX d.o.o.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "okpt": {
@@ -2878,7 +2878,7 @@
         "expiresAt": "2027-05-22T16:18:47.000Z",
         "registrar": "Squarespace Domains II LLC",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "oldtoonsworld": {
@@ -2887,13 +2887,13 @@
         "issuer": "Let's Encrypt",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-10-19T13:21:11.439Z",
         "registrar": "Spaceship, Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "onejav": {
@@ -2908,7 +2908,7 @@
         "expiresAt": "2031-04-11T07:47:21.000Z",
         "registrar": "NameSilo, LLC",
         "error": null,
-        "checkedAt": "2026-10-13T09:51:36.741Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "onlyencodes": {
@@ -2923,7 +2923,7 @@
         "expiresAt": "2027-07-19T16:37:06.000Z",
         "registrar": "Immaterialism Limited",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "opencd": {
@@ -2932,13 +2932,13 @@
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": null,
         "registrar": null,
         "error": "WHOIS ENOTFOUND",
-        "checkedAt": "2026-11-10T10:35:51.029Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "opensharing": {
@@ -2962,13 +2962,13 @@
         "issuer": "Let's Encrypt",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-11-10T10:35:51.029Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2029-09-10T20:15:43.337Z",
         "registrar": "Tucows Domains Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "oshenpt": {
@@ -2977,13 +2977,13 @@
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2028-05-08T16:03:41.000Z",
         "registrar": "Chengdu West Dimension Digital Technology Co., Ltd.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "ourbits": {
@@ -2992,13 +2992,13 @@
         "issuer": "Let's Encrypt",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2033-04-01T07:12:20.000Z",
         "registrar": "GoDaddy.com, LLC",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "pandacd": {
@@ -3022,13 +3022,13 @@
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2033-05-06T00:24:47.000Z",
         "registrar": "Squarespace Domains II LLC",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "passthepopcorn": {
@@ -3037,13 +3037,13 @@
         "issuer": "Let's Encrypt",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-05-08T16:05:58.000Z",
         "registrar": "TLD Registrar Solutions Ltd.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "pctorrent": {
@@ -3076,19 +3076,34 @@
         "checkedAt": "2026-10-28T09:14:30.712Z"
       }
     },
-    "piggo": {
+    "phoenixproject": {
       "ssl": {
-        "notAfter": "2026-12-15T18:30:41.000Z",
+        "notAfter": "2027-02-08T02:34:11.000Z",
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
+      },
+      "domain": {
+        "expiresAt": "2027-01-24T07:29:57.446Z",
+        "registrar": "Porkbun LLC",
+        "error": null,
+        "checkedAt": "2026-11-13T10:18:07.904Z"
+      }
+    },
+    "piggo": {
+      "ssl": {
+        "notAfter": "2027-01-29T20:00:10.000Z",
+        "issuer": "Google Trust Services",
+        "trustError": null,
+        "error": null,
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-04-12T13:05:20.000Z",
         "registrar": "GoDaddy.com, LLC",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "pixelcove": {
@@ -3097,13 +3112,13 @@
         "issuer": "Let's Encrypt",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-08-13T12:30:21.000Z",
         "registrar": "NameCheap, Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "playletpt": {
@@ -3118,7 +3133,7 @@
         "expiresAt": "2027-03-10T20:50:35.000Z",
         "registrar": "Spaceship, Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "plugintorrent": {
@@ -3142,13 +3157,13 @@
         "issuer": "Let's Encrypt",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
-        "expiresAt": "2027-01-10T18:09:03.000Z",
+        "expiresAt": "2028-01-10T18:09:03.000Z",
         "registrar": "NameSilo,LLC",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "pornolab": {
@@ -3157,13 +3172,13 @@
         "issuer": "Let's Encrypt",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2028-04-09T14:10:09.000Z",
         "registrar": "Internet Domain Service BS Corp",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "pornotorrent": {
@@ -3223,7 +3238,7 @@
         "expiresAt": "2027-10-30T22:20:30.563Z",
         "registrar": "Tucows Domains Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "privatehd": {
@@ -3238,7 +3253,7 @@
         "expiresAt": "2027-04-13T02:47:54.000Z",
         "registrar": "Tonic",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "ptcafe": {
@@ -3247,13 +3262,13 @@
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-07-12T14:19:49.000Z",
         "registrar": "Cloudflare, Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "pter": {
@@ -3268,7 +3283,7 @@
         "expiresAt": "2028-01-02T18:07:10.000Z",
         "registrar": "NameCheap, Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "ptfans": {
@@ -3283,7 +3298,7 @@
         "expiresAt": "2027-05-24T03:31:39.000Z",
         "registrar": "NameSilo, LLC",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "ptgtk": {
@@ -3298,22 +3313,22 @@
         "expiresAt": "2036-01-22T23:59:59.000Z",
         "registrar": "Spaceship, Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "pthome": {
       "ssl": {
-        "notAfter": "2026-12-28T09:44:23.000Z",
-        "issuer": "Google Trust Services",
+        "notAfter": "2027-01-22T12:47:56.000Z",
+        "issuer": "Let's Encrypt",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2026-11-18T14:18:05.000Z",
         "registrar": "Cloudflare, Inc.",
         "error": null,
-        "checkedAt": "2026-11-10T10:35:51.029Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "ptlgs": {
@@ -3328,7 +3343,7 @@
         "expiresAt": "2027-09-05T03:08:37.305Z",
         "registrar": "Spaceship, Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "ptneko": {
@@ -3337,13 +3352,13 @@
         "issuer": "Let's Encrypt",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-05-01T10:37:51.000Z",
         "registrar": "Cloudflare, Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "ptsbao": {
@@ -3352,13 +3367,13 @@
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-07-11T12:22:33.000Z",
         "registrar": "GoDaddy.com, LLC",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "ptskit": {
@@ -3370,25 +3385,25 @@
         "checkedAt": "2026-10-25T07:55:18.755Z"
       },
       "domain": {
-        "expiresAt": "2027-06-17T07:17:34.863Z",
+        "expiresAt": "2027-05-13T12:56:22.000Z",
         "registrar": "Spaceship, Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "pttime": {
       "ssl": {
-        "notAfter": "2027-01-08T12:30:09.000Z",
+        "notAfter": "2027-02-05T08:18:38.000Z",
         "issuer": "SSL Corporation",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-12-01T11:50:54.294Z",
         "registrar": "Xin Net Technology Corporation",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "ptzone": {
@@ -3403,7 +3418,7 @@
         "expiresAt": "2030-06-21T23:59:59.000Z",
         "registrar": "Alibaba Cloud Computing Ltd. d/b/a HiChina (www.net.cn)",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "pussytorrents": {
@@ -3412,13 +3427,13 @@
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-06-18T18:25:53.812Z",
         "registrar": "NameCheap, Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "qingwa": {
@@ -3427,13 +3442,13 @@
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-04-10T16:31:01.000Z",
         "registrar": "Cloudflare, Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "racing4everyone": {
@@ -3442,13 +3457,13 @@
         "issuer": "Let's Encrypt",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": null,
         "registrar": "Name: Tucows.com Co.",
         "error": "no expiration date in WHOIS record",
-        "checkedAt": "2026-11-10T10:35:51.029Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "railgunpt": {
@@ -3457,13 +3472,13 @@
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-05-05T23:15:16.000Z",
         "registrar": "Cloudflare, Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "rastastugan": {
@@ -3472,22 +3487,22 @@
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-02-14T17:17:02.119Z",
         "registrar": "NameCheap, Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "redacted": {
       "ssl": {
-        "notAfter": "2026-11-13T08:53:18.000Z",
+        "notAfter": "2027-02-08T16:14:07.000Z",
         "issuer": "Let's Encrypt",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-11-10T10:35:51.029Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-11-16T00:28:14.000Z",
@@ -3517,22 +3532,22 @@
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-10-22T13:44:23.000Z",
         "registrar": "NameCheap, Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "retromoviesclub": {
       "ssl": {
-        "notAfter": "2026-12-11T22:52:26.000Z",
+        "notAfter": "2027-02-10T01:21:06.000Z",
         "issuer": "Let's Encrypt",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-31T09:02:50.110Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-03-15T16:11:05.000Z",
@@ -3553,7 +3568,7 @@
         "expiresAt": "2027-02-13T07:22:28.431Z",
         "registrar": "Spaceship, Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "rintornet": {
@@ -3577,13 +3592,13 @@
         "issuer": "Let's Encrypt",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-02-25T16:31:14.000Z",
         "registrar": "NameSilo, LLC",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "rousipro": {
@@ -3598,7 +3613,7 @@
         "expiresAt": "2027-07-07T06:41:15.810Z",
         "registrar": "Porkbun LLC",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "rs": {
@@ -3607,13 +3622,13 @@
         "issuer": null,
         "trustError": null,
         "error": "ETIMEDOUT",
-        "checkedAt": "2026-11-10T10:35:51.029Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": null,
         "registrar": null,
         "error": "no expiration date in WHOIS record",
-        "checkedAt": "2026-11-10T10:35:51.029Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "rutor": {
@@ -3622,13 +3637,13 @@
         "issuer": "Let's Encrypt",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-13T09:51:36.741Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2026-12-28T23:29:16.952Z",
         "registrar": "Internet Domain Service BS Corp",
         "error": null,
-        "checkedAt": "2026-10-13T09:51:36.741Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "rutracker": {
@@ -3643,7 +3658,7 @@
         "expiresAt": "2028-02-17T20:34:41.516Z",
         "registrar": "Internet Domain Service BS Corp",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "rutrackerru": {
@@ -3652,13 +3667,13 @@
         "issuer": null,
         "trustError": null,
         "error": "no HTTPS URL",
-        "checkedAt": "2026-11-10T10:35:51.029Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-02-16T21:00:00.000Z",
         "registrar": "REGRU-RU",
         "error": null,
-        "checkedAt": "2026-10-13T09:51:36.741Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "sbpt": {
@@ -3667,28 +3682,43 @@
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-13T09:51:36.741Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2026-11-29T16:17:22.142Z",
         "registrar": "NameSilo, LLC",
         "error": null,
-        "checkedAt": "2026-11-10T10:35:51.029Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "secretcinema": {
       "ssl": {
-        "notAfter": "2026-12-26T15:08:09.000Z",
+        "notAfter": "2027-01-31T07:20:21.000Z",
         "issuer": "Let's Encrypt",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2028-02-07T23:59:59.000Z",
         "registrar": "TLD Registrar Solutions Ltd",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
+      }
+    },
+    "seedcore": {
+      "ssl": {
+        "notAfter": "2027-01-17T16:27:56.000Z",
+        "issuer": "Google Trust Services",
+        "trustError": null,
+        "error": null,
+        "checkedAt": "2026-11-13T10:18:07.904Z"
+      },
+      "domain": {
+        "expiresAt": "2027-06-23T13:29:10.000Z",
+        "registrar": "NameCheap, Inc.",
+        "error": null,
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "seedpool": {
@@ -3700,10 +3730,10 @@
         "checkedAt": "2026-10-19T08:15:28.769Z"
       },
       "domain": {
-        "expiresAt": "2027-03-16T18:20:06.961Z",
+        "expiresAt": "2036-03-16T18:20:06.961Z",
         "registrar": "Cloudflare, Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "sewerpt": {
@@ -3712,13 +3742,13 @@
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-02-26T16:23:07.000Z",
         "registrar": "Gname.com Pte. Ltd.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "sexypics": {
@@ -3742,13 +3772,13 @@
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-13T09:51:36.741Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2028-12-13T03:02:18.000Z",
         "registrar": "Porkbun LLC",
         "error": null,
-        "checkedAt": "2026-10-13T09:51:36.741Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "shareisland": {
@@ -3763,7 +3793,7 @@
         "expiresAt": "2027-03-08T22:44:14.578Z",
         "registrar": "GoDaddy.com, LLC",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "showrss": {
@@ -3793,7 +3823,7 @@
         "expiresAt": "2027-05-12T11:49:52.624Z",
         "registrar": "NameCheap, Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "siqi": {
@@ -3802,13 +3832,13 @@
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-06-16T23:59:59.000Z",
         "registrar": "GoDaddy.com, LLC",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "sjtu": {
@@ -3823,7 +3853,7 @@
         "expiresAt": null,
         "registrar": null,
         "error": "no expiration date in WHOIS record",
-        "checkedAt": "2026-11-10T10:35:51.029Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "skidrowrepack": {
@@ -3853,7 +3883,7 @@
         "expiresAt": "2027-06-22T23:59:59.000Z",
         "registrar": "NameCheap, Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "skyeysnow": {
@@ -3868,7 +3898,7 @@
         "expiresAt": "2028-02-03T11:20:51.000Z",
         "registrar": "NameSilo, LLC",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "sosulki": {
@@ -3892,13 +3922,13 @@
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-13T09:51:36.741Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-09-18T06:28:55.000Z",
         "registrar": "GoDaddy Online Services Cayman Islands Ltd.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "speedapp": {
@@ -3913,7 +3943,7 @@
         "expiresAt": "2027-05-12T18:44:33.000Z",
         "registrar": "NameCheap, Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "sportscult": {
@@ -3928,7 +3958,7 @@
         "expiresAt": "2029-09-18T06:40:01.756Z",
         "registrar": "Tucows Domains Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "springsunday": {
@@ -3943,7 +3973,7 @@
         "expiresAt": "2027-05-17T13:02:48.000Z",
         "registrar": "Tucows Domains Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "starspace": {
@@ -3952,13 +3982,13 @@
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-11-03T11:50:49.000Z",
         "registrar": "NameSilo, LLC",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "sunnypt": {
@@ -3967,13 +3997,13 @@
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-10-17T04:54:19.000Z",
         "registrar": "NameSilo,LLC",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "superbits": {
@@ -3982,13 +4012,13 @@
         "issuer": "Sectigo Limited",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-02-09T22:50:57.309Z",
         "registrar": "Tucows Domains Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "tangpt": {
@@ -4012,28 +4042,28 @@
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2036-03-08T10:04:02.838Z",
         "registrar": "NameSilo, LLC",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "teamhd": {
       "ssl": {
-        "notAfter": "2026-12-10T15:07:42.000Z",
+        "notAfter": "2027-02-09T19:49:44.000Z",
         "issuer": "Let's Encrypt",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-11-10T10:35:51.029Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-04-16T18:42:38.179Z",
         "registrar": "eNom, LLC",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "tey": {
@@ -4042,13 +4072,13 @@
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-01-26T09:06:32.000Z",
         "registrar": "Spaceship, Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "thegeeks": {
@@ -4063,7 +4093,7 @@
         "expiresAt": "2027-04-14T16:48:19.763Z",
         "registrar": "NAMECHEAP",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "thepiratebay": {
@@ -4072,13 +4102,13 @@
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-13T09:51:36.741Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2034-06-28T16:08:27.903Z",
         "registrar": "easyDNS Technologies Inc.",
         "error": null,
-        "checkedAt": "2026-10-13T09:51:36.741Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "therarbg": {
@@ -4087,13 +4117,13 @@
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-13T09:51:36.741Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2028-11-07T17:09:08.000Z",
         "registrar": "Tonic",
         "error": null,
-        "checkedAt": "2026-10-13T09:51:36.741Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "thevault": {
@@ -4108,7 +4138,7 @@
         "expiresAt": "2027-04-14T16:48:13.731Z",
         "registrar": "NAMECHEAP",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "tjupt": {
@@ -4117,13 +4147,13 @@
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-06-30T05:11:50.251Z",
         "registrar": "Cloudflare, Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "tlfbits": {
@@ -4138,7 +4168,7 @@
         "expiresAt": "2031-12-14T07:52:06.269Z",
         "registrar": "Name.com, Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "tlzdigital": {
@@ -4147,13 +4177,13 @@
         "issuer": "Let's Encrypt",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-02-26T23:25:45.000Z",
         "registrar": "NameCheap, Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "tokyopt": {
@@ -4168,7 +4198,7 @@
         "expiresAt": "2027-04-03T11:40:51.000Z",
         "registrar": "NameSilo,LLC",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "tokyotosho": {
@@ -4177,13 +4207,13 @@
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-03-27T19:13:27.669Z",
         "registrar": "NameCheap, Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "torlock": {
@@ -4218,32 +4248,32 @@
     },
     "torrentday": {
       "ssl": {
-        "notAfter": "2026-12-11T03:51:14.000Z",
+        "notAfter": "2027-02-10T03:51:11.000Z",
         "issuer": "Let's Encrypt",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-11-10T10:35:51.029Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-01-08T23:59:59.000Z",
         "registrar": "Tucows Domains Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "torrentgalaxyclone": {
       "ssl": {
-        "notAfter": "2027-01-07T09:02:02.000Z",
-        "issuer": "Google Trust Services",
+        "notAfter": "2027-01-26T13:36:32.000Z",
+        "issuer": "Let's Encrypt",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-13T09:51:36.741Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
-        "expiresAt": "2027-09-01T21:46:41.124Z",
-        "registrar": "Cloudflare, Inc",
+        "expiresAt": "2027-10-28T14:16:23.709Z",
+        "registrar": "Spaceship, Inc.",
         "error": null,
-        "checkedAt": "2026-10-13T09:51:36.741Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "torrenting": {
@@ -4258,7 +4288,7 @@
         "expiresAt": "2027-05-23T04:35:15.000Z",
         "registrar": "Tucows Domains Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "torrentkitty": {
@@ -4273,7 +4303,7 @@
         "expiresAt": "2027-08-19T06:52:54.000Z",
         "registrar": "NameCheap, Inc.",
         "error": null,
-        "checkedAt": "2026-10-13T09:51:36.741Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "torrentleech": {
@@ -4282,13 +4312,13 @@
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-12-31T15:25:34.434Z",
         "registrar": "NameCheap, Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "torrentparadise": {
@@ -4302,8 +4332,8 @@
       "domain": {
         "expiresAt": null,
         "registrar": null,
-        "error": "WHOIS ECONNRESET",
-        "checkedAt": "2026-11-10T10:35:51.029Z"
+        "error": "no expiration date in WHOIS record",
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "torrentscsv": {
@@ -4363,7 +4393,22 @@
         "expiresAt": null,
         "registrar": null,
         "error": "no expiration date in WHOIS record",
-        "checkedAt": "2026-11-10T10:35:51.029Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
+      }
+    },
+    "tr4ker": {
+      "ssl": {
+        "notAfter": "2027-01-08T17:45:57.000Z",
+        "issuer": "Let's Encrypt",
+        "trustError": null,
+        "error": null,
+        "checkedAt": "2026-11-13T10:18:07.904Z"
+      },
+      "domain": {
+        "expiresAt": "2027-04-13T00:08:26.000Z",
+        "registrar": "NameCheap, Inc.",
+        "error": null,
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "trancetraffic": {
@@ -4378,7 +4423,7 @@
         "expiresAt": "2028-08-06T02:47:38.000Z",
         "registrar": "GoDaddy.com, LLC",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "traxary": {
@@ -4402,22 +4447,22 @@
         "issuer": "GoGetSSL",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-09-01T01:23:06.000Z",
         "registrar": "GoDaddy.com, LLC",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "turkseed": {
       "ssl": {
-        "notAfter": "2026-12-26T10:06:34.000Z",
-        "issuer": "Let's Encrypt",
+        "notAfter": "2027-02-05T17:14:51.000Z",
+        "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-10-27T22:46:17.000Z",
@@ -4438,7 +4483,7 @@
         "expiresAt": "2027-08-22T15:19:12.175Z",
         "registrar": "DreamHost, LLC",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "u3c3": {
@@ -4468,7 +4513,7 @@
         "expiresAt": "2027-03-25T13:19:23.000Z",
         "registrar": "NameSilo, LLC",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "uindex": {
@@ -4498,7 +4543,7 @@
         "expiresAt": "2030-05-20T03:59:40.000Z",
         "registrar": "NameSilo, LLC",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "unwalled": {
@@ -4528,7 +4573,7 @@
         "expiresAt": "2027-10-04T00:50:26.000Z",
         "registrar": "CentralNic Ltd",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "vclib": {
@@ -4543,7 +4588,7 @@
         "expiresAt": "2027-07-05T23:59:59.000Z",
         "registrar": "DNSPod, Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "vsthouse": {
@@ -4552,7 +4597,7 @@
         "issuer": "Let's Encrypt",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-11-10T10:35:51.029Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-07-31T18:15:03.000Z",
@@ -4603,7 +4648,7 @@
         "expiresAt": "2027-03-23T23:24:21.000Z",
         "registrar": "NameCheap, Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "wintersakura": {
@@ -4618,22 +4663,22 @@
         "expiresAt": "2027-08-17T04:40:10.000Z",
         "registrar": "Squarespace Domains II LLC",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "worldtorrent": {
       "ssl": {
-        "notAfter": "2027-01-03T16:01:11.000Z",
+        "notAfter": "2027-02-02T14:16:59.000Z",
         "issuer": "Let's Encrypt",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-13T09:51:36.741Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
-        "expiresAt": "2027-10-05T05:47:10.068Z",
-        "registrar": "NameCheap, Inc.",
-        "error": null,
-        "checkedAt": "2026-10-13T09:51:36.741Z"
+        "expiresAt": null,
+        "registrar": null,
+        "error": "WHOIS ETIMEDOUT",
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "xdypt": {
@@ -4648,22 +4693,22 @@
         "expiresAt": "2027-08-18T10:10:10.000Z",
         "registrar": "Spaceship, Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "xingtan": {
       "ssl": {
-        "notAfter": "2026-12-13T06:07:51.000Z",
+        "notAfter": "2027-02-10T12:56:14.000Z",
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2026-12-07T05:18:06.000Z",
         "registrar": "Dynadot Inc",
         "error": null,
-        "checkedAt": "2026-11-10T10:35:51.029Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "xingwan": {
@@ -4672,43 +4717,43 @@
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2035-11-05T07:32:40.000Z",
         "registrar": "Porkbun LLC",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "xingyunge": {
       "ssl": {
-        "notAfter": "2026-12-22T03:20:50.000Z",
+        "notAfter": "2027-02-03T18:41:54.000Z",
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-06-07T15:02:07.149Z",
         "registrar": "NameSilo, LLC",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "xtr": {
       "ssl": {
-        "notAfter": "2026-12-13T09:03:17.000Z",
+        "notAfter": "2027-02-10T10:43:46.000Z",
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": null,
-        "registrar": "GoDaddy.com",
-        "error": "no expiration date in WHOIS record",
-        "checkedAt": "2026-11-10T10:35:51.029Z"
+        "registrar": null,
+        "error": "WHOIS ETIMEDOUT",
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "xxxclub": {
@@ -4717,13 +4762,13 @@
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-13T09:51:36.741Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2027-05-29T23:19:57.000Z",
         "registrar": "NAMECHEAP",
         "error": null,
-        "checkedAt": "2026-10-13T09:51:36.741Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "xxxtor": {
@@ -4738,7 +4783,7 @@
         "expiresAt": "2027-04-21T16:28:31.000Z",
         "registrar": "Internet Domain Service BS Corp",
         "error": null,
-        "checkedAt": "2026-10-13T09:51:36.741Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "yemapt": {
@@ -4747,13 +4792,13 @@
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
-        "expiresAt": "2028-04-27T03:58:52.804Z",
+        "expiresAt": "2036-04-27T03:58:52.804Z",
         "registrar": "Spaceship, Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "yts": {
@@ -4768,7 +4813,7 @@
         "expiresAt": null,
         "registrar": "epag (http://www.epag.de)",
         "error": "no expiration date in WHOIS record",
-        "checkedAt": "2026-11-10T10:35:51.029Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "yuscene": {
@@ -4783,7 +4828,7 @@
         "expiresAt": "2027-11-22T18:36:02.000Z",
         "registrar": "Tucows Domains Inc.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "yzyy": {
@@ -4798,7 +4843,7 @@
         "expiresAt": "2028-04-28T18:11:29.286Z",
         "registrar": "GoDaddy.com, LLC",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "zamundalife": {
@@ -4837,13 +4882,13 @@
         "issuer": null,
         "trustError": null,
         "error": "no HTTPS URL",
-        "checkedAt": "2026-11-10T10:35:51.029Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": null,
         "registrar": null,
         "error": "no expiration date in WHOIS record",
-        "checkedAt": "2026-11-10T10:35:51.029Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "zhuque": {
@@ -4852,13 +4897,13 @@
         "issuer": "Google Trust Services",
         "trustError": null,
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       },
       "domain": {
         "expiresAt": "2032-03-28T01:18:39.668Z",
         "registrar": "Dynadot, LLC",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "zmpt": {
@@ -4873,7 +4918,7 @@
         "expiresAt": "2027-09-24T01:33:59.000Z",
         "registrar": "Gname.com Pte. Ltd.",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     },
     "zrpt": {
@@ -4888,7 +4933,7 @@
         "expiresAt": "2027-10-25T12:06:23.000Z",
         "registrar": "NameSilo,LLC",
         "error": null,
-        "checkedAt": "2026-10-11T15:10:55.377Z"
+        "checkedAt": "2026-11-13T10:18:07.904Z"
       }
     }
   }
