@@ -4296,6 +4296,17 @@
     "isDead": false
   },
   {
+    "id": "tvvault",
+    "name": "TV-Vault",
+    "urls": [
+      "https://tv-vault.me/"
+    ],
+    "type": "private",
+    "description": "TV-Vault is a private tracker for classic television shows (XML search API only).",
+    "favicon": "",
+    "isDead": false
+  },
+  {
     "id": "u2",
     "name": "U2",
     "urls": [
