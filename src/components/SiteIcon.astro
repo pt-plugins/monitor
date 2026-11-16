@@ -1,0 +1,99 @@
+---
+/*
+ * The site's icon, or a tile bearing the first character of its name when the
+ * site has no icon asset at all. The fallback is the point: a header with a
+ * missing image reads as broken, while a letter tile reads as deliberate — the
+ * same treatment savept.icu gives the sites it has no icon for.
+ *
+ * The tile is exactly the icon's footprint, so a site's header does not move
+ * depending on whether it has an icon.
+ */
+export interface Props {
+  name: string;
+  /** Resolved by data-loader.ts; null when nothing was found for the site. */
+  faviconUrl: string | null;
+}
+
+const { name, faviconUrl } = Astro.props;
+
+/*
+ * The first character of the name, taken by code point so a surrogate pair is
+ * one character rather than half of one. Uppercasing can yield more than one
+ * character ("ß" becomes "SS"), hence the second [0] — the tile only fits one.
+ */
+const initial = Array.from(name.trim())[0]?.toUpperCase()[0] ?? "?";
+
+/*
+ * The tile's colour comes from the name rather than the site's type: the ribbon
+ * already says public or private, and a page of fallbacks would otherwise be
+ * dozens of identical tiles. A plain character sum keeps a site's tile the same
+ * colour on every page and build.
+ */
+let hue = 0;
+for (const ch of name) hue = (hue * 31 + ch.codePointAt(0)!) % 360;
+---
+
+<span class="site-icon" style={`--site-icon-hue: ${hue}`} aria-hidden="true">
+  <span class="site-icon-letter">{initial}</span>
+  {
+    faviconUrl && (
+      <img
+        class="site-icon-img"
+        src={faviconUrl}
+        alt=""
+        width="16"
+        height="16"
+        loading="lazy"
+        decoding="async"
+        /* The letter is the placeholder until the icon paints; once it has,
+           the letter is no longer needed behind it. A failed load drops the
+           image, leaving the letter as the standing fallback. */
+        onload="this.previousElementSibling.remove()"
+        onerror="this.remove()"
+      />
+    )
+  }
+</span>
+
+<style>
+  .site-icon {
+    position: relative;
+    display: inline-block;
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+    /* An inline block sits on the baseline, which hangs the tile below the
+       text's cap height; this pulls it back onto the line's optical centre. */
+    vertical-align: -0.15em;
+  }
+
+  .site-icon-letter,
+  .site-icon-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 3px;
+  }
+
+  /* 32% lightness keeps white legible on every hue in the wheel — the yellow
+     band is the worst case and still clears 4.5:1. */
+  .site-icon-letter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: hsl(var(--site-icon-hue) 45% 32%);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 1;
+    /* An image stand-in, not a piece of copy to select. */
+    user-select: none;
+  }
+
+  /* contain, not fill: an icon that is not square would otherwise be stretched
+     into the square tile. */
+  .site-icon-img {
+    object-fit: contain;
+  }
+</style>

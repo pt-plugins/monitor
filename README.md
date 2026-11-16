@@ -57,6 +57,21 @@ Site definitions are pulled from [`pt-plugins/PT-depiler`](https://github.com/pt
 - `descriptions` — optional description
 - `isDead` — optional flag to skip monitoring (default: `false`)
 
+### Site Icons
+
+A site's icon is resolved at build time by `resolveFaviconUrl()` (`src/lib/data-loader.ts`): an absolute `favicon` URL
+straight from the definition, then the file the definition names, looked up in `public/siteIcons/` (`update-source.mjs`
+copies those files in, so the extension on disk may differ from the one written down), then a file named after the site
+id. Any of those may be absent, and for a fair number of sites all of them are.
+
+Those last ones render through `src/components/SiteIcon.astro`, which falls back to the site name's **first character**
+on a tile — the treatment savept.icu gives the sites it has no icon for, and the reason a header never shows a gap where
+an icon belongs. Two things keep the fallback quiet: the tile is exactly the 16×16 the icon occupies, so a card does not
+shift depending on whether a site has one; and its hue is derived from the name rather than the site's type, so a page of
+fallbacks is a spread of tiles instead of dozens of one colour (the card ribbon already says public or private). The
+letter doubles as the placeholder while the icon loads, and stays put if the image fails, so a stale or deleted icon file
+degrades to the same tile.
+
 ### Request Overrides
 
 `data/request-overrides.json` holds per-site adjustments, keyed by site id:
@@ -370,6 +385,7 @@ pnpm dev
 │   ├── components/
 │   │   ├── Layout.astro
 │   │   ├── SiteCard.astro
+│   │   ├── SiteIcon.astro
 │   │   ├── CheckHeatmap.astro
 │   │   ├── SiteUptimeHeatmap.astro
 │   │   ├── StatusBadge.astro

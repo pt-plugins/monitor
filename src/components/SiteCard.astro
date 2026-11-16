@@ -3,6 +3,7 @@
 import type { SiteSummary } from "../lib/types";
 import { decodeUrl } from "../lib/site-url.mjs";
 import StatusBadge from "./StatusBadge.astro";
+import SiteIcon from "./SiteIcon.astro";
 
 export interface Props {
   site: SiteSummary;
@@ -39,17 +40,7 @@ function uptimeClass(pct: number): string {
     <StatusBadge status={site.currentStatus} />
   </div>
   <h3 class="card-name">
-    {site.faviconUrl && (
-      <img
-        class="card-favicon"
-        src={site.faviconUrl}
-        alt=""
-        width="16"
-        height="16"
-        loading="lazy"
-        onerror="this.style.display='none'"
-      />
-    )}
+    <SiteIcon name={site.name} faviconUrl={site.faviconUrl} />
     {site.name}
   </h3>
   <p class="card-desc">{site.description || "—"}</p>
@@ -188,11 +179,6 @@ function uptimeClass(pct: number): string {
     display: flex;
     align-items: center;
     gap: 0.4em;
-  }
-
-  .card-favicon {
-    flex-shrink: 0;
-    border-radius: 2px;
   }
 
   .card-desc {

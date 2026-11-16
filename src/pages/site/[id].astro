@@ -1,6 +1,7 @@
 ---
 import Layout from "../../components/Layout.astro";
 import StatusBadge from "../../components/StatusBadge.astro";
+import SiteIcon from "../../components/SiteIcon.astro";
 import LatencyChart from "../../components/LatencyChart.astro";
 import SiteUptimeHeatmap from "../../components/SiteUptimeHeatmap.astro";
 import ExtendedHistory from "../../components/ExtendedHistory.astro";
@@ -176,9 +177,7 @@ const certEmptyNote = isDead
   <div class="detail-header">
     <div class="detail-title">
       <h1>
-        {site.faviconUrl && (
-          <img class="card-favicon" src={site.faviconUrl} alt="" width="16" height="16" loading="lazy" onerror="this.style.display='none'" />
-        )}
+        <SiteIcon name={site.name} faviconUrl={site.faviconUrl} />
         {site.name}
       </h1>
       <StatusBadge status={site.currentStatus} />
@@ -360,7 +359,15 @@ const certEmptyNote = isDead
     margin-bottom: 0.25rem;
   }
 
-  .detail-title h1 { margin-bottom: 0; }
+  /* The icon and the name are two boxes in the same heading, and Astro trims
+     the whitespace between them, so the gap comes from the row rather than from
+     a space in the template. em keeps it proportional to the heading. */
+  .detail-title h1 {
+    display: flex;
+    align-items: center;
+    gap: 0.4em;
+    margin-bottom: 0;
+  }
 
   /* The description sits between the name row and the Uptime section: muted so
      it reads as context for the numbers below rather than a heading of its
@@ -371,11 +378,6 @@ const certEmptyNote = isDead
     line-height: 1.6;
     max-width: 80ch;
   }
-
-  /* The icon and the name are two inline boxes in the same heading, and Astro
-     trims the whitespace between them, so the gap has to come from the image.
-     em keeps it proportional to the heading, like the gap on the site cards. */
-  .card-favicon { margin-right: 0.4em; }
 
   /* The icon links sit together at the far end of the row. The auto margin
      belongs to this wrapper, not to each link: on two links the free space
