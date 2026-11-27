@@ -3971,6 +3971,17 @@
     "isDead": false
   },
   {
+    "id": "theshow",
+    "name": "TheShow",
+    "urls": [
+      "https://theshow.click/"
+    ],
+    "type": "private",
+    "description": "TheShow is a private tracker for entertainment-industry e-learning.",
+    "favicon": "",
+    "isDead": false
+  },
+  {
     "id": "thevault",
     "name": "TheVault",
     "urls": [
